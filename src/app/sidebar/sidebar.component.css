@@ -1,0 +1,284 @@
+.left_col {
+  background: #2a3f54;
+}
+
+.menu_section {
+  margin-bottom: 35px;
+}
+
+.menu_section h3 {
+  padding-left: 23px;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: bold;
+  font-size: 11px;
+  margin-bottom: 0;
+  margin-top: 0;
+  text-shadow: 1px 1px #000;
+}
+
+.menu_section > ul {
+  margin-top: 10px;
+  display: block;
+}
+
+.profile_pic {
+  width: 35%;
+  float: left;
+}
+
+.img-circle.profile_img {
+  width: 70%;
+  background: #fff;
+  margin-left: 15%;
+  z-index: 1000;
+  position: inherit;
+  margin-top: 20px;
+  border: 1px solid rgba(52, 73, 94, 0.44);
+  padding: 4px;
+}
+
+.profile_info {
+  padding: 25px 10px 10px;
+  width: 65%;
+  float: left;
+}
+
+.profile_info span {
+  font-size: 13px;
+  line-height: 30px;
+  color: #bab8b8;
+}
+
+.profile_info h2 {
+  font-size: 14px;
+  color: #ecf0f1;
+  margin: 0;
+  font-weight: 300;
+}
+
+.profile.img_2 {
+  text-align: center;
+}
+
+.profile.img_2 .profile_pic {
+  width: 100%;
+}
+
+.profile.img_2 .profile_pic .img-circle.profile_img {
+  width: 50%;
+  margin: 10px 0 0;
+}
+
+.profile.img_2 .profile_info {
+  padding: 15px 10px 0;
+  width: 100%;
+  margin-bottom: 10px;
+  float: left;
+}
+
+.nav_menu {
+  float: left;
+  background: #ededed;
+  border-bottom: 1px solid #d9dee4;
+  margin-bottom: 10px;
+  width: 100%;
+  position: relative;
+}
+.nav_title {
+  width: 230px;
+  float: left;
+  background: #2a3f54;
+  border-radius: 0;
+  height: 57px;
+  padding: 0px;
+}
+
+.sidebar-header {
+  border-bottom: 0;
+  margin-top: 46px;
+}
+
+.sidebar-header:first-of-type {
+  margin-top: 0;
+}
+
+.nav > li {
+  position: relative;
+  display: block;
+}
+
+.nav.side-menu > li {
+  position: relative;
+  display: block;
+  cursor: pointer;
+}
+
+.nav.side-menu > li > a {
+  margin-bottom: 6px;
+}
+
+.nav.side-menu > li > a:hover {
+  color: #f2f5f7 !important;
+}
+
+.nav.side-menu > li > a:hover,
+.nav > li > a:focus {
+  text-decoration: none;
+  background: transparent;
+}
+
+.nav.child_menu {
+  display: none;
+}
+
+.nav.child_menu li:hover,
+.nav.child_menu li.active {
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+.nav.child_menu li {
+  padding-left: 36px;
+}
+
+.nav.side-menu > li > a,
+.nav.child_menu > li > a {
+  color: #e7e7e7;
+  font-weight: 500;
+}
+
+.nav.child_menu li li:hover,
+.nav.child_menu li li.active {
+  background: none;
+}
+
+.nav.child_menu li li a:hover,
+.nav.child_menu li li a.active {
+  color: #fff;
+}
+
+.nav > li > a {
+  position: relative;
+  display: block;
+  padding: 13px 15px 12px;
+}
+
+.nav.side-menu > li.current-page,
+.nav.side-menu > li.active {
+  border-right: 5px solid #1abb9c;
+}
+
+.nav li.current-page {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.nav li li li.current-page {
+  background: none;
+}
+
+.nav li li.current-page a {
+  color: #fff;
+}
+.col-md-3.left_col {
+  min-height: 100%;
+  width: 230px;
+  padding: 0;
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  z-index: 1;
+}
+
+a {
+  color: #5a738e;
+  text-decoration: none;
+}
+
+a,
+a:visited,
+a:focus,
+a:active,
+:visited,
+:focus,
+:active,
+.btn:focus,
+.btn:active:focus,
+.btn.active:focus,
+.btn.focus,
+.btn:active.focus,
+.btn.active.focus {
+  outline: 0;
+}
+
+a:hover,
+a:focus {
+  text-decoration: none;
+}
+
+ul.nav.child_menu li:before {
+  background: #425668;
+  bottom: auto;
+  content: "";
+  height: 8px;
+  left: 23px;
+  margin-top: 15px;
+  position: absolute;
+  right: auto;
+  width: 8px;
+  z-index: 1;
+  border-radius: 50%;
+}
+
+ul.nav.child_menu li:last-child::after {
+  bottom: 50%;
+}
+ul.nav.child_menu li:after {
+  border-left: 1px solid #425668;
+  bottom: 0;
+  content: "";
+  left: 27px;
+  position: absolute;
+  top: 0;
+}
+
+.site_title {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-weight: 400;
+  font-size: 22px;
+  width: 100%;
+  color: #ecf0f1 !important;
+  margin-left: 0 !important;
+  line-height: 59px;
+  display: block;
+  height: 55px;
+  margin: 0;
+  padding-left: 10px;
+}
+
+.site_title:hover,
+.site_title:focus {
+  text-decoration: none;
+}
+
+.sidebar-widget {
+  overflow: hidden;
+}
+
+.main_menu .fa {
+  width: 26px;
+  opacity: 0.99;
+  display: inline-block;
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.main_menu .fa-chevron-down {
+  font-size: 15px;
+}
