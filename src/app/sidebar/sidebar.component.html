@@ -26,21 +26,29 @@
       <div class="menu_section">
         <h3>General</h3>
         <ul class="nav side-menu">
-          <li (click)="toggleDisplay($event)">
-            <a><i class="fa fa-home"></i> Home
+          <li (click)="clickEvent('home')">
+            <a
+              ><i class="fa fa-home"></i> Home
               <span class="fa fa-chevron-down float-end"></span>
             </a>
-            <ul class="nav child_menu" [ngStyle]="{display: liDisplay === 'home' ? 'block' : 'none'}">
+            <ul
+              class="nav child_menu"
+              [ngStyle]="{ display: toggleDisplay['home'] ? 'block' : 'none' }"
+            >
               <li><a href="index.html">Dashboard</a></li>
               <li><a href="index2.html">Dashboard2</a></li>
               <li><a href="index3.html">Dashboard3</a></li>
             </ul>
           </li>
-          <li (click)="toggleDisplay($event)">
-            <a><i class="fa fa-edit"></i> Forms
+          <li (click)="clickEvent('forms')">
+            <a
+              ><i class="fa fa-edit"></i> Forms
               <span class="fa fa-chevron-down float-end"></span>
             </a>
-            <ul class="nav child_menu" [ngStyle]="{display: liDisplay === 'forms' ? 'block' : 'none'}">
+            <ul
+              class="nav child_menu"
+              [ngStyle]="{ display: toggleDisplay['forms'] ? 'block' : 'none' }"
+            >
               <li><a href="form.html">General Form</a></li>
               <li><a href="form_advanced.html">Advanced Components</a></li>
               <li><a href="form_validation.html">Form Validation</a></li>
@@ -49,9 +57,9 @@
               <li><a href="form_buttons.html">Form Buttons</a></li>
             </ul>
           </li>
+
           <!-- additional list items here -->
         </ul>
-        
       </div>
     </div>
   </div>

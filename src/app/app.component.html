@@ -1,55 +1,12 @@
-<!-- <div class="main">
-  <div class="row">
-    <div class="col-md-3 text-white">
-      <app-navbar></app-navbar>
-      <app-side-bar></app-side-bar>
-    </div>
-    <div class="col-md-9">
+<div class="nav-md bodyy" *ngIf="isAuth">
+  <div class="container body">
+    <app-side-bar></app-side-bar>
+    <app-navbar> </app-navbar>
+    <div class="right_col" style="min-height: 952px">
       <router-outlet></router-outlet>
     </div>
   </div>
-</div> -->
-
-<div
-  class="nav-md"
-  data-new-gr-c-s-check-loaded="14.1095.0"
-  data-gr-ext-installed=""
->
-  <div class="container body">
-    <div class="main_container">
-      <app-side-bar></app-side-bar>
-
-      <div class="right_col" role="main" style="min-height: 952px">
-        <p>
-          <a
-            class="btn btn-primary"
-            data-bs-toggle="collapse"
-            href="#collapseExample"
-            role="button"
-            aria-expanded="false"
-            aria-controls="collapseExample"
-          >
-            Link with href
-          </a>
-          <button
-            class="btn btn-primary"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#collapseExample"
-            aria-expanded="false"
-            aria-controls="collapseExample"
-          >
-            Button with data-bs-target
-          </button>
-        </p>
-        <div class="collapse" id="collapseExample">
-          <div class="card card-body">
-            Some placeholder content for the collapse component. This panel is
-            hidden by default but revealed when the user activates the relevant
-            trigger.
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+</div>
+<div *ngIf="!isAuth">
+  <app-login></app-login>
 </div>

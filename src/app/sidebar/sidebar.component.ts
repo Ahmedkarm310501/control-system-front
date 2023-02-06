@@ -6,12 +6,17 @@ import { Component, ElementRef, OnInit } from '@angular/core';
   styleUrls: ['./sidebar.component.css'],
 })
 export class SidebarComponent {
-  liDisplay!: string;
+  /* liDisplay!: string;
 
   toggleDisplay(event: any) {
     let target = event.target.id;
     let liId = target.replace('chevron', 'li');
     this.liDisplay = liId;
+  }*/
+  public toggleDisplay: any = {};
+
+  public clickEvent(name: string) {
+    this.toggleDisplay[name] = !this.toggleDisplay[name];
   }
   constructor() {}
 
