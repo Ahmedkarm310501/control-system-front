@@ -283,3 +283,10 @@ ul.nav.child_menu li:after {
   font-size: 15px;
 }
 
+.side-menu > li.active {
+  border-right: 5px solid #1abb9c;
+}
+
+ul.side-menu li {
+  transition: 0.5s;
+}
