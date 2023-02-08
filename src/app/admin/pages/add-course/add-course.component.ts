@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-course.component.css']
 })
 export class AddCourseComponent implements OnInit {
-
   constructor() { }
 
   ngOnInit(): void {
   }
+  onSubmit(form: any) {
+    console.log(form);
+  }
+
+
 
 }

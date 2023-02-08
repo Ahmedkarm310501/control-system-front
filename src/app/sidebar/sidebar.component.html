@@ -8,14 +8,14 @@
     <div class="profile clearfix">
       <div class="profile_pic">
         <img
-          src="https://colorlib.com/polygon/gentelella/images/img.jpg"
+          src="\assets\60111.jpg"
           alt="..."
           class="img-circle profile_img rounded-circle"
         />
       </div>
       <div class="profile_info">
         <span>Welcome,</span>
-        <h2>John Doe</h2>
+        <h2>Youssef salah</h2>
       </div>
       <div class="clearfix"></div>
     </div>
@@ -26,7 +26,10 @@
       <div class="menu_section">
         <h3>General</h3>
         <ul class="nav side-menu">
-          <li (click)="clickEvent('home')">
+          <li
+            (click)="clickEvent('home')"
+            [ngClass]="toggleDisplay['home'] ? 'active' : ''"
+          >
             <a
               ><i class="fa fa-home"></i> Home
               <span class="fa fa-chevron-down float-end"></span>
@@ -40,7 +43,10 @@
               <li><a href="index3.html">Dashboard3</a></li>
             </ul>
           </li>
-          <li (click)="clickEvent('forms')">
+          <li
+            (click)="clickEvent('forms')"
+            [ngClass]="toggleDisplay['forms'] ? 'active' : ''"
+          >
             <a
               ><i class="fa fa-edit"></i> Forms
               <span class="fa fa-chevron-down float-end"></span>

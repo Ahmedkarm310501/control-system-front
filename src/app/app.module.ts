@@ -34,7 +34,7 @@ import { FormsModule } from '@angular/forms';
     CourseDashboardComponent,
     HomeScreenComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule , ReactiveFormsModule],
+  imports: [BrowserModule, AppRoutingModule ,FormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })
