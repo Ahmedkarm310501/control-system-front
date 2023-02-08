@@ -1,1 +1,186 @@
-<p>add-user works!</p>
+<div class="container-fluid">
+  <div class="formm">
+    <form #Form="ngForm" (ngSubmit)="onSubmit(Form.value)">
+      <span class="section fs-3">Personal Info</span>
+      <div class="field item form-group">
+        <label class="col-form-label col-md-3 col-sm-3 fs-5 label-align"
+          >Full Name<span class="required">*</span></label
+        >
+        <div class="col-md-6 col-sm-6">
+          <input
+            class="form-control"
+            data-validate-length-range="60 "
+            data-validate-words="4 "
+            name="name "
+            required
+            ngModel
+            #name="ngModel"
+          />
+          <div *ngIf="name && name.invalid && (name.dirty || name.touched)">
+            <div *ngIf="name.errors && name.errors['required']" class="error">
+              Name is required.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="field item form-group">
+        <label class="col-form-label col-md-3 col-sm-3 fs-5 label-align"
+          >Email<span class="required">*</span></label
+        >
+        <div class="col-md-6 col-sm-6">
+          <input
+            class="form-control"
+            name="email "
+            required
+            pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
+            email
+            type="email "
+            ngModel
+            #email="ngModel"
+          />
+          <div *ngIf="email && email.invalid && (email.dirty || email.touched)">
+            <div *ngIf="email.errors && email.errors['required']" class="error">
+              Email is required.
+            </div>
+
+            <div *ngIf="email.errors && email.errors['pattern']" class="error">
+              Email is invalid.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="field item form-group">
+        <label class="col-form-label col-md-3 col-sm-3 fs-5 label-align"
+          >Password<span class="required">*</span></label
+        >
+        <div class="col-md-6 col-sm-6">
+          <input
+            class="form-control"
+            type="password"
+            name="password"
+            minlength="8"
+            required="required "
+            password
+            ngModel
+            #password="ngModel"
+          />
+          <div
+            *ngIf="
+              password &&
+              password.invalid &&
+              (password.dirty || password.touched)
+            "
+          >
+            <div
+              *ngIf="password.errors && password.errors['required']"
+              class="error"
+            >
+              Password is required.
+            </div>
+            <div
+              *ngIf="password.errors && password.errors['minlength']"
+              class="error"
+            >
+              Password must be at least 8 characters.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="field item form-group">
+        <label class="col-form-label col-md-3 col-sm-3 fs-5 label-align"
+          >Repeat password<span class="required">*</span></label
+        >
+        <div class="col-md-6 col-sm-6">
+          <input
+            class="form-control"
+            type="password"
+            name="password2"
+            data-validate-linked="password"
+            required="required"
+            password
+            ngModel
+            #password2="ngModel"
+          />
+          <div
+            *ngIf="
+              password2 &&
+              password2.invalid &&
+              (password2.dirty || password2.touched)
+            "
+          >
+            <div
+              *ngIf="password2.errors && password2.errors['required']"
+              class="error"
+            >
+              Password is required.
+            </div>
+            <div
+              *ngIf="password2.errors && password2.errors['minlength']"
+              class="error"
+            >
+              Password must be at least 8 characters.
+            </div>
+            <div
+              *ngIf="password2.errors && password2.errors['Password']"
+              class="error"
+            >
+              Passwords must match.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="field item form-group">
+        <label class="col-form-label col-md-3 col-sm-3 fs-5 label-align"
+          >National ID<span class="required">*</span></label
+        >
+        <div class="col-md-6 col-sm-6">
+          <input
+            class="form-control"
+            name="number "
+            required
+            pattern="[0-9]{14} "
+            ngModel
+            #number="ngModel"
+          />
+          <div
+            *ngIf="number && number.invalid && (number.dirty || number.touched)"
+          >
+            <div
+              *ngIf="number.errors && number.errors['required']"
+              class="error"
+            >
+              National ID is required.
+            </div>
+            <!-- <div
+              *ngIf="number.errors && number.errors['pattern']"
+              class="error"
+            >
+              National ID is invalid.
+            </div> -->
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group form-check my-5">
+        <input type="checkbox" class="form-check-input" id="exampleCheck1 " />
+        <label class="form-check-label fs-6" for="exampleCheck1 "
+          >IS Admin</label
+        >
+      </div>
+      <div class="ln_solid me-5">
+        <div class="form-group me-5">
+          <div class="col-md-6 offset-md-3">
+            <button type="submit " class="btn btn-lg btn-success my-2 mx-2">
+              Add User
+            </button>
+            <button type="reset " class="btn btn-lg btn-primary my-2 mx-2">
+              Reset
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

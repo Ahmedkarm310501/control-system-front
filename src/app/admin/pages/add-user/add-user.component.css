@@ -1,0 +1,51 @@
+span.section {
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin-bottom: 20px;
+  font-size: 21px;
+  color: #333;
+  border: 0;
+}
+
+.container[_ngcontent-vua-c50] {
+  width: 921px;
+  height: 691px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.form-control {
+  display: block;
+  width: 523px;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 2.5;
+  color: #212529;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: 0.375rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+form {
+  width: 100%;
+  padding: 15px;
+  margin: auto;
+}
+
+.error {
+  color: red;
+  font-size: 12px;
+}
+
+.formm {
+  margin: 0 auto;
+  width: 700px;
+}
