@@ -1,0 +1,20 @@
+th{
+    font-size: 15px;
+    color: rgb(106, 106, 166);
+}
+td{
+    font-size: 15px;
+    margin: 2px;
+    padding: 3px;
+}
+.table {
+  border-collapse: separate;
+  border-spacing: 0 0.5rem;
+  border: 1px solid #dee2e6;
+  border-radius: 0.25rem;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+
+}
+

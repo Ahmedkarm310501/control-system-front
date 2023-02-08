@@ -1,1 +1,21 @@
-<p>admin-log works!</p>
+<div class="row">
+  <p style="font-size: 30px;">History of Vistors</p>
+</div>
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">UserName</th>
+    <th scope="col">Time</th>
+    <th scope="col">change</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of dummyData">
+    <th scope="row">{{data.id}}</th>
+    <td>{{data.username}}</td>
+    <td>{{data.Time}}</td>
+    <td>{{data.change}}</td>
+  </tr>
+</tbody>
+</table>
