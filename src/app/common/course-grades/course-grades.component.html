@@ -1,1 +1,107 @@
-<p>course-grades works!</p>
+<div class="container-fluid row">
+  <header class="col-10">
+    <div class="d-flex">
+      <div class="p-2">
+        <h5>Course ID</h5>
+        <p>IS321</p>
+      </div>
+      <div class="p-2">
+        <h5>Course Name</h5>
+        <p>Database</p>
+      </div>
+      <div class="p-2">
+        <h5>Course Department</h5>
+        <p>IS</p>
+      </div>
+      <div class="p-2">
+        <h5>Course Instructor</h5>
+        <p>Dr. John Doe</p>
+      </div>
+    </div>
+    <div class="float-end">
+        <button class="btn btn-primary">Upload Grades</button>
+    </div>
+  </header>
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Course Work</th>
+        <th scope="col">Exam Work</th>
+        <th scope="col">Total</th>
+        <th scope="col">Grade</th>
+        <th scope="col">Edit</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let student of students; let i = index">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ student.id }}</td>
+        <td>{{ student.name }}</td>
+
+        <td>
+          <input
+            type="number"
+            max="40"
+            ngModel
+            [disabled]="!student.editable"
+            #termWorkInput="ngModel"
+            (input)="updateTermWork(i, $event)"
+          />
+          <div *ngIf="termWorkInput.invalid && termWorkInput.dirty">
+            <!-- <div *ngIf="termWorkInput.errors.required">Term Work is required</div>
+                        <div *ngIf="termWorkInput.errors.pattern">Enter a valid number</div> -->
+            <div *ngIf="student.termWork > 40">
+              Term Work should not exceed 40
+            </div>
+          </div>
+        </td>
+        <td>
+          <input
+            type="number"
+            max="60"
+            ngModel
+            required
+            [disabled]="!student.editable"
+            #examWorkInput="ngModel"
+            (input)="updateExamWork(i, $event)"
+          />
+          <div *ngIf="examWorkInput.invalid && examWorkInput.dirty">
+            <!-- <div *ngIf="examWorkInput.errors.required">Exam Work is required</div>
+                        <div *ngIf="examWorkInput.errors.pattern">Enter a valid number</div> -->
+            <div *ngIf="student.examWork > 60">
+              Exam Work should not exceed 60
+            </div>
+          </div>
+        </td>
+        <td>{{ student.total }}</td>
+
+        <td>{{ student.grade }}</td>
+
+        <td>
+          <button
+            style="margin-right: 5px"
+            class="btn btn-secondary btn-sm"
+            type="button"
+            [disabled]="
+              termWorkInput.viewModel > 40 || examWorkInput.viewModel > 60
+            "
+            (click)="edit(i)"
+          >
+            {{ student.editable ? "Save" : "Edit" }}
+          </button>
+          <button
+            class="btn btn-secondary btn-sm"
+            type="button"
+            (click)="cancel(i)"
+          >
+            Cancel
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
