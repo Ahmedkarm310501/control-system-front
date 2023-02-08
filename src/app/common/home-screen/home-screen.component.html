@@ -24,7 +24,7 @@
       </div>
     </div>
     <div class="row courses g-3 mt-2">
-      <div class="col-sm-12 col-md-6" *ngFor="let course of filteredCourses">
+      <div class="col-sm-12 col-md-12" *ngFor="let course of filteredCourses">
         <div class="card bg-white">
           <div class="card-header m-0 fw-bold fs-4">{{ course.name }}</div>
           <div class="card-body">
@@ -34,11 +34,11 @@
               number of students: {{ course.numberOfStudents }}
             </h5>
             <hr />
-            <div class="d-flex justify-content-between">
+            <div class="d-flex justify-content-start">
               <h6 class="card-subtitle">
                 graded students: {{ course.gradedStudents }}
               </h6>
-              <h6 class="card-subtitle">
+              <h6 class="card-subtitle ms-5">
                 ungraded students: {{ course.ungradedStudents }}
               </h6>
             </div>

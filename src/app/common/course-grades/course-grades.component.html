@@ -19,7 +19,7 @@
       </div>
     </div>
     <div class="float-end">
-        <button class="btn btn-primary">Upload Grades</button>
+      <button class="btn btn-primary">Upload Grades</button>
     </div>
   </header>
 
@@ -41,7 +41,6 @@
         <th scope="row">{{ i + 1 }}</th>
         <td>{{ student.id }}</td>
         <td>{{ student.name }}</td>
-
         <td>
           <input
             type="number"
@@ -49,12 +48,10 @@
             ngModel
             [disabled]="!student.editable"
             #termWorkInput="ngModel"
-            (input)="updateTermWork(i, $event)"
+            #termWork
           />
           <div *ngIf="termWorkInput.invalid && termWorkInput.dirty">
-            <!-- <div *ngIf="termWorkInput.errors.required">Term Work is required</div>
-                        <div *ngIf="termWorkInput.errors.pattern">Enter a valid number</div> -->
-            <div *ngIf="student.termWork > 40">
+            <div *ngIf="termWorkInput.value > 40">
               Term Work should not exceed 40
             </div>
           </div>
@@ -67,12 +64,10 @@
             required
             [disabled]="!student.editable"
             #examWorkInput="ngModel"
-            (input)="updateExamWork(i, $event)"
+            #examWork
           />
           <div *ngIf="examWorkInput.invalid && examWorkInput.dirty">
-            <!-- <div *ngIf="examWorkInput.errors.required">Exam Work is required</div>
-                        <div *ngIf="examWorkInput.errors.pattern">Enter a valid number</div> -->
-            <div *ngIf="student.examWork > 60">
+            <div *ngIf="examWorkInput.value > 60">
               Exam Work should not exceed 60
             </div>
           </div>
@@ -83,17 +78,26 @@
 
         <td>
           <button
+            *ngIf="!student.editable"
             style="margin-right: 5px"
             class="btn btn-secondary btn-sm"
             type="button"
-            [disabled]="
-              termWorkInput.viewModel > 40 || examWorkInput.viewModel > 60
-            "
-            (click)="edit(i)"
+            (click)="student.editable = !student.editable"
           >
-            {{ student.editable ? "Save" : "Edit" }}
+            Edit
           </button>
           <button
+            *ngIf="student.editable"
+            style="margin-right: 5px"
+            class="btn btn-secondary btn-sm"
+            type="button"
+            [disabled]="termWorkInput.value > 40 || examWorkInput.value > 60"
+            (click)="save(i, termWorkInput.value, examWorkInput.value)"
+          >
+            Save
+          </button>
+          <button
+            *ngIf="student.editable"
             class="btn btn-secondary btn-sm"
             type="button"
             (click)="cancel(i)"
