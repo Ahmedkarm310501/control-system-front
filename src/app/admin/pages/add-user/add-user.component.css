@@ -1,51 +1,32 @@
-span.section {
-  display: block;
+input[type="checkbox"] {
+  transform: scale(2);
+}
+
+.x_panel {
+  position: relative;
   width: 100%;
-  padding: 0;
-  margin-bottom: 20px;
-  font-size: 21px;
-  color: #333;
-  border: 0;
+  margin-bottom: 10px;
+  padding: 10px 17px;
+  display: inline-block;
+  background: #fff;
+  border: 1px solid #e6e9ed;
+  -webkit-column-break-inside: avoid;
+  opacity: 1;
+  transition: all 0.2s ease;
 }
 
-.container[_ngcontent-vua-c50] {
-  width: 921px;
-  height: 691px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
-.form-control {
-  display: block;
-  width: 523px;
-  padding: 0.375rem 0.75rem;
-  font-size: 1rem;
+body {
+  color: #73879c;
+  background: #2a3f54;
+  font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
+  font-size: 13px;
   font-weight: 400;
-  line-height: 2.5;
-  color: #212529;
-  background-color: #fff;
-  background-clip: padding-box;
-  border: 1px solid #ced4da;
-  -webkit-appearance: none;
-  appearance: none;
-  border-radius: 0.375rem;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
-
-form {
-  width: 100%;
-  padding: 15px;
-  margin: auto;
-}
-
-.error {
-  color: red;
-  font-size: 12px;
-}
-
-.formm {
-  margin: 0 auto;
-  width: 700px;
+  line-height: 1.471;
 }

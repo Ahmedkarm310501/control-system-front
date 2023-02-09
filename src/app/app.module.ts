@@ -16,6 +16,7 @@ import { CourseDashboardComponent } from './common/course-dashboard/course-dashb
 import { HomeScreenComponent } from './common/home-screen/home-screen.component';
 import { FormsModule } from '@angular/forms';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +33,7 @@ import { FormsModule } from '@angular/forms';
     CourseDashboardComponent,
     HomeScreenComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule],
+  imports: [BrowserModule, AppRoutingModule,FormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })

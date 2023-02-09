@@ -1,38 +1,68 @@
-<div class="login">
-  <div class="center d-flex justify-content-center">
-    <form>
-      <h1>Login Form</h1>
-      <div>
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Username"
-          required=""
-        />
-      </div>
-      <div>
-        <input
-          type="password"
-          class="form-control"
-          placeholder="Password"
-          required=""
-        />
-      </div>
-      <div>
-        <a class="btn btn-default submit" href="index.html">Log in</a>
-      </div>
-      <div class="clearfix"></div>
-      <div class="separator">
-        <div class="clearfix"></div>
-        <br />
+<div class="back">
+  <div class="login">
+    <div class="center login_wrapper">
+      <form class="login_form" #Form="ngForm" (ngSubmit)="onSubmit(Form.value)">
+        <h1>Login Form</h1>
         <div>
-          <h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>
-          <p>
-            ©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 3
-            template. Privacy and Terms
-          </p>
+          <input
+            type="email"
+            class="form-control"
+            placeholder="Email"
+            name="email"
+            email
+            required
+            ngModel
+            #email="ngModel"
+          />
         </div>
-      </div>
-    </form>
+        <div *ngIf="email && email.invalid && (email.dirty || email.touched)">
+          <div *ngIf="email.errors && email.errors['required']" class="error">
+            Email is required.
+          </div>
+          <div *ngIf="email.errors && email.errors['email']" class="error">
+            Email is invalid.
+          </div>
+        </div>
+        <div>
+          <input
+            type="password"
+            class="form-control"
+            placeholder="Password"
+            name="password"
+            minlength="6"
+            maxlength="20"
+            required
+            ngModel
+            #password="ngModel"
+          />
+        </div>
+        <div *ngIf="password && password.invalid && (password.dirty || password.touched)">
+          <div *ngIf="password.errors && password.errors['required']" class="error">
+            Password is required.
+          </div>
+          <div *ngIf="password.errors && password.errors['minlength']" class="error">
+            Password must be at least 6 characters.
+          </div>
+          <div *ngIf="password.errors && password.errors['maxlength']" class="error">
+            Password must be at most 20 characters.
+          </div>
+        </div>
+
+        <button
+          class="btn btn-secondary submit px-4"
+          [disabled]="!Form.form.valid"
+        >
+          Log in
+        </button>
+
+        <div class="separator">
+          <br />
+          <div>
+            <h1><i class="fa fa-paw"></i> Control System</h1>
+            <p>© 2023 All Rights Reserved. FCAI Control System!</p>
+          </div>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
