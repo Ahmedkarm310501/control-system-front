@@ -1,21 +1,24 @@
 <div class="col-md-3 left_col">
   <div class="left_col scroll-view">
     <div class="navbar nav_title" style="border: 0">
-      <a href="index.html" class="site_title"> <span>Control System</span></a>
+      <a href="index.html" class="site_title d-flex align-items-center">
+        <img src="\assets\img.png" class="img-fluid cl me-2" />
+        <span>Control System</span></a
+      >
     </div>
     <div class="clearfix"></div>
 
     <div class="profile clearfix">
       <div class="profile_pic">
         <img
-          src="https://colorlib.com/polygon/gentelella/images/img.jpg"
+          src="\assets\60111.jpg"
           alt="..."
           class="img-circle profile_img rounded-circle"
         />
       </div>
       <div class="profile_info">
         <span>Welcome,</span>
-        <h2>John Doe</h2>
+        <h2>Youssef salah</h2>
       </div>
       <div class="clearfix"></div>
     </div>
@@ -31,16 +34,20 @@
             [ngClass]="toggleDisplay['home'] ? 'active' : ''"
           >
             <a
-              ><i class="fa fa-home"></i> Home
+              ><i class="fa fa-home"></i> Courses
               <span class="fa fa-chevron-down float-end"></span>
             </a>
             <ul
               class="nav child_menu"
               [ngStyle]="{ display: toggleDisplay['home'] ? 'block' : 'none' }"
             >
-              <li><a href="index.html">Dashboard</a></li>
-              <li><a href="index2.html">Dashboard2</a></li>
-              <li><a href="index3.html">Dashboard3</a></li>
+              <li routerLinkActive="current-page">
+                <a routerLink="home">courses</a>
+              </li>
+              <li routerLinkActive="current-page">
+                <a routerLink="course-dashboard">course dashboard</a>
+              </li>
+              <!--<li><a href="index3.html">Dashboard3</a></li> -->
             </ul>
           </li>
           <li
@@ -48,22 +55,43 @@
             [ngClass]="toggleDisplay['forms'] ? 'active' : ''"
           >
             <a
-              ><i class="fa fa-edit"></i> Forms
+              ><i class="fa fa-edit"></i> Students
               <span class="fa fa-chevron-down float-end"></span>
             </a>
             <ul
               class="nav child_menu"
               [ngStyle]="{ display: toggleDisplay['forms'] ? 'block' : 'none' }"
             >
-              <li><a href="form.html">General Form</a></li>
-              <li><a href="form_advanced.html">Advanced Components</a></li>
-              <li><a href="form_validation.html">Form Validation</a></li>
-              <li><a href="form_wizards.html">Form Wizard</a></li>
-              <li><a href="form_upload.html">Form Upload</a></li>
-              <li><a href="form_buttons.html">Form Buttons</a></li>
+              <li routerLinkActive="current-page">
+                <a routerLink="add-students">add students</a>
+              </li>
+              <!-- <li><a routerLink="form_advanced.html">Advanced Components</a></li> -->
             </ul>
           </li>
-
+          <li
+            (click)="clickEvent('users')"
+            [ngClass]="toggleDisplay['users'] ? 'active' : ''"
+          >
+            <a
+              ><i class="fa fa-lock"></i> Admin
+              <span class="fa fa-chevron-down float-end"></span>
+            </a>
+            <ul
+              class="nav child_menu"
+              [ngStyle]="{ display: toggleDisplay['users'] ? 'block' : 'none' }"
+            >
+              <li routerLinkActive="current-page">
+                <a routerLink="all-users">users</a>
+              </li>
+              <li routerLinkActive="current-page">
+                <a routerLink="add-user">add user</a>
+              </li>
+              <li routerLinkActive="current-page">
+                <a routerLink="admin-log">activity log</a>
+              </li>
+              <!-- <li><a routerLink="form_advanced.html">Advanced Components</a></li> -->
+            </ul>
+          </li>
           <!-- additional list items here -->
         </ul>
       </div>

@@ -1,1 +1,51 @@
-<p>home-screen works!</p>
+<div class="home-page">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="page-title">
+        <div class="title_left">
+          <h3>Assigned Courses</h3>
+        </div>
+        <div class="title_right">
+          <div class="pull-right top_search">
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Search for course..."
+                #searchInput
+                (input)="searchCourse(searchInput.value)"
+              />
+              <span class="input-group-btn">
+                <button class="btn btn-secondary" type="button">Go!</button>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row courses g-3 mt-2">
+      <div class="col-sm-12 col-md-12" *ngFor="let course of filteredCourses">
+        <div class="card bg-white">
+          <div class="card-header m-0 fw-bold fs-4">{{ course.name }}</div>
+          <div class="card-body">
+            <h4 class="card-title fw-500">Course ID: {{ course.id }}</h4>
+            <hr />
+            <h5 class="card-subtitle mb-2">
+              number of students: {{ course.numberOfStudents }}
+            </h5>
+            <hr />
+            <div class="d-flex justify-content-start">
+              <h6 class="card-subtitle">
+                graded students: {{ course.gradedStudents }}
+              </h6>
+              <h6 class="card-subtitle ms-5">
+                ungraded students: {{ course.ungradedStudents }}
+              </h6>
+            </div>
+            <button class="btn btn-secondary mt-3">Edit course grades</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
