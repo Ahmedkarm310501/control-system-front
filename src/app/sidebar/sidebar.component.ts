@@ -14,5 +14,10 @@ export class SidebarComponent {
 
   clickEvent(name: string) {
     this.toggleDisplay[name] = !this.toggleDisplay[name];
+    for (let key in this.toggleDisplay) {
+      if (key !== name) {
+        this.toggleDisplay[key] = false;
+      }
+    }
   }
 }
