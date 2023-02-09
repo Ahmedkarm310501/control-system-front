@@ -11,5 +11,18 @@ export class AddStudentsComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  onFileSelected(event : any) {
+    console.log(event);
+  }
+
+  onUpload() {
+
+    console.log("upload");
+
+  }
+  onSubmit(form: any) {
+    console.log("submit");
+  }
+
 
 }
