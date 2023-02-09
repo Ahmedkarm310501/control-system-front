@@ -18,7 +18,8 @@
         <p>Dr. John Doe</p>
       </div>
       <div class="float-end d-flex flex-column mt-1">
-        <button class="btn btn-primary">Upload Grades</button>
+        <input type="file" #f style="display: none;">
+        <button (click)="f.click()" class="btn btn-primary">Upload Grades</button>
         <span class="mt-1">Upload grades via excel</span>
 
       </div>
@@ -47,33 +48,45 @@
         <td>
           <input
             type="number"
-            max="40"
+            [max]="40"
+            [min]="0"
             ngModel
-            [disabled]="!student.editable"
+            [disabled]="!student.editable "
             #termWorkInput="ngModel"
             #termWork
+            style="width: 100%;"
           />
           <div *ngIf="termWorkInput.invalid && termWorkInput.dirty">
-            <div *ngIf="termWorkInput.value > 40">
+            <div style="margin-left: -5px;" *ngIf="termWorkInput.value > 40" class="error">
               Term Work should not exceed 40
+            </div>
+            <div style="margin-left: -5px;" *ngIf="termWorkInput.value <0" class="error">
+              Term Work should not be less than 0
             </div>
           </div>
         </td>
         <td>
           <input
             type="number"
-            max="60"
+            [max]="60"
+            [min]="0"
             ngModel
             required
             [disabled]="!student.editable"
             #examWorkInput="ngModel"
             #examWork
+            style="width: 100%;"
           />
           <div *ngIf="examWorkInput.invalid && examWorkInput.dirty">
-            <div *ngIf="examWorkInput.value > 60">
+            <div style="margin-left: -5px;" *ngIf="examWorkInput.value > 60" class="error">
               Exam Work should not exceed 60
             </div>
+            <div style="margin-left: -5px;" *ngIf="examWorkInput.value <0" class="error">
+              Exam Work should not be less than 0
+            </div>
           </div>
+
+          
         </td>
         <td>{{ student.total }}</td>
 
@@ -94,7 +107,7 @@
             style="margin-right: 5px"
             class="btn btn-secondary btn-sm"
             type="button"
-            [disabled]="termWorkInput.value > 40 || examWorkInput.value > 60"
+            [disabled]="termWorkInput.value > 40 || examWorkInput.value > 60 || termWorkInput.value < 0 || examWorkInput.value < 0"
             (click)="save(i, termWorkInput.value, examWorkInput.value)"
           >
             Save
