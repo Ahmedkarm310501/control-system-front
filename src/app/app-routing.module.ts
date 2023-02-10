@@ -4,6 +4,7 @@ import { AddCourseComponent } from './admin/pages/add-course/add-course.componen
 import { AddUserComponent } from './admin/pages/add-user/add-user.component';
 import { AdminLogComponent } from './admin/pages/admin-log/admin-log.component';
 import { AllUsersComponent } from './admin/pages/all-users/all-users.component';
+import { SettingsPageComponent } from './admin/pages/settings-page/settings-page.component';
 import { LoginComponent } from './auth/login/login.component';
 import { AddStudentsComponent } from './common/add-students/add-students.component';
 import { CourseDashboardComponent } from './common/course-dashboard/course-dashboard.component';
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'admin-log', component: AdminLogComponent },
   { path: 'add-course', component: AddCourseComponent },
   { path: 'all-users', component: AllUsersComponent },
+  { path: "settings", component: SettingsPageComponent},
 
   { path: '**', redirectTo: '/home', pathMatch: 'full' },
 ];
