@@ -1,0 +1,104 @@
+.x_panel {
+  position: relative;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px 17px;
+  display: inline-block;
+  background: #fff;
+  border: 1px solid #e6e9ed;
+  -webkit-column-break-inside: avoid;
+  opacity: 1;
+  transition: all 0.2s ease;
+}
+
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  color: #73879c;
+  background: #2a3f54;
+  font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.471;
+}
+
+.form-horizontal .form-group {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.item {
+  display: flex;
+}
+
+.form-group {
+  margin-bottom: 10px;
+}
+
+form:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+
+.col-sm-3,
+.col-md-3,
+.col-sm-6,
+.col-md-6 {
+  position: relative;
+  min-height: 1px;
+  float: left;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.btn {
+  border-radius: 3px;
+}
+
+button,
+.buttons,
+.btn,
+.modal-footer .btn + .btn {
+  margin-bottom: 5px;
+  margin-right: 5px;
+}
+
+.btn-success {
+  background: #26b99a;
+  border: 1px solid #169f85;
+}
+
+.label-align {
+  text-align: right;
+}
+
+.item input {
+  transition: 0.42s;
+}
+
+.form-control {
+  border-radius: 0;
+  width: 100%;
+}
+
+.ln_solid {
+  border-top: 1px solid #e5e5e5;
+  color: #ffffff;
+  background-color: #ffffff;
+  height: 1px;
+  margin: 20px 0;
+}
+
+.x_title {
+  border-bottom: 2px solid #e6e9ed;
+  padding: 1px 5px 6px;
+  margin-bottom: 10px;
+}

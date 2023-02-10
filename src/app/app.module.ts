@@ -15,6 +15,8 @@ import { AddStudentsComponent } from './common/add-students/add-students.compone
 import { CourseDashboardComponent } from './common/course-dashboard/course-dashboard.component';
 import { HomeScreenComponent } from './common/home-screen/home-screen.component';
 import { FormsModule } from '@angular/forms';
+import { EditUserComponent } from './admin/pages/edit-user/edit-user.component';
+import { StudentsPageComponent } from './admin/pages/students-page/students-page.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,9 @@ import { FormsModule } from '@angular/forms';
     AddStudentsComponent,
     CourseDashboardComponent,
     HomeScreenComponent,
+    EditUserComponent,
+    StudentsPageComponent,
+    
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],

@@ -1,68 +1,28 @@
-/* .container {
-  width: 600px;
-}
-
-.form-control {
-  width: 400px;
-}
-
-span.section {
-  display: block;
-  width: 100%;
-  padding: 0;
-  margin-bottom: 20px;
-  font-size: 21px;
-  line-height: inherit;
-  color: #333;
-  border: 0;
-  border-bottom: 1px solid #e5e5e5;
-}
-
-custom-select[_ngcontent-bpd-c49] {
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  height: calc(2.25rem + 2px);
-  padding: 0.375rem 0.75rem;
-  font-size: 1rem;
-  line-height: 1.5;
-  color: #495057;
-}
-
-.custom-select {
-  width: 100px;
-  height: 34px;
-}
-
-.ln_solid {
-  margin-left: -99px;
-} */
-
 .x_panel {
-  position: relative;
-  width: 100%;
-  margin-bottom: 10px;
-  padding: 10px 17px;
-  display: inline-block;
-  background: #fff;
-  border: 1px solid #e6e9ed;
-  -webkit-column-break-inside: avoid;
-  opacity: 1;
-  transition: all 0.2s ease;
+    position: relative;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px 17px;
+    display: inline-block;
+    background: #fff;
+    border: 1px solid #e6e9ed;
+    -webkit-column-break-inside: avoid;
+    opacity: 1;
+    transition: all 0.2s ease;
 }
 
 *,
 *:before,
 *:after {
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 body {
-  color: #73879c;
-  background: #2a3f54;
-  font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 1.471;
+    color: #73879c;
+    background: #2a3f54;
+    font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.471;
 }

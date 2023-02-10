@@ -122,29 +122,3 @@ export class AllUsersComponent implements OnInit {
     );
   }
 }
-//add function to sort data by name and email and id
-//   sortData(sort: any) {
-//     const data = this.dummyData.slice();
-//     if (!sort.active || sort.direction === '') {
-//       this.filteredData = data;
-//       return;
-//     }
-
-//     this.filteredData = data.sort((a, b) => {
-//       const isAsc = sort.direction === 'asc';
-//       switch (sort.active) {
-//         case 'name':
-//           return compare(a.name, b.name, isAsc);
-//         case 'email':
-//           return compare(a.email, b.email, isAsc);
-//         case 'id':
-//           return compare(a.id, b.id, isAsc);
-//         default:
-//           return 0;
-//       }
-//     });
-//   }
-// }
-// function compare(name: string, name1: string, isAsc: boolean): number {
-//   return (name < name1 ? -1 : 1) * (isAsc ? 1 : -1);
-// }
