@@ -14,9 +14,11 @@ import { CourseSettingsComponent } from './common/course-settings/course-setting
 import { AddStudentsComponent } from './common/add-students/add-students.component';
 import { CourseDashboardComponent } from './common/course-dashboard/course-dashboard.component';
 import { HomeScreenComponent } from './common/home-screen/home-screen.component';
-import { FormsModule } from '@angular/forms';
 import { EditUserComponent } from './admin/pages/edit-user/edit-user.component';
 import { StudentsPageComponent } from './admin/pages/students-page/students-page.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UserProfileComponent } from './common/user-profile/user-profile.component';
+import { SettingsPageComponent } from './admin/pages/settings-page/settings-page.component';
 
 @NgModule({
   declarations: [
@@ -35,9 +37,10 @@ import { StudentsPageComponent } from './admin/pages/students-page/students-page
     HomeScreenComponent,
     EditUserComponent,
     StudentsPageComponent,
-    
+    UserProfileComponent,
+    SettingsPageComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })
