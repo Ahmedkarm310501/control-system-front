@@ -1,21 +1,41 @@
-<div class="row">
-  <p style="font-size: 30px;">History of Vistors</p>
-</div>
+<header>
+  <div class="page-title">
+    <div class="title_left">
+      <h3>History of Vistors</h3>
+    </div>
+    <div class="title_right">
+      <div class="pull-right top_search">
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Search for course..."
+            #searchInput
+            (input)="searchCourse(searchInput.value)"
+          />
+          <span class="input-group-btn">
+            <button class="btn btn-secondary" type="button">Go!</button>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
 <table class="table table-hover">
   <thead>
-  <tr>
-    <th scope="col">#</th>
-    <th scope="col">UserName</th>
-    <th scope="col">Time</th>
-    <th scope="col">change</th>
-  </tr>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">UserName</th>
+      <th scope="col">Time</th>
+      <th scope="col">change</th>
+    </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let data of dummyData">
-    <th scope="row">{{data.id}}</th>
-    <td>{{data.username}}</td>
-    <td>{{data.Time}}</td>
-    <td>{{data.change}}</td>
-  </tr>
-</tbody>
+    <tr *ngFor="let data of filteredCourses">
+      <th scope="row">{{ data.id }}</th>
+      <td>{{ data.username }}</td>
+      <td>{{ data.Time }}</td>
+      <td>{{ data.change }}</td>
+    </tr>
+  </tbody>
 </table>

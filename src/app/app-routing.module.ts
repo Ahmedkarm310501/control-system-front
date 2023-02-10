@@ -10,6 +10,7 @@ import { CourseDashboardComponent } from './common/course-dashboard/course-dashb
 import { CourseGradesComponent } from './common/course-grades/course-grades.component';
 import { CourseSettingsComponent } from './common/course-settings/course-settings.component';
 import { HomeScreenComponent } from './common/home-screen/home-screen.component';
+import { UserProfileComponent } from './common/user-profile/user-profile.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'course-settings', component: CourseSettingsComponent },
   { path: 'add-students', component: AddStudentsComponent },
   { path: 'course-dashboard', component: CourseDashboardComponent },
+  { path: 'user-profile', component: UserProfileComponent },
   // admin routes
   { path: 'add-user', component: AddUserComponent },
   { path: 'admin-log', component: AdminLogComponent },
