@@ -1,6 +1,6 @@
 <div class="x_panel">
   <div class="x_title">
-    <h2>All <small>Users</small></h2>
+    <h2>All Students</h2>
 
     <div class="clearfix"></div>
   </div>
@@ -40,7 +40,7 @@
                   <input
                     type="text"
                     class="form-control mx-2 my-2"
-                    placeholder="Search for User..."
+                    placeholder="Search for Students..."
                     #searchInput
                     (input)="search(searchInput.value)"
                   />
@@ -115,6 +115,52 @@
                         aria-controls="datatable"
                         rowspan="1"
                         colspan="1"
+                        aria-label="Office: activate to sort column ascending"
+                        style="width: 136px"
+                      >
+                        Department
+                        <i
+                          class="fa fa-lg fa-sort float-end"
+                          (click)="sortBy('department')"
+                        ></i>
+                      </th>
+                      <th
+                        class="sorting"
+                        tabindex="0"
+                        aria-controls="datatable"
+                        rowspan="1"
+                        colspan="1"
+                        aria-label="Office: activate to sort column ascending"
+                        style="width: 136px"
+                      >
+                        Level
+                        <i
+                          class="fa fa-lg fa-sort float-end"
+                          (click)="sortBy('Level')"
+                        ></i>
+                      </th>
+                      <th
+                        class="sorting"
+                        tabindex="0"
+                        aria-controls="datatable"
+                        rowspan="1"
+                        colspan="1"
+                        aria-label="Office: activate to sort column ascending"
+                        style="width: 136px"
+                      >
+                        GPA
+                        <i
+                          class="fa fa-lg fa-sort float-end"
+                          (click)="sortBy('Gpa')"
+                        ></i>
+                      </th>
+
+                      <th
+                        class="sorting"
+                        tabindex="0"
+                        aria-controls="datatable"
+                        rowspan="1"
+                        colspan="1"
                         aria-label="Age: activate to sort column ascending"
                         style="width: 69px"
                       >
@@ -131,6 +177,10 @@
                       <td class="sorting_1">{{ data.id }}</td>
                       <td>{{ data.name }}</td>
                       <td>{{ data.email }}</td>
+                      <td>{{ data.department }}</td>
+                      <td>{{ data.Level }}</td>
+                      <td>{{ data.Gpa }}</td>
+
                       <td
                         class="d-flex justify-content-evenly align-items-center m-0"
                       >
@@ -141,12 +191,12 @@
                           data-bs-target="#exampleModal"
                           (click)="onEdit(data.id)"
                         >
-                          Assign
+                          View
                         </button>
 
                         <button
                           class="btn btn-danger mx-2 my-2 m-0"
-                          routerLink="/edit-user/:id"
+                          routerLink="edit-user"
                         >
                           Edit
                         </button>
@@ -222,8 +272,8 @@
                 required
                 #course="ngModel"
               >
-                <option *ngFor="let Course of dummyDataCourses">
-                  {{ Course.name }}"
+                <option *ngFor="let data of filteredData">
+                  {{ data.name }}"
                 </option>
               </select>
               <div *ngIf="course.invalid && course.touched" class="error">
