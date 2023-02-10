@@ -18,6 +18,10 @@ export class CourseGradesComponent implements OnInit {
       editable: false,
     };
   });
+  isShown = false;
+  shown() {
+    this.isShown = !this.isShown;
+  }
 
   constructor(private gradeService: GradeService) {}
 

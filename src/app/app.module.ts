@@ -16,6 +16,7 @@ import { CourseDashboardComponent } from './common/course-dashboard/course-dashb
 import { HomeScreenComponent } from './common/home-screen/home-screen.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserProfileComponent } from './common/user-profile/user-profile.component';
+import { SettingsPageComponent } from './admin/pages/settings-page/settings-page.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { UserProfileComponent } from './common/user-profile/user-profile.compone
     CourseDashboardComponent,
     HomeScreenComponent,
     UserProfileComponent,
+    SettingsPageComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
   providers: [],

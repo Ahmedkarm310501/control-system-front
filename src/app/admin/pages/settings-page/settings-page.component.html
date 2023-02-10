@@ -1,0 +1,36 @@
+<header>
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Settings</h3>
+        </div>
+    </div>
+</header>
+
+<form class="row g-3" #Form="ngForm" (ngSubmit)="onSubmit(Form.value)">
+    <div class="col-md-6">
+        <label for="courseid" class="form-label">Login With</label>
+        <select class="form-select" id="loginwith" name="loginwith">
+            <option value="email">Email</option>
+            <option value="ssn">SSN</option>
+        </select>
+    </div>
+    <div>
+        <p>Notifications</p>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+            <label class="form-check-label" for="flexRadioDefault1">
+                Notify
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+            <label class="form-check-label" for="flexRadioDefault2">
+                Don't Notify
+            </label>
+        </div>
+    </div>
+
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</form>
