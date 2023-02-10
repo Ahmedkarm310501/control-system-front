@@ -1,0 +1,167 @@
+<div class="profile">
+  <div class="contaier-fluid">
+    <div class="row">
+      <p class="col-md-12 fs-3">User Profile</p>
+      <form class="col-md-12">
+        <div class="row g-4">
+          <div class="col-12">
+            <div class="bg-white p-3 rounded-3">
+              <div class="row">
+                <div class="col-sm-12 col-md-6 mb-3">
+                  <label for="name" class="form-label">Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="name"
+                    placeholder="Enter your name"
+                    disabled
+                    value="Ahmed karam"
+                  />
+                </div>
+                <div class="col-sm-12 col-md-6 mb-3">
+                  <label for="email" class="form-label">Email</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    placeholder="Enter your email"
+                    disabled
+                    value="ahmed@fci-cu.edu.eg"
+                  />
+                </div>
+                <div class="col-sm-12 col-md-6 mb-3">
+                  <label for="NationalID" class="form-label">National ID</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="NationalID"
+                    disabled
+                    value="28203040294838"
+                  />
+                </div>
+
+                <!-- butotns div -->
+                <!-- <div class="col-sm-12 col-md-12 mb-3">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <button class="btn btn-primary">Save</button>
+                    </div>
+                  </div>
+                </div> -->
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-lg-3">
+            <div class="row bg-white py-3 rounded-3">
+              <div class="col-md-12 text-center mb-3">
+                <img
+                  class="rounded-circle"
+                  src="/assets/60111.jpg"
+                  alt="user image"
+                  width="150"
+                  height="150"
+                />
+              </div>
+              <div class="col-md-12">
+                <div class="d-flex justify-content-around">
+                  <div class="">
+                    <button class="btn btn-primary">Update</button>
+                  </div>
+                  <div class="">
+                    <button class="btn btn-danger">Delete</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-lg-9">
+            <div class="bg-white p-3 rounded-3">
+              <span class="fs-2">update password</span>
+              <form
+                [formGroup]="updatePasswordForm"
+                (ngSubmit)="updatePassword()"
+              >
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <label for="password" class="form-label fs-4"
+                      >new password</label
+                    >
+                    <input
+                      type="password"
+                      class="form-control"
+                      id="password"
+                      placeholder="Enter your password"
+                      formControlName="password"
+                    />
+                    <div
+                      *ngIf="
+                        updatePasswordForm
+                          .get('password')
+                          .hasError('required') &&
+                        updatePasswordForm.get('password').touched
+                      "
+                      class="error"
+                    >
+                      Password is required.
+                    </div>
+                    <div
+                      *ngIf="
+                        updatePasswordForm
+                          .get('password')
+                          .hasError('minlength') &&
+                        updatePasswordForm.get('password').touched
+                      "
+                      class="error"
+                    >
+                      Password must have at least 8 characters.
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="c-password" class="form-label fs-4"
+                      >confirm password</label
+                    >
+                    <input
+                      type="password"
+                      class="form-control"
+                      id="c-password"
+                      placeholder="Enter your password"
+                      formControlName="confirmPassword"
+                    />
+                    <div
+                      *ngIf="
+                        updatePasswordForm
+                          .get('confirmPassword')
+                          .hasError('required') &&
+                        updatePasswordForm.get('confirmPassword').touched
+                      "
+                      class="error"
+                    >
+                      Confirm Password is required.
+                    </div>
+                    <div
+                      *ngIf="
+                        updatePasswordForm.hasError('mismatch') &&
+                        updatePasswordForm.get('confirmPassword').touched
+                      "
+                      class="error"
+                    >
+                      Passwords do not match.
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <button
+                      class="btn btn-primary"
+                      [disabled]="updatePasswordForm.invalid"
+                    >
+                      Save
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
