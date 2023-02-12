@@ -20,6 +20,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserProfileComponent } from './common/user-profile/user-profile.component';
 import { SettingsPageComponent } from './admin/pages/settings-page/settings-page.component';
 import { ReadExcelDirective } from './common/directives/read-excel.directive';
+import { ModalComponent } from './components/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { ReadExcelDirective } from './common/directives/read-excel.directive';
     UserProfileComponent,
     SettingsPageComponent,
     ReadExcelDirective,
+    ModalComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
   providers: [],

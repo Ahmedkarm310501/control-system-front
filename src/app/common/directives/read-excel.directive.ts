@@ -18,6 +18,7 @@ export class ReadExcelDirective implements OnChanges {
   constructor() {}
 
   ngOnChanges(changes: SimpleChanges) {
+    console.log('changes', changes);
     if (changes['file'] && changes['file'].currentValue) {
       this.readExcel();
     }
@@ -33,5 +34,6 @@ export class ReadExcelDirective implements OnChanges {
       this.uploaded.emit(XLSX.utils.sheet_to_json(worksheet, { raw: true }));
     };
     reader.readAsBinaryString(this.file);
+    // this.file = null;
   }
 }

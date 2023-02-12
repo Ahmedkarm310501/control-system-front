@@ -18,10 +18,10 @@ export let studData = [
   {
     id: '20190003',
     name: 'youssef salah saber',
-    termWork: 30,
-    examWork: 40,
-    total: 70,
-    grade: 'C+',
+    termWork: null,
+    examWork: null,
+    total: null,
+    grade: null,
   },
   {
     id: '20190004',

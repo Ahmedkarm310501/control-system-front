@@ -57,25 +57,48 @@
               (uploaded)="onExcelUpload($event)"
             />Upload Grades
           </a>
-          <a class="dropdown-item">Export grades</a>
+          <a class="dropdown-item" style="cursor: pointer">Export grades</a>
+          <a
+            class="dropdown-item"
+            style="cursor: pointer"
+            (click)="deleteAllGrades()"
+            >Delete all grades</a
+          >
         </div>
       </div>
     </div>
   </header>
-
-  <div class="search col-6 mb-3">
-    <div class="input-group">
-      <input
-        type="search"
-        class="form-control bg-white"
-        placeholder="Search for..."
-        #searchInput
-        (input)="searchStudent(searchInput.value)"
-      />
-      <span class="input-group-btn">
-        <button class="btn btn-secondary" type="button">Go!</button>
-      </span>
+  <div class="row">
+    <div class="form-check col-6 mb-3 d-flex justify-content-start">
+      <label
+        class="btn btn-secondary"
+        data-toggle-class="btn-primary"
+        data-toggle-passive-class="btn-default"
+      >
+        <input
+          type="checkbox"
+          (change)="toggleStudentsWithNoGrades()"
+          class="join-btn"
+        />
+        &nbsp; show students with no grades &nbsp;
+      </label>
     </div>
+    <div class="search col-6 mb-3">
+      <div class="input-group">
+        <input
+          type="search"
+          class="form-control bg-white"
+          placeholder="Search for..."
+          #searchInput
+          (input)="searchStudent(searchInput.value)"
+        />
+        <span class="input-group-btn">
+          <button class="btn btn-secondary" type="button">Go!</button>
+        </span>
+      </div>
+    </div>
+
+    <!-- checkbox for show stud with no grades -->
   </div>
 
   <table class="tb table table-bordered table-hover table-responsive-md">
@@ -193,3 +216,14 @@
     </tbody>
   </table>
 </div>
+
+<!-- 
+<app-modal [show]="showModal" (closeModal)="closeModal()">
+  <div modal-title>Modal Title</div>
+  <div modal-body>
+    <p>Modal content goes here...</p>
+  </div>
+  <div modal-footer>
+    <button (click)="closeModal()">Close</button>
+  </div>
+</app-modal> -->

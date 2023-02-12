@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+  Renderer2,
+} from '@angular/core';
 import { studData } from './stud-data';
 import { GradeService } from './grade.service';
 import { ReadExcelDirective } from '../directives/read-excel.directive';
@@ -9,7 +15,11 @@ import { ReadExcelDirective } from '../directives/read-excel.directive';
   styleUrls: ['./course-grades.component.css'],
 })
 export class CourseGradesComponent implements OnInit {
-  constructor(private gradeService: GradeService) {}
+  @ViewChild('f') fileRef: ElementRef;
+  constructor(
+    private gradeService: GradeService,
+    private renderer: Renderer2
+  ) {}
   file: File;
   students = studData.map((student) => {
     return {
@@ -73,8 +83,73 @@ export class CourseGradesComponent implements OnInit {
     this.file = event.target.files[0];
   }
 
+  missingStudents = [];
   onExcelUpload(data: any) {
-    console.log('in uplodaed');
     console.log(data);
+    this.students = this.students.map((student) => {
+      const excelStudent = data.find((s) => +s.id === +student.id);
+      if (excelStudent) {
+        return {
+          ...student,
+          termWork: excelStudent.termWork || 0,
+          examWork: excelStudent.examWork || 0,
+          total: +excelStudent.termWork + +excelStudent.examWork,
+          grade: this.gradeService.calculateGrade(
+            +excelStudent.termWork + +excelStudent.examWork
+          ),
+        };
+      } else {
+        this.missingStudents.push(student.id);
+        return student;
+      }
+    });
+    this.filteredStudents = this.students;
+    if (this.missingStudents.length > 0) {
+      alert(
+        `there are ${this.missingStudents.length} missing students: ${this.missingStudents}`
+      );
+    }
+    this.renderer.setProperty(this.fileRef.nativeElement, 'value', null);
   }
+
+  deleteAllGrades() {
+    let cc = confirm('Are you sure you want to delete all grades?');
+    if (cc) {
+      this.students = this.students.map((student) => {
+        return {
+          ...student,
+          termWork: null,
+          examWork: null,
+          total: null,
+          grade: null,
+        };
+      });
+      this.filteredStudents = this.students;
+    }
+  }
+
+  toggleStudentsWithNoGrades() {
+    if (this.filteredStudents.length === this.students.length) {
+      this.filteredStudents = this.students.filter((student) => {
+        return !student.termWork || !student.examWork;
+      });
+    } else {
+      this.filteredStudents = this.students;
+    }
+  }
+  // showStudentsWithNoGrades() {
+  //   this.filteredStudents = this.students.filter((student) => {
+  //     return !student.termWork || !student.examWork;
+  //   });
+  // }
+
+  // showModal = false;
+
+  // openModal() {
+  //   this.showModal = true;
+  // }
+
+  // closeModal() {
+  //   this.showModal = false;
+  // }
 }
