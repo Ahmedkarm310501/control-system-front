@@ -30,23 +30,55 @@
       </div> -->
       <!-- Example single danger button -->
       <div class="dropdown">
-        <button (click)="shown()" class="btn btn-primary dropdown-toggle " type="button" id="dropdownMenuButton"
-          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <button
+          (click)="shown()"
+          class="btn btn-primary dropdown-toggle"
+          type="button"
+          id="dropdownMenuButton"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
           Grades Options
         </button>
-        <div [ngClass]="{show: isShown}" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" (click)="f.click()" style="cursor : pointer"><input type="file" #f
-              style="display: none;">
-            <button class="grades-but" (click)="f.click()">Upload Grades</button>
+        <div
+          [ngClass]="{ show: isShown }"
+          class="dropdown-menu"
+          aria-labelledby="dropdownMenuButton"
+        >
+          <a class="dropdown-item" (click)="f.click()" style="cursor: pointer"
+            ><input
+              type="file"
+              #f
+              style="display: none"
+              (change)="onFileChange($event)"
+              appReadExcel
+              [file]="file"
+              (uploaded)="onExcelUpload($event)"
+            />Upload Grades
           </a>
           <a class="dropdown-item">Export grades</a>
         </div>
       </div>
-
     </div>
   </header>
 
-  <table class="tb table table-hover table-responsive-md">
+  <div class="search col-6 mb-3">
+    <div class="input-group">
+      <input
+        type="search"
+        class="form-control bg-white"
+        placeholder="Search for..."
+        #searchInput
+        (input)="searchStudent(searchInput.value)"
+      />
+      <span class="input-group-btn">
+        <button class="btn btn-secondary" type="button">Go!</button>
+      </span>
+    </div>
+  </div>
+
+  <table class="tb table table-bordered table-hover table-responsive-md">
     <thead>
       <tr>
         <th scope="col">#</th>
@@ -60,51 +92,100 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let student of students; let i = index">
+      <tr *ngFor="let student of filteredStudents; let i = index">
         <th scope="row">{{ i + 1 }}</th>
         <td>{{ student.id }}</td>
         <td>{{ student.name }}</td>
         <td>
-          <input type="number" [max]="40" [min]="0" ngModel [disabled]="!student.editable " #termWorkInput="ngModel"
-            #termWork style="width: 100%;" />
+          <input
+            type="number"
+            [max]="40"
+            [min]="0"
+            [(ngModel)]="student.termWork"
+            [disabled]="!student.editable"
+            #termWorkInput="ngModel"
+            style="width: 100%"
+          />
           <div *ngIf="termWorkInput.invalid && termWorkInput.dirty">
-            <div style="margin-left: -5px;" *ngIf="termWorkInput.value > 40" class="error">
+            <div
+              style="margin-left: -5px"
+              *ngIf="termWorkInput.value > 40"
+              class="error"
+            >
               Term Work should not exceed 40
             </div>
-            <div style="margin-left: -5px;" *ngIf="termWorkInput.value <0" class="error">
+            <div
+              style="margin-left: -5px"
+              *ngIf="termWorkInput.value < 0"
+              class="error"
+            >
               Term Work should not be less than 0
             </div>
           </div>
         </td>
         <td>
-          <input type="number" [max]="60" [min]="0" ngModel required [disabled]="!student.editable"
-            #examWorkInput="ngModel" #examWork style="width: 100%;" />
+          <input
+            type="number"
+            [max]="60"
+            [min]="0"
+            [(ngModel)]="student.examWork"
+            required
+            [disabled]="!student.editable"
+            #examWorkInput="ngModel"
+            style="width: 100%"
+          />
           <div *ngIf="examWorkInput.invalid && examWorkInput.dirty">
-            <div style="margin-left: -5px;" *ngIf="examWorkInput.value > 60" class="error">
+            <div
+              style="margin-left: -5px"
+              *ngIf="examWorkInput.value > 60"
+              class="error"
+            >
               Exam Work should not exceed 60
             </div>
-            <div style="margin-left: -5px;" *ngIf="examWorkInput.value <0" class="error">
+            <div
+              style="margin-left: -5px"
+              *ngIf="examWorkInput.value < 0"
+              class="error"
+            >
               Exam Work should not be less than 0
             </div>
           </div>
-
-
         </td>
         <td>{{ student.total }}</td>
 
         <td>{{ student.grade }}</td>
 
         <td>
-          <button *ngIf="!student.editable" style="margin-right: 5px" class="btn btn-secondary btn-sm" type="button"
-            (click)="student.editable = !student.editable">
+          <button
+            *ngIf="!student.editable"
+            style="margin-right: 5px"
+            class="btn btn-secondary btn-sm"
+            type="button"
+            (click)="edit(i)"
+          >
             Edit
           </button>
-          <button *ngIf="student.editable" style="margin-right: 5px" class="btn btn-secondary btn-sm" type="button"
-            [disabled]="termWorkInput.value > 40 || examWorkInput.value > 60 || termWorkInput.value < 0 || examWorkInput.value < 0"
-            (click)="save(i, termWorkInput.value, examWorkInput.value)">
+          <button
+            *ngIf="student.editable"
+            style="margin-right: 5px"
+            class="btn btn-secondary btn-sm"
+            type="button"
+            [disabled]="
+              termWorkInput.value > 40 ||
+              examWorkInput.value > 60 ||
+              termWorkInput.value < 0 ||
+              examWorkInput.value < 0
+            "
+            (click)="save(i, termWorkInput.value, examWorkInput.value)"
+          >
             Save
           </button>
-          <button *ngIf="student.editable" class="btn btn-secondary btn-sm" type="button" (click)="cancel(i)">
+          <button
+            *ngIf="student.editable"
+            class="btn btn-secondary btn-sm"
+            type="button"
+            (click)="cancel(i)"
+          >
             Cancel
           </button>
         </td>

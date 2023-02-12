@@ -1,7 +1,7 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
-import { ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { studData } from './stud-data';
 import { GradeService } from './grade.service';
+import { ReadExcelDirective } from '../directives/read-excel.directive';
 
 @Component({
   selector: 'app-course-grades',
@@ -9,43 +9,72 @@ import { GradeService } from './grade.service';
   styleUrls: ['./course-grades.component.css'],
 })
 export class CourseGradesComponent implements OnInit {
-  @ViewChild('termWork') termWorkInput: ElementRef;
-  @ViewChild('examWork') examWorkInput: ElementRef;
-
+  constructor(private gradeService: GradeService) {}
+  file: File;
   students = studData.map((student) => {
     return {
       ...student,
       editable: false,
+      oldTermWork: student.termWork,
+      oldExamWork: student.examWork,
     };
   });
+  filteredStudents = this.students;
   isShown = false;
   shown() {
     this.isShown = !this.isShown;
   }
 
-  constructor(private gradeService: GradeService) {}
+  edit(index: number) {
+    this.filteredStudents[index].editable =
+      !this.filteredStudents[index].editable;
+    this.filteredStudents[index].oldTermWork =
+      this.filteredStudents[index].termWork;
+    this.filteredStudents[index].oldExamWork =
+      this.filteredStudents[index].examWork;
+  }
 
   save(index: number, termWork: number, examWork: number) {
-    this.students[index].editable = !this.students[index].editable;
-    this.students[index].termWork = termWork;
-    this.students[index].examWork = examWork;
-    this.students[index].total = +termWork + +examWork;
+    this.filteredStudents[index].editable =
+      !this.filteredStudents[index].editable;
+    this.filteredStudents[index].total = +termWork + +examWork;
     this.calculateGrade(index);
+    // update old values
+    this.filteredStudents[index].oldTermWork =
+      this.filteredStudents[index].termWork;
+    this.filteredStudents[index].oldExamWork =
+      this.filteredStudents[index].examWork;
   }
 
   cancel(index: number) {
-    this.students[index].editable = !this.students[index].editable;
-    this.termWorkInput.nativeElement.value = this.students[index].termWork;
-    this.examWorkInput.nativeElement.value = this.students[index].examWork;
-    console.log(this.termWorkInput.nativeElement.value);
-    console.log(this.examWorkInput.nativeElement.value);
+    this.filteredStudents[index].editable =
+      !this.filteredStudents[index].editable;
+    this.filteredStudents[index].termWork =
+      this.filteredStudents[index].oldTermWork;
+    this.filteredStudents[index].examWork =
+      this.filteredStudents[index].oldExamWork;
   }
 
   calculateGrade(index: number) {
-    this.students[index].grade = this.gradeService.calculateGrade(
-      this.students[index].total
+    this.filteredStudents[index].grade = this.gradeService.calculateGrade(
+      this.filteredStudents[index].total
     );
   }
 
+  searchStudent(searchTerm: string) {
+    this.filteredStudents = this.students.filter((student) => {
+      return student.id.includes(searchTerm);
+    });
+  }
+
   ngOnInit(): void {}
+
+  onFileChange(event: any) {
+    this.file = event.target.files[0];
+  }
+
+  onExcelUpload(data: any) {
+    console.log('in uplodaed');
+    console.log(data);
+  }
 }

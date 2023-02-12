@@ -1,55 +1,51 @@
-export
-    let studData = [
-        {
+export let studData = [
+  {
     id: '20190001',
-    name: ' عيدالرحمن جمال عبدالرحيم',
+    name: 'Ahmed karam hassan',
     termWork: null,
     examWork: null,
     total: null,
     grade: null,
   },
-    { 
-      id: '20190002',
-      name: 'عبدالله عبدالرحيم عبدالله',
-      termWork: null,
-      examWork: null,
-      total: null,
-      grade: null,
-    },
-    {
-      id: '20190003',
-      name: 'عبدالله عبدالرحيم عبدالله',
-      termWork: null,
-      examWork: null,
-      total: null,
-      grade: null,
-
-    },
-    {
-      id: '20190004',
-      name: 'عبدالله عبدالرحيم عبدالله',
-      termWork: null,
-      examWork: null,
-      total: null,
-      grade: null,
-    },
-    {
-      id: '20190005',
-      name: 'عبدالله عبدالرحيم عبدالله',
-      termWork: null,
-      examWork: null,
-      total: null,
-      grade: null,
-    },
-    // generate 100 more items manually for demo purposes
-    {
-        id: '20190006',
-        name: 'عبدالله عبدالرحيم عبدالله',
-        termWork: null,
-        examWork: null,
-        total: null,
-        grade: null,
-    }
-    
-
-  ];
+  {
+    id: '20190002',
+    name: 'mohamed gamal abu zaid',
+    termWork: null,
+    examWork: null,
+    total: null,
+    grade: null,
+  },
+  {
+    id: '20190003',
+    name: 'youssef salah saber',
+    termWork: 30,
+    examWork: 40,
+    total: 70,
+    grade: 'C+',
+  },
+  {
+    id: '20190004',
+    name: 'abdulrahman gamal abelreheem',
+    termWork: null,
+    examWork: null,
+    total: null,
+    grade: null,
+  },
+  {
+    id: '20190005',
+    name: 'ali mostafa amr',
+    termWork: null,
+    examWork: null,
+    total: null,
+    grade: null,
+  },
+  // generate 100 more items manually for demo purposes
+  {
+    id: '20190006',
+    name: 'mahmoud mohamed ',
+    termWork: null,
+    examWork: null,
+    total: null,
+    grade: null,
+  },
+];
