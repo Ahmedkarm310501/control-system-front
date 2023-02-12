@@ -14,24 +14,26 @@ import { CourseGradesComponent } from './common/course-grades/course-grades.comp
 import { CourseSettingsComponent } from './common/course-settings/course-settings.component';
 import { HomeScreenComponent } from './common/home-screen/home-screen.component';
 import { UserProfileComponent } from './common/user-profile/user-profile.component';
+import { LoginGuard } from './auth/login.guard';
+import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'home', component: HomeScreenComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'course-grades', component: CourseGradesComponent },
-  { path: 'course-settings', component: CourseSettingsComponent },
-  { path: 'add-students', component: AddStudentsComponent },
-  { path: 'course-dashboard', component: CourseDashboardComponent },
-  { path: 'user-profile', component: UserProfileComponent },
+  { path: 'home', component: HomeScreenComponent, canActivate: [AuthGuard] },
+  { path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
+  { path: 'course-grades', component: CourseGradesComponent, canActivate: [AuthGuard] },
+  { path: 'course-settings', component: CourseSettingsComponent, canActivate: [AuthGuard] },
+  { path: 'add-students', component: AddStudentsComponent, canActivate: [AuthGuard] },
+  { path: 'course-dashboard', component: CourseDashboardComponent, canActivate: [AuthGuard] },
+  { path: 'user-profile', component: UserProfileComponent, canActivate: [AuthGuard] },
   // admin routes
-  { path: 'add-user', component: AddUserComponent },
-  { path: 'admin-log', component: AdminLogComponent },
-  { path: 'add-course', component: AddCourseComponent },
-  { path: 'all-users', component: AllUsersComponent },
-  { path: 'edit-user/:id', component: EditUserComponent },
-  { path: 'students-page', component: StudentsPageComponent },
-  { path: 'settings', component: SettingsPageComponent },
+  { path: 'add-user', component: AddUserComponent, canActivate: [AuthGuard] },
+  { path: 'admin-log', component: AdminLogComponent, canActivate: [AuthGuard] },
+  { path: 'add-course', component: AddCourseComponent, canActivate: [AuthGuard] },
+  { path: 'all-users', component: AllUsersComponent, canActivate: [AuthGuard] },
+  { path: 'edit-user/:id', component: EditUserComponent , canActivate: [AuthGuard]},
+  { path: 'students-page', component: StudentsPageComponent, canActivate: [AuthGuard] },
+  { path: 'settings', component: SettingsPageComponent, canActivate: [AuthGuard] },
 
   { path: '**', redirectTo: '/home', pathMatch: 'full' },
 ];

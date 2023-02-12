@@ -36,14 +36,27 @@
             #password="ngModel"
           />
         </div>
-        <div *ngIf="password && password.invalid && (password.dirty || password.touched)">
-          <div *ngIf="password.errors && password.errors['required']" class="error">
+        <div
+          *ngIf="
+            password && password.invalid && (password.dirty || password.touched)
+          "
+        >
+          <div
+            *ngIf="password.errors && password.errors['required']"
+            class="error"
+          >
             Password is required.
           </div>
-          <div *ngIf="password.errors && password.errors['minlength']" class="error">
+          <div
+            *ngIf="password.errors && password.errors['minlength']"
+            class="error"
+          >
             Password must be at least 6 characters.
           </div>
-          <div *ngIf="password.errors && password.errors['maxlength']" class="error">
+          <div
+            *ngIf="password.errors && password.errors['maxlength']"
+            class="error"
+          >
             Password must be at most 20 characters.
           </div>
         </div>
@@ -51,6 +64,7 @@
         <button
           class="btn btn-secondary submit px-4"
           [disabled]="!Form.form.valid"
+          (click)="onLogin()"
         >
           Log in
         </button>
@@ -58,7 +72,9 @@
         <div class="separator">
           <br />
           <div>
-            <h1><i class="fa fa-paw"></i> Control System</h1>
+            <h1>
+              <img src="assets/img.png" width="35" height="35" /> Control System
+            </h1>
             <p>© 2023 All Rights Reserved. FCAI Control System!</p>
           </div>
         </div>

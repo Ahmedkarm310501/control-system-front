@@ -1,12 +1,10 @@
-<div class="nav-md bodyy" *ngIf="isAuth">
-  <div class="container body">
-    <app-side-bar></app-side-bar>
-    <app-navbar> </app-navbar>
-    <div class="right_col" style="min-height: 952px">
-      <router-outlet></router-outlet>
-    </div>
-  </div>
-</div>
-<div *ngIf="!isAuth">
-  <app-login></app-login>
+<ng-container *ngIf="isAuth">
+  <app-side-bar></app-side-bar>
+  <app-navbar> </app-navbar>
+</ng-container>
+<div
+  [ngClass]="isAuth && 'right_col'"
+  [ngStyle]="isAuth && { 'min-height': '952px' }"
+>
+  <router-outlet></router-outlet>
 </div>
