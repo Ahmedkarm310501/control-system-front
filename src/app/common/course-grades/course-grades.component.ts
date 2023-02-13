@@ -91,8 +91,8 @@ export class CourseGradesComponent implements OnInit {
       if (excelStudent) {
         return {
           ...student,
-          termWork: excelStudent.termWork || 0,
-          examWork: excelStudent.examWork || 0,
+          termWork: excelStudent.termWork,
+          examWork: excelStudent.examWork,
           total: +excelStudent.termWork + +excelStudent.examWork,
           grade: this.gradeService.calculateGrade(
             +excelStudent.termWork + +excelStudent.examWork
@@ -139,14 +139,20 @@ export class CourseGradesComponent implements OnInit {
   }
   sortOrder = 1;
 
-  sortBy(property: string) {
+  //sort by all columns
+  sortBy(column: string) {
+    this.filteredStudents = this.filteredStudents.sort((a, b) => {
+      if (a[column] > b[column]) {
+        return 1 * this.sortOrder;
+      } else if (a[column] < b[column]) {
+        return -1 * this.sortOrder;
+      } else {
+        return 0;
+      }
+    });
     this.sortOrder = this.sortOrder * -1;
-    this.filteredStudents.sort(
-      (a, b) =>
-        (a[property].toLowerCase() > b[property].toLowerCase() ? 1 : -1) *
-        this.sortOrder
-    );
   }
+
   // showStudentsWithNoGrades() {
   //   this.filteredStudents = this.students.filter((student) => {
   //     return !student.termWork || !student.examWork;

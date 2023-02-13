@@ -106,33 +106,41 @@
       <tr>
         <th scope="col">#</th>
         <th scope="col" class="sorting">
-          ID <i class="fa fa-lg fa-sort float-end" (click)="sortBy('id')"></i>
+          <div class="d-flex justify-content-between">
+            <span>ID</span>
+            <i class="fa fa-lg fa-sort" (click)="sortBy('id')"></i>
+          </div>
         </th>
         <th scope="col" class="sorting">
-          Name
-          <i class="fa fa-lg fa-sort float-end" (click)="sortBy('name')"></i>
+          <div class="d-flex justify-content-between">
+            <span class="me-auto">Name</span>
+            <i class="fa fa-lg fa-sort" (click)="sortBy('name')"></i>
+          </div>
         </th>
         <th scope="col" class="sorting">
-          Course Work
-          <i
-            class="fa fa-lg fa-sort float-end"
-            (click)="sortBy('termWork')"
-          ></i>
+          <div class="d-flex justify-content-between">
+            <span>Course Work</span>
+            <i class="fa fa-lg fa-sort" (click)="sortBy('termWork')"></i>
+          </div>
         </th>
         <th scope="col" class="sorting">
-          Exam Work
-          <i
-            class="fa fa-lg fa-sort float-end"
-            (click)="sortBy('examWork')"
-          ></i>
+          <div class="d-flex justify-content-between">
+            <span>Exam Work</span>
+
+            <i class="fa fa-lg fa-sort" (click)="sortBy('examWork')"></i>
+          </div>
         </th>
         <th scope="col" class="sorting">
-          Total
-          <i class="fa fa-lg fa-sort float-end" (click)="sortBy('total')"></i>
+          <div class="d-flex justify-content-between">
+            <span>Total</span>
+            <i class="fa fa-lg fa-sort" (click)="sortBy('total')"></i>
+          </div>
         </th>
         <th scope="col" class="sorting">
-          Grade
-          <i class="fa fa-lg fa-sort float-end" (click)="sortBy('grade')"></i>
+          <div class="d-flex justify-content-between">
+            <span>Grade</span>
+            <i class="fa fa-lg fa-sort" (click)="sortBy('grade')"></i>
+          </div>
         </th>
         <th scope="col">Edit</th>
       </tr>
