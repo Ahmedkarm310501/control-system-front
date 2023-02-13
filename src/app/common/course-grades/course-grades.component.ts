@@ -137,6 +137,16 @@ export class CourseGradesComponent implements OnInit {
       this.filteredStudents = this.students;
     }
   }
+  sortOrder = 1;
+
+  sortBy(property: string) {
+    this.sortOrder = this.sortOrder * -1;
+    this.filteredStudents.sort(
+      (a, b) =>
+        (a[property].toLowerCase() > b[property].toLowerCase() ? 1 : -1) *
+        this.sortOrder
+    );
+  }
   // showStudentsWithNoGrades() {
   //   this.filteredStudents = this.students.filter((student) => {
   //     return !student.termWork || !student.examWork;

@@ -105,12 +105,35 @@
     <thead>
       <tr>
         <th scope="col">#</th>
-        <th scope="col">ID</th>
-        <th scope="col">Name</th>
-        <th scope="col">Course Work</th>
-        <th scope="col">Exam Work</th>
-        <th scope="col">Total</th>
-        <th scope="col">Grade</th>
+        <th scope="col" class="sorting">
+          ID <i class="fa fa-lg fa-sort float-end" (click)="sortBy('id')"></i>
+        </th>
+        <th scope="col" class="sorting">
+          Name
+          <i class="fa fa-lg fa-sort float-end" (click)="sortBy('name')"></i>
+        </th>
+        <th scope="col" class="sorting">
+          Course Work
+          <i
+            class="fa fa-lg fa-sort float-end"
+            (click)="sortBy('termWork')"
+          ></i>
+        </th>
+        <th scope="col" class="sorting">
+          Exam Work
+          <i
+            class="fa fa-lg fa-sort float-end"
+            (click)="sortBy('examWork')"
+          ></i>
+        </th>
+        <th scope="col" class="sorting">
+          Total
+          <i class="fa fa-lg fa-sort float-end" (click)="sortBy('total')"></i>
+        </th>
+        <th scope="col" class="sorting">
+          Grade
+          <i class="fa fa-lg fa-sort float-end" (click)="sortBy('grade')"></i>
+        </th>
         <th scope="col">Edit</th>
       </tr>
     </thead>
@@ -217,7 +240,7 @@
   </table>
 </div>
 
-<!-- 
+<!--
 <app-modal [show]="showModal" (closeModal)="closeModal()">
   <div modal-title>Modal Title</div>
   <div modal-body>
