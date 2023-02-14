@@ -1,0 +1,80 @@
+<div class="setup">
+  <div class="container h-100">
+    <div class="row h-100 align-items-center">
+      <div class="fs-sm-5 text-sm-center text-md-start col-sm-12 col-md-7">
+        <h1 class="fs-1 brand">Control system</h1>
+        <p class="text-black fs-4">
+          The control system helps you to manage student grades, users and
+          courses, logs modifications, set rules, and allows data manipulation.
+        </p>
+      </div> 
+      <div class="col-sm-12 col-md-5">
+        <form
+          class="bg-white p-4 shadow rounded-3"
+          #Form="ngForm"
+          (ngSubmit)="onSubmit(Form.value)"
+        >
+          <h1 class="fs-1 text-center mb-2 form-header">Control system</h1>
+          <hr />
+          <div class="form-group mb-3">
+            <input
+              type="email"
+              class="form-control"
+              placeholder="Enter your email"
+              name="email"
+              email
+              required
+              ngModel
+              #email="ngModel"
+            />
+            <!-- handle erroe -->
+            <div
+              *ngIf="email && email.invalid && (email.dirty || email.touched)"
+            >
+              <div
+                *ngIf="email.errors && email.errors['required']"
+                class="error"
+              >
+                Email is required.
+              </div>
+              <div *ngIf="email.errors && email.errors['email']" class="error">
+                Email is invalid.
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group mb-3">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Enter you product key"
+              name="productKey"
+              required
+              ngModel
+              #productKey="ngModel"
+            />
+            <!-- handle erroe -->
+            <div
+              *ngIf="
+                productKey &&
+                productKey.invalid &&
+                (productKey.dirty || productKey.touched)
+              "
+            >
+              <div
+                *ngIf="productKey.errors && productKey.errors['required']"
+                class="error"
+              >
+                Product key is required.
+              </div>
+            </div>
+          </div>
+          <hr />
+          <button class="btn btn-primary w-100" [disabled]="!Form.form.valid">
+            Submit
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -21,6 +21,9 @@ import { UserProfileComponent } from './common/user-profile/user-profile.compone
 import { SettingsPageComponent } from './admin/pages/settings-page/settings-page.component';
 import { ReadExcelDirective } from './common/directives/read-excel.directive';
 import { ModalComponent } from './components/modal/modal.component';
+import { SetupPageComponent } from './config/setup-page/setup-page.component';
+import { AdminDataComponent } from './config/admin-data/admin-data.component';
+import { SystemSettingsComponent } from './config/system-settings/system-settings.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +46,9 @@ import { ModalComponent } from './components/modal/modal.component';
     SettingsPageComponent,
     ReadExcelDirective,
     ModalComponent,
+    SetupPageComponent,
+    AdminDataComponent,
+    SystemSettingsComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
   providers: [],
