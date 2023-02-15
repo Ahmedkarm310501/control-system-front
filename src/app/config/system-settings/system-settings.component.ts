@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-system-settings',
@@ -6,11 +8,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./system-settings.component.css'],
 })
 export class SystemSettingsComponent implements OnInit {
-  constructor() {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {}
 
   onSubmit(form: any) {
     console.log(form);
+    this.authService.login();
+    this.router.navigate(['/home']);
   }
 }

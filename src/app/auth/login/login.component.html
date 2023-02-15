@@ -1,84 +1,111 @@
-<div class="back">
+<!-- <div class="back">
   <div class="login">
     <div class="center login_wrapper">
-      <form class="login_form" #Form="ngForm" (ngSubmit)="onSubmit(Form.value)">
-        <h1>Login Form</h1>
-        <div>
-          <input
-            type="email"
-            class="form-control"
-            placeholder="Email"
-            name="email"
-            email
-            required
-            ngModel
-            #email="ngModel"
-          />
-        </div>
-        <div *ngIf="email && email.invalid && (email.dirty || email.touched)">
-          <div *ngIf="email.errors && email.errors['required']" class="error">
-            Email is required.
-          </div>
-          <div *ngIf="email.errors && email.errors['email']" class="error">
-            Email is invalid.
-          </div>
-        </div>
-        <div>
-          <input
-            type="password"
-            class="form-control"
-            placeholder="Password"
-            name="password"
-            minlength="6"
-            maxlength="20"
-            required
-            ngModel
-            #password="ngModel"
-          />
-        </div>
-        <div
-          *ngIf="
-            password && password.invalid && (password.dirty || password.touched)
-          "
-        >
-          <div
-            *ngIf="password.errors && password.errors['required']"
-            class="error"
-          >
-            Password is required.
-          </div>
-          <div
-            *ngIf="password.errors && password.errors['minlength']"
-            class="error"
-          >
-            Password must be at least 6 characters.
-          </div>
-          <div
-            *ngIf="password.errors && password.errors['maxlength']"
-            class="error"
-          >
-            Password must be at most 20 characters.
-          </div>
-        </div>
+      
+    </div>
+  </div>
+</div> -->
 
-        <button
-          class="btn btn-secondary submit px-4"
-          [disabled]="!Form.form.valid"
-          (click)="onLogin()"
+<div class="setup">
+  <div class="container h-100">
+    <div class="row h-100 align-items-center">
+      <div class="fs-sm-5 text-sm-center text-md-start col-sm-12 col-md-7">
+        <h1 class="fs-1 brand">Control system</h1>
+        <p class="text-black fs-4">
+          The control system helps you to manage student grades, users and
+          courses, logs modifications, set rules, and allows data manipulation.
+        </p>
+      </div>
+      <div class="col-sm-12 col-md-5 text-center">
+        <form
+          class="bg-white p-4 shadow rounded-3"
+          #Form="ngForm"
+          (ngSubmit)="onSubmit(Form.value)"
         >
-          Log in
-        </button>
-
-        <div class="separator">
-          <br />
-          <div>
-            <h1>
-              <img src="assets/img.png" width="35" height="35" /> Control System
-            </h1>
-            <p>© 2023 All Rights Reserved. FCAI Control System!</p>
+          <h1 class="fs-1 text-center mb-2 form-header">Login</h1>
+          <hr />
+          <div class="form-group mb-3">
+            <input
+              type="email"
+              class="form-control"
+              placeholder="Email"
+              name="email"
+              email
+              required
+              ngModel
+              #email="ngModel"
+            />
           </div>
+          <div *ngIf="email && email.invalid && (email.dirty || email.touched)">
+            <div *ngIf="email.errors && email.errors['required']" class="error">
+              Email is required.
+            </div>
+            <div *ngIf="email.errors && email.errors['email']" class="error">
+              Email is invalid.
+            </div>
+          </div>
+          <div class="form-group mb-3">
+            <input
+              type="password"
+              class="form-control"
+              placeholder="Password"
+              name="password"
+              minlength="6"
+              maxlength="20"
+              required
+              ngModel
+              #password="ngModel"
+            />
+          </div>
+          <div
+            *ngIf="
+              password &&
+              password.invalid &&
+              (password.dirty || password.touched)
+            "
+          >
+            <div
+              *ngIf="password.errors && password.errors['required']"
+              class="error"
+            >
+              Password is required.
+            </div>
+            <div
+              *ngIf="password.errors && password.errors['minlength']"
+              class="error"
+            >
+              Password must be at least 6 characters.
+            </div>
+            <div
+              *ngIf="password.errors && password.errors['maxlength']"
+              class="error"
+            >
+              Password must be at most 20 characters.
+            </div>
+          </div>
+          <hr />
+          <button
+            class="btn btn-secondary submit px-4"
+            [disabled]="!Form.form.valid"
+            (click)="onLogin()"
+          >
+            Log in
+          </button>
+
+          <div class="separator">
+            <br />
+            <div class="form-fotter">
+              <p class="fs-5">
+                Dont have a license ? <a routerLink="/setup">get one</a>
+              </p>
+            </div>
+          </div>
+        </form>
+        <div class="brand">
+          <h1>Control System</h1>
+          <p>© 2023 All Rights Reserved. FCAI Control System!</p>
         </div>
-      </form>
+      </div>
     </div>
   </div>
 </div>

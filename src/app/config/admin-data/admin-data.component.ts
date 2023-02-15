@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router, NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-admin-data',
@@ -9,7 +10,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class AdminDataComponent implements OnInit {
   form: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private router: Router) {}
 
   ngOnInit(): void {
     this.form = this.fb.group(
@@ -31,6 +32,12 @@ export class AdminDataComponent implements OnInit {
 
   submitForm() {
     console.log(this.form.value);
+
+    const navigationExtras: NavigationExtras = {
+      replaceUrl: true,
+      state: { setup: true },
+    };
+    this.router.navigate(['/system-setup'], navigationExtras);
   }
 
   matchingPasswords(passwordKey: string, repeatPasswordKey: string) {

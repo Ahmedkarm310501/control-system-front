@@ -19,13 +19,22 @@ import { AuthGuard } from './auth/auth.guard';
 import { SetupPageComponent } from './config/setup-page/setup-page.component';
 import { AdminDataComponent } from './config/admin-data/admin-data.component';
 import { SystemSettingsComponent } from './config/system-settings/system-settings.component';
+import { DissAllowGuard } from './auth/diss-allow.guard';
 // import { UserDataComponent } from './config/user-data/user-data.component';
 
 const routes: Routes = [
   // configration routes
-  { path: 'setup', component: SetupPageComponent },
-  { path: 'admin-data', component: AdminDataComponent },
-  { path: 'system-setup', component: SystemSettingsComponent },
+  { path: 'setup', component: SetupPageComponent, canActivate: [LoginGuard] },
+  {
+    path: 'admin-data',
+    component: AdminDataComponent,
+    canActivate: [DissAllowGuard],
+  }, //missing guard
+  {
+    path: 'system-setup',
+    component: SystemSettingsComponent,
+    canActivate: [DissAllowGuard],
+  }, //missing guard
   // common routes
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeScreenComponent, canActivate: [AuthGuard] },

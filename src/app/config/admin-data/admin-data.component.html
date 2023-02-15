@@ -1,16 +1,17 @@
 <div class="setup">
   <div class="container h-100">
-    <div class="row h-100 align-items-center justify-content-center">
-      <div class="col-sm-10 col-lg-8">
+    <div class="row h-100 justify-content-center">
+      <div class="col-sm-10 col-lg-8 text-center">
         <form
-          class="bg-white p-4 shadow rounded-3"
+          class="bg-white p-4 shadow rounded-3 mt-5"
           [formGroup]="form"
           (ngSubmit)="submitForm()"
         >
           <h1 class="fs-1 text-center mb-2 form-header">Register admin</h1>
           <hr />
           <div class="row">
-            <div class="form-group mb-3 col-sm-12 col-md-6">
+            <div class="form-group mb-3 col-sm-12 col-md-6 text-start">
+              <label for="name" class="form-label">Name</label>
               <input
                 type="text"
                 class="form-control"
@@ -25,7 +26,8 @@
                 Name is required
               </div>
             </div>
-            <div class="form-group mb-3 col-sm-12 col-md-6">
+            <div class="form-group mb-3 col-sm-12 col-md-6 text-start">
+              <label for="email" class="form-label">Email</label>
               <input
                 type="email"
                 class="form-control"
@@ -45,7 +47,8 @@
                 Invalid email format
               </div>
             </div>
-            <div class="form-group mb-3 col-sm-12 col-md-6">
+            <div class="form-group mb-3 col-sm-12 col-md-6 text-start">
+              <label for="password" class="form-label">Password</label>
               <input
                 type="password"
                 class="form-control"
@@ -65,7 +68,10 @@
                 Password must be at least 6 characters
               </div>
             </div>
-            <div class="form-group mb-3 col-sm-12 col-md-6">
+            <div class="form-group mb-3 col-sm-12 col-md-6 text-start">
+              <label for="repeatPassword" class="form-label"
+                >Repeat Password</label
+              >
               <input
                 type="password"
                 class="form-control"
@@ -85,7 +91,8 @@
                 Passwords do not match
               </div>
             </div>
-            <div class="form-group col-sm-12 col-md-6">
+            <div class="form-group col-sm-12 col-md-6 text-start">
+              <label for="nationalId" class="form-label">National ID</label>
               <input
                 type="text"
                 class="form-control"
@@ -111,6 +118,10 @@
             Submit
           </button>
         </form>
+        <div class="brand">
+          <h1>Control System</h1>
+          <p>© 2023 All Rights Reserved. FCAI Control System!</p>
+        </div>
       </div>
     </div>
   </div>

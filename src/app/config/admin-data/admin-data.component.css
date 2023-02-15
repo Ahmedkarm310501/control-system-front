@@ -1,6 +1,6 @@
 .setup {
   background: #f0f2f5;
-  height: 100vh;
+  height: 130vh;
   /* choose ugly font family */
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
@@ -61,8 +61,16 @@ form button:hover {
 }
 
 .brand {
-  font-size: 30px;
+  font-size: 16px;
   font-weight: 700;
+  margin-top: 10px;
+  color: #2a3f54;
+  text-shadow: 0 1px 0 #fff;
+}
+
+form label {
+  font-size: 16px;
+  font-weight: 400;
   margin-bottom: 10px;
   color: #2a3f54;
 }
