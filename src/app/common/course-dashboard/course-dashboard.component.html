@@ -1,1 +1,46 @@
-<p>course-dashboard works!</p>
+<div class="dashboard">
+  <div class="container-fluid">
+    <div class="card bg-white">
+      <div class="card-header m-0 fw-bold fs-4">Select Course</div>
+      <div class="card-body">
+        <div class="select-course row g-3">
+          <div class="select col-6">
+            <select name="dept" class="w-100">
+              <option value="0">Select Department</option>
+              <option value="GE">General</option>
+              <option value="CS">Computer Science</option>
+              <option value="IS">Information Systems</option>
+              <option value="IT">Information Technology</option>
+              <option value="DS">Decision Support</option>
+              <option value="AI">Artificial Intelligence</option>
+            </select>
+          </div>
+          <div class="select col-6">
+            <select name="course" class="w-100">
+              <option value="0">Select Course</option>
+              <option value="CS101">Introduction to Computer Science</option>
+              <option value="CS102">Introduction to Programming</option>
+              <option value="CS103">Data Structures</option>
+              <option value="CS104">Algorithms</option>
+              <option value="CS105">Computer Architecture</option>
+              <option value="CS106">Operating Systems</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card bg-white mt-4">
+      <!-- <div class="card-header m-0 fw-bold fs-4">Select Course</div> -->
+      <div class="card-body">
+        <div class="select-course row g-3">
+          <div class="select col-6">
+            <app-bar-chart></app-bar-chart>
+          </div>
+          <div class="select col-6">
+            <app-pie-chart></app-pie-chart>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

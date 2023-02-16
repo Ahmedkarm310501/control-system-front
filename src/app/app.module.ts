@@ -24,6 +24,8 @@ import { ModalComponent } from './components/modal/modal.component';
 import { SetupPageComponent } from './config/setup-page/setup-page.component';
 import { AdminDataComponent } from './config/admin-data/admin-data.component';
 import { SystemSettingsComponent } from './config/system-settings/system-settings.component';
+import { BarChartComponent } from './common/charts/bar-chart/bar-chart.component';
+import { PieChartComponent } from './common/charts/pie-chart/pie-chart.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +51,8 @@ import { SystemSettingsComponent } from './config/system-settings/system-setting
     SetupPageComponent,
     AdminDataComponent,
     SystemSettingsComponent,
+    BarChartComponent,
+    PieChartComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
   providers: [],
