@@ -1,7 +1,6 @@
 .left_col {
-  background: #2a3f54;
+  background: var(--main-color);
 }
-
 .menu_section {
   margin-bottom: 35px;
 }
@@ -90,7 +89,7 @@
 .nav_title {
   width: 230px;
   float: left;
-  background: #2a3f54;
+  /* background: #2a3f54; */
   border-radius: 0;
   height: 57px;
   padding: 0px;

@@ -1,16 +1,17 @@
 .top_nav {
   text-align: left;
-  color: #73879c;
+  color: var(--main-color);
   margin-left: 230px;
 }
 
 .nav_menu {
   float: left;
-  background: #ededed;
+  background: var(--background-color);
   border-bottom: 1px solid #d9dee4;
   margin-bottom: 10px;
   width: 100%;
   position: relative;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 
 .toggle {
@@ -56,7 +57,7 @@
 }
 
 a.user-profile {
-  color: #5e6974 !important;
+  color: var(--text-color) !important;
 }
 .dropdown-toggle {
   white-space: nowrap;
@@ -92,7 +93,7 @@ img {
 }
 
 a {
-  color: #5a738e;
+  color: var(--text-color);
   text-decoration: none;
 }
 
@@ -109,32 +110,13 @@ a {
   right: -2px;
   top: -8px;
 }
-.bg-green {
-  background: #1abb9c !important;
-  border: 1px solid #1abb9c !important;
-  color: #fff;
-}
-
-.navbar-nav .open .dropdown-menu.msg_list {
-  width: 300px !important;
-}
-.navbar-nav .open .dropdown-menu {
-  position: absolute;
-  background: #fff;
-  margin-top: 0;
-  border: 1px solid #d9dee4;
-  -webkit-box-shadow: none;
-  right: 0;
-  left: auto;
-}
 
 .top_nav .navbar-right li {
   display: inline-block;
-  float: right;
 }
 
 ul.msg_list li {
-  background: #f7f7f7;
+  background: var(--background-color);
   padding: 5px;
 
   margin: 6px 6px 0;

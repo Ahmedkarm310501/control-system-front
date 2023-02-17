@@ -1,5 +1,5 @@
 .setup {
-  background: #f0f2f5;
+  background: var(--background-color);
   height: 130vh;
   /* choose ugly font family */
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
@@ -10,7 +10,7 @@ form input {
   border: 1px solid #dfe3e8;
   border-radius: 4px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
-  color: #555;
+  color: var(--text-color);
   display: block;
   font-size: 18px;
   height: 50px;
@@ -22,9 +22,9 @@ form input {
 }
 
 form button {
-  background: #2a3f54;
+  background: var(--button-color);
   /* border: 1px solid #16a085;
-       */
+     */
   border: 1px solid #2a3f54;
   border-radius: 4px;
   color: #fff;
@@ -39,7 +39,7 @@ form button {
 }
 
 form button:hover {
-  background: #455e76;
+  background: var(--main-color-light);
   border: 1px solid #1e2b3a;
   border-radius: 4px;
   color: #fff;
@@ -55,7 +55,7 @@ form button:hover {
 
 .form-header {
   /* background: #1abb9c; */
-  color: #2a3f54;
+  color: var(--text-color);
   /* padding: 20px; */
   text-align: center;
 }
@@ -64,11 +64,16 @@ form button:hover {
   font-size: 16px;
   font-weight: 700;
   margin-top: 10px;
-  color: #2a3f54;
+  color: var(--text-color);
   text-shadow: 0 1px 0 #fff;
 }
 
-/* style form select */
+form label {
+  font-size: 16px;
+  font-weight: 400;
+  margin-bottom: 10px;
+  color: var(--text-color);
+}
 
 form select {
   background: #fff;
@@ -84,29 +89,4 @@ form select {
   padding: 6px 12px;
   transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
   width: 100%;
-}
-
-/* style form chekbox label */
-.check-box-label {
-  font-size: 18px;
-  font-weight: 400;
-  margin-bottom: 10px;
-  color: #2a3f54;
-}
-
-/* style form chekbox */
-.check-box {
-  /* margin-bottom: 10px; */
-  color: #2a3f54;
-
-  /* change size */
-  width: 40px;
-  height: 40px;
-}
-
-form label {
-  font-size: 16px;
-  font-weight: 400;
-  margin-bottom: 10px;
-  color: #2a3f54;
 }

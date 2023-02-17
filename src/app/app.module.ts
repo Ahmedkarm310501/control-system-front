@@ -26,6 +26,8 @@ import { AdminDataComponent } from './config/admin-data/admin-data.component';
 import { SystemSettingsComponent } from './config/system-settings/system-settings.component';
 import { BarChartComponent } from './common/charts/bar-chart/bar-chart.component';
 import { PieChartComponent } from './common/charts/pie-chart/pie-chart.component';
+import { LineChartComponent } from './common/charts/line-chart/line-chart.component';
+import { BoxComponent } from './components/box/box.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +55,8 @@ import { PieChartComponent } from './common/charts/pie-chart/pie-chart.component
     SystemSettingsComponent,
     BarChartComponent,
     PieChartComponent,
+    LineChartComponent,
+    BoxComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
   providers: [],

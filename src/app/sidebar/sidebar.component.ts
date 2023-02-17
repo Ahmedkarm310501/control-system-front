@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
-
+import '../../styles.css';
 @Component({
   selector: 'app-side-bar',
   templateUrl: './sidebar.component.html',

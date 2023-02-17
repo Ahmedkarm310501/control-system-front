@@ -4,6 +4,10 @@ select {
   border-radius: 5px;
   padding: 0 10px;
   font-size: 18px;
-  color: #333;
+  color: var(--text-color);
   background: #fff;
 }
+
+/* .card-header {
+  background-color: #2a3f54;
+} */

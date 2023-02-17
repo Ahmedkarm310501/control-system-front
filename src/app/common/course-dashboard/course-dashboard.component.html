@@ -29,15 +29,99 @@
         </div>
       </div>
     </div>
-    <div class="card bg-white mt-4">
-      <!-- <div class="card-header m-0 fw-bold fs-4">Select Course</div> -->
+    <div class="card mt-4">
+      <div class="card-header m-0 fw-bold fs-4">Course grades analysis</div>
       <div class="card-body">
         <div class="select-course row g-3">
-          <div class="select col-6">
-            <app-bar-chart></app-bar-chart>
+          <app-box
+            class="col-3"
+            [number]="4"
+            [name]="'Number of students'"
+            [color]="'10px solid red'"
+          ></app-box>
+          <app-box
+            class="col-3"
+            [number]="4"
+            [name]="'Number of students'"
+            [color]="'10px solid green'"
+          ></app-box>
+          <app-box
+            class="col-3"
+            [number]="4"
+            [name]="'Number of students'"
+            [color]="'10px solid blue'"
+          ></app-box>
+          <app-box
+            class="col-3"
+            [number]="4"
+            [name]="'Number of students'"
+            [color]="'10px solid yellow'"
+          ></app-box>
+        </div>
+      </div>
+    </div>
+    <div class="card mt-4">
+      <div class="card-header m-0 fw-bold fs-4">Course grades analysis</div>
+      <div class="card-body">
+        <div class="select-course row g-3">
+          <div class="select col-8">
+            <div class="text-center">
+              <app-bar-chart></app-bar-chart>
+              <h4>student grades distribution</h4>
+            </div>
           </div>
-          <div class="select col-6">
-            <app-pie-chart></app-pie-chart>
+          <div class="select col-4">
+            <div class="text-center">
+              <app-pie-chart></app-pie-chart>
+              <h4>Pass / Fail ratio</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card my-4">
+      <div class="card-header m-0 fw-bold fs-4">Ra'fa grades analysis</div>
+      <div class="card-body">
+        <div class="row align-items-center">
+          <div class="select col-8">
+            <div class="text-center">
+              <app-line-chart></app-line-chart>
+              <h4>Needed ra'fa grades</h4>
+            </div>
+          </div>
+          <div class="select col-4">
+            <div class="text-center">
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th scope="col">Ra'fa grades</th>
+                    <th scope="col">Number of students</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>5</td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>6</td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>7</td>
+                  </tr>
+                  <tr>
+                    <td>4</td>
+                    <td>9</td>
+                  </tr>
+                  <tr>
+                    <td>5</td>
+                    <td>2</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>

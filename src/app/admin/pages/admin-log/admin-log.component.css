@@ -1,6 +1,6 @@
 th {
   font-size: 15px;
-  color: rgb(106, 106, 166);
+  color: var(--text-color);
 }
 td {
   font-size: 15px;

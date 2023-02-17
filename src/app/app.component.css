@@ -4,7 +4,8 @@
   max-width: 100%;
 }
 .right_col {
-  background: #f7f7f7;
+  /* background-color: var(--main-color); */
+  background-color: var(--background-color);
   padding: 10px 20px 0;
   margin-left: 230px;
 }
@@ -14,8 +15,8 @@
 }
 
 .bodyy {
-  color: #73879c;
-  background: #2a3f54;
+  /* color: #73879c;
+  background: #2a3f54; */
   font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
   font-size: 13px;
   font-weight: 400;
