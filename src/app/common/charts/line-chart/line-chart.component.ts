@@ -24,6 +24,8 @@ export class LineChartComponent implements OnInit {
           {
             label: 'Grades',
             data: [5, 7, 3, 6, 8, 10, 1, 2, 4, 5],
+            backgroundColor: '#1d2c28',
+            borderColor: '#1d2c28',
           },
         ],
       },

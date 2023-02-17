@@ -1,0 +1,17 @@
+input,
+select {
+  background-color: var(--background-color-dark);
+  box-shadow: none !important;
+  /* color: var(--text-color-dark); */
+}
+
+input:focus {
+  background-color: var(--background-color-dark);
+  /* color: var(--text-color-dark); */
+  box-shadow: none !important;
+}
+
+.btn-primary {
+  background-color: var(--button-color);
+  border-color: var(--background-color-dark);
+}

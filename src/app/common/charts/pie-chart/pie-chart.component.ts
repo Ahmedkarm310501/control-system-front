@@ -26,6 +26,7 @@ export class PieChartComponent implements OnInit {
           {
             label: 'Total students',
             data: ['80', '20'],
+            backgroundColor: ['#1d2c28', '#e74c3c'],
             // hoverOffset: 4,
           },
         ],

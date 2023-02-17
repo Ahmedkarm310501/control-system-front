@@ -1,0 +1,13 @@
+.back {
+  background-color: var(--background-color-dark);
+}
+
+input {
+  background-color: var(--background-color);
+  box-shadow: none !important;
+}
+
+.btn-primary {
+  background-color: var(--button-color);
+  border-color: var(--background-color-dark);
+}

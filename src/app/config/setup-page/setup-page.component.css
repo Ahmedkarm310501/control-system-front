@@ -6,7 +6,8 @@
 }
 
 form input {
-  background: #fff;
+  background: var(--background-color);
+  /* background: #fff; */
   border: 1px solid #dfe3e8;
   border-radius: 4px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;

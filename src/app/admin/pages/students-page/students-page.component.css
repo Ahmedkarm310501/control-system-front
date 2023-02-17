@@ -1,0 +1,4 @@
+.btn-primary {
+  background-color: var(--button-color);
+  border-color: var(--background-color-dark);
+}

@@ -1,43 +1,41 @@
-
-  .custom-select {
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    height: calc(2.25rem + 2px);
-    padding: .375rem .75rem;
-    font-size: 1rem;
-    line-height: 1.5;
-    color: #495057;
-  }
-  .custom-select:focus {
-    border-color: #80bdff;
-    outline: 0;
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, .25);
-  }
-  /* form {
+.custom-select {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  height: calc(2.25rem + 2px);
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #495057;
+}
+.custom-select:focus {
+  border-color: #80bdff;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+/* form {
     position: absolute;
     top: 50%;
     left: 40%;
     transform: translate(-50%, -50%);
   } */
-form{
-  background-color: #f7f7f7;
+form {
+  /* background-color: #f7f7f7; */
+  background-color: var(--background-color-dark);
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
   padding: 20px;
   border-radius: 5px;
   width: 50%;
   margin: 0 auto;
   margin-top: 50px;
-
 }
-label{
-
+label {
   font-weight: bold;
 }
-input.ng-invalid.ng-touched,select.ng-invalid.ng-touched  {
+input.ng-invalid.ng-touched,
+select.ng-invalid.ng-touched {
   border: 1px solid red !important;
 }
-
 
 .error {
   margin-left: 2px;
@@ -45,4 +43,15 @@ input.ng-invalid.ng-touched,select.ng-invalid.ng-touched  {
   margin-bottom: 10px;
   text-align: left;
   color: red;
+}
+
+input,
+select {
+  background-color: var(--background-color) !important;
+  box-shadow: none !important;
+}
+
+.btn-primary {
+  background-color: var(--button-color) !important;
+  border-color: var(--button-color) !important;
 }

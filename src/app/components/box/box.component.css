@@ -1,5 +1,6 @@
 .box {
-  background-color: #2a3f54;
+  /* background-color: #2a3f54; */
+  background-color: var(--box-color);
   color: #fff;
   /* width: ; */
   height: 100%;

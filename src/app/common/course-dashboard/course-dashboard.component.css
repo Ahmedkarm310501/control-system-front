@@ -5,9 +5,17 @@ select {
   padding: 0 10px;
   font-size: 18px;
   color: var(--text-color);
-  background: #fff;
+  /* background: #fff; */
+  background: var(--background-color);
 }
 
 /* .card-header {
   background-color: #2a3f54;
+} */
+.card {
+  background-color: var(--background-color-dark);
+}
+
+/* .table-bordered {
+  border: 3px solid var(--background-color-dark) !important;
 } */

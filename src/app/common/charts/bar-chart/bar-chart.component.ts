@@ -19,6 +19,7 @@ export class BarChartComponent implements OnInit {
   createChart() {
     this.chart = new Chart('bar', {
       type: 'bar', //this denotes tha type of chart
+
       data: {
         // values on X-Axis
         labels: ['F', 'D', 'D+', 'C', 'C+', 'B', 'B+', 'A', 'A+'],
@@ -26,6 +27,7 @@ export class BarChartComponent implements OnInit {
           {
             label: 'Grades',
             data: [100, 200, 300, 400, 500, 400, 300, 200, 100],
+            backgroundColor: '#1d2c28',
           },
         ],
       },

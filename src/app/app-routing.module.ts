@@ -29,12 +29,12 @@ const routes: Routes = [
     path: 'admin-data',
     component: AdminDataComponent,
     canActivate: [DissAllowGuard],
-  }, //missing guard
+  }, 
   {
     path: 'system-setup',
     component: SystemSettingsComponent,
     canActivate: [DissAllowGuard],
-  }, //missing guard
+  }, 
   // common routes
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeScreenComponent, canActivate: [AuthGuard] },
