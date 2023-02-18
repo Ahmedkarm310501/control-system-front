@@ -5,6 +5,11 @@
 <div
   [ngClass]="isAuth && 'right_col'"
   [ngStyle]="isAuth && { 'min-height': '952px' }"
+  [ngStyle]="
+    isAuth && sideBarOpen
+      ? { 'margin-left': '230px' }
+      : { 'margin-left': '70px' }
+  "
 >
   <router-outlet></router-outlet>
 </div>
