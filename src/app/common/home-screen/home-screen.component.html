@@ -1,6 +1,7 @@
 <div class="home-page">
   <div class="container-fluid">
     <div class="row">
+      <!-- <app-navigation></app-navigation> -->
       <div class="page-title">
         <div class="title_left">
           <h3>Assigned Courses</h3>
@@ -42,7 +43,7 @@
                 ungraded students: {{ course.ungradedStudents }}
               </h6>
             </div>
-            <a routerLink="/course-grades" class="btn mt-3 button"
+            <a routerLink="course/id" class="btn mt-3 button"
               >Edit course grades</a
             >
           </div>

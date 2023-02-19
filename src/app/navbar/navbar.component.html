@@ -7,11 +7,15 @@
   <div class="nav_menu">
     <div class="nav toggle">
       <a id="menu_toggle"
-        ><i class="fa fa-bars" (click)="onToggleSideBar()"></i
+        ><i class="fa fa-bars" (click)="onToggleSideBar()"> </i
       ></a>
     </div>
+
     <nav class="nav navbar-nav">
-      <ul class="navbar-right">
+      <ul
+        class="navbar-right d-flex justify-content-between align-items-center"
+      >
+        <app-breadcrumb></app-breadcrumb>
         <li
           class="nav-item dropdown open"
           style="padding-left: 15px"

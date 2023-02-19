@@ -29,26 +29,39 @@ const routes: Routes = [
     path: 'admin-data',
     component: AdminDataComponent,
     canActivate: [DissAllowGuard],
-  }, 
+  },
   {
     path: 'system-setup',
     component: SystemSettingsComponent,
     canActivate: [DissAllowGuard],
-  }, 
+  },
   // common routes
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'home', component: HomeScreenComponent, canActivate: [AuthGuard] },
+  { path: '', redirectTo: '/courses', pathMatch: 'full' },
+  {
+    path: 'courses',
+    // component: HomeScreenComponent,
+    data: { breadcrumb: 'Courses' },
+    canActivate: [AuthGuard],
+    children: [
+      { path: '', component: HomeScreenComponent },
+      {
+        path: 'course/:courseId',
+        data: { breadcrumb: 'Course grades' },
+        canActivate: [AuthGuard],
+        children: [
+          { path: '', component: CourseGradesComponent },
+          {
+            path: 'course-settings',
+            component: CourseSettingsComponent,
+            canActivate: [AuthGuard],
+            data: { breadcrumb: 'Course settings' },
+          },
+        ],
+      },
+    ],
+  },
   { path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
-  {
-    path: 'course-grades',
-    component: CourseGradesComponent,
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'course-settings',
-    component: CourseSettingsComponent,
-    canActivate: [AuthGuard],
-  },
+
   {
     path: 'add-students',
     component: AddStudentsComponent,
@@ -58,35 +71,60 @@ const routes: Routes = [
     path: 'course-dashboard',
     component: CourseDashboardComponent,
     canActivate: [AuthGuard],
+    data: { breadcrumb: 'Course dashboard' },
   },
   {
     path: 'user-profile',
     component: UserProfileComponent,
     canActivate: [AuthGuard],
+    data: { breadcrumb: 'User profile' },
   },
   // admin routes
-  { path: 'add-user', component: AddUserComponent, canActivate: [AuthGuard] },
-  { path: 'admin-log', component: AdminLogComponent, canActivate: [AuthGuard] },
+  {
+    path: 'add-user',
+    component: AddUserComponent,
+    canActivate: [AuthGuard],
+    data: { breadcrumb: 'Add user' },
+  },
+  {
+    path: 'admin-log',
+    component: AdminLogComponent,
+    canActivate: [AuthGuard],
+    data: { breadcrumb: 'Admin log' },
+  },
   {
     path: 'add-course',
     component: AddCourseComponent,
     canActivate: [AuthGuard],
+    data: { breadcrumb: 'Add course' },
   },
-  { path: 'all-users', component: AllUsersComponent, canActivate: [AuthGuard] },
   {
-    path: 'edit-user/:id',
-    component: EditUserComponent,
+    path: 'all-users',
+    // component: AllUsersComponent,
     canActivate: [AuthGuard],
+    data: { breadcrumb: 'All users' },
+    children: [
+      { path: '', component: AllUsersComponent },
+      {
+        path: 'edit-user/:id',
+        component: EditUserComponent,
+        canActivate: [AuthGuard],
+        data: { breadcrumb: 'Edit user' },
+      },
+    ],
   },
+
   {
     path: 'students-page',
     component: StudentsPageComponent,
     canActivate: [AuthGuard],
+    data: { breadcrumb: 'Students page' },
   },
   {
     path: 'settings',
     component: SettingsPageComponent,
     canActivate: [AuthGuard],
+    data: { breadcrumb: 'Settings' },
   },
 
   { path: '**', redirectTo: '/home', pathMatch: 'full' },
