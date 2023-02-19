@@ -16,11 +16,14 @@ import { ReadExcelDirective } from '../directives/read-excel.directive';
 })
 export class CourseGradesComponent implements OnInit {
   @ViewChild('f') fileRef: ElementRef;
+  @ViewChild('fG') fileRefgrade: ElementRef;
   constructor(
     private gradeService: GradeService,
     private renderer: Renderer2
   ) {}
-  file: File;
+  gradesFile: File;
+  namesFile: File;
+
   students = studData.map((student) => {
     return {
       ...student,
@@ -43,7 +46,6 @@ export class CourseGradesComponent implements OnInit {
     this.filteredStudents[index].oldExamWork =
       this.filteredStudents[index].examWork;
   }
-
   save(index: number, termWork: number, examWork: number) {
     this.filteredStudents[index].editable =
       !this.filteredStudents[index].editable;
@@ -79,38 +81,119 @@ export class CourseGradesComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onFileChange(event: any) {
-    this.file = event.target.files[0];
+  onFileChangeGrades(event: any) {
+    console.log(event);
+    this.gradesFile = event.target.files[0];
+
+  }
+  onFileChangeNames(event: any) {
+    this.namesFile = event.target.files[0];
+  }
+/**/
+onExcelUploadNames(data: any) {
+  console.log(data);
+  const newStudents = data
+    .filter((row: any) => row.id && row.name) // Only keep rows with non-empty ID and name
+    .filter((row: any) => {
+      // Only keep rows where student ID doesn't already exist in students array
+      return !this.students.find((s: any) => s.id === row.id);
+    })
+    .map((row: any) => {
+      return {
+        id: row.id,
+        name: row.name,
+        termWork: null,
+        examWork: null,
+        editable: false,
+        oldTermWork: null,
+        oldExamWork: null,
+        total: null,
+        grade: null,
+      };
+    });
+
+  if (newStudents.length > 0) {
+    this.students = this.students.concat(newStudents);
+    this.filteredStudents = this.students;
+    console.log(this.filteredStudents);
   }
 
+  const invalidRecords = data.filter((row: any) => !row.id || !row.name);
+  if (invalidRecords.length > 0) {
+    alert(` ${invalidRecords.length} rows were not added. Please make sure each row has both an ID and name.`);
+  }
+}
+
+
+
+/***/
   missingStudents = [];
-  onExcelUpload(data: any) {
+  // onExcelUploadGrades(data: any) {
+  //   console.log(data);
+  //   this.students = this.students.map((student) => {
+  //     const excelStudent = data.find((s) => +s.id === +student.id);
+  //     if (excelStudent) {
+  //       return {
+  //         ...student,
+  //         termWork: excelStudent.termWork,
+  //         examWork: excelStudent.examWork,
+  //         total: +excelStudent.termWork + +excelStudent.examWork,
+  //         grade: this.gradeService.calculateGrade(
+  //           +excelStudent.termWork + +excelStudent.examWork
+  //         ),
+  //       };
+  //     } else {
+  //       this.missingStudents.push(student.id);
+  //       return student;
+  //     }
+  //   });
+  //   this.filteredStudents = this.students;
+  //   if (this.missingStudents.length > 0) {
+  //     alert(
+  //       `there are ${this.missingStudents.length} missing students: ${this.missingStudents}`
+  //     );
+  //   }
+  //   this.renderer.setProperty(this.fileRef.nativeElement, 'value', null);
+  // }
+
+  onExcelUploadGrades(data: any) {
     console.log(data);
+    const validatedData = data.filter((excelStudent) => {
+      const termWork = +excelStudent.termWork;
+      const examWork = +excelStudent.examWork;
+      // Check that term work is between 0 and 40, and exam work is between 0 and 60
+      if (termWork < 0 || termWork > 40 || examWork < 0 || examWork > 60) {
+        console.error(`Invalid data for student ${excelStudent.id}: termWork=${termWork}, examWork=${examWork}`);
+        return false;
+      }
+      return true;
+    });
+
     this.students = this.students.map((student) => {
-      const excelStudent = data.find((s) => +s.id === +student.id);
+      const excelStudent = validatedData.find((s) => +s.id === +student.id);
       if (excelStudent) {
         return {
           ...student,
           termWork: excelStudent.termWork,
           examWork: excelStudent.examWork,
           total: +excelStudent.termWork + +excelStudent.examWork,
-          grade: this.gradeService.calculateGrade(
-            +excelStudent.termWork + +excelStudent.examWork
-          ),
+          grade: this.gradeService.calculateGrade(+excelStudent.termWork + +excelStudent.examWork),
         };
       } else {
         this.missingStudents.push(student.id);
         return student;
       }
     });
+
     this.filteredStudents = this.students;
+
     if (this.missingStudents.length > 0) {
-      alert(
-        `there are ${this.missingStudents.length} missing students: ${this.missingStudents}`
-      );
+      alert(`There are ${this.missingStudents.length} missing students: ${this.missingStudents}`);
     }
+
     this.renderer.setProperty(this.fileRef.nativeElement, 'value', null);
   }
+
 
   deleteAllGrades() {
     let cc = confirm('Are you sure you want to delete all grades?');
@@ -151,6 +234,31 @@ export class CourseGradesComponent implements OnInit {
       }
     });
     this.sortOrder = this.sortOrder * -1;
+  }
+  onSubmit(Form) {
+    let studentId = Math.floor(Form.value.studentId);
+    let studentName = Form.value.studentName;
+    console.log(studentId, studentName);
+    console.log(this.students);
+
+    if (this.students.some(student => student.id === studentId)) {
+      alert(`A student with ID ${studentId} already exists.`);
+      return;
+    }
+
+    const newStudent = {
+      id: studentId,
+      name: studentName,
+      termWork: null,
+      examWork: null,
+      editable: false,
+      oldTermWork: null,
+      oldExamWork: null,
+      total: null,
+      grade: null,
+    };
+    this.students.push(newStudent);
+    this.filteredStudents = this.students;
   }
 
   // showStudentsWithNoGrades() {

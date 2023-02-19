@@ -9,7 +9,6 @@ import { AuthService } from 'src/app/auth/auth.service';
 })
 export class SystemSettingsComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) {}
-
   ngOnInit(): void {}
 
   onSubmit(form: any) {

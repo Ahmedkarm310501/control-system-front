@@ -1,12 +1,175 @@
-<header>
+<!-- <header>
     <div class="row">
         <div class="col-md-6">
             <h3>Settings</h3>
         </div>
     </div>
-</header>
+</header> -->
+<div class="setup">
+  <div class="container h-100">
+    <div class="row h-100 justify-content-center">
+      <div class="col-sm-10 col-lg-8 text-center">
+        <form
+          class="p-4 shadow rounded-3 mt-5"
+          #Form="ngForm"
+          (ngSubmit)="onSubmit(Form.value)"
+        >
+          <h1 class="fs-1 text-center mb-2 form-header">Settings</h1>
+          <hr />
+          <div class="row">
+            <div class="form-group mb-3 col-sm-12 col-md-6 text-start">
+              <label for="universityName" class="form-label"
+                >University name</label
+              >
+              <input
 
-<form class="row g-3" #Form="ngForm" (ngSubmit)="onSubmit(Form.value)">
+                type="text"
+                class="form-control"
+                name="universityName"
+                required
+                [(ngModel)]="university"
+                #universityName="ngModel"
+              />
+              <div
+                *ngIf="
+                  universityName &&
+                  universityName.invalid &&
+                  (universityName.dirty || universityName.touched)
+                "
+              >
+                <div
+                  *ngIf="
+                    universityName.errors && universityName.errors['required']
+                  "
+                  class="error"
+                >
+                  University name is required.
+                </div>
+              </div>
+            </div>
+            <div class="form-group mb-3 col-sm-12 col-md-6 text-start">
+              <label for="facultyName" class="form-label">Faculty name</label>
+              <input
+                type="text"
+                class="form-control"
+                name="facultyName"
+                required
+                [(ngModel)]="faculty"
+                #facultyName="ngModel"
+              />
+              <div
+                *ngIf="
+                  facultyName &&
+                  facultyName.invalid &&
+                  (facultyName.dirty || facultyName.touched)
+                "
+              >
+                <div
+                  *ngIf="facultyName.errors && facultyName.errors['required']"
+                  class="error"
+                >
+                  Faculty name is required.
+                </div>
+              </div>
+            </div>
+            <div class="form-group mb-3 col-sm-12 col-md-6 text-start">
+              <label for="departmentName" class="form-label">Login with</label>
+              <select required name="loginType" [(ngModel)]="With" #loginType="ngModel">
+                <option value="">Select login type</option>
+                <option value="email">Email</option>
+                <option value="national Id">National Id</option>
+              </select>
+              <div
+                *ngIf="
+                  loginType &&
+                  loginType.invalid &&
+                  (loginType.dirty || loginType.touched)
+                "
+              >
+                <div
+                  *ngIf="loginType.errors && loginType.errors['required']"
+                  class="error"
+                >
+                  Login type is required.
+                </div>
+              </div>
+            </div>
+            <div
+              class="form-group mb-3 col-sm-12 col-md-6 text-start"
+              *ngIf="Form.value.loginType === 'email'"
+            >
+              <label for="emailPattern" class="form-label">Email pattern</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Email pattern (exapmle: @gmail.com)"
+                name="emailPattern"
+                [required]="Form.value.loginType === 'email'"
+                ngModel
+                #emailPattern="ngModel"
+              />
+              <div
+                *ngIf="
+                  emailPattern &&
+                  emailPattern.invalid &&
+                  (emailPattern.dirty || emailPattern.touched)
+                "
+              >
+                <div
+                  *ngIf="emailPattern.errors && emailPattern.errors['required']"
+                  class="error"
+                >
+                  Email pattern is required.
+                </div>
+              </div>
+            </div>
+            <div class="form-group col-sm-12 col-md-6 text-start">
+              <label for="notify" class="form-label"
+                >Notify for user changes</label
+              >
+              <select required name="notify" [(ngModel)]="j" #notify="ngModel">
+                <option value="">Notify for user changes</option>
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+              </select>
+              <div
+                *ngIf="
+                  notify && notify.invalid && (notify.dirty || notify.touched)
+                "
+              >
+                <div
+                  *ngIf="notify.errors && notify.errors['required']"
+                  class="error"
+                >
+                  Notify is required.
+                </div>
+              </div>
+            </div>
+            <div class="form-group col-sm-12 col-md-6 text-start">
+              <label for="notify" class="form-label"
+                >University logo (optional)</label
+              >
+              <input
+                type="file"
+                class="form-control"
+                name="facultyLogo"
+                [(ngModel)]="lo"
+                #facultyLogo="ngModel"
+              />
+            </div>
+          </div>
+          <hr />
+          <button class="btn btn-primary w-100" [disabled]="Form.invalid">
+            save
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- <form class="row g-3" #Form="ngForm" (ngSubmit)="onSubmit(Form.value)">
     <div class="col-md-6">
         <label for="courseid" class="form-label">Login With</label>
         <select class="form-select" id="loginwith" name="loginwith">
@@ -33,4 +196,4 @@
     <div class="col-12">
         <button type="submit" class="btn btn-primary">Submit</button>
     </div>
-</form>
+</form> -->
