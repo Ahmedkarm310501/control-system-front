@@ -22,7 +22,6 @@
                 >University name</label
               >
               <input
-
                 type="text"
                 class="form-control"
                 name="universityName"
@@ -74,7 +73,12 @@
             </div>
             <div class="form-group mb-3 col-sm-12 col-md-6 text-start">
               <label for="departmentName" class="form-label">Login with</label>
-              <select required name="loginType" [(ngModel)]="With" #loginType="ngModel">
+              <select
+                required
+                name="loginType"
+                [(ngModel)]="With"
+                #loginType="ngModel"
+              >
                 <option value="">Select login type</option>
                 <option value="email">Email</option>
                 <option value="national Id">National Id</option>
@@ -153,7 +157,7 @@
                 type="file"
                 class="form-control"
                 name="facultyLogo"
-                [(ngModel)]="lo"
+                ngModel
                 #facultyLogo="ngModel"
               />
             </div>
@@ -167,7 +171,6 @@
     </div>
   </div>
 </div>
-
 
 <!-- <form class="row g-3" #Form="ngForm" (ngSubmit)="onSubmit(Form.value)">
     <div class="col-md-6">

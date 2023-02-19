@@ -4,12 +4,17 @@
       <div class="left_col scroll-view">
         <div class="navbar nav_title" style="border: 0">
           <a class="site_title d-flex align-items-center">
-            <span>Control System</span></a>
+            <span>Control System</span></a
+          >
         </div>
         <div class="clearfix"></div>
         <div class="profile clearfix">
           <div class="profile_pic">
-            <img src="\assets\download.jfif" alt="..." class="img-circle profile_img rounded-circle" />
+            <img
+              src="\assets\download.jfif"
+              alt="..."
+              class="img-circle profile_img rounded-circle"
+            />
           </div>
           <div class="profile_info">
             <span>Welcome,</span>
@@ -24,15 +29,22 @@
           <div class="menu_section">
             <h3>General</h3>
             <ul class="nav side-menu">
-              <li (click)="clickEvent('home')" [ngClass]="toggleDisplay['home'] ? 'active' : ''">
-                <a><i class="fa fa-home"></i> Courses
+              <li
+                (click)="clickEvent('home')"
+                [ngClass]="toggleDisplay['home'] ? 'active' : ''"
+              >
+                <a
+                  ><i class="fa fa-home"></i> Courses
                   <span class="fa fa-chevron-down float-end"></span>
                 </a>
-                <ul class="nav child_menu" [ngStyle]="{
+                <ul
+                  class="nav child_menu"
+                  [ngStyle]="{
                     display: toggleDisplay['home'] ? 'block' : 'none'
-                  }">
+                  }"
+                >
                   <li routerLinkActive="current-page">
-                    <a routerLink="home">Courses</a>
+                    <a routerLink="courses">Courses</a>
                   </li>
                   <li routerLinkActive="current-page">
                     <a routerLink="add-course">Add course</a>
@@ -43,13 +55,20 @@
                   <!--<li><a href="index3.html">Dashboard3</a></li> -->
                 </ul>
               </li>
-              <li (click)="clickEvent('forms')" [ngClass]="toggleDisplay['forms'] ? 'active' : ''">
-                <a><i class="fa fa-edit"></i> Students
+              <li
+                (click)="clickEvent('forms')"
+                [ngClass]="toggleDisplay['forms'] ? 'active' : ''"
+              >
+                <a
+                  ><i class="fa fa-edit"></i> Students
                   <span class="fa fa-chevron-down float-end"></span>
                 </a>
-                <ul class="nav child_menu" [ngStyle]="{
+                <ul
+                  class="nav child_menu"
+                  [ngStyle]="{
                     display: toggleDisplay['forms'] ? 'block' : 'none'
-                  }">
+                  }"
+                >
                   <li routerLinkActive="current-page">
                     <a routerLink="add-students">add students</a>
                   </li>
@@ -59,13 +78,20 @@
                   <!-- <li><a routerLink="form_advanced.html">Advanced Components</a></li> -->
                 </ul>
               </li>
-              <li (click)="clickEvent('users')" [ngClass]="toggleDisplay['users'] ? 'active' : ''">
-                <a><i class="fa fa-lock"></i> Admin
+              <li
+                (click)="clickEvent('users')"
+                [ngClass]="toggleDisplay['users'] ? 'active' : ''"
+              >
+                <a
+                  ><i class="fa fa-lock"></i> Admin
                   <span class="fa fa-chevron-down float-end"></span>
                 </a>
-                <ul class="nav child_menu" [ngStyle]="{
+                <ul
+                  class="nav child_menu"
+                  [ngStyle]="{
                     display: toggleDisplay['users'] ? 'block' : 'none'
-                  }">
+                  }"
+                >
                   <li routerLinkActive="current-page">
                     <a routerLink="all-users">Users</a>
                   </li>
