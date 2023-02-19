@@ -1,8 +1,9 @@
 <div
   class="top_nav sticky-top"
   [ngStyle]="
-    sideBarOpen ? { 'margin-left': '230px' } : { 'margin-left': '70px' }
+    sideBarOpen ? { 'margin-left': '230px' } : { 'margin-left': '70px'}
   "
+  [ngClass]="sideBarOpen ? 'anime' : 'animee'"
 >
   <div class="nav_menu">
     <div class="nav toggle">

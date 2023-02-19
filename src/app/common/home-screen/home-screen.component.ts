@@ -32,7 +32,7 @@ export class HomeScreenComponent implements OnInit {
     },
     {
       id: 'CS112',
-      name: 'Programing 1',
+      name: 'Programming 1',
       department: 'Information Systems',
       numberOfStudents: 200,
       gradedStudents: 0,
@@ -40,7 +40,7 @@ export class HomeScreenComponent implements OnInit {
     },
     {
       id: 'CS113',
-      name: 'Programing 2',
+      name: 'Programming 2',
       department: 'Information Systems',
       numberOfStudents: 200,
       gradedStudents: 0,

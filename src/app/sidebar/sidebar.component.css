@@ -469,3 +469,9 @@ ul.side-menu li {
 .nav-sm li li span.fa {
   display: inline-block;
 }
+.anime{
+  transition: 0.5s;
+}
+.animee{
+  transition: 0.5s;
+}
