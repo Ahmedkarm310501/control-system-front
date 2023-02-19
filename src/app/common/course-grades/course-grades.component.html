@@ -68,18 +68,18 @@
               (uploaded)="onExcelUploadNames($event)"
             />Add student names
           </a>
-          <a class="dropdown-item" style="cursor: pointer" data-bs-toggle="modal"
-          data-bs-target="#exampleModal"
-            ><input
-              style="display: none"
-
-            />Add one student
+          <a
+            class="dropdown-item"
+            style="cursor: pointer"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+            ><input style="display: none" />Add one student
           </a>
           <a class="dropdown-item" style="cursor: pointer">Export grades</a>
           <a
             class="dropdown-item"
             style="cursor: pointer"
-            routerLink="/course-settings"
+            routerLink="course-settings"
             >Course settings</a
           >
           <a
@@ -272,7 +272,6 @@
   </table>
 </div>
 
-
 <div
   class="modal fade"
   id="exampleModal"
@@ -331,7 +330,14 @@
               <br />
             </div>
             <div class="modal-footer">
-              <button type="submit"  class="btn btn-primary" data-bs-dismiss="modal" [disabled]="Form.invalid">Add</button>
+              <button
+                type="submit"
+                class="btn btn-primary"
+                data-bs-dismiss="modal"
+                [disabled]="Form.invalid"
+              >
+                Add
+              </button>
             </div>
           </form>
         </div>

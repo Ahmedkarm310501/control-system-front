@@ -28,6 +28,7 @@ import { BarChartComponent } from './common/charts/bar-chart/bar-chart.component
 import { PieChartComponent } from './common/charts/pie-chart/pie-chart.component';
 import { LineChartComponent } from './common/charts/line-chart/line-chart.component';
 import { BoxComponent } from './components/box/box.component';
+import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { BoxComponent } from './components/box/box.component';
     PieChartComponent,
     LineChartComponent,
     BoxComponent,
+    BreadcrumbComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
   providers: [],
