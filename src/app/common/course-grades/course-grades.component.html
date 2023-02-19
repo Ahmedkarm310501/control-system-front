@@ -51,11 +51,29 @@
               type="file"
               #f
               style="display: none"
-              (change)="onFileChange($event)"
+              (change)="onFileChangeGrades($event)"
               appReadExcel
-              [file]="file"
-              (uploaded)="onExcelUpload($event)"
+              [file]="gradesFile"
+              (uploaded)="onExcelUploadGrades($event)"
             />Upload Grades
+          </a>
+          <a class="dropdown-item" (click)="fG.click()" style="cursor: pointer"
+            ><input
+              type="file"
+              #fG
+              style="display: none"
+              (change)="onFileChangeNames($event)"
+              appReadExcel
+              [file]="namesFile"
+              (uploaded)="onExcelUploadNames($event)"
+            />Add student names
+          </a>
+          <a class="dropdown-item" style="cursor: pointer" data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+            ><input
+              style="display: none"
+
+            />Add one student
           </a>
           <a class="dropdown-item" style="cursor: pointer">Export grades</a>
           <a
@@ -254,6 +272,73 @@
   </table>
 </div>
 
+
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Student</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <form #Form="ngForm" class="w-100" (ngSubmit)="onSubmit(Form)">
+            <div class="mb-3" class="col-md-12">
+              <label>Student ID :&nbsp;</label>
+              <input
+                type="text"
+                class="form-control"
+                id="studentId"
+                name="studentId"
+                ngModel
+                required
+                #studentId="ngModel"
+              />
+              <div *ngIf="studentId.invalid && studentId.touched" class="error">
+                Please enter a valid Student ID.
+              </div>
+              <br />
+            </div>
+            <hr />
+            <div class="mb-3" class="col-md-12">
+              <label>Student Name :&nbsp;</label>
+              <input
+                type="text"
+                class="form-control"
+                id="studentName"
+                name="studentName"
+                ngModel
+                required
+                #studentName="ngModel"
+              />
+              <div
+                *ngIf="studentName.invalid && studentName.touched"
+                class="error"
+              >
+                Please enter a valid Student Name.
+              </div>
+              <br />
+            </div>
+            <div class="modal-footer">
+              <button type="submit"  class="btn btn-primary" data-bs-dismiss="modal" [disabled]="Form.invalid">Add</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <!--
 <app-modal [show]="showModal" (closeModal)="closeModal()">
   <div modal-title>Modal Title</div>

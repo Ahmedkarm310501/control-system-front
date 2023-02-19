@@ -8,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 export class SettingsPageComponent implements OnInit {
 
   constructor() { }
-
+  university = 'Cairo University';
+  faculty = 'computer science';
+  With = 'national Id';
+  j='true';
+  lo = 'logo.png';
   ngOnInit(): void {
   }
   onSubmit(form: any) {

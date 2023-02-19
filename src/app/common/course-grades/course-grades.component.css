@@ -128,3 +128,20 @@ input[type="search"] {
   color: #f7f7f7;
   margin-bottom: 0 !important;
 }
+.btn-primary {
+  color: #fff;
+  background-color: var(--button-color) !important;
+  border-color: var(--button-color) !important;
+}
+
+.modal-content {
+  background-color: var(--background-color-dark);
+}
+
+.modal select {
+  background-color: var(--background-color);
+}
+input:focus {
+  outline: none;
+  box-shadow: none;
+}
