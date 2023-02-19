@@ -20,11 +20,9 @@
   --text-color: #0d1b2a;
 } */
 :root {
-  /* --main-color: #00110c; */
   --main-color: #1d2c28;
   --main-color-light: #415a77;
   --background-color: #f8f7f1;
-  /* --background-color: linear-gradient(to left, #ffefba, #ffffff); */
   --background-color-dark: #f1eee3;
   --nav-color: #415a77;
   --button-color: #1d2c28;

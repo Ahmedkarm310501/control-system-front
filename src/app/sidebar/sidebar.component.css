@@ -93,6 +93,7 @@
   border-radius: 0;
   height: 57px;
   padding: 0px;
+  transition: all 0.5s ease;
 }
 
 .sidebar-header {
@@ -190,6 +191,7 @@
   display: -ms-flexbox;
   display: flex;
   z-index: 1;
+  transition: all 0.5s ease;
 }
 
 a {
@@ -320,11 +322,6 @@ ul.side-menu li {
   padding: 0;
   max-width: 100%;
 }
-/* .right_col {
-  background: #f7f7f7;
-  padding: 10px 20px 0;
-  margin-left: 230px;
-} */
 
 .main_content {
   padding: 10px 20px;
@@ -378,6 +375,7 @@ ul.side-menu li {
 
 .nav-sm .navbar.nav_title {
   width: 70px;
+  transition: all 0.5s ease;
 }
 
 .nav-sm .navbar.nav_title a span {
@@ -469,9 +467,9 @@ ul.side-menu li {
 .nav-sm li li span.fa {
   display: inline-block;
 }
-.anime{
-  transition: 0.5s;
+/* .anime {
+  transition: all 0.5s ease !important;
 }
-.animee{
-  transition: 0.5s;
-}
+.animee {
+  transition: all 0.5s ease !important;
+} */
