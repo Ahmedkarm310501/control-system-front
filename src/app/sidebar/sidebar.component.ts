@@ -1,14 +1,21 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, OnDestroy } from '@angular/core';
 import '../../styles.css';
+import { SidebarService } from './sidebar.service';
 @Component({
   selector: 'app-side-bar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.css'],
 })
-export class SidebarComponent {
-  constructor() {}
+export class SidebarComponent implements OnInit, OnDestroy {
+  sideBarOpen: boolean;
 
-  ngOnInit(): void {}
+  constructor(private sidebarService: SidebarService) {}
+
+  ngOnInit(): void {
+    this.sidebarService.sideBarOpen.subscribe((res) => {
+      this.sideBarOpen = res;
+    });
+  }
 
   toggleDisplay: any = {};
 
@@ -19,5 +26,9 @@ export class SidebarComponent {
         this.toggleDisplay[key] = false;
       }
     }
+  }
+
+  ngOnDestroy() {
+    // this.sidebarService.sideBarOpen.unsubscribe();
   }
 }
