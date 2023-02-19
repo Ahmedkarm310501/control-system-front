@@ -55,3 +55,9 @@ select {
   background-color: var(--button-color) !important;
   border-color: var(--button-color) !important;
 }
+
+form h1{
+  text-align: center;
+  color: var(--text-color);
+  margin-bottom: 20px;
+}
