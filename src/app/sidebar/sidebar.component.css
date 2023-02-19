@@ -91,8 +91,10 @@
   float: left;
   /* background: #2a3f54; */
   border-radius: 0;
-  height: 57px;
+  /* height: 57px; */
   padding: 0px;
+  /* margin-left: 0; */
+  margin-top: 20px;
   transition: all 0.5s ease;
 }
 
@@ -255,9 +257,9 @@ a:focus {
   width: 100%;
   color: #ecf0f1 !important;
   margin-left: 0 !important;
-  line-height: 59px;
+  /* line-height: 59px; */
   display: block;
-  height: 55px;
+  /* height: 55px; */
   margin: 0;
   padding-left: 10px;
 }
@@ -379,7 +381,8 @@ ul.side-menu li {
 }
 
 .nav-sm .navbar.nav_title a span {
-  display: none;
+  margin-left: -250px;
+  /* display: none; */
 }
 
 .nav-sm .navbar.nav_title a i {
