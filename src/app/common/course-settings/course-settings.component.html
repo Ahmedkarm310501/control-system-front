@@ -1,97 +1,101 @@
-<header>
-    <div class="row">
-        <div class="col-md-6">
-            <h3>Course Settings</h3>
-        </div>
-    </div>
-</header>
+<div class="setup">
+    <div class="container h-100">
+        <div class="row h-100 justify-content-center">
+            <div class="col-sm-10 col-lg-8 text-center">
+                <form class="row g-3" #Form="ngForm" (ngSubmit)="onSubmit(Form.value)">
+                    <h1 class="fs-1 text-center mb-2 form-header">Course Settings</h1>
+                    <hr>
+                    <div class="col-md-6">
+                        <label for="courseid" class="form-label">Course ID</label>
+                        <input [(ngModel)]="courseID" name="courseid" required #courseId="ngModel" type="text"
+                            class="form-control" id="courseid">
+                        <div *ngIf="courseId && courseId.invalid && (courseId.dirty || courseId.touched) && courseId.errors && courseId.errors['required']"
+                            class="error">
+                            courseID is required.
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="coursename" class="form-label">Course Name</label>
+                        <input [(ngModel)]="courseNamee" name="coursename" required #courseName="ngModel" type="text"
+                            class="form-control" id="coursename">
+                        <div *ngIf="courseName && courseName.invalid && (courseName.dirty || courseName.touched) && courseName.errors && courseName.errors['required']"
+                            class="error">
+                            courseName is required.
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="coursetermwork" class="form-label">Course Term Work</label>
+                        <input [(ngModel)]="termWorkk" type="number" name="coursetermwork" required
+                            #courseTermWork="ngModel" class="form-control" id="coursetermwork">
+                        <div *ngIf="courseTermWork && courseTermWork.invalid && (courseTermWork.dirty || courseTermWork.touched) && courseTermWork.errors && courseTermWork.errors['required']"
+                            class="error">
+                            courseTermWork is required.
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="courseexamwork" class="form-label">Course Exam Work</label>
+                        <input [(ngModel)]="examWorkk" type="number" name="courseexamwork" required
+                            #courseExamWork="ngModel" class="form-control" id="courseexamwork">
+                        <div *ngIf="courseExamWork && courseExamWork.invalid && (courseExamWork.dirty || courseExamWork.touched) && courseExamWork.errors && courseExamWork.errors['required']"
+                            class="error">
+                            courseExamWork is required.
+                        </div>
+                    </div>
+                    <div class="error">
+                        <div *ngIf="courseExamWork.value+courseTermWork.value > 100" class="error">
+                            Course Term Work + Course Exam Work must be equal to 100.
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="coursedepartment" class="form-label">Course Department</label>
+                        <select [(ngModel)]="departmentt" name="coursedepartment" required #courseDepartment="ngModel"
+                            id="coursedepartment">
+                            <option selected>Choose...</option>
+                            <option>IS</option>
+                            <option>CS</option>
+                            <option>AI</option>
+                            <option>IT</option>
+                            <option>DS</option>
+                        </select>
+                        <div *ngIf="courseDepartment && courseDepartment.invalid && (courseDepartment.dirty || courseDepartment.touched) && courseDepartment.errors && courseDepartment.errors['required']"
+                            class="error">
+                            courseDepartment is required.
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="courseinstructor" class="form-label">Course Instructor</label>
+                        <input [(ngModel)]="instructorr" name="courseinstructor" required #courseInstructor="ngModel"
+                            type="text" class="form-control" id="courseinstructor">
+                        <div *ngIf="courseInstructor && courseInstructor.invalid && (courseInstructor.dirty || courseInstructor.touched) && courseInstructor.errors && courseInstructor.errors['required']"
+                            class="error">
+                            courseInstructor is required.
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="coursecredits" class="form-label">Course Credits</label>
+                        <input [(ngModel)]="creditss" name="coursecredits" required #courseCredits="ngModel" type="text"
+                            class="form-control" id="coursecredits">
+                        <div *ngIf="courseCredits && courseCredits.invalid && (courseCredits.dirty || courseCredits.touched) && courseCredits.errors && courseCredits.errors['required']"
+                            class="error">
+                            courseCredits is required.
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="courseraapha" class="form-label">Course Ra'fa</label>
+                        <input [(ngModel)]="raafaa" type="number" name="courseraapha" required #courseraapha="ngModel"
+                            class="form-control" id="coursecapacity">
+                        <div *ngIf="courseraapha && courseraapha.invalid && (courseraapha.dirty || courseraapha.touched) && courseraapha.errors && courseraapha.errors['required']"
+                            class="error">
+                            Ra'fa is required.
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary"
+                            [disabled]="Form.invalid || courseExamWork.value+courseTermWork.value > 100 ">Submit</button>
+                    </div>
+                </form>
 
-<form class="row g-3" #Form="ngForm" (ngSubmit)="onSubmit(Form.value)">
-    <div class="col-md-6">
-        <label for="courseid" class="form-label">Course ID</label>
-        <input name="courseid" ngModel required #courseId="ngModel" type="text" class="form-control" id="courseid">
-        <div *ngIf="courseId && courseId.invalid && (courseId.dirty || courseId.touched) && courseId.errors && courseId.errors['required']"
-            class="error">
-            courseID is required.
+            </div>
         </div>
     </div>
-    <div class="col-md-6">
-        <label for="coursename" class="form-label">Course Name</label>
-        <input name="coursename" ngModel required #courseName="ngModel" type="text" class="form-control"
-            id="coursename">
-        <div *ngIf="courseName && courseName.invalid && (courseName.dirty || courseName.touched) && courseName.errors && courseName.errors['required']"
-            class="error">
-            courseName is required.
-        </div>
-    </div>
-    <div class="col-md-6">
-        <label for="coursetermwork" class="form-label">Course Term Work</label>
-        <input type="number" name="coursetermwork" ngModel required #courseTermWork="ngModel" class="form-control"
-            id="coursetermwork">
-        <div *ngIf="courseTermWork && courseTermWork.invalid && (courseTermWork.dirty || courseTermWork.touched) && courseTermWork.errors && courseTermWork.errors['required']"
-            class="error">
-            courseTermWork is required.
-        </div>
-    </div>
-    <div class="col-md-6">
-        <label for="courseexamwork" class="form-label">Course Exam Work</label>
-        <input type="number" name="courseexamwork" ngModel required #courseExamWork="ngModel" class="form-control"
-            id="courseexamwork">
-        <div *ngIf="courseExamWork && courseExamWork.invalid && (courseExamWork.dirty || courseExamWork.touched) && courseExamWork.errors && courseExamWork.errors['required']"
-            class="error">
-            courseExamWork is required.
-        </div>
-    </div>
-    <div class="error">
-        <div *ngIf="courseExamWork.value+courseTermWork.value > 100" class="error">
-            Course Term Work + Course Exam Work must be equal to 100.
-        </div>
-    </div>
-    <div class="col-md-6">
-        <label for="coursedepartment" class="form-label">Course Department</label>
-        <select name="coursedepartment" ngModel required #courseDepartment="ngModel" id="coursedepartment"
-            class="form-select">
-            <option selected>Choose...</option>
-            <option>IS</option>
-            <option>CS</option>
-            <option>AI</option>
-            <option>IT</option>
-            <option>DS</option>
-        </select>
-        <div *ngIf="courseDepartment && courseDepartment.invalid && (courseDepartment.dirty || courseDepartment.touched) && courseDepartment.errors && courseDepartment.errors['required']"
-            class="error">
-            courseDepartment is required.
-        </div>
-    </div>
-    <div class="col-md-6">
-        <label for="courseinstructor" class="form-label">Course Instructor</label>
-        <input name="courseinstructor" ngModel required #courseInstructor="ngModel" type="text" class="form-control"
-            id="courseinstructor">
-        <div *ngIf="courseInstructor && courseInstructor.invalid && (courseInstructor.dirty || courseInstructor.touched) && courseInstructor.errors && courseInstructor.errors['required']"
-            class="error">
-            courseInstructor is required.
-        </div>
-    </div>
-    <div class="col-md-6">
-        <label for="coursecredits" class="form-label">Course Credits</label>
-        <input name="coursecredits" ngModel required #courseCredits="ngModel" type="text" class="form-control"
-            id="coursecredits">
-        <div *ngIf="courseCredits && courseCredits.invalid && (courseCredits.dirty || courseCredits.touched) && courseCredits.errors && courseCredits.errors['required']"
-            class="error">
-            courseCredits is required.
-        </div>
-    </div>
-    <div class="col-md-6">
-        <label for="courseraapha" class="form-label">Course Ra'fa</label>
-        <input type="number" name="courseraapha" ngModel required #courseraapha="ngModel" class="form-control"
-            id="coursecapacity">
-        <div *ngIf="courseraapha && courseraapha.invalid && (courseraapha.dirty || courseraapha.touched) && courseraapha.errors && courseraapha.errors['required']"
-            class="error">
-            Ra'fa is required.
-        </div>
-    </div>
-    <div class="col-12">
-        <button type="submit" class="btn btn-primary"
-            [disabled]="Form.invalid || courseExamWork.value+courseTermWork.value > 100 ">Submit</button>
-    </div>
-</form>
+</div>
