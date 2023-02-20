@@ -31,7 +31,7 @@ form button {
   color: #fff;
   display: block;
   font-size: 18px;
-  height: 50px;
+  /* height: 50px; */
   line-height: 1.42857;
   margin-bottom: 10px;
   padding: 6px 12px;
@@ -46,7 +46,7 @@ form button:hover {
   color: #fff;
   display: block;
   font-size: 18px;
-  height: 50px;
+  /* height: 50px; */
   line-height: 1.42857;
   margin-bottom: 10px;
   padding: 6px 12px;
@@ -84,13 +84,16 @@ form select {
   color: #555;
   display: block;
   font-size: 18px;
-  height: 50px;
+  /* height: 50px; */
   line-height: 1.42857;
   margin-bottom: 10px;
-  padding: 6px 12px;
+  padding: 6px 12px ;
   transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
   width: 100%;
 }
 form {
   background-color: var(--background-color-dark);
+}
+.file{
+  height: auto !important;
 }

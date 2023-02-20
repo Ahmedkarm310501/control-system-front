@@ -1,7 +1,6 @@
 .top_nav {
   text-align: left;
   color: var(--main-color);
-  
 }
 
 .nav_menu {
@@ -145,4 +144,11 @@ ul.msg_list li a .image img {
   float: left;
   margin-right: 10px;
   width: 11%;
+}
+
+.anime {
+  transition: all 0.5s ease;
+}
+.animee {
+  transition: all 0.5s ease;
 }

@@ -1,10 +1,15 @@
+<!-- [ngStyle]="sideBarOpen ? {'transition' : '1s'} : {'transition': '2s'}" -->
 <div class="bodyy" [ngClass]="sideBarOpen ? 'nav-md' : 'nav-sm'">
   <div class="container body">
     <div class="col-md-3 left_col">
       <div class="left_col scroll-view">
         <div class="navbar nav_title" style="border: 0">
           <a class="site_title d-flex align-items-center">
-            <span>Control System</span></a
+            <span
+              ><a style="color: white" routerLink="courses"
+                >Control System</a
+              ></span
+            ></a
           >
         </div>
         <div class="clearfix"></div>
@@ -47,7 +52,7 @@
                     <a routerLink="courses">Courses</a>
                   </li>
                   <li routerLinkActive="current-page">
-                    <a routerLink="add-course">Add course</a>
+                    <a routerLink="add-course">Add Course</a>
                   </li>
                   <li routerLinkActive="current-page">
                     <a routerLink="course-dashboard">Course Dashboard</a>

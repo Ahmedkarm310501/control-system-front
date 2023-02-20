@@ -60,7 +60,7 @@ form button {
   color: #fff;
   display: block;
   font-size: 18px;
-  height: 50px;
+  /* height: 50px; */
   line-height: 1.42857;
   margin-bottom: 10px;
   padding: 6px 12px;
@@ -75,7 +75,7 @@ form button:hover {
   color: #fff;
   display: block;
   font-size: 18px;
-  height: 50px;
+  /* height: 50px; */
   line-height: 1.42857;
   margin-bottom: 10px;
   padding: 6px 12px;
@@ -112,7 +112,7 @@ form select {
   color: #555;
   display: block;
   font-size: 18px;
-  height: 50px;
+  /* height: 50px; */
   line-height: 1.42857;
   margin-bottom: 10px;
   padding: 6px 12px;
