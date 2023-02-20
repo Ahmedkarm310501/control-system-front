@@ -22,3 +22,10 @@
   font-weight: 400;
   line-height: 1.471;
 }
+
+@media (max-width:600px) {
+  .responsive{
+    margin-left: 70px !important;
+  }
+  
+}

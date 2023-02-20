@@ -1,10 +1,10 @@
 <!-- [ngStyle]="sideBarOpen ? {'transition' : '1s'} : {'transition': '2s'}" -->
 <div class="bodyy" [ngClass]="sideBarOpen ? 'nav-md' : 'nav-sm'">
-  <div class="container body">
-    <div class="col-md-3 left_col">
-      <div class="left_col scroll-view">
+  <div class="container body nav-small">
+    <div class="col-md-3 left_col smaller">
+      <div class="left_col scroll-view nav-small">
         <div class="navbar nav_title" style="border: 0">
-          <a class="site_title d-flex align-items-center">
+          <a class="site_title d-flex align-items-center hider">
             <span
               ><a style="color: white" routerLink="courses"
                 >Control System</a
@@ -13,7 +13,7 @@
           >
         </div>
         <div class="clearfix"></div>
-        <div class="profile clearfix">
+        <div class="profile clearfix hider ">
           <div class="profile_pic">
             <img
               src="\assets\download.jfif"
@@ -32,18 +32,19 @@
 
         <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
           <div class="menu_section">
-            <h3>General</h3>
-            <ul class="nav side-menu">
+            <h3 class="hider">General</h3>
+            <ul class="nav side-menu mar">
               <li
                 (click)="clickEvent('home')"
                 [ngClass]="toggleDisplay['home'] ? 'active' : ''"
               >
                 <a
                   ><i class="fa fa-home"></i> Courses
-                  <span class="fa fa-chevron-down float-end"></span>
+                  <!-- <span class="fa fa-chevron-down float-end"></span> -->
+                  <i class="fa fa-caret-down float-end"></i>
                 </a>
                 <ul
-                  class="nav child_menu"
+                  class="nav child_menu nav-childs"
                   [ngStyle]="{
                     display: toggleDisplay['home'] ? 'block' : 'none'
                   }"
@@ -66,10 +67,12 @@
               >
                 <a
                   ><i class="fa fa-edit"></i> Students
-                  <span class="fa fa-chevron-down float-end"></span>
+                  <!-- <span class="fa fa-chevron-down float-end"></span> -->
+                  <i class="fa fa-caret-down float-end"></i>
+
                 </a>
                 <ul
-                  class="nav child_menu"
+                  class="nav child_menu nav-childs"
                   [ngStyle]="{
                     display: toggleDisplay['forms'] ? 'block' : 'none'
                   }"
@@ -89,10 +92,12 @@
               >
                 <a
                   ><i class="fa fa-lock"></i> Admin
-                  <span class="fa fa-chevron-down float-end"></span>
+                  <!-- <span class="fa fa-chevron-down float-end"></span> -->
+                  <i class="fa fa-caret-down float-end"></i>
+
                 </a>
                 <ul
-                  class="nav child_menu"
+                  class="nav child_menu nav-childs"
                   [ngStyle]="{
                     display: toggleDisplay['users'] ? 'block' : 'none'
                   }"

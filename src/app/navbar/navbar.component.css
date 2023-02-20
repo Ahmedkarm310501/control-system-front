@@ -152,3 +152,12 @@ ul.msg_list li a .image img {
 .animee {
   transition: all 0.5s ease;
 }
+
+@media (max-width: 600px) {
+  .nav-small {
+    margin-left: 70px !important;
+  }
+  .hider{
+    display: none !important;
+  }
+}

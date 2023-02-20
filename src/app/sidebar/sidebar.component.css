@@ -94,7 +94,7 @@
   /* height: 57px; */
   padding: 0px;
   /* margin-left: 0; */
-  margin-top: 20px;
+  margin-top: 12px;
   transition: all 0.5s ease;
 }
 
@@ -253,7 +253,7 @@ a:focus {
   text-overflow: ellipsis;
   overflow: hidden;
   font-weight: 400;
-  font-size: 22px;
+  font-size: 24px;
   width: 100%;
   color: #ecf0f1 !important;
   margin-left: 0 !important;
@@ -261,7 +261,8 @@ a:focus {
   display: block;
   /* height: 55px; */
   margin: 0;
-  padding-left: 10px;
+  padding-left: 5vh;
+  height: 43px;
 }
 
 .site_title:hover,
@@ -476,3 +477,27 @@ ul.side-menu li {
 .animee {
   transition: all 0.5s ease !important;
 } */
+
+@media (max-width : 600px) {
+  .nav-small{
+    width: 70px !important;
+    margin-left: 0 !important;
+
+  }
+  .hider{
+    display: none !important;
+  }
+  .smaller{
+    width: auto !important;
+  }
+  .nav-childs{
+    position: absolute !important;
+    left: 100% !important;
+    background-color: var(--main-color) !important;
+    top: 0px !important;
+  }
+  .mar{
+    margin-top: 25px !important;
+    align-items: center;
+  }
+}
