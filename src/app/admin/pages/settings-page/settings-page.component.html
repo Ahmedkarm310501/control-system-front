@@ -19,7 +19,7 @@
           <div class="row">
             <div class="form-group mb-3 col-sm-12 col-md-6 text-start">
               <label for="universityName" class="form-label"
-                >University name</label
+                >University Name</label
               >
               <input
                 type="text"
@@ -47,7 +47,7 @@
               </div>
             </div>
             <div class="form-group mb-3 col-sm-12 col-md-6 text-start">
-              <label for="facultyName" class="form-label">Faculty name</label>
+              <label for="facultyName" class="form-label">Faculty Name</label>
               <input
                 type="text"
                 class="form-control"
@@ -72,16 +72,16 @@
               </div>
             </div>
             <div class="form-group mb-3 col-sm-12 col-md-6 text-start">
-              <label for="departmentName" class="form-label">Login with</label>
+              <label for="departmentName" class="form-label">Login With</label>
               <select
                 required
                 name="loginType"
                 [(ngModel)]="With"
                 #loginType="ngModel"
               >
-                <option value="">Select login type</option>
+                <option value="">Select Login Type</option>
                 <option value="email">Email</option>
-                <option value="national Id">National Id</option>
+                <option value="national Id">National ID</option>
               </select>
               <div
                 *ngIf="
@@ -129,10 +129,10 @@
             </div>
             <div class="form-group col-sm-12 col-md-6 text-start">
               <label for="notify" class="form-label"
-                >Notify for user changes</label
+                >Notify For User Changes</label
               >
               <select required name="notify" [(ngModel)]="j" #notify="ngModel">
-                <option value="">Notify for user changes</option>
+                <option value="">Notify For User Changes</option>
                 <option value="true">Yes</option>
                 <option value="false">No</option>
               </select>
@@ -151,7 +151,7 @@
             </div>
             <div class="form-group col-sm-12 col-md-6 text-start">
               <label for="notify" class="form-label"
-                >University logo (optional)</label
+                >University Logo (Optional)</label
               >
               <input
                 type="file"
@@ -164,7 +164,7 @@
           </div>
           <hr />
           <button class="btn btn-primary w-100" [disabled]="Form.invalid">
-            save
+            Save
           </button>
         </form>
       </div>

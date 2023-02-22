@@ -5,25 +5,16 @@
       <div class="left_col scroll-view nav-small">
         <div class="navbar nav_title" style="border: 0">
           <a class="site_title d-flex align-items-center hider">
-            <span
-              ><a style="color: white" routerLink="courses"
-                >Control System</a
-              ></span
-            ></a
-          >
+            <span><a style="color: white" routerLink="courses">Control System</a></span></a>
         </div>
         <div class="clearfix"></div>
         <div class="profile clearfix hider ">
           <div class="profile_pic">
-            <img
-              src="\assets\download.jfif"
-              alt="..."
-              class="img-circle profile_img rounded-circle"
-            />
+            <img src="\assets\download.jfif" alt="..." class="img-circle profile_img rounded-circle" />
           </div>
           <div class="profile_info">
             <span>Welcome,</span>
-            <h2>Youssef salah</h2>
+            <h2>Youssef Salah</h2>
           </div>
           <div class="clearfix"></div>
         </div>
@@ -34,21 +25,14 @@
           <div class="menu_section">
             <h3 class="hider">General</h3>
             <ul class="nav side-menu mar">
-              <li
-                (click)="clickEvent('home')"
-                [ngClass]="toggleDisplay['home'] ? 'active' : ''"
-              >
-                <a
-                  ><i class="fa fa-home"></i> Courses
+              <li (click)="clickEvent('home')" [ngClass]="toggleDisplay['home'] ? 'active' : ''">
+                <a><i class="fa fa-home"></i> Courses
                   <!-- <span class="fa fa-chevron-down float-end"></span> -->
                   <i class="fa fa-caret-down float-end"></i>
                 </a>
-                <ul
-                  class="nav child_menu nav-childs"
-                  [ngStyle]="{
+                <ul class="nav child_menu nav-childs" [ngStyle]="{
                     display: toggleDisplay['home'] ? 'block' : 'none'
-                  }"
-                >
+                  }">
                   <li routerLinkActive="current-page">
                     <a routerLink="courses">Courses</a>
                   </li>
@@ -61,24 +45,17 @@
                   <!--<li><a href="index3.html">Dashboard3</a></li> -->
                 </ul>
               </li>
-              <li
-                (click)="clickEvent('forms')"
-                [ngClass]="toggleDisplay['forms'] ? 'active' : ''"
-              >
-                <a
-                  ><i class="fa fa-edit"></i> Students
+              <li (click)="clickEvent('forms')" [ngClass]="toggleDisplay['forms'] ? 'active' : ''">
+                <a><i class="fa fa-edit"></i> Students
                   <!-- <span class="fa fa-chevron-down float-end"></span> -->
                   <i class="fa fa-caret-down float-end"></i>
 
                 </a>
-                <ul
-                  class="nav child_menu nav-childs"
-                  [ngStyle]="{
+                <ul class="nav child_menu nav-childs" [ngStyle]="{
                     display: toggleDisplay['forms'] ? 'block' : 'none'
-                  }"
-                >
+                  }">
                   <li routerLinkActive="current-page">
-                    <a routerLink="add-students">add students</a>
+                    <a routerLink="add-students">Add students</a>
                   </li>
                   <li routerLinkActive="current-page">
                     <a routerLink="students-page">All students</a>
@@ -86,27 +63,20 @@
                   <!-- <li><a routerLink="form_advanced.html">Advanced Components</a></li> -->
                 </ul>
               </li>
-              <li
-                (click)="clickEvent('users')"
-                [ngClass]="toggleDisplay['users'] ? 'active' : ''"
-              >
-                <a
-                  ><i class="fa fa-lock"></i> Admin
+              <li (click)="clickEvent('users')" [ngClass]="toggleDisplay['users'] ? 'active' : ''">
+                <a><i class="fa fa-lock"></i> Admin
                   <!-- <span class="fa fa-chevron-down float-end"></span> -->
                   <i class="fa fa-caret-down float-end"></i>
 
                 </a>
-                <ul
-                  class="nav child_menu nav-childs"
-                  [ngStyle]="{
+                <ul class="nav child_menu nav-childs" [ngStyle]="{
                     display: toggleDisplay['users'] ? 'block' : 'none'
-                  }"
-                >
+                  }">
                   <li routerLinkActive="current-page">
                     <a routerLink="all-users">Users</a>
                   </li>
                   <li routerLinkActive="current-page">
-                    <a routerLink="add-user">Add user</a>
+                    <a routerLink="add-user">Add User</a>
                   </li>
                   <li routerLinkActive="current-page">
                     <a routerLink="admin-log">Activity Log</a>

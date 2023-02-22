@@ -12,7 +12,7 @@
               <input
                 type="text"
                 class="form-control"
-                placeholder="Search for course..."
+                placeholder="Search For Course..."
                 #searchInput
                 (input)="searchCourse(searchInput.value)"
               />
@@ -32,19 +32,19 @@
             <h4 class="card-title fw-500">Course ID: {{ course.id }}</h4>
             <hr />
             <h5 class="card-subtitle mb-2">
-              number of students: {{ course.numberOfStudents }}
+              Number Of Students: {{ course.numberOfStudents }}
             </h5>
             <hr />
             <div class="d-flex justify-content-start">
               <h6 class="card-subtitle">
-                graded students: {{ course.gradedStudents }}
+                Graded Students: {{ course.gradedStudents }}
               </h6>
               <h6 class="card-subtitle ms-5">
-                ungraded students: {{ course.ungradedStudents }}
+                Ungraded Students: {{ course.ungradedStudents }}
               </h6>
             </div>
             <a routerLink="course/id" class="btn mt-3 button"
-              >Edit course grades</a
+              >Edit Course Grades</a
             >
           </div>
         </div>
