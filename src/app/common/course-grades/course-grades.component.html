@@ -30,92 +30,42 @@
       </div> -->
       <!-- Example single danger button -->
       <div class="dropdown">
-        <button
-          (click)="shown()"
-          class="btn btn-prim dropdown-toggle"
-          type="button"
-          id="dropdownMenuButton"
-          data-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false"
-        >
+        <button (click)="shown()" class="btn btn-prim dropdown-toggle" type="button" id="dropdownMenuButton"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Course Options
         </button>
-        <div
-          [ngClass]="{ show: isShown }"
-          class="dropdown-menu"
-          aria-labelledby="dropdownMenuButton"
-        >
-          <a class="dropdown-item" (click)="f.click()" style="cursor: pointer"
-            ><input
-              type="file"
-              #f
-              style="display: none"
-              (change)="onFileChangeGrades($event)"
-              appReadExcel
-              [file]="gradesFile"
-              (uploaded)="onExcelUploadGrades($event)"
-            />Upload Grades
+        <div [ngClass]="{ show: isShown }" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" (click)="f.click()" style="cursor: pointer"><input type="file" #f
+              style="display: none" (change)="onFileChangeGrades($event)" appReadExcel [file]="gradesFile"
+              (uploaded)="onExcelUploadGrades($event)" data-bs-toggle="modal" data-bs-target="exampleModalll" />Upload
+            Grades
           </a>
-          <a class="dropdown-item" (click)="fG.click()" style="cursor: pointer"
-            ><input
-              type="file"
-              #fG
-              style="display: none"
-              (change)="onFileChangeNames($event)"
-              appReadExcel
-              [file]="namesFile"
-              (uploaded)="onExcelUploadNames($event)"
-            />Add student names
+          <a class="dropdown-item" (click)="fG.click()" style="cursor: pointer"><input type="file" #fG
+              style="display: none" (change)="onFileChangeNames($event)" appReadExcel [file]="namesFile"
+              (uploaded)="onExcelUploadNames($event)" />Add Student Names
           </a>
-          <a
-            class="dropdown-item"
-            style="cursor: pointer"
-            data-bs-toggle="modal"
-            data-bs-target="#exampleModal"
-            ><input style="display: none" />Add one student
+          <a class="dropdown-item" style="cursor: pointer" data-bs-toggle="modal" data-bs-target="#exampleModal"><input
+              style="display: none" />Add One Student
           </a>
-          <a class="dropdown-item" style="cursor: pointer">Export grades</a>
-          <a
-            class="dropdown-item"
-            style="cursor: pointer"
-            routerLink="course-settings"
-            >Course settings</a
-          >
-          <a
-            class="dropdown-item"
-            style="cursor: pointer"
-            (click)="deleteAllGrades()"
-            >Delete all grades</a
-          >
+          <a class="dropdown-item" style="cursor: pointer">Export Grades</a>
+          <a class="dropdown-item" style="cursor: pointer" routerLink="course-settings">Course Settings</a>
+          <a class="dropdown-item" style="cursor: pointer" data-bs-toggle="modal" data-bs-target="#exampleModall">Delete
+            All Grades</a>
         </div>
       </div>
     </div>
   </header>
   <div class="row">
     <div class="form-check col-6 mb-3 d-flex justify-content-start">
-      <label
-        class="btn btn-secondary"
-        data-toggle-class="btn-primary"
-        data-toggle-passive-class="btn-default"
-      >
-        <input
-          type="checkbox"
-          (change)="toggleStudentsWithNoGrades()"
-          class="join-btn"
-        />
+      <label class="btn btn-secondary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+        <input type="checkbox" (change)="toggleStudentsWithNoGrades()" class="join-btn" />
         &nbsp; show students with no grades &nbsp;
       </label>
     </div>
     <div class="search col-6 mb-3">
       <div class="input-group">
-        <input
-          type="search"
-          class="form-control bg-white"
-          placeholder="Search for..."
-          #searchInput
-          (input)="searchStudent(searchInput.value)"
-        />
+        <input type="search" class="form-control bg-white" placeholder="Search for..." #searchInput
+          (input)="searchStudent(searchInput.value)" />
         <span class="input-group-btn">
           <button class="btn btn-secondary" type="button">Go!</button>
         </span>
@@ -175,56 +125,25 @@
         <td>{{ student.id }}</td>
         <td>{{ student.name }}</td>
         <td>
-          <input
-            type="number"
-            [max]="40"
-            [min]="0"
-            [(ngModel)]="student.termWork"
-            [disabled]="!student.editable"
-            #termWorkInput="ngModel"
-            style="width: 100%"
-          />
+          <input type="number" [max]="40" [min]="0" [(ngModel)]="student.termWork" [disabled]="!student.editable"
+            #termWorkInput="ngModel" style="width: 100%" />
           <div *ngIf="termWorkInput.invalid && termWorkInput.dirty">
-            <div
-              style="margin-left: -5px"
-              *ngIf="termWorkInput.value > 40"
-              class="error"
-            >
+            <div style="margin-left: -5px" *ngIf="termWorkInput.value > 40" class="error">
               Term Work should not exceed 40
             </div>
-            <div
-              style="margin-left: -5px"
-              *ngIf="termWorkInput.value < 0"
-              class="error"
-            >
+            <div style="margin-left: -5px" *ngIf="termWorkInput.value < 0" class="error">
               Term Work should not be less than 0
             </div>
           </div>
         </td>
         <td>
-          <input
-            type="number"
-            [max]="60"
-            [min]="0"
-            [(ngModel)]="student.examWork"
-            required
-            [disabled]="!student.editable"
-            #examWorkInput="ngModel"
-            style="width: 100%"
-          />
+          <input type="number" [max]="60" [min]="0" [(ngModel)]="student.examWork" required
+            [disabled]="!student.editable" #examWorkInput="ngModel" style="width: 100%" />
           <div *ngIf="examWorkInput.invalid && examWorkInput.dirty">
-            <div
-              style="margin-left: -5px"
-              *ngIf="examWorkInput.value > 60"
-              class="error"
-            >
+            <div style="margin-left: -5px" *ngIf="examWorkInput.value > 60" class="error">
               Exam Work should not exceed 60
             </div>
-            <div
-              style="margin-left: -5px"
-              *ngIf="examWorkInput.value < 0"
-              class="error"
-            >
+            <div style="margin-left: -5px" *ngIf="examWorkInput.value < 0" class="error">
               Exam Work should not be less than 0
             </div>
           </div>
@@ -234,36 +153,20 @@
         <td>{{ student.grade }}</td>
 
         <td>
-          <button
-            *ngIf="!student.editable"
-            style="margin-right: 5px"
-            class="btn btn-secondary btn-sm"
-            type="button"
-            (click)="edit(i)"
-          >
+          <button *ngIf="!student.editable" style="margin-right: 5px" class="btn btn-secondary btn-sm" type="button"
+            (click)="edit(i)">
             Edit
           </button>
-          <button
-            *ngIf="student.editable"
-            style="margin-right: 5px"
-            class="btn btn-secondary btn-sm"
-            type="button"
+          <button *ngIf="student.editable" style="margin-right: 5px" class="btn btn-secondary btn-sm" type="button"
             [disabled]="
               termWorkInput.value > 40 ||
               examWorkInput.value > 60 ||
               termWorkInput.value < 0 ||
               examWorkInput.value < 0
-            "
-            (click)="save(i, termWorkInput.value, examWorkInput.value)"
-          >
+            " (click)="save(i, termWorkInput.value, examWorkInput.value)">
             Save
           </button>
-          <button
-            *ngIf="student.editable"
-            class="btn btn-secondary btn-sm"
-            type="button"
-            (click)="cancel(i)"
-          >
+          <button *ngIf="student.editable" class="btn btn-secondary btn-sm" type="button" (click)="cancel(i)">
             Cancel
           </button>
         </td>
@@ -272,38 +175,20 @@
   </table>
 </div>
 
-<div
-  class="modal fade"
-  id="exampleModal"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Add Student</h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <div class="container-fluid">
           <form #Form="ngForm" class="w-100" (ngSubmit)="onSubmit(Form)">
             <div class="mb-3" class="col-md-12">
               <label>Student ID :&nbsp;</label>
-              <input
-                type="text"
-                class="form-control"
-                id="studentId"
-                name="studentId"
-                ngModel
-                required
-                #studentId="ngModel"
-              />
+              <input type="text" class="form-control" id="studentId" name="studentId" ngModel required
+                #studentId="ngModel" />
               <div *ngIf="studentId.invalid && studentId.touched" class="error">
                 Please enter a valid Student ID.
               </div>
@@ -312,30 +197,15 @@
             <hr />
             <div class="mb-3" class="col-md-12">
               <label>Student Name :&nbsp;</label>
-              <input
-                type="text"
-                class="form-control"
-                id="studentName"
-                name="studentName"
-                ngModel
-                required
-                #studentName="ngModel"
-              />
-              <div
-                *ngIf="studentName.invalid && studentName.touched"
-                class="error"
-              >
+              <input type="text" class="form-control" id="studentName" name="studentName" ngModel required
+                #studentName="ngModel" />
+              <div *ngIf="studentName.invalid && studentName.touched" class="error">
                 Please enter a valid Student Name.
               </div>
               <br />
             </div>
             <div class="modal-footer">
-              <button
-                type="submit"
-                class="btn btn-primary"
-                data-bs-dismiss="modal"
-                [disabled]="Form.invalid"
-              >
+              <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" [disabled]="Form.invalid">
                 Add
               </button>
             </div>
@@ -355,3 +225,64 @@
     <button (click)="closeModal()">Close</button>
   </div>
 </app-modal> -->
+<div class="modal fade" id="exampleModall" tabindex="-1" aria-labelledby="exampleModalLabell" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="mb-3" class="col-md-12">
+            <h4>Are you sure you want to delete all grades?</h4>
+            <button  (click)="deleteAllGrades()" class="btn btn-primary me-2" value="yes" data-bs-dismiss="modal">Yes</button>
+            <button class="btn btn-secondary" value="no" data-bs-dismiss="modal">No</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <app-modal></app-modal> -->
+
+
+<app-modal (closeModal)="closeModal()" [show]="modalIsOpen">
+  <div modal-title>Alert</div>
+  <div modal-body>
+    <p>There are {{missingStudents.length}} missing students: {{missingStudents}}</p>
+  </div>
+  <div modal-footer>
+    <button class="btn btn-primary" (click)="closeModal()">Close</button>
+  </div>
+</app-modal>
+
+<app-modal (closeModal)="closeModal2()" [show]="ISduplicated">
+  <div modal-title>Alert</div>
+  <div modal-body>
+    <p>A student with ID {{Form.value.studentId}} already exists.</p>
+  </div>
+  <div modal-footer>
+    <button class="btn btn-primary" (click)="closeModal2()">Close</button>
+  </div>
+</app-modal>
+
+<app-modal (closeModal)="closeModal3()" [show]="IsInvalid">
+  <div modal-title>Alert</div>
+  <div modal-body>
+    <p>{{errorMsg}}</p>
+  </div>
+  <div modal-footer>
+    <button class="btn btn-primary" (click)="closeModal3()">Close</button>
+  </div>
+</app-modal>
+
+<app-modal (closeModal)="closeModal4()" [show]="IsInvalidRecords">
+  <div modal-title>Alert</div>
+  <div modal-body>
+    <p>{{errorMsg2}}</p>
+  </div>
+  <div modal-footer>
+    <button class="btn btn-primary" (click)="closeModal4()">Close</button>
+  </div>
+</app-modal>

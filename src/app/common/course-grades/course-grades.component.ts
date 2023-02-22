@@ -89,6 +89,8 @@ export class CourseGradesComponent implements OnInit {
     this.namesFile = event.target.files[0];
   }
   /**/
+  IsInvalidRecords = false;
+  errorMsg2 = '';
   onExcelUploadNames(data: any) {
     console.log(data);
     const newStudents = data
@@ -119,9 +121,11 @@ export class CourseGradesComponent implements OnInit {
 
     const invalidRecords = data.filter((row: any) => !row.id || !row.name);
     if (invalidRecords.length > 0) {
-      alert(
-        ` ${invalidRecords.length} rows were not added. Please make sure each row has both an ID and name.`
-      );
+      // alert(
+      //   ` ${invalidRecords.length} rows were not added. Please make sure each row has both an ID and name.`
+      // );
+      this.errorMsg2 = `${invalidRecords.length} rows were not added. Please make sure each row has both an ID and name.`;
+      this.IsInvalidRecords = true;
     }
   }
 
@@ -154,17 +158,23 @@ export class CourseGradesComponent implements OnInit {
   //   }
   //   this.renderer.setProperty(this.fileRef.nativeElement, 'value', null);
   // }
-
+  modalIsOpen = false;
+  IsInvalid = false;
+  errorMsg = '';
   onExcelUploadGrades(data: any) {
     console.log(data);
     const validatedData = data.filter((excelStudent) => {
+      console.log(excelStudent);
       const termWork = +excelStudent.termWork;
       const examWork = +excelStudent.examWork;
       // Check that term work is between 0 and 40, and exam work is between 0 and 60
       if (termWork < 0 || termWork > 40 || examWork < 0 || examWork > 60) {
-        alert(
-          `Invalid data for student ${excelStudent.id}: termWork=${termWork}, examWork=${examWork}`
-        );
+        // alert(
+        //   `Invalid data for student ${excelStudent.id}: termWork=${termWork}, examWork=${examWork}`
+        // );
+        this.errorMsg = `Invalid data for student ${excelStudent.id}: termWork=${termWork}, examWork=${examWork}`;
+
+        this.IsInvalid = true;
         return false;
       }
       return true;
@@ -192,28 +202,32 @@ export class CourseGradesComponent implements OnInit {
     this.filteredStudents = this.students;
 
     if (this.missingStudents.length > 0) {
-      alert(
-        `There are ${this.missingStudents.length} missing students: ${this.missingStudents}`
-      );
+      // alert(
+      //   `There are ${this.missingStudents.length} missing students: ${this.missingStudents}`
+      // );
+      this.modalIsOpen = true;
+      // const modal = document.getElementById('exampleModalll');
+      // const myModal = new Modal(modal);
+      // myModal.show();
+      // show modal with missing students
     }
 
     this.renderer.setProperty(this.fileRef.nativeElement, 'value', null);
   }
 
   deleteAllGrades() {
-    let cc = confirm('Are you sure you want to delete all grades?');
-    if (cc) {
-      this.students = this.students.map((student) => {
-        return {
-          ...student,
-          termWork: null,
-          examWork: null,
-          total: null,
-          grade: null,
-        };
-      });
-      this.filteredStudents = this.students;
-    }
+    // let cc = confirm("Are you sure you want to delete all grades?");
+    // if (cc) {}
+    this.students = this.students.map((student) => {
+      return {
+        ...student,
+        termWork: null,
+        examWork: null,
+        total: null,
+        grade: null,
+      };
+    });
+    this.filteredStudents = this.students;
   }
 
   toggleStudentsWithNoGrades() {
@@ -240,14 +254,17 @@ export class CourseGradesComponent implements OnInit {
     });
     this.sortOrder = this.sortOrder * -1;
   }
+  ISduplicated = false;
   onSubmit(Form) {
-    let studentId = Math.floor(Form.value.studentId);
+    let studentId = Form.value.studentId;
     let studentName = Form.value.studentName;
     console.log(studentId, studentName);
     console.log(this.students);
 
     if (this.students.some((student) => student.id === studentId)) {
-      alert(`A student with ID ${studentId} already exists.`);
+      // alert(`A student with ID ${studentId} already exists.`);
+      console.log(studentId);
+      this.ISduplicated = true;
       return;
     }
 
@@ -272,13 +289,20 @@ export class CourseGradesComponent implements OnInit {
   //   });
   // }
 
-  // showModal = false;
+  // // openModal() {
+  // //   this.showModal = true;
+  // // }
 
-  // openModal() {
-  //   this.showModal = true;
-  // }
-
-  // closeModal() {
-  //   this.showModal = false;
-  // }
+  closeModal() {
+    this.modalIsOpen = false;
+  }
+  closeModal2() {
+    this.ISduplicated = false;
+  }
+  closeModal3() {
+    this.IsInvalid = false;
+  }
+  closeModal4() {
+    this.IsInvalidRecords = false;
+  }
 }
