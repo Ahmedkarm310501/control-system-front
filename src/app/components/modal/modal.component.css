@@ -17,3 +17,10 @@
   justify-content: center;
   align-items: center;
 }
+.modal-content {
+  background-color: var(--background-color-dark);
+}
+
+.modal select {
+  background-color: var(--background-color);
+}
