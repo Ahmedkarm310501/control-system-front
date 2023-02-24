@@ -58,9 +58,9 @@ export class HomeScreenComponent implements OnInit {
       id: 'MA112',
       name: 'Math 2',
       department: 'General',
-      numberOfStudents: 700,
-      gradedStudents: 200,
-      ungradedStudents: 500,
+      numberOfStudents: 0,
+      gradedStudents: 0,
+      ungradedStudents: 0,
     },
   ];
   constructor() {}

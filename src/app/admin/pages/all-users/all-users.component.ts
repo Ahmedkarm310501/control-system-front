@@ -53,7 +53,7 @@ export class AllUsersComponent implements OnInit {
   dummyDataCourses = [
     {
       id: 1,
-      name: 'Angular',
+      name: 'Math 1',
       description:
         'Angular is a TypeScript-based open-source web application framework led by the Angular Team at Google and by a community of individuals and corporations.',
       price: 100,
@@ -63,7 +63,7 @@ export class AllUsersComponent implements OnInit {
     {
       id: 2,
 
-      name: 'React',
+      name: 'Math 2',
       description:
         'React is an open-source, front end, JavaScript library for building user interfaces or UI components.',
       price: 200,
@@ -74,7 +74,7 @@ export class AllUsersComponent implements OnInit {
     },
     {
       id: 3,
-      name: 'Vue',
+      name: 'Database Management System',
       description:
         'Vue.js is an open-source model–view–viewmodel front end JavaScript framework for building user interfaces and single-page applications.',
       price: 300,
