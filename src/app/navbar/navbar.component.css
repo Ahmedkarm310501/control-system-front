@@ -146,12 +146,12 @@ ul.msg_list li a .image img {
   width: 11%;
 }
 
-.anime {
+/* .anime {
   transition: all 0.5s ease;
 }
 .animee {
   transition: all 0.5s ease;
-}
+} */
 
 @media (max-width: 600px) {
   .nav-small {

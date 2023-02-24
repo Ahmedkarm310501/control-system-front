@@ -14,6 +14,6 @@ export class SystemSettingsComponent implements OnInit {
   onSubmit(form: any) {
     console.log(form);
     this.authService.login();
-    this.router.navigate(['/home']);
+    this.router.navigate(['/courses']);
   }
 }

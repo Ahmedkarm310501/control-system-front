@@ -95,7 +95,7 @@
   padding: 0px;
   /* margin-left: 0; */
   margin-top: 12px;
-  transition: all 0.5s ease;
+  /* transition: all 0.5s ease; */
 }
 
 .sidebar-header {
@@ -193,7 +193,7 @@
   display: -ms-flexbox;
   display: flex;
   z-index: 1;
-  transition: all 0.5s ease;
+  /* transition: all 0.5s ease; */
 }
 
 a {
@@ -295,7 +295,7 @@ a:focus {
 }
 
 ul.side-menu li {
-  transition: 0.5s;
+  /* transition: 0.5s; */
 }
 
 .nav.side-menu > li.active > a {
@@ -378,7 +378,7 @@ ul.side-menu li {
 
 .nav-sm .navbar.nav_title {
   width: 70px;
-  transition: all 0.5s ease;
+  /* transition: all 0.5s ease; */
 }
 
 .nav-sm .navbar.nav_title a span {
@@ -471,12 +471,7 @@ ul.side-menu li {
 .nav-sm li li span.fa {
   display: inline-block;
 }
-/* .anime {
-  transition: all 0.5s ease !important;
-}
-.animee {
-  transition: all 0.5s ease !important;
-} */
+
 
 @media (max-width : 600px) {
   .nav-small{

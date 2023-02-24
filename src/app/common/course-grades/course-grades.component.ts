@@ -74,8 +74,9 @@ export class CourseGradesComponent implements OnInit {
   }
 
   searchStudent(searchTerm: string) {
+    console.log(this.students);
     this.filteredStudents = this.students.filter((student) => {
-      return student.id.includes(searchTerm);
+      return student.id.toString().includes(searchTerm);
     });
   }
 
@@ -261,7 +262,7 @@ export class CourseGradesComponent implements OnInit {
     console.log(studentId, studentName);
     console.log(this.students);
 
-    if (this.students.some((student) => student.id === studentId)) {
+    if (this.students.some((student) => +student.id === +studentId)) {
       // alert(`A student with ID ${studentId} already exists.`);
       console.log(studentId);
       this.ISduplicated = true;

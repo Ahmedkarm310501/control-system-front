@@ -145,3 +145,9 @@ input:focus {
   outline: none;
   box-shadow: none;
 }
+
+.join-btn{
+  background-color: var(--button-color) !important;
+ 
+  color: #fff;
+}
