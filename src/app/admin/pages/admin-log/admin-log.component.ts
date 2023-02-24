@@ -12,39 +12,33 @@ export class AdminLogComponent implements OnInit {
   dummyData = [
     {
       id: 1,
-      username: 'john doe',
+      username: 'Dr Ali Zidan',
       change: 'add grade for course IS111',
-      Time: '2023-02-09 12:45:47',
+      Time: '2022-02-01 12:00:00',
     },
     {
       id: 2,
-      username: 'Jane Doe',
+      username: 'Dr Iman Helal',
       change: 'add grade for course CS111',
-      Time: '2023-02-07 11:29:47',
+      Time: '2022-02-02 1:10:20',
     },
     {
       id: 3,
-      username: 'Bob Smith',
-      change: 'add grade for course DS191',
-      Time: '2023-02-06 10:00:00',
+      username: 'Dr Ayman El-Kilany',
+      change: 'add grade for course IS191',
+      Time: '2022-02-03 2:10:20',
     },
     {
       id: 4,
-      username: 'youssef',
-      change: 'add grade for course AI811',
-      Time: '2023-02-05 08:39:27',
+      username: 'Dr Mohamed Nour',
+      change: 'add grade for course IS811',
+      Time: '2022-03-01 12:00:00',
     },
     {
       id: 5,
-      username: 'ali',
-      change: 'add grade for course DS111',
-      Time: '2023-02-04 07:00:00',
-    },
-    {
-      id: 6,
-      username: 'ahmed',
-      change: 'add grade for course MA111',
-      Time: '2023-02-03 06:00:00',
+      username: 'Dr Osama Ismail',
+      change: 'add grade for course IS211',
+      Time: '2022-02-04 12:00:00',
     },
   ];
   filteredCourses = this.dummyData;
