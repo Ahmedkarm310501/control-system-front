@@ -11,6 +11,7 @@ import { SidebarService } from '../sidebar/sidebar.service';
 export class NavbarComponent implements OnInit, OnDestroy {
   isClicked = false;
   sideBarOpen: boolean;
+  userName: string;
   toggleClick() {
     this.isClicked = !this.isClicked;
   }
@@ -35,6 +36,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.sidebarService.sideBarOpen.subscribe((res) => {
       this.sideBarOpen = res;
     });
+    this.userName = this.authService.user.value.userName;
   }
 
   ngOnDestroy() {

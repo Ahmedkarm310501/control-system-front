@@ -30,6 +30,10 @@ import { LineChartComponent } from './common/charts/line-chart/line-chart.compon
 import { BoxComponent } from './components/box/box.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptorService } from './auth/auth-interceptor.service';
+import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,9 +63,22 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
     LineChartComponent,
     BoxComponent,
     BreadcrumbComponent,
+    LoadingSpinnerComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
-  providers: [],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

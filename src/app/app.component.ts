@@ -24,9 +24,12 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnInit() {
     // console.log(this.router.config);
 
+    this.authService.autoLogin();
+
     this.authService.isLoggedIn.subscribe((value) => {
       this.isAuth = value;
     });
+
     console.log(this.isAuth);
     this.sidebarService.sideBarOpen.subscribe((res) => {
       this.sideBarOpen = res;
@@ -34,7 +37,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.authService.isLoggedIn.unsubscribe();
+    this.authService.user.unsubscribe();
     // this.sidebarService.sideBarOpen.unsubscribe();
   }
 }
