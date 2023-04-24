@@ -1,3 +1,4 @@
+<app-snackbar #snackbar message="test message" type="failed"></app-snackbar>
 <div class="setup">
   <div class="container h-100">
     <div class="row h-100 justify-content-center">
@@ -35,7 +36,7 @@
               class="form-control"
               name="email "
               required
-              pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
+              pattern="^[a-zA-Z0-9.!#$%&*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
               email
               type="email "
               ngModel
@@ -148,7 +149,7 @@
               class="form-control"
               name="number "
               required
-              pattern="[0-9]{14} "
+              pattern="[0-9]{14}"
               ngModel
               #number="ngModel"
             />
@@ -180,7 +181,7 @@
               >Rules*</label
             > -->
             <div class="col-md-6 col-sm-6 admin-style">
-              <div id="Admin" class="d-flex" >
+              <div id="Admin" class="d-flex">
                 <input
                   type="checkbox"
                   name="admin"

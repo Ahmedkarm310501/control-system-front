@@ -33,6 +33,7 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
+import { SnackbarComponent } from './components/snackbar/snackbar.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.compo
     BoxComponent,
     BreadcrumbComponent,
     LoadingSpinnerComponent,
+    SnackbarComponent,
   ],
   imports: [
     BrowserModule,
