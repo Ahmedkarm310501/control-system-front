@@ -6,19 +6,10 @@
           <h1>Add User</h1>
           <hr />
           <div class="col-md-6">
-            <label for="fullName" class="form-label"
-              >Full Name<span class="required">*</span></label
-            >
+            <label for="fullName" class="form-label">Full Name<span class="required">*</span></label>
 
-            <input
-              class="form-control"
-              data-validate-length-range="60 "
-              data-validate-words="4 "
-              name="name "
-              required
-              ngModel
-              #name="ngModel"
-            />
+            <input class="form-control" data-validate-length-range="60 " data-validate-words="4 " name="name" required
+              ngModel #name="ngModel" />
             <div *ngIf="name && name.invalid && (name.dirty || name.touched)">
               <div *ngIf="name.errors && name.errors['required']" class="error">
                 Name is required.
@@ -27,166 +18,85 @@
           </div>
 
           <div class="col-md-6">
-            <label for="email" class="form-label"
-              >Email<span class="required">*</span></label
-            >
+            <label for="email" class="form-label">Email<span class="required">*</span></label>
 
-            <input
-              class="form-control"
-              name="email "
-              required
-              pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
-              email
-              type="email "
-              ngModel
-              #email="ngModel"
-            />
-            <div
-              *ngIf="email && email.invalid && (email.dirty || email.touched)"
-            >
-              <div
-                *ngIf="email.errors && email.errors['required']"
-                class="error"
-              >
+            <input class="form-control" name="email" required
+              pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" email type="email" ngModel
+              #email="ngModel" />
+            <div *ngIf="email && email.invalid && (email.dirty || email.touched)">
+              <div *ngIf="email.errors && email.errors['required']" class="error">
                 Email is required.
               </div>
 
-              <div
-                *ngIf="email.errors && email.errors['pattern']"
-                class="error"
-              >
+              <div *ngIf="email.errors && email.errors['pattern']" class="error">
                 Email is invalid.
               </div>
             </div>
           </div>
 
           <div class="col-md-6">
-            <label for="password" class="form-label"
-              >Password<span class="required">*</span></label
-            >
+            <label for="password" class="form-label">Password<span class="required">*</span></label>
 
-            <input
-              class="form-control"
-              type="password"
-              name="password"
-              minlength="8"
-              required="required "
-              password
-              ngModel
-              #password="ngModel"
-            />
-            <div
-              *ngIf="
+            <input class="form-control" type="password" name="password" minlength="8" required="required " password
+              ngModel #password="ngModel" />
+            <div *ngIf="
                 password &&
                 password.invalid &&
                 (password.dirty || password.touched)
-              "
-            >
-              <div
-                *ngIf="password.errors && password.errors['required']"
-                class="error"
-              >
+              ">
+              <div *ngIf="password.errors && password.errors['required']" class="error">
                 Password is required.
               </div>
-              <div
-                *ngIf="password.errors && password.errors['minlength']"
-                class="error"
-              >
+              <div *ngIf="password.errors && password.errors['minlength']" class="error">
                 Password must be at least 8 characters.
               </div>
             </div>
           </div>
 
           <div class="col-md-6">
-            <label for="repassword" class="form-label"
-              >Repeat Password<span class="required">*</span></label
-            >
-            <input
-              class="form-control"
-              type="password"
-              name="password2"
-              data-validate-linked="password"
-              required="required"
-              password
-              ngModel
-              #password2="ngModel"
-            />
-            <div
-              *ngIf="
+            <label for="repassword" class="form-label">Repeat Password<span class="required">*</span></label>
+            <input class="form-control" type="password" name="password_confirmation" data-validate-linked="password"
+              required="required" password ngModel #password2="ngModel" />
+            <div *ngIf="
                 password2 &&
                 password2.invalid &&
                 (password2.dirty || password2.touched)
-              "
-            >
-              <div
-                *ngIf="password2.errors && password2.errors['required']"
-                class="error"
-              >
+              ">
+              <div *ngIf="password2.errors && password2.errors['required']" class="error">
                 Password is required.
               </div>
-              <div
-                *ngIf="password2.errors && password2.errors['minlength']"
-                class="error"
-              >
+              <div *ngIf="password2.errors && password2.errors['minlength']" class="error">
                 Password must be at least 8 characters.
               </div>
-              <div
-                *ngIf="password2.errors && password2.errors['Password']"
-                class="error"
-              >
+              <div *ngIf="password2.errors && password2.errors['Password']" class="error">
                 Passwords must match.
               </div>
             </div>
           </div>
 
           <div class="col-md-6">
-            <label for="NationalID" class="form-label"
-              >National ID<span class="required">*</span></label
-            >
+            <label for="NationalID" class="form-label">National ID<span class="required">*</span></label>
 
-            <input
-              class="form-control"
-              name="number "
-              required
-              pattern="[0-9]{14} "
-              ngModel
-              #number="ngModel"
-            />
-            <div
-              *ngIf="
+            <input class="form-control" name="national_id" required pattern="[0-9]{14}" ngModel #number="ngModel" />
+            <div *ngIf="
                 number && number.invalid && (number.dirty || number.touched)
-              "
-            >
-              <div
-                *ngIf="number.errors && number.errors['required']"
-                class="error"
-              >
+              ">
+              <div *ngIf="number.errors && number.errors['required']" class="error">
                 National ID is required.
               </div>
-              <div
-                *ngIf="number.errors && number.errors['pattern']"
-                class="error"
-              >
+              <div *ngIf="number.errors && number.errors['pattern']" class="error">
                 National ID is invalid.
               </div>
             </div>
           </div>
 
-          <div
-            class="col-md-6"
-            style="padding-bottom: epx; padding-top: 45—; margin-top: 8px"
-          >
+          <div class="col-md-6" style="padding-bottom: epx; padding-top: 45—; margin-top: 8px">
             <!-- <label class="col-form-label col-md-3 col-sm-3 label-align me-3"
               >Rules*</label
             > -->
             <div class="col-md-6 col-sm-6 admin-style">
-              <div id="Admin" class="d-flex" >
-                <input
-                  type="checkbox"
-                  name="admin"
-                  value="admin"
-                  class="input-style"
-                />
+              <div id="Admin" class="d-flex">
+                <input type="checkbox" name="is_admin" value="is_admin" class="input-style" ngModel />
                 <label> &nbsp; Admin &nbsp; </label>
               </div>
             </div>
