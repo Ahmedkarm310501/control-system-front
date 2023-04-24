@@ -29,7 +29,7 @@ import { PieChartComponent } from './common/charts/pie-chart/pie-chart.component
 import { LineChartComponent } from './common/charts/line-chart/line-chart.component';
 import { BoxComponent } from './components/box/box.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
-import { AddCoursesComponent } from './admin/add-courses/add-courses.component';
+import { AddCoursesComponent } from './admin/pages/add-courses/add-courses.component';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
