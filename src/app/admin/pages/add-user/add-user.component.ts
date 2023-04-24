@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
 import { AddUserService } from './add-user.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { SnackbarComponent } from 'src/app/components/snackbar/snackbar.component';
 
 @Component({
   selector: 'app-add-user',
@@ -7,6 +8,8 @@ import { AddUserService } from './add-user.service';
   styleUrls: ['./add-user.component.css'],
 })
 export class AddUserComponent implements OnInit {
+@ViewChild('snackbar') snackbar: SnackbarComponent;
+
   constructor(private addUser: AddUserService) {}
 
   ngOnInit(): void {}
@@ -31,5 +34,7 @@ export class AddUserComponent implements OnInit {
         }
       );
     console.log(form.is_admin);
-  }
+        this.snackbar.show();
+
+  } 
 }
