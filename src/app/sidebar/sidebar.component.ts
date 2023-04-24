@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, OnDestroy } from '@angular/core';
 import '../../styles.css';
 import { SidebarService } from './sidebar.service';
+import { AuthService } from '../auth/auth.service';
 @Component({
   selector: 'app-side-bar',
   templateUrl: './sidebar.component.html',
@@ -8,10 +9,14 @@ import { SidebarService } from './sidebar.service';
 })
 export class SidebarComponent implements OnInit, OnDestroy {
   sideBarOpen: boolean;
-
-  constructor(private sidebarService: SidebarService) {}
+  userName: string;
+  constructor(
+    private sidebarService: SidebarService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
+    this.userName = this.authService.user.value.userName;
     this.sidebarService.sideBarOpen.subscribe((res) => {
       this.sideBarOpen = res;
     });

@@ -9,16 +9,21 @@ import { AuthService } from '../auth.service';
 })
 export class LoginComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) {}
+  error = '';
 
   ngOnInit(): void {}
 
   onSubmit(form: any) {
-    console.log(form);
+    this.authService.login(form.email, form.password).subscribe(
+      (res) => {
+        console.log(res);
+        this.router.navigate(['/courses']);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 
-  onLogin() {
-    this.authService.login();
-    console.log('Login successful');
-    this.router.navigate(['/courses']);
-  }
+  onLogin() {}
 }
