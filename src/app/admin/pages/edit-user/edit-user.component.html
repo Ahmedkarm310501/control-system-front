@@ -2,7 +2,7 @@
   <div class="container h-100">
     <div class="row h-100 justify-content-center">
       <div class="col-sm-10 col-lg-8 text-center">
-        <form>
+        <form #Form="ngForm" (ngSubmit)="editUserSubmit(Form.value)">
           <h1>Edit User</h1>
           <hr>
           <div class="item form-group">
@@ -10,21 +10,21 @@
               <span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6">
-              <input type="text" id="username" required="required" class="form-control" placeholder="User Name" />
+              <input ngModel type="text" id="username" required="required" class="form-control" name="name" placeholder="User Name" />
             </div>
           </div>
           <div class="item form-group">
             <label class="col-form-label col-md-3 col-sm-3 label-align" for="email">Email <span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6">
-              <input type="email" id="email" name="email" required="required" class="form-control" placeholder="Email" />
+              <input ngModel type="email" id="email" name="email" required="required" class="form-control" placeholder="Email" />
             </div>
           </div>
           <div class="item form-group">
             <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align"
               aria-placeholder="password">password</label>
             <div class="col-md-6 col-sm-6">
-              <input id="password" class="form-control" type="text" name="password" placeholder="password" />
+              <input id="password" class="form-control" type="text" name="password" placeholder="password" ngModel />
             </div>
           </div>
           <div class="item form-group">
@@ -32,11 +32,11 @@
             <div class="col-md-6 col-sm-6">
               <div id="Admin" class="btn-group" data-toggle="buttons">
                 <label class="btn" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                  <input type="checkbox" name="admin" value="admin" class="join-btn input-style" />
+                  <input type="checkbox" name="is_admin" value="admin" class="join-btn input-style" ngModel />
                   &nbsp; Admin &nbsp;
                 </label>
                 <label class="btn" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                  <input type="checkbox" class="input-style" />
+                  <input type="checkbox" name="is_active" class="input-style" ngModel />
                   &nbsp; Activate &nbsp;
                 </label>
               </div>
@@ -47,7 +47,7 @@
             </label>
             <div class="col-md-6 col-sm-6">
               <input id="NationalID" class="date-picker form-control" placeholder="National ID" type="number"
-                required="required" />
+                required="required" name="national_id" ngModel />
             </div>
           </div>
           <div class="ln_solid"></div>
