@@ -176,3 +176,7 @@ td {
 .modal select {
   background-color: var(--background-color); 
 }
+
+.left-45{
+  left : 45%;
+}

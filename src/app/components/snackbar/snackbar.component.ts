@@ -14,8 +14,9 @@ import {
       #snackbar
       class="snackbar"
       [ngStyle]="{
-        'background-color': type === 'success' ? '#00F593' : '#FF0033',
-        color: type === 'success' ? 'black' : 'white'
+        'background-color':
+          type === 'success' ? 'var(--main-color)' : '#ff0000',
+        color: type === 'success' ? 'white' : 'white'
       }"
     >
       <div class="symbol">

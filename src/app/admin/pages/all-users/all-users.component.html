@@ -5,6 +5,9 @@
     <div class="clearfix"></div>
   </div>
   <div class="x_content">
+    <div class="position-absolute top-100 left-45">
+      <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+    </div>
     <div class="row">
       <div class="col-sm-12">
         <div class="card-box table-responsive">
@@ -49,7 +52,7 @@
                       </th>
                       <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
                         aria-label="Position: activate to sort column ascending" style="width: 289px">
-                        Uaer Name
+                        User Name
                         <i class="fa fa-lg fa-sort float-end" (click)="sortBy('name')"></i>
                       </th>
                       <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
