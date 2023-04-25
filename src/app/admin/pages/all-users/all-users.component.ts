@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AllUsersService } from './all-users.service';
 
 @Component({
   selector: 'app-all-users',
@@ -6,48 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./all-users.component.css'],
 })
 export class AllUsersComponent implements OnInit {
-  dummyData = [
-    {
-      id: '1',
-      name: 'Mohamed',
-      email: 'Mohamed@fds.com',
-    },
-    {
-      id: '2',
-      name: 'mike',
-      email: 'mike@f.com',
-    },
-    {
-      id: '3',
-      name: 'Ahmed',
-      email: 'Ahmed@f.com',
-    },
-    {
-      id: '4',
-      name: 'abdo',
-      email: 'abdo@f.com',
-    },
-    {
-      id: '5',
-      name: 'jo',
-      email: 'jo@f.com',
-    },
-    {
-      id: '6',
-      name: 'mo',
-      email: 'mog@f.com',
-    },
-    {
-      id: '7',
-      name: 'John Doe',
-      email: 'asfcg@fds.com',
-    },
-    {
-      id: '8',
-      name: 'Jane Doe',
-      email: 'asfcg@fds.com',
-    },
-  ];
+  // add empty array to contain data from api
+  users: any = [];
+  // add api array to users array
+  isLoading: boolean = true;
+
 
   //add dummy data of courses
   dummyDataCourses = [
@@ -84,12 +48,27 @@ export class AllUsersComponent implements OnInit {
     },
   ];
 
-  filteredData: any = this.dummyData;
+  filteredData: any = this.users;
   modalIsOpen = false;
   selectedID: string = '';
-  constructor() {}
+  constructor(private allUsers: AllUsersService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.allUsers.getAllUsers().subscribe(
+      (res) => {
+        console.log(res);
+        this.users = res.data;
+        this.filteredData = this.users;
+        this.isLoading = false;
+
+      },
+      (err) => {
+        console.log(err);
+        this.isLoading =true;
+
+      }
+    );
+  }
 
   onSubmit(form: any) {
     console.log('Form Submitted');
@@ -99,7 +78,7 @@ export class AllUsersComponent implements OnInit {
     this.selectedID = id;
   }
   search(search: string) {
-    this.filteredData = this.dummyData.filter((dummyData) => {
+    this.filteredData = this.users.filter((dummyData) => {
       return (
         dummyData.name.toLowerCase().includes(search.toLowerCase()) ||
         dummyData.email.toLowerCase().includes(search.toLowerCase()) ||

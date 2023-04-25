@@ -8,8 +8,9 @@ import { SnackbarComponent } from 'src/app/components/snackbar/snackbar.componen
   styleUrls: ['./add-user.component.css'],
 })
 export class AddUserComponent implements OnInit {
-@ViewChild('snackbar') snackbar: SnackbarComponent;
-
+  @ViewChild('snackbar') snackbar: SnackbarComponent;
+  message: string;
+  type: string;
   constructor(private addUser: AddUserService) {}
 
   ngOnInit(): void {}
@@ -25,16 +26,18 @@ export class AddUserComponent implements OnInit {
       )
       .subscribe(
         (res) => {
-          alert('User Added Successfully');
+          this.message = 'User Added Successfully';
+          this.type = 'success';
           console.log(res);
+          this.snackbar.show();
         },
         (err) => {
-          alert('Error Occured');
+          this.message = 'Error Adding User';
+          this.type = 'failed';
           console.log(err);
+          this.snackbar.show();          
         }
       );
     console.log(form.is_admin);
-        this.snackbar.show();
-
-  } 
+  }
 }
