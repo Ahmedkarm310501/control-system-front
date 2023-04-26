@@ -1,79 +1,36 @@
 import { Component, OnInit } from '@angular/core';
-interface Course {
-  id: string;
-  name: string;
-  department: string;
-  numberOfStudents: number;
-  gradedStudents: number;
-  ungradedStudents: number;
-}
+import { Course, HomeService } from './home.service';
 @Component({
   selector: 'app-home-screen',
   templateUrl: './home-screen.component.html',
   styleUrls: ['./home-screen.component.css'],
 })
 export class HomeScreenComponent implements OnInit {
-  courses = [
-    {
-      id: 'IS324',
-      name: 'Database Management System',
-      department: 'Information Systems',
-      numberOfStudents: 100,
-      gradedStudents: 50,
-      ungradedStudents: 50,
-    },
-    {
-      id: 'IS245',
-      name: 'Database Systems',
-      department: 'Information Systems',
-      numberOfStudents: 160,
-      gradedStudents: 50,
-      ungradedStudents: 110,
-    },
-    {
-      id: 'CS112',
-      name: 'Programming 1',
-      department: 'Information Systems',
-      numberOfStudents: 200,
-      gradedStudents: 0,
-      ungradedStudents: 200,
-    },
-    {
-      id: 'CS113',
-      name: 'Programming 2',
-      department: 'Information Systems',
-      numberOfStudents: 200,
-      gradedStudents: 0,
-      ungradedStudents: 200,
-    },
-    {
-      id: 'MA111',
-      name: 'Math 1',
-      department: 'General',
-      numberOfStudents: 700,
-      gradedStudents: 200,
-      ungradedStudents: 500,
-    },
-    {
-      id: 'MA112',
-      name: 'Math 2',
-      department: 'General',
-      numberOfStudents: 0,
-      gradedStudents: 0,
-      ungradedStudents: 0,
-    },
-  ];
-  constructor() {}
+  constructor(private home: HomeService) {}
+  Courses: Course[];
+  filterCourses: Course[];
+  noCorseFound = false;
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.noCorseFound = false;
+    //console.log(this.Courses.length);
+    this.home.getHomeData().subscribe((res) => {
+      this.filterCourses = res.data;
+      this.Courses = res.data;
+      if (this.Courses.length == 0) {
+        this.noCorseFound = true;
+        console.log('No courses found');
+      }
+    });
+  }
 
-  filteredCourses: Course[] = this.courses;
+  // filteredCourses: Course[];
 
   searchCourse(searchTerm: string) {
-    this.filteredCourses = this.courses.filter((course) => {
+    this.filterCourses = this.Courses.filter((course) => {
       return (
-        course.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        course.id.toLowerCase().includes(searchTerm.toLowerCase())
+        course.course_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        course.course_code.toLowerCase().includes(searchTerm.toLowerCase())
       );
     });
   }

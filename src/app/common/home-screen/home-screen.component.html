@@ -1,7 +1,15 @@
 <div class="home-page">
-  <div class="container-fluid">
+  <div *ngIf="noCorseFound">
+    <div
+      class="container-fluid d-flex align-items-center justify-content-center h-100"
+    >
+      <div class="position-absolute top-50">
+        <h1 class="text-center">No Courses Found</h1>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid" *ngIf="!noCorseFound">
     <div class="row">
-      <!-- <app-navigation></app-navigation> -->
       <div class="page-title">
         <div class="title_left">
           <h3>Assigned Courses</h3>
@@ -10,14 +18,14 @@
           <div class="pull-right top_search">
             <div class="input-group">
               <input
-                type="text"
+                type="text "
                 class="form-control"
-                placeholder="Search For Course..."
+                placeholder="Search For Course... "
                 #searchInput
                 (input)="searchCourse(searchInput.value)"
               />
               <span class="input-group-btn">
-                <button class="btn btn-secondary" type="button">Go!</button>
+                <button class="btn btn-secondary" type="button ">Go!</button>
               </span>
             </div>
           </div>
@@ -25,25 +33,25 @@
       </div>
     </div>
     <div class="row courses g-3 mt-2">
-      <div class="col-sm-12 col-md-6" *ngFor="let course of filteredCourses">
+      <div class="col-sm-12 col-md-4" *ngFor="let course of filterCourses">
         <div class="card">
-          <div class="card-header m-0 fw-bold fs-4">{{ course.name }}</div>
+          <div class="card-header m-0 fw-bold fs-4">
+            {{ course.course_name }}
+          </div>
           <div class="card-body">
-            <h4 class="card-title fw-500">Course ID: {{ course.id }}</h4>
+            <h4 class="card-title fw-500">
+              Course ID: {{ course.course_code }}
+            </h4>
             <hr />
             <h5 class="card-subtitle mb-2">
-              Number Of Students: {{ course.numberOfStudents }}
+              Number Of Students: {{ course.number_of_students }}
             </h5>
             <hr />
             <div class="d-flex justify-content-start">
-              <h6 class="card-subtitle">
-                Graded Students: {{ course.gradedStudents }}
-              </h6>
-              <h6 class="card-subtitle ms-5">
-                Ungraded Students: {{ course.ungradedStudents }}
-              </h6>
+              <h5 class="card-subtitle">Term: first</h5>
+              <h5 class="card-subtitle ms-5">Year: 2019</h5>
             </div>
-            <a routerLink="course/id" class="btn mt-3 button"
+            <a routerLink="course/id " class="btn mt-3 button"
               >Edit Course Grades</a
             >
           </div>
