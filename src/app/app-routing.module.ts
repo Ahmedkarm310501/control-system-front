@@ -19,6 +19,7 @@ import { AuthGuard } from './auth/auth.guard';
 import { SetupPageComponent } from './config/setup-page/setup-page.component';
 import { AdminDataComponent } from './config/admin-data/admin-data.component';
 import { SystemSettingsComponent } from './config/system-settings/system-settings.component';
+import { AllCoursesComponent } from './admin/pages/all-courses/all-courses.component';
 import { DissAllowGuard } from './auth/diss-allow.guard';
 // import { UserDataComponent } from './config/user-data/user-data.component';
 
@@ -112,6 +113,13 @@ const routes: Routes = [
         data: { breadcrumb: 'Edit User' },
       },
     ],
+  },
+  {
+    path: 'all-courses',
+    component: AllCoursesComponent,
+    canActivate: [AuthGuard],
+    data: { breadcrumb: 'All Courses'}
+
   },
 
   {

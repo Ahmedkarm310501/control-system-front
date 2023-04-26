@@ -3,6 +3,8 @@ import { EditUserService } from './edit-user.service';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { AuthService } from 'src/app/auth/auth.service';
+import { User } from 'src/app/auth/User';
 
 @Component({
   selector: 'app-edit-user',
@@ -10,7 +12,11 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./edit-user.component.css'],
 })
 export class EditUserComponent implements OnInit {
-  constructor(private route: ActivatedRoute, private http: HttpClient) {}
+  constructor(
+    private route: ActivatedRoute,
+    private http: HttpClient,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
     // const id = +this.route.snapshot.paramMap.get('id');
@@ -49,6 +55,9 @@ export class EditUserComponent implements OnInit {
     ).subscribe(
       (res) => {
         console.log(res);
+        // let user = this.authService.user.value;
+        // user.userName = form.name;
+        // this.authService.user.next(user);
       },
       (err) => console.log(err)
     );
