@@ -1,4 +1,5 @@
 <div class="profile">
+  <app-snackbar #snackbar message={{message}} type={{type}}></app-snackbar>
   <div
     class="container-fluid d-flex align-items-center justify-content-center h-100"
   >
@@ -74,12 +75,19 @@
             <div class="back p-4 rounded-3">
               <span class="fs-2">update password</span>
               <form
-                [formGroup]="updatePasswordForm"
-                (ngSubmit)="updatePassword()"
+                (ngSubmit)="updatePass(Form.value)"
+                #Form="ngForm"
               >
                 <div class="row g-3">
                   <div class="col-md-6">
-                    <label for="password" class="form-label fs-4"
+                    <label for="current-password" class="form-label fs-4">current password</label>
+                    <input name="current_password" type="password" class="form-control" id="current-pass"
+                      placeholder="Enter your password" ngModel 
+                      #currentPassword="ngModel"
+                        />
+                  </div>
+                  <div class="col-md-6">
+                    <label for="new_password" class="form-label fs-4"
                       >new password</label
                     >
                     <input
@@ -87,7 +95,9 @@
                       class="form-control"
                       id="password"
                       placeholder="Enter your password"
-                      formControlName="password"
+                      name="new_password"
+                      ngModel
+                      #password="ngModel"
                     />
                     <div
                       *ngIf="
@@ -113,7 +123,7 @@
                     </div>
                   </div>
                   <div class="col-md-6">
-                    <label for="c-password" class="form-label fs-4"
+                    <label for="new_password_confirmation" class="form-label fs-4"
                       >confirm password</label
                     >
                     <input
@@ -121,7 +131,9 @@
                       class="form-control"
                       id="c-password"
                       placeholder="Enter your password"
-                      formControlName="confirmPassword"
+                      name="new_password_confirmation"
+                      ngModel
+                      #confirmPassword="ngModel"
                     />
                     <div
                       *ngIf="
@@ -134,7 +146,7 @@
                     >
                       Confirm Password is required.
                     </div>
-                    <div
+                    <!-- <div
                       *ngIf="
                         updatePasswordForm.hasError('mismatch') &&
                         updatePasswordForm.get('confirmPassword').touched
@@ -142,12 +154,14 @@
                       class="error"
                     >
                       Passwords do not match.
-                    </div>
+                    </div> -->
+                  
                   </div>
+                 
                   <div class="col-md-12">
                     <button
                       class="btn btn-primary"
-                      [disabled]="updatePasswordForm.invalid"
+                      
                     >
                       Save
                     </button>

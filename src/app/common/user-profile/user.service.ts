@@ -22,4 +22,16 @@ export class UserService {
   getUserProfile() {
     return this.http.get<responseData>(`${this.baseUrl}/user-profile`);
   }
+
+  updatePassword(
+    current_password: string,
+    new_password: string,
+    new_password_confirmation: string
+  ) {
+    return this.http.post(`${this.baseUrl}/update-password`, {
+      current_password,
+      new_password,
+      new_password_confirmation,
+    });
+  }
 }

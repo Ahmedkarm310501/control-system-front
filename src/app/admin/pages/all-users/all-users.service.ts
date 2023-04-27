@@ -23,6 +23,10 @@ export class AllUsersService {
     return this.http.get<Res>(`${this.enviroment.baseUrl}/list-users`);
   }
 
+  onDelete(id: number) {
+    return this.http.delete(`${this.enviroment.baseUrl}/delete-user?id=${id}`);
+  }
+
   assignUserToCourse(course_id: any, user_id: any) {
     return this.http.post(`${this.enviroment.baseUrl}/assign-user-to-course`, { course_id, user_id });
   }

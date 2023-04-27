@@ -32,7 +32,7 @@ export class AddUserComponent implements OnInit {
           this.snackbar.show();
         },
         (err) => {
-          this.message = 'Error Adding User';
+          this.message = err.error.message;
           this.type = 'failed';
           console.log(err);
           this.snackbar.show();          

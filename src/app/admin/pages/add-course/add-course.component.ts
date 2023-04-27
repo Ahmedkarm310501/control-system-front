@@ -33,11 +33,9 @@ export class AddCourseComponent implements OnInit {
 
         },
         (err) => {
-          this.message = 'Error Adding Course';
+          this.message = err.error.message;
           this.type = 'failed';
-          console.log(err);
           this.snackbar.show();
-          console.log('error')
 
         }
       );
