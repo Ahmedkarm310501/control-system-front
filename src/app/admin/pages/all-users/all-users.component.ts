@@ -1,6 +1,7 @@
 import { Component, OnInit , ViewChild} from '@angular/core';
 import { AllUsersService } from './all-users.service';
 import { SnackbarComponent } from 'src/app/components/snackbar/snackbar.component';
+import { AllCoursesService } from '../all-courses/all-courses.service';
 
 @Component({
   selector: 'app-all-users',
@@ -20,40 +21,26 @@ export class AllUsersComponent implements OnInit {
     {
       id: 1,
       name: 'Math 1',
-      description:
-        'Angular is a TypeScript-based open-source web application framework led by the Angular Team at Google and by a community of individuals and corporations.',
-      price: 100,
-      duration: 10,
-      image: 'https://angular.io/assets/images/logos/angular/angular.svg',
     },
     {
       id: 2,
 
       name: 'Math 2',
-      description:
-        'React is an open-source, front end, JavaScript library for building user interfaces or UI components.',
-      price: 200,
-      duration: 20,
-
-      image:
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1280px-React-icon.svg.png',
     },
     {
       id: 3,
       name: 'Database Management System',
-      description:
-        'Vue.js is an open-source model–view–viewmodel front end JavaScript framework for building user interfaces and single-page applications.',
-      price: 300,
-      duration: 30,
-      image:
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Vue.js_Logo_2.svg/1200px-Vue.js_Logo_2.svg.png',
     },
   ];
 
   filteredData: any = this.users;
   modalIsOpen = false;
   selectedID: string = '';
-  constructor(private allUsers: AllUsersService) {}
+  departments: any = [];
+  constructor(
+    private allUsers: AllUsersService,
+    private allCourses: AllCoursesService
+  ) {}
 
   ngOnInit(): void {
     //display all user
@@ -63,7 +50,6 @@ export class AllUsersComponent implements OnInit {
         this.users = res.data;
         this.filteredData = this.users;
         this.isLoading = false;
-
       },
       (err) => {
         console.log(err);
@@ -72,6 +58,10 @@ export class AllUsersComponent implements OnInit {
 
       }
     );
+    this.allCourses.getAllDepartments().subscribe((res) => {
+      this.departments = res.data;
+      console.log(this.departments);
+    });
   }
   onEdit(id: string) {
     this.modalIsOpen = !this.modalIsOpen;
