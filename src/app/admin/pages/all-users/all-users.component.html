@@ -1,3 +1,4 @@
+<app-snackbar message={{message}} type={{type}}></app-snackbar>
 <div class="x_panel">
   <div class="x_title">
     <h2>All <small>Users</small></h2>
@@ -66,8 +67,8 @@
                       </th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr *ngFor="let data of filteredData" role="row" class="odd">
+                  <tbody *ngIf="!isShown">
+                    <tr  *ngFor="let data of filteredData" role="row" class="odd">
                       <td class="sorting_1">{{ data.id }}</td>
                       <td>{{ data.name }}</td>
                       <td>{{ data.email }}</td>
@@ -80,9 +81,22 @@
                         <button class="btn btn-secondary mx-2 my-2 m-0" routerLink="edit-user/{{ data.id}}">
                           Edit
                         </button>
+                        <button class="btn btn-danger mx-2 my-2 m-0" (click)="onDelete(data.id)">Delete</button>
                       </td>
                     </tr>
+                   
                   </tbody>
+                  <tbody *ngIf="isShown">
+                    <tr  role="row" class="odd">
+                      <td class="sorting_1">No Data Found</td>
+                      <td>No Data Found</td>
+                      <td>No Data Found</td>
+                      <td class="d-flex justify-content-evenly align-items-center m-0">
+                        No data found
+                      </td>
+                  </tr>
+                  </tbody>
+                  
                 </table>
               </div>
             </div>

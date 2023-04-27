@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { UserService } from './user.service';
+import { SnackbarComponent } from 'src/app/components/snackbar/snackbar.component';
 
 @Component({
   selector: 'app-user-profile',
@@ -8,6 +9,8 @@ import { UserService } from './user.service';
   styleUrls: ['./user-profile.component.css'],
 })
 export class UserProfileComponent implements OnInit {
+  @ViewChild('snackbar') snackbar: SnackbarComponent;
+
   updatePasswordForm: FormGroup;
   userName: string;
   userEmail: string;
@@ -44,11 +47,37 @@ export class UserProfileComponent implements OnInit {
     return pass === confirmPass ? null : { mismatch: true };
   }
 
-  updatePassword() {
-    if (this.updatePasswordForm.valid) {
-      console.log('Password updated!');
-    }
-    //log the form values
-    console.log(this.updatePasswordForm.value);
+  // updatePassword() {
+  //   if (this.updatePasswordForm.valid) {
+  //     console.log('Password updated!');
+  //   }
+  //   //log the form values
+  //   console.log(this.updatePasswordForm.value);
+  // }
+
+  message: string;
+  type: string;
+  updatePass(form: any) {
+    this.userService
+      .updatePassword(
+        form.current_password,
+        form.new_password,
+        form.new_password_confirmation
+      )
+      .subscribe(
+        (res) => {
+          this.message = 'Password Updated Successfully';
+          this.type = 'success';
+          this.snackbar.show();
+
+          console.log(res);
+        },
+        (err) => {
+          this.message = err.error.message;
+          this.type = 'failed';
+          this.snackbar.show();
+          console.log(err);
+        }
+      );
   }
 }

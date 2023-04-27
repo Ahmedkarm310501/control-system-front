@@ -23,4 +23,8 @@ export class AllUsersService {
     return this.http.get<Res>(`${this.enviroment.baseUrl}/list-users`);
   }
 
+  onDelete(id: number) {
+    return this.http.delete(`${this.enviroment.baseUrl}/delete-user?id=${id}`);
+  }
+
 }

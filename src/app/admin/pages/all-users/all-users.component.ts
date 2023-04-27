@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , ViewChild} from '@angular/core';
 import { AllUsersService } from './all-users.service';
+import { SnackbarComponent } from 'src/app/components/snackbar/snackbar.component';
 
 @Component({
   selector: 'app-all-users',
@@ -7,11 +8,12 @@ import { AllUsersService } from './all-users.service';
   styleUrls: ['./all-users.component.css'],
 })
 export class AllUsersComponent implements OnInit {
+  @ViewChild('snackbar') snackbar: SnackbarComponent;
   // add empty array to contain data from api
   users: any = [];
   // add api array to users array
   isLoading: boolean = true;
-
+  isShown: boolean = false;
 
   //add dummy data of courses
   dummyDataCourses = [
@@ -54,6 +56,7 @@ export class AllUsersComponent implements OnInit {
   constructor(private allUsers: AllUsersService) {}
 
   ngOnInit(): void {
+    //display all user
     this.allUsers.getAllUsers().subscribe(
       (res) => {
         console.log(res);
@@ -64,19 +67,20 @@ export class AllUsersComponent implements OnInit {
       },
       (err) => {
         console.log(err);
-        this.isLoading =true;
+        this.isLoading = true;
+        
 
       }
     );
-  }
-
-  onSubmit(form: any) {
-    console.log('Form Submitted');
   }
   onEdit(id: string) {
     this.modalIsOpen = !this.modalIsOpen;
     this.selectedID = id;
   }
+  onSubmit(form: any){
+    console.log('form Submitted')
+  }
+  // search for user
   search(search: string) {
     this.filteredData = this.users.filter((dummyData) => {
       return (
@@ -86,6 +90,25 @@ export class AllUsersComponent implements OnInit {
       );
     });
   }
+  message: string;
+  type: string;
+  //delete user
+  onDelete(id: number) {
+    this.allUsers.onDelete(id).subscribe(
+      (res) => {
+        console.log(res);
+        this.users = this.users.filter((user: any) => user.id !== id);
+        this.filteredData = this.users;
+      },
+      (err) => {
+        this.message = err.error.message;
+        this.type = 'error';
+        this.snackbar.show()
+        console.log(err);
+      }
+    );
+  }
+
 
   sortOrder = 1;
 
