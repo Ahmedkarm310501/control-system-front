@@ -7,21 +7,36 @@ interface Course {
   name: string;
   course_code: string;
 }
+interface Department {
+  id: number;
+  dept_code: string;
+}
 interface Res {
   data: Course[];
   message: string;
 }
+interface Req {
+  data: Department[];
+  message: string;
+}
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AllCoursesService {
-
-  constructor(
-    private http: HttpClient
-  ) { }
+  constructor(private http: HttpClient) {}
 
   getAllCourses() {
     return this.http.get<Res>(`${environment.baseUrl}/list-courses`);
+  }
+
+  getAllCoursesByDepartment(id: any) {
+    return this.http.get<Res>(
+      `${environment.baseUrl}/courses-in-department/${id}`
+    );
+  }
+
+  getAllDepartments() {
+    return this.http.get<Req>(`${environment.baseUrl}/departments`);
   }
 }

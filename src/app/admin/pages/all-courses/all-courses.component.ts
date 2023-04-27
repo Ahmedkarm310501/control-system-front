@@ -11,7 +11,8 @@ export class AllCoursesComponent implements OnInit {
 
   isLoading: boolean = true;
   courses: any = [];
-
+  departments: any = [];
+  dep_id: any;
   ngOnInit(): void {
     this.allCourses.getAllCourses().subscribe(
       (res) => {
@@ -24,8 +25,19 @@ export class AllCoursesComponent implements OnInit {
         console.log(err);
       }
     );
+    this.allCourses.getAllDepartments().subscribe(
+      (res) => {
+        this.departments = res.data;
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
-
+  isShown = false;
+  shown() {
+    this.isShown = !this.isShown;
+  }
   // getAllCourses() {
   //   this.allCourses.getAllCourses().subscribe(
   //     (res) => {
@@ -41,6 +53,21 @@ export class AllCoursesComponent implements OnInit {
   // }
 
   filteredData: any = this.courses;
+  getAllCoursesByDepartment(id: any) {
+    this.isLoading = true;
+    this.allCourses.getAllCoursesByDepartment(id).subscribe(
+      (res) => {
+        this.courses = res.data;
+        this.filteredData = this.courses;
+        this.isLoading = false;
+        console.log(res);
+        console.log(this.filteredData);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
 
   search(search: string) {
     this.filteredData = this.courses.filter((dummyData) => {
