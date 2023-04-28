@@ -1,6 +1,6 @@
-import { Component, OnInit , ViewChild} from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AllUsersService } from './all-users.service';
-import { SnackbarComponent } from 'src/app/components/snackbar/snackbar.component';
+import { SnackbarComponent } from '../../../components/snackbar/snackbar.component';
 import { AllCoursesService } from '../all-courses/all-courses.service';
 
 @Component({
@@ -10,6 +10,7 @@ import { AllCoursesService } from '../all-courses/all-courses.service';
 })
 export class AllUsersComponent implements OnInit {
   @ViewChild('snackbar') snackbar: SnackbarComponent;
+  @ViewChild('dept') dept: any;
   // add empty array to contain data from api
   users: any = [];
   // add api array to users array
@@ -17,26 +18,13 @@ export class AllUsersComponent implements OnInit {
   isShown: boolean = false;
 
   //add dummy data of courses
-  dummyDataCourses = [
-    {
-      id: 1,
-      name: 'Math 1',
-    },
-    {
-      id: 2,
-
-      name: 'Math 2',
-    },
-    {
-      id: 3,
-      name: 'Database Management System',
-    },
-  ];
+  dummyDataCourses: any = [];
 
   filteredData: any = this.users;
-  modalIsOpen = false;
+
   selectedID: string = '';
   departments: any = [];
+
   constructor(
     private allUsers: AllUsersService,
     private allCourses: AllCoursesService
@@ -54,8 +42,6 @@ export class AllUsersComponent implements OnInit {
       (err) => {
         console.log(err);
         this.isLoading = true;
-        
-
       }
     );
     this.allCourses.getAllDepartments().subscribe((res) => {
@@ -63,13 +49,43 @@ export class AllUsersComponent implements OnInit {
       console.log(this.departments);
     });
   }
+
+  onSelectDepartment(event: any) {
+    const id = event.target.value;
+    this.allCourses.getAllCoursesByDepartment(id).subscribe((res) => {
+      this.dummyDataCourses = res.data;
+      console.log(this.dummyDataCourses);
+    });
+  }
   onEdit(id: string) {
-    this.modalIsOpen = !this.modalIsOpen;
     this.selectedID = id;
   }
-  onSubmit(form: any){
-    console.log('form Submitted')
+  onSubmit(form: any) {
+    console.log('form Submitted');
+    console.log(form);
+    this.allUsers.assignUserToCourse(form.course, this.selectedID).subscribe(
+      (res) => {
+        console.log(res);
+        this.type = 'success';
+        this.message = 'User assigned to course successfully';
+
+        this.snackbar.show();
+      },
+      (err) => {
+        this.message = err.error.message;
+        this.type = 'error';
+
+        this.snackbar.show();
+
+        console.log(err);
+      }
+    );
   }
+  closeModal() {
+    this.dummyDataCourses = [];
+    this.dept.nativeElement.value = 'Select Department';
+  }
+
   // search for user
   search(search: string) {
     this.filteredData = this.users.filter((dummyData) => {
@@ -93,12 +109,11 @@ export class AllUsersComponent implements OnInit {
       (err) => {
         this.message = err.error.message;
         this.type = 'error';
-        this.snackbar.show()
+        this.snackbar.show();
         console.log(err);
       }
     );
   }
-
 
   sortOrder = 1;
 

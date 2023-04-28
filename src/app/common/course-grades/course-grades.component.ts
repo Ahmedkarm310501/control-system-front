@@ -1,7 +1,7 @@
 import {
   Component,
   ElementRef,
-  OnInit, 
+  OnInit,
   ViewChild,
   Renderer2,
 } from '@angular/core';
@@ -130,35 +130,9 @@ export class CourseGradesComponent implements OnInit {
     }
   }
 
-  /***/
+
   missingStudents = [];
-  // onExcelUploadGrades(data: any) {
-  //   console.log(data);
-  //   this.students = this.students.map((student) => {
-  //     const excelStudent = data.find((s) => +s.id === +student.id);
-  //     if (excelStudent) {
-  //       return {
-  //         ...student,
-  //         termWork: excelStudent.termWork,
-  //         examWork: excelStudent.examWork,
-  //         total: +excelStudent.termWork + +excelStudent.examWork,
-  //         grade: this.gradeService.calculateGrade(
-  //           +excelStudent.termWork + +excelStudent.examWork
-  //         ),
-  //       };
-  //     } else {
-  //       this.missingStudents.push(student.id);
-  //       return student;
-  //     }
-  //   });
-  //   this.filteredStudents = this.students;
-  //   if (this.missingStudents.length > 0) {
-  //     alert(
-  //       `there are ${this.missingStudents.length} missing students: ${this.missingStudents}`
-  //     );
-  //   }
-  //   this.renderer.setProperty(this.fileRef.nativeElement, 'value', null);
-  // }
+  
   modalIsOpen = false;
   IsInvalid = false;
   errorMsg = '';
