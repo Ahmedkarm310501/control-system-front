@@ -1,4 +1,8 @@
-<app-snackbar message={{message}} type={{type}}></app-snackbar>
+<app-snackbar
+  #snackbar
+  message="{{ message }}"
+  type="{{ type }}"
+></app-snackbar>
 <div class="x_panel">
   <div class="x_title">
     <h2>All <small>Users</small></h2>
@@ -127,7 +131,11 @@
                     </tr>
                   </thead>
                   <tbody *ngIf="!isShown">
-                    <tr  *ngFor="let data of filteredData" role="row" class="odd">
+                    <tr
+                      *ngFor="let data of filteredData"
+                      role="row"
+                      class="odd"
+                    >
                       <td class="sorting_1">{{ data.id }}</td>
                       <td>{{ data.name }}</td>
                       <td>{{ data.email }}</td>
@@ -150,22 +158,27 @@
                         >
                           Edit
                         </button>
-                        <button class="btn btn-danger mx-2 my-2 m-0" (click)="onDelete(data.id)">Delete</button>
+                        <button
+                          class="btn btn-danger mx-2 my-2 m-0"
+                          (click)="onDelete(data.id)"
+                        >
+                          Delete
+                        </button>
                       </td>
                     </tr>
-                   
                   </tbody>
                   <tbody *ngIf="isShown">
-                    <tr  role="row" class="odd">
+                    <tr role="row" class="odd">
                       <td class="sorting_1">No Data Found</td>
                       <td>No Data Found</td>
                       <td>No Data Found</td>
-                      <td class="d-flex justify-content-evenly align-items-center m-0">
+                      <td
+                        class="d-flex justify-content-evenly align-items-center m-0"
+                      >
                         No data found
                       </td>
-                  </tr>
+                    </tr>
                   </tbody>
-                  
                 </table>
               </div>
             </div>
@@ -192,11 +205,13 @@
           class="btn-close"
           data-bs-dismiss="modal"
           aria-label="Close"
+          (click)="closeModal()"
         ></button>
       </div>
+
       <div class="modal-body">
         <div class="container-fluid">
-          <form #Form="ngForm" (ngSubmit)="onSubmit(Form.value)">
+          <form #Form="ngForm">
             <div class="mb-3" class="col-md-12">
               <label>Department :&nbsp;</label>
               <select
@@ -206,9 +221,15 @@
                 ngModel
                 required
                 #department="ngModel"
+                #dept
+                (change)="onSelectDepartment($event)"
               >
                 <option>Select Department</option>
-                <option *ngFor="let Department of departments">
+                <option
+                  #dept
+                  *ngFor="let Department of departments"
+                  [value]="Department.id"
+                >
                   {{ Department.dept_code }}
                 </option>
               </select>
@@ -227,13 +248,17 @@
               <select
                 class="custom-select"
                 id="subject"
-                name="Course"
+                name="course"
                 ngModel
                 required
                 #course="ngModel"
               >
-                <option *ngFor="let Course of dummyDataCourses">
-                  {{ Course.name }}"
+                <option>Select Course</option>
+                <option
+                  *ngFor="let Course of dummyDataCourses"
+                  [value]="Course.id"
+                >
+                  {{ Course.name }}
                 </option>
               </select>
               <div *ngIf="course.invalid && course.touched" class="error">
@@ -241,14 +266,26 @@
               </div>
               <br />
             </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+                (click)="closeModal()"
+              >
+                Closel
+              </button>
+              <button
+                type="submit"
+                class="btn btn-primary"
+                data-bs-dismiss="modal"
+                (click)="onSubmit(Form.value)"
+              >
+                Save changes
+              </button>
+            </div>
           </form>
         </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          Closel
-        </button>
-        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
