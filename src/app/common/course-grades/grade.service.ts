@@ -1,12 +1,19 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class GradeService {
-
-  constructor() { }
+  baseUrl = environment.baseUrl;
+  constructor(private http: HttpClient) {}
   // function to calculate grade for each student and return the grade
+
+  getCourseGrades(courseId: string) {
+    return this.http.get(`${this.baseUrl}/courses/${courseId}`);
+  }
+
   calculateGrade(total: number) {
     if (total >= 90) {
       return 'A+';
@@ -20,14 +27,11 @@ export class GradeService {
       return 'C+';
     } else if (total >= 65) {
       return 'C';
-    }
-    else if (total >= 60) {
+    } else if (total >= 60) {
       return 'D+';
-    }
-    else if (total >= 50) {
+    } else if (total >= 50) {
       return 'D';
-    }
-    else {
+    } else {
       return 'F';
     }
   }
