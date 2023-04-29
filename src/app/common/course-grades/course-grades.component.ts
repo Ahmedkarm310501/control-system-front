@@ -8,6 +8,7 @@ import {
 import { studData } from './stud-data';
 import { GradeService } from './grade.service';
 import { ReadExcelDirective } from '../directives/read-excel.directive';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-course-grades',
@@ -19,11 +20,12 @@ export class CourseGradesComponent implements OnInit {
   @ViewChild('fG') fileRefgrade: ElementRef;
   constructor(
     private gradeService: GradeService,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private route: ActivatedRoute
   ) {}
   gradesFile: File;
   namesFile: File;
-
+  id = this.route.snapshot.paramMap.get('id');
   students = studData.map((student) => {
     return {
       ...student,
@@ -80,7 +82,9 @@ export class CourseGradesComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.gradeService.getCourseGrades(this.id).subscribe((res) => {});
+  }
 
   onFileChangeGrades(event: any) {
     console.log(event);
@@ -130,9 +134,8 @@ export class CourseGradesComponent implements OnInit {
     }
   }
 
-
   missingStudents = [];
-  
+
   modalIsOpen = false;
   IsInvalid = false;
   errorMsg = '';
