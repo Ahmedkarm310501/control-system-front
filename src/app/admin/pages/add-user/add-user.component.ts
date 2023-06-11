@@ -11,6 +11,7 @@ export class AddUserComponent implements OnInit {
   @ViewChild('snackbar') snackbar: SnackbarComponent;
   message: string;
   type: string;
+  isAdmin: boolean = false;
   constructor(private addUser: AddUserService) {}
 
   ngOnInit(): void {}
@@ -35,7 +36,7 @@ export class AddUserComponent implements OnInit {
           this.message = err.error.message;
           this.type = 'failed';
           console.log(err);
-          this.snackbar.show();          
+          this.snackbar.show();
         }
       );
     console.log(form.is_admin);

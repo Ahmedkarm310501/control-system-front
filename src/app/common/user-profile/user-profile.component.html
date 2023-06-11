@@ -1,5 +1,9 @@
 <div class="profile">
-  <app-snackbar #snackbar message={{message}} type={{type}}></app-snackbar>
+  <app-snackbar
+    #snackbar
+    message="{{ message }}"
+    type="{{ type }}"
+  ></app-snackbar>
   <div
     class="container-fluid d-flex align-items-center justify-content-center h-100"
   >
@@ -73,22 +77,26 @@
           </div>
           <div class="col-sm-12 col-lg-9">
             <div class="back p-4 rounded-3">
-              <span class="fs-2">update password</span>
-              <form
-                (ngSubmit)="updatePass(Form.value)"
-                #Form="ngForm"
-              >
+              <span class="fs-2">Update Password</span>
+              <form (ngSubmit)="updatePass(Form.value)" #Form="ngForm">
                 <div class="row g-3">
                   <div class="col-md-6">
-                    <label for="current-password" class="form-label fs-4">current password</label>
-                    <input name="current_password" type="password" class="form-control" id="current-pass"
-                      placeholder="Enter your password" ngModel 
+                    <label for="current-password" class="form-label fs-4"
+                      >Current Password</label
+                    >
+                    <input
+                      name="current_password"
+                      type="password"
+                      class="form-control"
+                      id="current-pass"
+                      placeholder="Enter your password"
+                      ngModel
                       #currentPassword="ngModel"
-                        />
+                    />
                   </div>
                   <div class="col-md-6">
                     <label for="new_password" class="form-label fs-4"
-                      >new password</label
+                      >New Password</label
                     >
                     <input
                       type="password"
@@ -123,8 +131,10 @@
                     </div>
                   </div>
                   <div class="col-md-6">
-                    <label for="new_password_confirmation" class="form-label fs-4"
-                      >confirm password</label
+                    <label
+                      for="new_password_confirmation"
+                      class="form-label fs-4"
+                      >Confirm Password</label
                     >
                     <input
                       type="password"
@@ -155,16 +165,10 @@
                     >
                       Passwords do not match.
                     </div> -->
-                  
                   </div>
-                 
+
                   <div class="col-md-12">
-                    <button
-                      class="btn btn-primary"
-                      
-                    >
-                      Save
-                    </button>
+                    <button class="btn btn-primary">Save</button>
                   </div>
                 </div>
               </form>
