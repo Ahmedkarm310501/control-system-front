@@ -8,6 +8,7 @@ export interface Course {
   course_code: string;
   course_name: string;
   number_of_students: string;
+  term_id: string;
 }
 interface responseData {
   data: Course[];

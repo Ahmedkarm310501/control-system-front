@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild} from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AddCourseService } from './add-course.service';
 import { SnackbarComponent } from 'src/app/components/snackbar/snackbar.component';
@@ -19,7 +19,7 @@ export class AddCourseComponent implements OnInit {
   ngOnInit(): void {}
   onSubmit(form: any) {
     this.addCourseService
-      .addCourse(form.course_name, form.course_name, form.dept_code)
+      .addCourse(form.course_name, form.course_code, form.dept_code)
       .subscribe(
         (res) => {
           this.message = 'Course Added Successfully';
@@ -30,16 +30,12 @@ export class AddCourseComponent implements OnInit {
           setTimeout(() => {
             this.router.navigate(['/courses']);
           }, 2000);
-
         },
         (err) => {
           this.message = err.error.message;
           this.type = 'failed';
           this.snackbar.show();
-
         }
       );
-
-    
   }
 }
