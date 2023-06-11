@@ -2,6 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
+type ResponseData = {
+  message: string;
+  data: { id: string; name: string; deptName: string; course_code: string };
+};
+
 @Injectable({
   providedIn: 'root',
 })
@@ -10,8 +15,8 @@ export class GradeService {
   constructor(private http: HttpClient) {}
   // function to calculate grade for each student and return the grade
 
-  getCourseGrades(courseId: string) {
-    return this.http.get(`${this.baseUrl}/courses/${courseId}`);
+  getCourseData(courseId: string) {
+    return this.http.get<ResponseData>(`${this.baseUrl}/courses/${courseId}`);
   }
 
   calculateGrade(total: number) {

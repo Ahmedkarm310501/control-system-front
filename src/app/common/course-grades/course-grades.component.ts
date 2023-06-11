@@ -25,7 +25,11 @@ export class CourseGradesComponent implements OnInit {
   ) {}
   gradesFile: File;
   namesFile: File;
-  id = this.route.snapshot.paramMap.get('id');
+  id = this.route.snapshot.paramMap.get('courseId');
+  courseCode: string;
+  courseName: string;
+  deptName: string;
+
   students = studData.map((student) => {
     return {
       ...student,
@@ -38,6 +42,9 @@ export class CourseGradesComponent implements OnInit {
   isShown = false;
   shown() {
     this.isShown = !this.isShown;
+  }
+  close() {
+    this.isShown = false;
   }
 
   edit(index: number) {
@@ -83,7 +90,13 @@ export class CourseGradesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.gradeService.getCourseGrades(this.id).subscribe((res) => {});
+    console.log(this.id);
+    this.gradeService.getCourseData(this.id).subscribe((res) => {
+      console.log(res);
+      this.courseCode = res.data.course_code;
+      this.courseName = res.data.name;
+      this.deptName = res.data.deptName;
+    });
   }
 
   onFileChangeGrades(event: any) {
