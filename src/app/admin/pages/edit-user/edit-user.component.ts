@@ -1,17 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { EditUserService } from './edit-user.service';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { AuthService } from 'src/app/auth/auth.service';
 import { User } from 'src/app/auth/User';
-
+import { SnackbarComponent } from 'src/app/components/snackbar/snackbar.component';
 @Component({
   selector: 'app-edit-user',
   templateUrl: './edit-user.component.html',
   styleUrls: ['./edit-user.component.css'],
 })
 export class EditUserComponent implements OnInit {
+  @ViewChild('snackbar') snackbar: SnackbarComponent;
+  message: string;
+  type: string;
+  isAdmin: boolean = false;
+  isActive: boolean = false;
   constructor(
     private route: ActivatedRoute,
     private http: HttpClient,
@@ -54,12 +59,18 @@ export class EditUserComponent implements OnInit {
       form.national_id
     ).subscribe(
       (res) => {
+        this.message = 'User Edited Successfully';
+        this.type = 'success';
+
+        this.snackbar.show();
         console.log(res);
-        // let user = this.authService.user.value;
-        // user.userName = form.name;
-        // this.authService.user.next(user);
       },
-      (err) => console.log(err)
+      (err) => {
+        this.message = err.error.message;
+        this.type = 'failed';
+        console.log(err);
+        this.snackbar.show();
+      }
     );
   }
 }

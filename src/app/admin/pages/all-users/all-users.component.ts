@@ -105,6 +105,9 @@ export class AllUsersComponent implements OnInit {
         console.log(res);
         this.users = this.users.filter((user: any) => user.id !== id);
         this.filteredData = this.users;
+        this.message = 'User Deleted Successfully';
+        this.type = 'success';
+        this.snackbar.show();
       },
       (err) => {
         this.message = err.error.message;
