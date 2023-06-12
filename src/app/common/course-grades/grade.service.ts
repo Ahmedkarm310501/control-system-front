@@ -41,6 +41,24 @@ export class GradeService {
     );
   }
 
+  addStudentToCourse(
+    student_name: string,
+    course_id: string,
+    semester_id: string,
+    student_id: string
+  ) {
+    return this.http.post(
+      `${this.baseUrl}/add-student-to-course`,
+      {
+        student_name: student_name,
+        course_id: course_id,
+        semester_id: semester_id,
+        student_id: student_id,
+      },
+      { observe: 'response' }
+    );
+  }
+
   calculateGrade(total: number) {
     if (total >= 90) {
       return 'A+';

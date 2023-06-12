@@ -268,28 +268,33 @@ export class CourseGradesComponent implements OnInit {
     console.log(studentId, studentName);
     console.log(this.students);
 
-    if (this.students.some((student) => +student.id === +studentId)) {
+    if (this.students.some((student) => +student.student_id === +studentId)) {
       // alert(`A student with ID ${studentId} already exists.`);
       console.log(studentId);
       this.ISduplicated = true;
       return;
     }
-
-    const newStudent = {
-      id: studentId,
-      name: studentName,
-      termWork: null,
-      examWork: null,
-      editable: false,
-      oldTermWork: null,
-      oldExamWork: null,
-      total: null,
-      grade: null,
-    };
-    this.students.push(newStudent);
-    this.filteredStudents = this.students;
+    this.gradeService
+      .addStudentToCourse(studentName, this.courseId, this.termId, studentId)
+      .subscribe((res) => {
+        console.log(res);
+        this.students.push({
+          student_id: studentId,
+          student: {
+            name: studentName,
+          },
+          termWork: null,
+          examWork: null,
+          editable: false,
+          oldTermWork: null,
+          oldExamWork: null,
+          total: null,
+          grade: null,
+        });
+        console.log(this.students);
+        this.filteredStudents = this.students;
+      });
   }
-
   // showStudentsWithNoGrades() {
   //   this.filteredStudents = this.students.filter((student) => {
   //     return !student.termWork || !student.examWork;
