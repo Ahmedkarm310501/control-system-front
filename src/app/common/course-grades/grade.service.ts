@@ -103,6 +103,26 @@ export class GradeService {
     );
   }
 
+  addOneStudentGrade(
+    course_id: string,
+    semester_id: string,
+    student_id: string,
+    term_work: number,
+    exam_work: number
+  ) {
+    return this.http.post(
+      `${this.baseUrl}/add-one-student-grade/`,
+      {
+        student_id: student_id,
+        course_id: course_id,
+        semester_id: semester_id,
+        term_work: term_work,
+        exam_work: exam_work,
+      },
+      { observe: 'response' }
+    );
+  }
+
   calculateGrade(total: number) {
     if (total >= 90) {
       return 'A+';

@@ -83,15 +83,30 @@ export class CourseGradesComponent implements OnInit {
       this.filteredStudents[index].examWork;
   }
   save(index: number, termWork: number, examWork: number) {
-    this.filteredStudents[index].editable =
-      !this.filteredStudents[index].editable;
-    this.filteredStudents[index].total = +termWork + +examWork;
-    this.calculateGrade(index);
-    // update old values
-    this.filteredStudents[index].oldTermWork =
-      this.filteredStudents[index].termWork;
-    this.filteredStudents[index].oldExamWork =
-      this.filteredStudents[index].examWork;
+    this.gradeService
+      .addOneStudentGrade(
+        this.courseId,
+        this.termId,
+        this.filteredStudents[index].student_id,
+        termWork,
+        examWork
+      )
+      .subscribe((res) => {
+        console.log(res);
+        if (res.status === 200) {
+          this.filteredStudents[index].editable =
+            !this.filteredStudents[index].editable;
+          this.filteredStudents[index].total_grade = +termWork + +examWork;
+          this.calculateGrade(index);
+          // update old values
+          this.filteredStudents[index].oldTermWork =
+            this.filteredStudents[index].termWork;
+          this.filteredStudents[index].oldExamWork =
+            this.filteredStudents[index].examWork;
+        } else {
+          this.cancel(index);
+        }
+      });
   }
 
   cancel(index: number) {
@@ -105,7 +120,7 @@ export class CourseGradesComponent implements OnInit {
 
   calculateGrade(index: number) {
     this.filteredStudents[index].grade = this.gradeService.calculateGrade(
-      this.filteredStudents[index].total
+      this.filteredStudents[index].total_grade
     );
   }
 
