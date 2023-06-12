@@ -36,12 +36,8 @@
               type="file"
               #f
               style="display: none"
-              (change)="onFileChangeGrades($event)"
-              appReadExcel
-              [file]="gradesFile"
-              (uploaded)="onExcelUploadGrades($event)"
-              data-bs-toggle="modal"
-              data-bs-target="exampleModalll"
+              #fileInput1
+              (change)="onExcelUploadGrades(fileInput1.files)"
             />Upload Grades
           </a>
           <a class="dropdown-item" (click)="fG.click()" style="cursor: pointer"
@@ -60,7 +56,12 @@
             data-bs-target="#exampleModal"
             ><input style="display: none" />Add One Student
           </a>
-          <a class="dropdown-item" style="cursor: pointer">Export Grades</a>
+          <a
+            class="dropdown-item"
+            style="cursor: pointer"
+            (click)="exportGrades()"
+            >Export Grades</a
+          >
           <a
             class="dropdown-item"
             style="cursor: pointer"

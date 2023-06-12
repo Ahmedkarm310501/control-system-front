@@ -35,6 +35,7 @@ type response = {
     ];
   };
 };
+// excel file response data
 
 @Injectable({
   providedIn: 'root',
@@ -120,6 +121,45 @@ export class GradeService {
         exam_work: exam_work,
       },
       { observe: 'response' }
+    );
+  }
+
+  deleteAllStudentGrades(course_id: string, semester_id: string) {
+    return this.http.post(
+      `${this.baseUrl}/delete-course-grades/`,
+      {
+        course_id: course_id,
+        semester_id: semester_id,
+      },
+      { observe: 'response' }
+    );
+  }
+  addStudentGradesExcel(course_id: string, semester_id: string, file: File) {
+    const formData = new FormData();
+    formData.append('students', file);
+    formData.append('course_id', course_id);
+    formData.append('semester_id', semester_id);
+
+    return this.http.post<ResponseData2>(
+      `${this.baseUrl}/add-students-grades-excel`,
+      formData,
+      {
+        observe: 'response',
+      }
+    );
+  }
+
+  exportGradesToExcel(course_id: string, semester_id: string) {
+    return this.http.post(
+      `${this.baseUrl}/export-course-grades`,
+      {
+        course_id: course_id,
+        semester_id: semester_id,
+      },
+      {
+        responseType: 'blob',
+        observe: 'response',
+      }
     );
   }
 
