@@ -25,20 +25,46 @@ export class CourseGradesComponent implements OnInit {
   ) {}
   gradesFile: File;
   namesFile: File;
-  id = this.route.snapshot.paramMap.get('courseId');
+  courseId = this.route.snapshot.paramMap.get('courseId');
+  termId = this.route.snapshot.paramMap.get('termId');
   courseCode: string;
   courseName: string;
   deptName: string;
+  students: any;
+  filteredStudents: any;
+  ngOnInit(): void {
+    console.log(this.courseId);
+    this.gradeService.getCourseData(this.courseId).subscribe((res) => {
+      console.log(res);
+      this.courseCode = res.data.course_code;
+      this.courseName = res.data.name;
+      this.deptName = res.data.deptName;
+    });
 
-  students = studData.map((student) => {
-    return {
-      ...student,
-      editable: false,
-      oldTermWork: student.termWork,
-      oldExamWork: student.examWork,
-    };
-  });
-  filteredStudents = this.students;
+    this.gradeService
+      .getCourseGrades(this.courseId, this.termId)
+      .subscribe((res) => {
+        console.log(res);
+        this.students = res.data.map((student) => {
+          return {
+            ...student,
+            editable: false,
+            oldTermWork: student.term_work,
+            oldExamWork: student.exam_work,
+          };
+        });
+        this.filteredStudents = this.students;
+      });
+  }
+  // students = studData.map((student) => {
+  //   return {
+  //     ...student,
+  //     editable: false,
+  //     oldTermWork: student.termWork,
+  //     oldExamWork: student.examWork,
+  //   };
+  // });
+
   isShown = false;
   shown() {
     this.isShown = !this.isShown;
@@ -86,16 +112,6 @@ export class CourseGradesComponent implements OnInit {
     console.log(this.students);
     this.filteredStudents = this.students.filter((student) => {
       return student.id.toString().includes(searchTerm);
-    });
-  }
-
-  ngOnInit(): void {
-    console.log(this.id);
-    this.gradeService.getCourseData(this.id).subscribe((res) => {
-      console.log(res);
-      this.courseCode = res.data.course_code;
-      this.courseName = res.data.name;
-      this.deptName = res.data.deptName;
     });
   }
 

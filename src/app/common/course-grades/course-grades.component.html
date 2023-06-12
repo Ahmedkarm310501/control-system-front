@@ -160,14 +160,14 @@
     <tbody>
       <tr *ngFor="let student of filteredStudents; let i = index">
         <th scope="row">{{ i + 1 }}</th>
-        <td>{{ student.id }}</td>
-        <td>{{ student.name }}</td>
+        <td>{{ student.student_id }}</td>
+        <td>{{ student.student.name }}</td>
         <td>
           <input
             type="number"
             [max]="40"
             [min]="0"
-            [(ngModel)]="student.termWork"
+            [(ngModel)]="student.term_work"
             [disabled]="!student.editable"
             #termWorkInput="ngModel"
             style="width: 100%"
@@ -194,7 +194,7 @@
             type="number"
             [max]="60"
             [min]="0"
-            [(ngModel)]="student.examWork"
+            [(ngModel)]="student.exam_work"
             required
             [disabled]="!student.editable"
             #examWorkInput="ngModel"
@@ -217,7 +217,7 @@
             </div>
           </div>
         </td>
-        <td>{{ student.total }}</td>
+        <td>{{ student.total_grade }}</td>
 
         <td>{{ student.grade }}</td>
 

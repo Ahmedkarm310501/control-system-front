@@ -46,7 +46,7 @@ const routes: Routes = [
     children: [
       { path: '', component: HomeScreenComponent },
       {
-        path: 'course/:courseId/:terdId',
+        path: 'course/:courseId/:termId',
         data: { breadcrumb: 'Course Grades' },
         canActivate: [AuthGuard],
         children: [
@@ -118,8 +118,7 @@ const routes: Routes = [
     path: 'all-courses',
     component: AllCoursesComponent,
     canActivate: [AuthGuard],
-    data: { breadcrumb: 'All Courses'}
-
+    data: { breadcrumb: 'All Courses' },
   },
 
   {

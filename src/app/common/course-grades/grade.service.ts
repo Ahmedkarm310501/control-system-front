@@ -7,6 +7,22 @@ type ResponseData = {
   data: { id: string; name: string; deptName: string; course_code: string };
 };
 
+type ResponseData2 = {
+  message: string;
+  data: [
+    {
+      student_id: string;
+      term_work: number;
+      exam_work: number;
+      total_grade: number;
+      grade: string;
+      student: {
+        name: string;
+      };
+    }
+  ];
+};
+
 @Injectable({
   providedIn: 'root',
 })
@@ -17,6 +33,12 @@ export class GradeService {
 
   getCourseData(courseId: string) {
     return this.http.get<ResponseData>(`${this.baseUrl}/courses/${courseId}`);
+  }
+
+  getCourseGrades(courseId: string, termId: string) {
+    return this.http.get<ResponseData2>(
+      `${this.baseUrl}/course-grades/${courseId}/${termId}`
+    );
   }
 
   calculateGrade(total: number) {
