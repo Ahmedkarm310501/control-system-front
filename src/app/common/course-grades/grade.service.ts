@@ -22,6 +22,19 @@ type ResponseData2 = {
     }
   ];
 };
+type response = {
+  message: string;
+  data: {
+    students: [
+      {
+        student_id: string;
+        student: {
+          name: string;
+        };
+      }
+    ];
+  };
+};
 
 @Injectable({
   providedIn: 'root',
@@ -54,6 +67,37 @@ export class GradeService {
         course_id: course_id,
         semester_id: semester_id,
         student_id: student_id,
+      },
+      { observe: 'response' }
+    );
+  }
+
+  addStudentsToCourse(course_id: string, semester_id: string, file: File) {
+    const formData = new FormData();
+    formData.append('students', file);
+    formData.append('course_id', course_id);
+    formData.append('semester_id', semester_id);
+
+    return this.http.post<response>(
+      `${this.baseUrl}/add-students-to-course-excel`,
+      formData,
+      {
+        observe: 'response',
+      }
+    );
+  }
+
+  deleteStudentFromCourse(
+    course_id: string,
+    semester_id: string,
+    student_id: string
+  ) {
+    return this.http.post(
+      `${this.baseUrl}/delete-student-from-course/`,
+      {
+        student_id: student_id,
+        course_id: course_id,
+        semester_id: semester_id,
       },
       { observe: 'response' }
     );

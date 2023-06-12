@@ -32,6 +32,7 @@ export class CourseGradesComponent implements OnInit {
   deptName: string;
   students: any;
   filteredStudents: any;
+  deleteStudent = false;
   ngOnInit(): void {
     console.log(this.courseId);
     this.gradeService.getCourseData(this.courseId).subscribe((res) => {
@@ -295,6 +296,55 @@ export class CourseGradesComponent implements OnInit {
         this.filteredStudents = this.students;
       });
   }
+
+  onFileSelected(files: FileList) {
+    const file = files[0];
+
+    this.gradeService
+      .addStudentsToCourse(this.courseId, this.termId, file)
+      .subscribe((res) => {
+        let newStudents = res.body.data.students.map((student) => {
+          return {
+            student_id: student.student_id,
+            student: {
+              name: student.student.name,
+            },
+            termWork: null,
+            examWork: null,
+            editable: false,
+            oldTermWork: null,
+            oldExamWork: null,
+            total: null,
+            grade: null,
+          };
+        });
+        // check if any of the new students already exist in the students array
+        this.students = this.students.concat(
+          newStudents.filter((newStudent) => {
+            return !this.students.some(
+              (student) => +student.student_id === +newStudent.student_id
+            );
+          })
+        );
+
+        this.filteredStudents = this.students;
+      });
+  }
+
+  DeleteStudent(studentId: string) {
+    this.deleteStudent = true;
+    console.log(studentId);
+    this.gradeService
+      .deleteStudentFromCourse(this.courseId, this.termId, studentId)
+      .subscribe((res) => {
+        console.log(res);
+        this.students = this.students.filter((student) => {
+          return +student.student_id !== +studentId;
+        });
+        this.filteredStudents = this.students;
+      });
+  }
+
   // showStudentsWithNoGrades() {
   //   this.filteredStudents = this.students.filter((student) => {
   //     return !student.termWork || !student.examWork;
@@ -316,5 +366,10 @@ export class CourseGradesComponent implements OnInit {
   }
   closeModal4() {
     this.IsInvalidRecords = false;
+  }
+
+  closeModal5() {
+    this.errorMsg = 'Are you sure you want to delete this student ?';
+    this.deleteStudent = false;
   }
 }

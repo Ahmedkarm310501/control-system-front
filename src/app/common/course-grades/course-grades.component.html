@@ -49,10 +49,8 @@
               type="file"
               #fG
               style="display: none"
-              (change)="onFileChangeNames($event)"
-              appReadExcel
-              [file]="namesFile"
-              (uploaded)="onExcelUploadNames($event)"
+              #fileInput
+              (change)="onFileSelected(fileInput.files)"
             />Add Student Names
           </a>
           <a
@@ -230,6 +228,15 @@
             (click)="edit(i)"
           >
             Edit
+          </button>
+          <button
+            *ngIf="!student.editable"
+            style="margin-right: 5px"
+            class="btn btn-danger btn-sm"
+            type="button"
+            (click)="DeleteStudent(student.student_id)"
+          >
+            Delete
           </button>
           <button
             *ngIf="student.editable"
@@ -427,6 +434,17 @@
     <p>{{ errorMsg2 }}</p>
   </div>
   <div modal-footer>
+    <button class="btn btn-primary" (click)="closeModal4()">Close</button>
+  </div>
+</app-modal>
+
+<app-modal (closeModal)="closeModal5()" [show]="IsInvalidRecords">
+  <div modal-title>Alert</div>
+  <div modal-body>
+    <p>{{ errorMsg2 }}</p>
+  </div>
+  <div modal-footer>
+    <button class="btn btn-danger" (click)="closeModal4()">Delete</button>
     <button class="btn btn-primary" (click)="closeModal4()">Close</button>
   </div>
 </app-modal>
