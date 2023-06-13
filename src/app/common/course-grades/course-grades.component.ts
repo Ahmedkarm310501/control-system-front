@@ -1,13 +1,5 @@
-import {
-  Component,
-  ElementRef,
-  OnInit,
-  ViewChild,
-  Renderer2,
-} from '@angular/core';
-import { studData } from './stud-data';
+import { Component, OnInit } from '@angular/core';
 import { GradeService } from './grade.service';
-import { ReadExcelDirective } from '../directives/read-excel.directive';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -16,11 +8,8 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./course-grades.component.css'],
 })
 export class CourseGradesComponent implements OnInit {
-  @ViewChild('f') fileRef: ElementRef;
-  @ViewChild('fG') fileRefgrade: ElementRef;
   constructor(
     private gradeService: GradeService,
-    private renderer: Renderer2,
     private route: ActivatedRoute
   ) {}
   gradesFile: File;
@@ -56,22 +45,6 @@ export class CourseGradesComponent implements OnInit {
         });
         this.filteredStudents = this.students;
       });
-  }
-  // students = studData.map((student) => {
-  //   return {
-  //     ...student,
-  //     editable: false,
-  //     oldTermWork: student.termWork,
-  //     oldExamWork: student.examWork,
-  //   };
-  // });
-
-  isShown = false;
-  shown() {
-    this.isShown = !this.isShown;
-  }
-  close() {
-    this.isShown = false;
   }
 
   edit(index: number) {
@@ -171,9 +144,6 @@ export class CourseGradesComponent implements OnInit {
 
     const invalidRecords = data.filter((row: any) => !row.id || !row.name);
     if (invalidRecords.length > 0) {
-      // alert(
-      //   ` ${invalidRecords.length} rows were not added. Please make sure each row has both an ID and name.`
-      // );
       this.errorMsg2 = `${invalidRecords.length} rows were not added. Please make sure each row has both an ID and name.`;
       this.IsInvalidRecords = true;
     }
@@ -184,49 +154,6 @@ export class CourseGradesComponent implements OnInit {
   modalIsOpen = false;
   IsInvalid = false;
   errorMsg = '';
-  onExcelUploadGradess(data: any) {
-    console.log(data);
-    const validatedData = data.filter((excelStudent) => {
-      console.log(excelStudent);
-      const termWork = +excelStudent.termWork;
-      const examWork = +excelStudent.examWork;
-      // Check that term work is between 0 and 40, and exam work is between 0 and 60
-      if (termWork < 0 || termWork > 40 || examWork < 0 || examWork > 60) {
-        this.errorMsg = `Invalid data for student ${excelStudent.id}: termWork=${termWork}, examWork=${examWork}`;
-
-        this.IsInvalid = true;
-        return false;
-      }
-      return true;
-    });
-    console.log(`validatedData = ${JSON.stringify(validatedData)}`);
-
-    this.students = this.students.map((student) => {
-      const excelStudent = validatedData.find((s) => +s.id === +student.id);
-      if (excelStudent) {
-        return {
-          ...student,
-          termWork: excelStudent.termWork,
-          examWork: excelStudent.examWork,
-          total: +excelStudent.termWork + +excelStudent.examWork,
-          grade: this.gradeService.calculateGrade(
-            +excelStudent.termWork + +excelStudent.examWork
-          ),
-        };
-      } else {
-        this.missingStudents.push(student.id);
-        return student;
-      }
-    });
-
-    this.filteredStudents = this.students;
-
-    if (this.missingStudents.length > 0) {
-      this.modalIsOpen = true;
-    }
-
-    this.renderer.setProperty(this.fileRef.nativeElement, 'value', null);
-  }
 
   onExcelUploadGrades(files: FileList) {
     const file = files[0];
@@ -312,6 +239,7 @@ export class CourseGradesComponent implements OnInit {
     this.sortOrder = this.sortOrder * -1;
   }
   ISduplicated = false;
+
   onSubmit(Form) {
     let studentId = Form.value.studentId;
     let studentName = Form.value.studentName;
@@ -402,29 +330,12 @@ export class CourseGradesComponent implements OnInit {
         downloadLink.download = `${this.courseCode}-${this.termId}.xlsx`;
         downloadLink.click();
         console.log(res);
-        // const url = window.URL.createObjectURL(res.body);
-        // const a = document.createElement('a');
-        // a.href = url;
-        // a.download = `${this.courseCode}-${this.termId}.xlsx`;
-        // a.click();
-        // window.URL.revokeObjectURL(url);
-        // a.remove();
       },
       (err) => {
         console.log(err);
       }
     );
   }
-
-  // showStudentsWithNoGrades() {
-  //   this.filteredStudents = this.students.filter((student) => {
-  //     return !student.termWork || !student.examWork;
-  //   });
-  // }
-
-  // // openModal() {
-  // //   this.showModal = true;
-  // // }
 
   closeModal() {
     this.modalIsOpen = false;
