@@ -15,22 +15,25 @@ export class SidebarComponent implements OnInit, OnDestroy {
     private authService: AuthService
   ) {}
 
+  toggleDisplay: any;
   ngOnInit(): void {
     this.userName = this.authService.user.value.userName;
     this.sidebarService.sideBarOpen.subscribe((res) => {
       this.sideBarOpen = res;
     });
+    this.sidebarService.toggleDisplay.subscribe((res) => {
+      this.toggleDisplay = res;
+    });
   }
 
-  toggleDisplay: any = {};
-
   clickEvent(name: string) {
-    this.toggleDisplay[name] = !this.toggleDisplay[name];
-    for (let key in this.toggleDisplay) {
-      if (key !== name) {
-        this.toggleDisplay[key] = false;
-      }
-    }
+    // this.toggleDisplay[name] = !this.toggleDisplay[name];
+    // for (let key in this.toggleDisplay) {
+    //   if (key !== name) {
+    //     this.toggleDisplay[key] = false;
+    //   }
+    // }
+    this.sidebarService.toggleDisplayFunc(name);
   }
 
   ngOnDestroy() {
