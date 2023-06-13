@@ -19,18 +19,14 @@
       </div>
       <div class="dropdown">
         <button
-          (click)="shown()"
           class="btn btn-prim dropdown-toggle"
           type="button"
-          id="dropdownMenuButton"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
         >
           Course Options
         </button>
-        <div
-          [ngClass]="{ show: isShown }"
-          class="dropdown-menu"
-          aria-labelledby="dropdownMenuButton"
-        >
+        <div class="dropdown-menu">
           <a class="dropdown-item" (click)="f.click()" style="cursor: pointer"
             ><input
               type="file"
