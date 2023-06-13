@@ -19,29 +19,21 @@
       </div>
       <div class="dropdown">
         <button
-          (click)="shown()"
           class="btn btn-prim dropdown-toggle"
           type="button"
-          id="dropdownMenuButton"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
         >
           Course Options
         </button>
-        <div
-          [ngClass]="{ show: isShown }"
-          class="dropdown-menu"
-          aria-labelledby="dropdownMenuButton"
-        >
+        <div class="dropdown-menu">
           <a class="dropdown-item" (click)="f.click()" style="cursor: pointer"
             ><input
               type="file"
               #f
               style="display: none"
-              (change)="onFileChangeGrades($event)"
-              appReadExcel
-              [file]="gradesFile"
-              (uploaded)="onExcelUploadGrades($event)"
-              data-bs-toggle="modal"
-              data-bs-target="exampleModalll"
+              #fileInput1
+              (change)="onExcelUploadGrades(fileInput1.files)"
             />Upload Grades
           </a>
           <a class="dropdown-item" (click)="fG.click()" style="cursor: pointer"
@@ -49,10 +41,8 @@
               type="file"
               #fG
               style="display: none"
-              (change)="onFileChangeNames($event)"
-              appReadExcel
-              [file]="namesFile"
-              (uploaded)="onExcelUploadNames($event)"
+              #fileInput
+              (change)="onFileSelected(fileInput.files)"
             />Add Student Names
           </a>
           <a
@@ -62,7 +52,12 @@
             data-bs-target="#exampleModal"
             ><input style="display: none" />Add One Student
           </a>
-          <a class="dropdown-item" style="cursor: pointer">Export Grades</a>
+          <a
+            class="dropdown-item"
+            style="cursor: pointer"
+            (click)="exportGrades()"
+            >Export Grades</a
+          >
           <a
             class="dropdown-item"
             style="cursor: pointer"
@@ -160,14 +155,14 @@
     <tbody>
       <tr *ngFor="let student of filteredStudents; let i = index">
         <th scope="row">{{ i + 1 }}</th>
-        <td>{{ student.id }}</td>
-        <td>{{ student.name }}</td>
+        <td>{{ student.student_id }}</td>
+        <td>{{ student.student.name }}</td>
         <td>
           <input
             type="number"
             [max]="40"
             [min]="0"
-            [(ngModel)]="student.termWork"
+            [(ngModel)]="student.term_work"
             [disabled]="!student.editable"
             #termWorkInput="ngModel"
             style="width: 100%"
@@ -194,7 +189,7 @@
             type="number"
             [max]="60"
             [min]="0"
-            [(ngModel)]="student.examWork"
+            [(ngModel)]="student.exam_work"
             required
             [disabled]="!student.editable"
             #examWorkInput="ngModel"
@@ -217,7 +212,7 @@
             </div>
           </div>
         </td>
-        <td>{{ student.total }}</td>
+        <td>{{ student.total_grade }}</td>
 
         <td>{{ student.grade }}</td>
 
@@ -230,6 +225,15 @@
             (click)="edit(i)"
           >
             Edit
+          </button>
+          <button
+            *ngIf="!student.editable"
+            style="margin-right: 5px"
+            class="btn btn-danger btn-sm"
+            type="button"
+            (click)="DeleteStudent(student.student_id)"
+          >
+            Delete
           </button>
           <button
             *ngIf="student.editable"
@@ -427,6 +431,17 @@
     <p>{{ errorMsg2 }}</p>
   </div>
   <div modal-footer>
+    <button class="btn btn-primary" (click)="closeModal4()">Close</button>
+  </div>
+</app-modal>
+
+<app-modal (closeModal)="closeModal5()" [show]="IsInvalidRecords">
+  <div modal-title>Alert</div>
+  <div modal-body>
+    <p>{{ errorMsg2 }}</p>
+  </div>
+  <div modal-footer>
+    <button class="btn btn-danger" (click)="closeModal4()">Delete</button>
     <button class="btn btn-primary" (click)="closeModal4()">Close</button>
   </div>
 </app-modal>

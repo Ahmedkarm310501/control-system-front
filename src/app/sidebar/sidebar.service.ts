@@ -6,6 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 export class SidebarService {
   //   sideBarOpen = true;
   sideBarOpen = new BehaviorSubject<boolean>(true);
+  toggleDisplay = new BehaviorSubject<any>({});
   constructor() {}
 
   toggleSideBar() {
@@ -13,8 +14,10 @@ export class SidebarService {
     this.sideBarOpen.next(!this.sideBarOpen.value);
   }
 
-  getSideBarStatus() {
-    // return this.sideBarOpen;
-    return this.sideBarOpen.asObservable();
+  toggleDisplayFunc(curr: any) {
+    this.toggleDisplay.next({
+      // ...this.toggleDisplay.value,
+      [curr]: !this.toggleDisplay.value[curr],
+    });
   }
 }
