@@ -11,13 +11,12 @@ export class ConfigureSemesterComponent implements OnInit {
   constructor(
     private allCourses: AllCoursesService,
     private configureSemester: ConfigureSemesterService
-
-  ) { }
+  ) {}
   courses: any = [];
 
   filteredData: any;
   departments: any = [];
-  
+
   ngOnInit(): void {
     // display all courses
     this.allCourses.getAllCourses().subscribe(
@@ -39,38 +38,28 @@ export class ConfigureSemesterComponent implements OnInit {
     this.configureSemester.getAllDepartments().subscribe((res) => {
       this.departments = res.data;
       console.log(this.departments);
-    }
-    );
-
-      
+    });
   }
 
   selectedCourses = [];
 
   move() {
-  
-      this.selectedCourses = this.selectedCourses.concat(
-        this.courses.filter((item) => item.checked)
-      );
-      
+    this.selectedCourses = this.selectedCourses.concat(
+      this.courses.filter((item) => item.checked)
+    );
 
     // this.selectedCourses = this.courses.filter(
     //   (item) => item.checked
     // );
-    this.courses = this.courses.filter(
-      (item) => !item.checked
-    );
+    this.courses = this.courses.filter((item) => !item.checked);
     this.filteredData = this.courses;
   }
   moveBack() {
     this.courses = this.courses.concat(
       this.selectedCourses.filter((item) => item.checked)
     );
-    this.selectedCourses = this.selectedCourses.filter(
-      (item) => !item.checked
-    );
+    this.selectedCourses = this.selectedCourses.filter((item) => !item.checked);
     this.filteredData = this.courses;
-    
   }
   // filter by department
   onSelectDepartment(event: any) {
@@ -80,7 +69,21 @@ export class ConfigureSemesterComponent implements OnInit {
     }
     const id = event.target.value;
     console.log(id);
-    this.filteredData = this.courses.filter((item: any) => item.department.dept_code == id);
+    this.filteredData = this.courses.filter(
+      (item: any) => item.department.dept_code == id
+    );
     console.log(this.filteredData);
+  }
+  // search by course name
+  search(event: any) {
+    if (event.target.value === null || event.target.value === '') {
+      this.filteredData = this.courses;
+      return;
+    }
+
+    const value = event.target.value.toLowerCase();
+    this.filteredData = this.courses.filter((item) =>
+      item.name.toLowerCase().includes(value)
+    );
   }
 }

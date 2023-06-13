@@ -23,6 +23,7 @@
             <option value="all">All Departments</option>
             <option *ngFor="let department of departments" [value]="department.dept_code">{{department.dept_code}}</option>
         </select>
+        <input class="search" type="text"placeholder="Search..." (change)="search($event)" >
     </div>
 
     <div style="margin: auto;" class="row">
