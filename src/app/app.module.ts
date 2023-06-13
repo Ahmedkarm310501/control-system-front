@@ -34,6 +34,8 @@ import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 import { SnackbarComponent } from './components/snackbar/snackbar.component';
 import { AllCoursesComponent } from './admin/pages/all-courses/all-courses.component';
+import { AddSemesterComponent } from './admin/pages/add-semester/add-semester.component';
+import { ConfigureSemesterComponent } from './admin/pages/configure-semester/configure-semester.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +69,8 @@ import { AllCoursesComponent } from './admin/pages/all-courses/all-courses.compo
     LoadingSpinnerComponent,
     SnackbarComponent,
     AllCoursesComponent,
+    AddSemesterComponent,
+    ConfigureSemesterComponent,
   ],
   imports: [
     BrowserModule,
