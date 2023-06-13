@@ -1,5 +1,5 @@
 .header {
-  margin-bottom: 5vh;
+  margin-bottom: 4vh;
 }
 .save-but{
   margin-top: 1vh
@@ -13,11 +13,22 @@
 
 .left-cont {
   border: 1px solid black;
-  min-height: 50vh;
-  border-radius: 20px;
+  height: 50vh;
+  border-radius: 10px;
   padding: 0;
   margin: 0;
+  overflow: auto;
 }
+.left-cont::-webkit-scrollbar-thumb {
+  background-color: grey;
+  border: 4px solid transparent;
+  border-radius: 8px;
+  background-clip: padding-box;  
+}
+.left-cont::-webkit-scrollbar {
+  width: 16px;
+}
+
 .left-cont div {
   display: flex;
   flex-direction: row;
@@ -41,12 +52,23 @@
   display: flex;
   flex-direction: row;
 }
+
 .right-cont {
   border: 1px solid black;
-  min-height: 50vh;
-  border-radius: 20px;
+  height: 50vh;
+  border-radius: 10px;
   padding: 0;
   margin: 0;
+  overflow: auto;
+}
+.right-cont::-webkit-scrollbar-thumb {
+  background-color: grey;
+  border: 4px solid transparent;
+  border-radius: 8px;
+  background-clip: padding-box;  
+}
+.right-cont::-webkit-scrollbar {
+  width: 16px;
 }
 .but-container {
   display: flex;
@@ -61,7 +83,7 @@
 .but-container button {
   background-color: var(--main-color);
   border: none;
-  width: 20%;
+  width: 30%;
 }
 input[type="checkbox"] {
   width: 20px;
@@ -69,10 +91,54 @@ input[type="checkbox"] {
 }
 .dep {
   padding: 10px;
-  width: 37%;
   border-radius: 10px;
   margin-bottom: 20px;
 }
-.dep option {
-  border-radius: 20px;
+
+
+.filters{
+  display: flex;
+  flex-direction: column;
+  width: 37%;
+}
+
+.search{
+  border: 1px solid gray;
+  border-radius: 10px;
+  padding: 7px;
+  margin-bottom: 20px;
+}
+
+@media screen and (max-width: 768px) {
+  .left-cont {
+    height: 30vh;
+  }
+  .right-cont {
+    height: 30vh;
+  }
+  .filters{
+    width: 100%;
+  }
+  .but-container button {
+    width: 50%;
+  }
+  .save-but button{
+    width: 100%;
+  }
+  .but-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .mid-cont{
+    max-width: 100%;
+    display: flex;
+    margin-top: -20px;
+    margin-bottom: 40px;
+
+  }
+  .but-container button {
+    width: 15vh;
+  }
 }
