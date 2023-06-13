@@ -21,6 +21,8 @@ import { AdminDataComponent } from './config/admin-data/admin-data.component';
 import { SystemSettingsComponent } from './config/system-settings/system-settings.component';
 import { AllCoursesComponent } from './admin/pages/all-courses/all-courses.component';
 import { DissAllowGuard } from './auth/diss-allow.guard';
+import { AddSemesterComponent } from './admin/pages/add-semester/add-semester.component';
+import { ConfigureSemesterComponent } from './admin/pages/configure-semester/configure-semester.component';
 // import { UserDataComponent } from './config/user-data/user-data.component';
 
 const routes: Routes = [
@@ -92,6 +94,18 @@ const routes: Routes = [
     component: AdminLogComponent,
     canActivate: [AuthGuard],
     data: { breadcrumb: 'Admin Log' },
+  },
+  {
+    path: 'add-semester',
+    component: AddSemesterComponent,
+    canActivate: [AuthGuard],
+    data: { breadcrumb: 'Add Semester' },
+  },
+  {
+    path: 'configure-semester',
+    component: ConfigureSemesterComponent,
+    canActivate: [AuthGuard],
+    data: { breadcrumb: 'Configure Semester' },
   },
   {
     path: 'add-course',

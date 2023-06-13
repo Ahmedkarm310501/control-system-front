@@ -1,0 +1,9 @@
+.but-style {
+  display: flex;
+  width: auto;
+  justify-content: center;
+}
+.but-style button {
+  background: var(--main-color);
+  color: white;
+}
