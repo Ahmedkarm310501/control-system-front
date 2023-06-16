@@ -1,3 +1,4 @@
+<app-snackbar #snackbar message={{message}} type={{type}}></app-snackbar>
 <div class="setup">
     <div class="container h-100">
         <div class="row h-100 justify-content-center">
@@ -18,12 +19,12 @@
                     </div>
 
                     <div class="col-md-6 from-group">
-                        <label for="enum" class="form-label">Semester<span class="required">*</span></label>
+                        <label for="term" class="form-label">Semester<span class="required">*</span></label>
 
-                        <select class="form-control" name="enum" id="exampleFormControlSelect1" ngModel required #enum="ngModel" >
-                            <option value="1">1st Semester</option>
-                            <option value="2">2nd Semester</option>
-                            <option value="3">3rd Semester</option>
+                        <select class="form-control" name="term" value="term" id="exampleFormControlSelect1" ngModel required #enum="ngModel" >
+                            <option value="first">1st Semester</option>
+                            <option value="second">2nd Semester</option>
+                            <option value="third">3rd Semester</option>
                         </select>
                         <div *ngIf="enum && enum.invalid && (enum.dirty || enum.touched)">
                             <div *ngIf="enum.errors && enum.errors['required']" class="error">

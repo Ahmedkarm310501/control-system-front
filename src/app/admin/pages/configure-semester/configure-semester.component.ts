@@ -13,9 +13,9 @@ export class ConfigureSemesterComponent implements OnInit {
     private configureSemester: ConfigureSemesterService
   ) {}
   courses: any = [];
-
   filteredData: any;
   departments: any = [];
+  semester: any = [];
 
   ngOnInit(): void {
     // display all courses
@@ -39,6 +39,16 @@ export class ConfigureSemesterComponent implements OnInit {
       this.departments = res.data;
       console.log(this.departments);
     });
+
+    this.configureSemester.getCurrentSemester().subscribe((res) => {
+      this.semester = res.data;
+      console.log(this.semester);
+    }, err => {
+      console.log(err);
+    }
+    );
+
+      
   }
 
   selectedCourses = [];

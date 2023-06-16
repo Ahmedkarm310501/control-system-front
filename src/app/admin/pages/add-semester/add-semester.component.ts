@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { AddSemesterService } from './add-semester.service';
+import { SnackbarComponent } from 'src/app/components/snackbar/snackbar.component';
 
 @Component({
   selector: 'app-add-semester',
@@ -7,12 +9,37 @@ import { Router } from '@angular/router';
   styleUrls: ['./add-semester.component.css'],
 })
 export class AddSemesterComponent implements OnInit {
-  constructor(private router: Router) {}
+  @ViewChild('snackbar') snackbar: SnackbarComponent;
+  message: string;
+  type: string;
+  constructor(
+    private router: Router,
+    private addSemester: AddSemesterService
+  ) {}
 
   ngOnInit(): void {}
+  semester: any = [];
   onSubmit(form: any) {
+    this.addSemester.addSemester(form.year, form.term).subscribe(
+      (res) => {
+        this.semester = res.data;
+        this.message = 'Semester Added Successfully';
+        this.type = 'success';
+
+        this.snackbar.show();
+        setTimeout(() => {
+          this.router.navigate(['/configure-semester']);
+        }
+        , 2000);  
+      },
+      (err) => {
+        this.message = err.error.message;
+        this.type = 'failed';
+        this.snackbar.show();
+      }
+    );
     console.log('Form Submitted!');
     // navigate to configure semester page
-    this.router.navigate(['/configure-semester']);
+    // this.router.navigate(['/configure-semester']);
   }
 }
