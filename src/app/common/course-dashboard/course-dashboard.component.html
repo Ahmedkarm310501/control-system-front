@@ -5,69 +5,33 @@
       <div class="card-body">
         <div class="select-course row g-3">
           <div class="select col-6">
-            <select
-              name="dept"
-              class="w-100"
-              [(ngModel)]="selectedDepartment"
-              (change)="onDepartmentSelected()"
-            >
+            <select name="dept" class="w-100" [(ngModel)]="selectedDepartment" (change)="onSelectDepartment($event)">
               <option value="0">Select Department</option>
-              <option value="GE">General</option>
-              <option value="CS">Computer Science</option>
-              <option value="IS">Information Systems</option>
-              <option value="IT">Information Technology</option>
-              <option value="DS">Decision Support</option>
-              <option value="AI">Artificial Intelligence</option>
+              <option *ngFor="let dept of departments" value={{dept.dept_code}}>{{dept.dept_code}}</option>
             </select>
           </div>
           <div class="select col-6">
-            <select
-              name="course"
-              class="w-100"
-              [(ngModel)]="selectedCourse"
-              (change)="onCourseSelected()"
-            >
+            <select name="course" class="w-100" [(ngModel)]="selectedCourse" (change)="getGraphs($event)">
               <option value="0">Select Course</option>
-              <option value="CS101">Introduction to Computer Science</option>
-              <option value="CS102">Introduction to Programming</option>
-              <option value="CS103">Data Structures</option>
-              <option value="CS104">Algorithms</option>
-              <option value="CS105">Computer Architecture</option>
-              <option value="CS106">Math 2</option>
+              <option *ngFor="let course of filteredData" value={{course.id}}>{{course.course_code}}</option>
             </select>
           </div>
         </div>
       </div>
     </div>
-    <ng-container *ngIf="selectedCourse && selectedDepartment">
+    <ng-container *ngIf="show">
       <div class="card mt-4">
         <div class="card-header m-0 fw-bold fs-4">Course Grades Analysis</div>
         <div class="card-body">
           <div class="select-course row g-3">
-            <app-box
-              class="col-3"
-              [number]="476"
-              [name]="'Number Of Students'"
-              [color]="'10px solid var(--main-color)'"
-            ></app-box>
-            <app-box
-              class="col-3"
-              [number]="79"
-              [name]="'Average Grade'"
-              [color]="'10px solid var(--main-color)'"
-            ></app-box>
-            <app-box
-              class="col-3"
-              [number]="400"
-              [name]="'Passed Students'"
-              [color]="'10px solid var(--main-color)'"
-            ></app-box>
-            <app-box
-              class="col-3"
-              [number]="76"
-              [name]="'Failed Students'"
-              [color]="'10px solid var(--main-color)'"
-            ></app-box>
+            <app-box class="col-3" [number]="graphOne.number_of_students" [name]="'Number Of Students'"
+              [color]="'10px solid var(--main-color)'"></app-box>
+            <app-box class="col-3" [number]="graphOne.average_grade" [name]="'Average Grade'"
+              [color]="'10px solid var(--main-color)'"></app-box>
+            <app-box class="col-3" [number]="graphOne.passed_students" [name]="'Passed Students'"
+              [color]="'10px solid var(--main-color)'"></app-box>
+            <app-box class="col-3" [number]="graphOne.failed_students" [name]="'Failed Students'"
+              [color]="'10px solid var(--main-color)'"></app-box>
           </div>
         </div>
       </div>
@@ -77,13 +41,13 @@
           <div class="select-course row g-3">
             <div class="select col-8">
               <div class="text-center">
-                <app-bar-chart></app-bar-chart>
+                <app-bar-chart width="327px" [data1]="bar"></app-bar-chart>
                 <h4>Student Grades Distribution</h4>
               </div>
             </div>
             <div class="select col-4">
               <div class="text-center">
-                <app-pie-chart></app-pie-chart>
+                <app-pie-chart  [data1]="pie"></app-pie-chart>
                 <h4>Pass / Fail ratio</h4>
               </div>
             </div>
@@ -138,10 +102,7 @@
         </div>
       </div>
     </ng-container>
-    <div
-      class="fallback-text mt-5"
-      *ngIf="!(selectedCourse && selectedDepartment)"
-    >
+    <div class="fallback-text mt-5" *ngIf="!(selectedCourse && selectedDepartment)">
       <h1 class="text-center">Please Select A Course</h1>
     </div>
   </div>

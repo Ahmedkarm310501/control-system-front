@@ -12,7 +12,7 @@
         </div>
     </header>
     <div class="col-2 save-but">
-        <button class="btn">Save</button>
+        <button class="btn" (click)="saveSemester()">Save</button>
     </div>
 </div>
 
@@ -21,12 +21,17 @@
     <div class="filters">
         <select class="dep" name="departments" id="dep" (change)="onSelectDepartment($event)">
             <option value="all">All Departments</option>
-            <option *ngFor="let department of departments" [value]="department.dept_code">{{department.dept_code}}</option>
+            <option *ngFor="let department of departments" [value]="department.dept_code">{{department.dept_code}}
+            </option>
         </select>
-        <input class="search" type="text"placeholder="Search..." (change)="search($event)" >
+        <div class="select-all">
+            <input type="checkbox" name="select" id="select">
+            <label for="select">Select All</label>
+        </div>
+        <input class="search" type="text" placeholder="Search..." (change)="search($event)">
     </div>
 
-    <div style="margin: auto;" class="row">
+    <div style="margin: auto;" class="row conts">
         <div class="col-md left-cont">
             <div class="left-courses" *ngFor="let course of filteredData">
                 <input type="checkbox" [(ngModel)]="course.checked">
@@ -39,10 +44,9 @@
         </div>
         <div class="col-sm mid-cont">
             <div class="but-container">
-                <button class="btn btn-primary" (click)="move()">>></button>
-                <button class="btn btn-primary" (click)="moveBack()">
-                    << 
-                </button>
+                <button class="btn btn-primary btn-1" (click)="move()">>></button>
+                <button class="btn btn-primary btn-2" (click)="moveBack()">
+                    << </button>
 
             </div>
 

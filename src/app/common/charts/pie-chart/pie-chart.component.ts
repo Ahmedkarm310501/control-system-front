@@ -1,17 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Chart } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
+import { CourseDashboardComponent } from '../../course-dashboard/course-dashboard.component';
+
 @Component({
   selector: 'app-pie-chart',
   templateUrl: './pie-chart.component.html',
   styleUrls: ['./pie-chart.component.css'],
 })
 export class PieChartComponent implements OnInit {
+  @Input('data1') data1: any;
   public chart: any;
-  constructor() {}
+  constructor(private courseDashboardComponent: CourseDashboardComponent) {}
 
   ngOnInit(): void {
+    console.log(this.data1);
+
     this.createChart();
+    console.log(this.data1);
   }
 
   createChart() {
@@ -25,7 +31,7 @@ export class PieChartComponent implements OnInit {
         datasets: [
           {
             label: 'Total students',
-            data: ['80', '20'],
+            data: [this.data1[0].toString(), this.data1[1].toString()],
             backgroundColor: ['#1d2c28', '#e74c3c'],
             // hoverOffset: 4,
           },

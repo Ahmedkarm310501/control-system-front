@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input} from '@angular/core';
 // import { Chart } from 'chart.js';
 import Chart from 'chart.js/auto';
 
@@ -8,6 +8,8 @@ import Chart from 'chart.js/auto';
   styleUrls: ['./bar-chart.component.css'],
 })
 export class BarChartComponent implements OnInit {
+  @Input('data1') data1: any;
+
   public chart: any;
 
   constructor() {}
@@ -26,7 +28,7 @@ export class BarChartComponent implements OnInit {
         datasets: [
           {
             label: 'Grades',
-            data: [100, 200, 300, 400, 500, 400, 300, 200, 100],
+            data: this.data1,
             backgroundColor: '#1d2c28',
           },
         ],
