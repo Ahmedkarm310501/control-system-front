@@ -40,15 +40,29 @@ export class ConfigureSemesterComponent implements OnInit {
       console.log(this.departments);
     });
 
-    this.configureSemester.getCurrentSemester().subscribe((res) => {
-      this.semester = res.data;
-      console.log(this.semester);
-    }, err => {
-      console.log(err);
-    }
+    this.configureSemester.getCurrentSemester().subscribe(
+      (res) => {
+        this.semester = res.data;
+
+        console.log(this.semester);
+      },
+      (err) => {
+        console.log(err);
+      }
     );
 
-      
+    
+    // this.configureSemester
+    //   .getCoursesInSemester(this.semester.id)
+    //   .subscribe(
+    //     (res) => {
+    //       console.log(this.semester.id);
+    //       console.log(res);
+    //     },
+    //     (err) => {
+    //       console.log(err);
+    //     }
+    //   );  need to be done
   }
 
   selectedCourses = [];
@@ -57,6 +71,12 @@ export class ConfigureSemesterComponent implements OnInit {
     this.selectedCourses = this.selectedCourses.concat(
       this.courses.filter((item) => item.checked)
     );
+    this.selectedCourses = this.selectedCourses.map((item) => {
+      return {
+        ...item,
+        checked: false,
+      };
+    });
 
     // this.selectedCourses = this.courses.filter(
     //   (item) => item.checked
@@ -68,8 +88,15 @@ export class ConfigureSemesterComponent implements OnInit {
     this.courses = this.courses.concat(
       this.selectedCourses.filter((item) => item.checked)
     );
+    this.courses = this.courses.map((item) => {
+      return {
+        ...item,
+        checked: false,
+      };
+    });
     this.selectedCourses = this.selectedCourses.filter((item) => !item.checked);
     this.filteredData = this.courses;
+    this.courses.checked = false;
   }
   // filter by department
   onSelectDepartment(event: any) {
@@ -95,5 +122,32 @@ export class ConfigureSemesterComponent implements OnInit {
     this.filteredData = this.courses.filter((item) =>
       item.name.toLowerCase().includes(value)
     );
+
+    if (event.target.value === null || event.target.value === '') {
+      this.selectedCourses = this.selectedCourses;
+      return;
+    }
+
+    const value2 = event.target.value.toLowerCase();
+    this.selectedCourses = this.selectedCourses.filter((item) =>
+      item.name.toLowerCase().includes(value2)
+    );
+  }
+
+  // save semester
+  saveSemester() {
+    // make array of course ids
+    const data = this.selectedCourses.map((item: any) => item.id);
+    console.log(data);
+    this.configureSemester.SaveSemester(data).subscribe(
+      (res) => {
+        console.log(res);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+
+    // console.log(this.selectedCourses);
   }
 }
