@@ -16,6 +16,11 @@ interface Res {
   data: Course[];
   message: string;
 }
+interface Semester {
+  id: number;
+  year: number;
+  term: number;
+}
 @Injectable({
   providedIn: 'root',
 })
@@ -33,5 +38,10 @@ export class ConfigureSemesterService {
   getAllDepartments() {
     return this.http.get<Res>(`${environment.baseUrl}/departments`);
   }
- 
+  getCurrentSemester() {
+    return this.http.get<Res>(`${environment.baseUrl}/current-semester`);
+  }
+  SaveSemester(data:number []) {
+    return this.http.post(`${environment.baseUrl}/semester`, data);
+  }
 }
