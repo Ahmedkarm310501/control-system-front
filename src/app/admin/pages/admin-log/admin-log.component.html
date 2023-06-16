@@ -31,11 +31,62 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let data of filteredCourses">
-      <th scope="row">{{ data.id }}</th>
-      <td>{{ data.username }}</td>
-      <td>{{ data.Time }}</td>
-      <td>{{ data.change }}</td>
-    </tr>
+    <ng-container *ngFor="let data of filteredCourses">
+      <tr
+        (click)="toggleCollapse(data.id)"
+        [attr.aria-expanded]="!isCollapsed(data.id)"
+      >
+        <th scope="row">{{ data.id }}</th>
+        <td>{{ data.username }}</td>
+        <td>{{ data.Time }}</td>
+        <td>{{ data.change }}</td>
+      </tr>
+      <tr
+
+        id="log{{ data.id }}"
+        [ngClass]="{ collapse: true, show: !isCollapsed(data.id) }"
+      >
+        <td  colspan="4">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Before Change</th>
+                <th>After Change</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td *ngIf="data.before === 'null'">
+                  -------- Nothing To Show --------
+                </td>
+                <td *ngIf="data.before !== 'null'">
+                  <span class="data">{{ data.before }}</span>
+                  <button
+                    type="button"
+                    class="btn btn-success"
+                    *ngIf="data.Type === 'add'"
+                    (click)="downloadFile()"
+                  >
+                    Download
+                  </button>
+                </td>
+
+                <td>
+                  <span class="data">{{ data.after }}</span>
+                  <button
+                    type="button"
+                    class="btn btn-success"
+                    *ngIf="data.Type === 'add' && data.after !== 'null'"
+                    (click)="downloadFile()"
+                  >
+                    Download
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+    </ng-container>
   </tbody>
 </table>

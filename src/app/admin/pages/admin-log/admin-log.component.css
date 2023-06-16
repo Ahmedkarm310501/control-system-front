@@ -72,3 +72,10 @@ td {
   color: #f7f7f7;
   margin-bottom: 0 !important;
 }
+.data {
+  margin-right: 100px;
+}
+
+td[colspan] {
+  box-shadow: none;
+}
