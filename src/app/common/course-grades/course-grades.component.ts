@@ -1,4 +1,4 @@
-import { Component, OnInit ,ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { GradeService } from './grade.service';
 import { ActivatedRoute } from '@angular/router';
 import { SnackbarComponent } from 'src/app/components/snackbar/snackbar.component';
@@ -23,33 +23,52 @@ export class CourseGradesComponent implements OnInit {
   courseName: string;
   deptName: string;
   instructor: string;
-  students: any;
+  students: any = [];
   filteredStudents: any;
   deleteStudent = false;
+  isLoading: boolean = true;
+  deletedStudentId: string;
+
   message: string;
   type: string;
   ngOnInit(): void {
     console.log(this.courseId);
-    this.gradeService.getCourseData(this.courseId).subscribe((res) => {
-      console.log(res);
-      this.courseCode = res.data.courseID;
-      this.courseName = res.data.courseName;
-      this.deptName = res.data.deptName;
-      this.instructor = res.data.instructor;
-    });
+    this.gradeService.getCourseData(this.courseId).subscribe(
+      (res) => {
+        console.log(res);
+        this.courseCode = res.data.courseID;
+        this.courseName = res.data.courseName;
+        this.deptName = res.data.deptName;
+        this.instructor = res.data.instructor;
+        this.isLoading = false;
+      },
+      (err) => {
+        console.log(err);
+        this.isLoading = true;
+      }
+    );
 
     this.gradeService
       .getCourseGrades(this.courseId, this.termId)
       .subscribe((res) => {
         console.log(res);
-        this.students = res.data.map((student) => {
-          return {
-            ...student,
-            editable: false,
-            oldTermWork: student.term_work,
-            oldExamWork: student.exam_work,
-          };
-        });
+        this.isLoading = false;
+
+        this.students = res.data.map(
+          (student) => {
+            return {
+              ...student,
+              editable: false,
+              oldTermWork: student.term_work,
+              oldExamWork: student.exam_work,
+            };
+          },
+          (err) => {
+            console.log(err);
+            this.isLoading = true;
+          }
+        );
+
         this.filteredStudents = this.students;
       });
   }
@@ -107,7 +126,14 @@ export class CourseGradesComponent implements OnInit {
   searchStudent(searchTerm: string) {
     console.log(this.students);
     this.filteredStudents = this.students.filter((student) => {
-      return student.id.toString().includes(searchTerm);
+      return (
+        student.student.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        student.student_id.toString().includes(searchTerm) ||
+        student.grade.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        student.total_grade.toString().includes(searchTerm) ||
+        student.term_work.toString().includes(searchTerm) ||
+        student.exam_work.toString().includes(searchTerm)
+      );
     });
   }
 
@@ -164,36 +190,44 @@ export class CourseGradesComponent implements OnInit {
 
   onExcelUploadGrades(files: FileList) {
     const file = files[0];
-
+    this.isLoading = true;
     this.gradeService
       .addStudentGradesExcel(this.courseId, this.termId, file)
       .subscribe((res) => {
         console.log(res);
         if (res.status === 201) {
-          this.students = this.students.map((student) => {
-            const excelStudent = res.body.data.find(
-              (s) => +s.student_id === +student.student_id
-            );
-            if (excelStudent.term_work && excelStudent.exam_work) {
-              return {
-                ...student,
-                term_work: excelStudent.term_work,
-                exam_work: excelStudent.exam_work,
-                total_grade: +excelStudent.term_work + +excelStudent.exam_work,
-                grade: this.gradeService.calculateGrade(
-                  +excelStudent.term_work + +excelStudent.exam_work
-                ),
-              };
-            } else {
-              this.missingStudents.push(student.student_id);
-              return student;
+          this.students = this.students.map(
+            (student) => {
+              const excelStudent = res.body.data.find(
+                (s) => +s.student_id === +student.student_id
+              );
+              if (excelStudent.term_work && excelStudent.exam_work) {
+                return {
+                  ...student,
+                  term_work: excelStudent.term_work,
+                  exam_work: excelStudent.exam_work,
+                  total_grade:
+                    +excelStudent.term_work + +excelStudent.exam_work,
+                  grade: this.gradeService.calculateGrade(
+                    +excelStudent.term_work + +excelStudent.exam_work
+                  ),
+                };
+              } else {
+                this.missingStudents.push(student.student_id);
+                return student;
+              }
+            },
+            (err) => {
+              console.log(err);
+              this.isLoading = true;
             }
-          });
+          );
           this.filteredStudents = this.students;
           if (this.missingStudents.length > 0) {
             console.log(this.missingStudents);
             this.modalIsOpen = true;
           }
+          this.isLoading = false;
         } else {
           // alert('Invalid data in excel file');
           this.errorMsg = 'Invalid data in excel file';
@@ -234,15 +268,28 @@ export class CourseGradesComponent implements OnInit {
 
   //sort by all columns
   sortBy(column: string) {
-    this.filteredStudents = this.filteredStudents.sort((a, b) => {
-      if (a[column] > b[column]) {
-        return 1 * this.sortOrder;
-      } else if (a[column] < b[column]) {
-        return -1 * this.sortOrder;
-      } else {
-        return 0;
-      }
-    });
+    if (column === 'name') {
+      this.filteredStudents = this.filteredStudents.sort((a, b) => {
+        if (a.student.name > b.student.name) {
+          return 1 * this.sortOrder;
+        } else if (a.student.name < b.student.name) {
+          return -1 * this.sortOrder;
+        } else {
+          return 0;
+        }
+      });
+    } else {
+      this.filteredStudents = this.filteredStudents.sort((a, b) => {
+        if (a[column] > b[column]) {
+          return 1 * this.sortOrder;
+        } else if (a[column] < b[column]) {
+          return -1 * this.sortOrder;
+        } else {
+          return 0;
+        }
+      });
+    }
+
     this.sortOrder = this.sortOrder * -1;
   }
   ISduplicated = false;
@@ -283,26 +330,34 @@ export class CourseGradesComponent implements OnInit {
 
   onFileSelected(files: FileList) {
     const file = files[0];
+    this.isLoading = true;
 
     this.gradeService
       .addStudentsToCourse(this.courseId, this.termId, file)
       .subscribe(
         (res) => {
-          let newStudents = res.body.data.students.map((student) => {
-            return {
-              student_id: student.student_id,
-              student: {
-                name: student.student.name,
-              },
-              termWork: null,
-              examWork: null,
-              editable: false,
-              oldTermWork: null,
-              oldExamWork: null,
-              total: null,
-              grade: null,
-            };
-          });
+          let newStudents = res.body.data.students.map(
+            (student) => {
+              return {
+                student_id: student.student_id,
+                student: {
+                  name: student.student.name,
+                },
+                termWork: null,
+                examWork: null,
+                editable: false,
+                oldTermWork: null,
+                oldExamWork: null,
+                total: null,
+                grade: null,
+              };
+            },
+            (err) => {
+              console.log(err);
+            }
+          );
+          this.isLoading = false;
+
           // check if any of the new students already exist in the students array
           this.students = this.students.concat(
             newStudents.filter((newStudent) => {
@@ -329,16 +384,30 @@ export class CourseGradesComponent implements OnInit {
       );
   }
 
-  DeleteStudent(studentId: string) {
+  // DeleteStudent(student_id: string) {
+  //   this.deleteStudent = true;
+  //   console.log(student_id);
+  //   this.gradeService
+  //     .deleteStudentFromCourse(this.courseId, this.termId, student_id)
+  //     .subscribe((res) => {
+  //       console.log(res);
+  //       this.students = this.students.filter((student) => {
+  //         return +student.student_id !== +student_id;
+  //       });
+  //       this.filteredStudents = this.students;
+  //     });
+  // }
+  DeleteStudent(student_id: string) {
     this.deleteStudent = true;
-    console.log(studentId);
+    console.log(student_id);
+    console.log(this.filteredStudents);
     this.gradeService
-      .deleteStudentFromCourse(this.courseId, this.termId, studentId)
+      .deleteStudentFromCourse(this.courseId, this.termId, student_id)
       .subscribe(
         (res) => {
           console.log(res);
           this.students = this.students.filter((student) => {
-            return +student.student_id !== +studentId;
+            return +student.student_id !== +student_id;
           });
           this.filteredStudents = this.students;
         },
@@ -368,6 +437,20 @@ export class CourseGradesComponent implements OnInit {
         this.snackbar.show();
       }
     );
+  }
+  deleteAllStudents() {
+    this.gradeService
+      .deleteAllStudentsFromCourse(this.courseId, this.termId)
+      .subscribe(
+        (res) => {
+          console.log(res);
+          this.students = [];
+          this.filteredStudents = this.students;
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
   }
 
   closeModal() {

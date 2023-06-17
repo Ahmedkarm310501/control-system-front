@@ -140,6 +140,16 @@ export class GradeService {
       { observe: 'response' }
     );
   }
+  deleteAllStudentsFromCourse(course_id: string, semester_id: string) {
+    return this.http.post(
+      `${this.baseUrl}/delete-all-students-from-course/`,
+      {
+        course_id: course_id,
+        semester_id: semester_id,
+      },
+      { observe: 'response' }
+    );
+  }
   addStudentGradesExcel(course_id: string, semester_id: string, file: File) {
     const formData = new FormData();
     formData.append('students', file);
