@@ -99,10 +99,10 @@ div.dataTables_wrapper div.dataTables_paginate ul.pagination {
   content: "";
 }
 
-thead .sorting:after {
+/* thead .sorting:after {
   opacity: 0.2;
   content: "\e150";
-}
+} */
 
 .sorting:after {
   position: absolute;
@@ -174,9 +174,15 @@ td {
 }
 
 .modal select {
-  background-color: var(--background-color); 
+  background-color: var(--background-color);
 }
 
-.left-45{
-  left : 45%;
+.left-45 {
+  left: 45%;
+}
+
+.search-bar {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
 }

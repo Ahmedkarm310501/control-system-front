@@ -1,4 +1,4 @@
-<div class="container-fluid row">
+<div class="container-fluid row w-100">
   <header class="col-10">
     <div class="d-flex">
       <div class="p-2">
@@ -71,6 +71,13 @@
             data-bs-target="#exampleModall"
             >Delete All Grades</a
           >
+          <a
+            class="dropdown-item"
+            style="cursor: pointer"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModalll"
+            >Delete All Students</a
+          >
         </div>
       </div>
     </div>
@@ -107,15 +114,20 @@
 
     <!-- checkbox for show stud with no grades -->
   </div>
-
-  <table class="tb table table-bordered table-hover table-responsive-md">
+  <div class="d-flex justify-content-center mt-5">
+    <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+  </div>
+  <table
+    class="tb table table-bordered table-hover table-responsive-md"
+    *ngIf="!isLoading"
+  >
     <thead>
       <tr>
         <th scope="col">#</th>
         <th scope="col" class="sorting">
           <div class="d-flex justify-content-between">
             <span>ID</span>
-            <i class="fa fa-lg fa-sort" (click)="sortBy('id')"></i>
+            <i class="fa fa-lg fa-sort" (click)="sortBy('student_id')"></i>
           </div>
         </th>
         <th scope="col" class="sorting">
@@ -127,26 +139,25 @@
         <th scope="col" class="sorting">
           <div class="d-flex justify-content-between">
             <span>Course Work</span>
-            <i class="fa fa-lg fa-sort" (click)="sortBy('termWork')"></i>
+            <i class="fa fa-lg fa-sort" (click)="sortBy('term_work')"></i>
           </div>
         </th>
         <th scope="col" class="sorting">
           <div class="d-flex justify-content-between">
             <span>Exam Work</span>
 
-            <i class="fa fa-lg fa-sort" (click)="sortBy('examWork')"></i>
+            <i class="fa fa-lg fa-sort" (click)="sortBy('exam_work')"></i>
           </div>
         </th>
         <th scope="col" class="sorting">
           <div class="d-flex justify-content-between">
             <span>Total</span>
-            <i class="fa fa-lg fa-sort" (click)="sortBy('total')"></i>
+            <i class="fa fa-lg fa-sort" (click)="sortBy('total_grade')"></i>
           </div>
         </th>
         <th scope="col" class="sorting">
           <div class="d-flex justify-content-between">
             <span>Grade</span>
-            <i class="fa fa-lg fa-sort" (click)="sortBy('grade')"></i>
           </div>
         </th>
         <th scope="col">Edit</th>
@@ -230,11 +241,14 @@
             *ngIf="!student.editable"
             style="margin-right: 5px"
             class="btn btn-danger btn-sm"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModalToDelete"
             type="button"
-            (click)="DeleteStudent(student.student_id)"
+            (click)="deletedStudentId = student.student_id"
           >
             Delete
           </button>
+
           <button
             *ngIf="student.editable"
             style="margin-right: 5px"
@@ -262,6 +276,49 @@
       </tr>
     </tbody>
   </table>
+</div>
+
+<div
+  class="modal fade"
+  id="exampleModalToDelete"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabell"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="mb-3" class="col-md-12">
+            <h4>Are you sure you want to delete this student?</h4>
+            <button
+              class="btn btn-primary me-2"
+              data-bs-dismiss="modal"
+              (click)="DeleteStudent(deletedStudentId)"
+            >
+              Yes
+            </button>
+            <button
+              class="btn btn-secondary"
+              value="no"
+              data-bs-dismiss="modal"
+            >
+              No
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div
@@ -392,6 +449,52 @@
 </div>
 <!-- <app-modal></app-modal> -->
 
+<div
+  class="modal fade"
+  id="exampleModalll"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabell"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="mb-3" class="col-md-12">
+            <h4>Are you sure you want to delete all students?</h4>
+            <button
+              (click)="deleteAllStudents()"
+              class="btn btn-primary me-2"
+              value="yes"
+              data-bs-dismiss="modal"
+            >
+              Yes
+            </button>
+            <button
+              class="btn btn-secondary"
+              value="no"
+              data-bs-dismiss="modal"
+            >
+              No
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--  -->
+
+<!--  -->
 <app-modal (closeModal)="closeModal()" [show]="modalIsOpen">
   <div modal-title>Alert</div>
   <div modal-body>

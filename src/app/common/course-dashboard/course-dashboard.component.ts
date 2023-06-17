@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CourseDashboardService } from './course-dashboard.service';
 import { ConfigureSemesterService } from '../../admin/pages/configure-semester/configure-semester.service';
+import { ChangeDetectorRef } from '@angular/core';
 @Component({
   selector: 'app-course-dashboard',
   templateUrl: './course-dashboard.component.html',
@@ -9,11 +10,14 @@ import { ConfigureSemesterService } from '../../admin/pages/configure-semester/c
 export class CourseDashboardComponent implements OnInit {
   selectedDepartment: any = null;
   selectedCourse: any = null;
-  show : boolean = false;
+  show: boolean = false;
+  message: string;
+  type: string;
 
   constructor(
     private courseDashboardService: CourseDashboardService,
-    private configureSemester: ConfigureSemesterService
+    private configureSemester: ConfigureSemesterService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   departments: any = [];
@@ -40,9 +44,10 @@ export class CourseDashboardComponent implements OnInit {
       },
       (err) => {
         console.log(err);
+        // this.message = err.error.message;
+        // this.type = 'failed';
       }
     );
-
   }
 
   onSelectDepartment(event: any) {
@@ -58,7 +63,7 @@ export class CourseDashboardComponent implements OnInit {
     console.log(this.filteredData);
   }
   graphOne: any;
-  graphTwo: any = [];
+  graphTwo: any;
   getGraphs(event: any) {
     const course_id = event.target.value;
 
@@ -75,11 +80,12 @@ export class CourseDashboardComponent implements OnInit {
     this.courseDashboardService
       .graphTwo(course_id, this.semester.id)
       .subscribe((res) => {
+        this.show = false;
         this.graphTwo = res.data;
         console.log(this.graphTwo);
-         this.pie = [
-           this.graphTwo.perecentage_passed,
-           this.graphTwo.perecentage_failed,
+        this.pie = [
+          this.graphTwo.perecentage_passed,
+          this.graphTwo.perecentage_failed,
         ];
         this.bar = [
           this.graphTwo.grade_A,
@@ -93,13 +99,15 @@ export class CourseDashboardComponent implements OnInit {
           this.graphTwo.grade_F,
         ];
         console.log(this.pie);
+        console.log(this.bar);
         this.show = true;
-      });
-    
-
-
+      },
+        (err) => {
+          console.log(err);
+        }
+      );
   }
-  onCourseSelected() {
-    // this.selectedCourse = course;
+  getFlooredAverageGrade() {
+    return Math.floor(this.graphOne.average_grade);
   }
 }

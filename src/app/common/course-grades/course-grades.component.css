@@ -151,3 +151,7 @@ input:focus {
 
   color: #fff;
 }
+
+* {
+  box-sizing: border-box;
+}

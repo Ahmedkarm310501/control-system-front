@@ -21,13 +21,14 @@
             </label>
             <div class="col-md-6 col-sm-6">
               <input
-                ngModel
+                [(ngModel)]="name"
                 type="text"
                 id="username"
                 required="required"
                 class="form-control"
                 name="name"
                 placeholder="User Name"
+                
               />
             </div>
           </div>
@@ -39,7 +40,7 @@
             </label>
             <div class="col-md-6 col-sm-6">
               <input
-                ngModel
+                [(ngModel)]="email"
                 type="email"
                 id="email"
                 name="email"
@@ -49,24 +50,7 @@
               />
             </div>
           </div>
-          <div class="item form-group">
-            <label
-              for="middle-name"
-              class="col-form-label col-md-3 col-sm-3 label-align"
-              aria-placeholder="password"
-              >password</label
-            >
-            <div class="col-md-6 col-sm-6">
-              <input
-                id="password"
-                class="form-control"
-                type="text"
-                name="password"
-                placeholder="password"
-                ngModel
-              />
-            </div>
-          </div>
+          
           <div class="item form-group">
             <label class="col-form-label col-md-3 col-sm-3 label-align"
               >Rules*</label
@@ -84,7 +68,7 @@
                     value="admin"
                     class="join-btn input-style"
                     ngModel
-                    [(ngModel)]="isAdmin"
+                    [(ngModel)]="is_admin"
                   />
                   &nbsp; Admin &nbsp;
                 </label>
@@ -98,7 +82,7 @@
                     name="is_active"
                     class="input-style"
                     ngModel
-                    [(ngModel)]="isActive"
+                    [(ngModel)]="is_active"
                   />
                   &nbsp; Activate &nbsp;
                 </label>
@@ -117,7 +101,7 @@
                 type="number"
                 required="required"
                 name="national_id"
-                ngModel
+                [(ngModel)]="national_id"
               />
             </div>
           </div>
