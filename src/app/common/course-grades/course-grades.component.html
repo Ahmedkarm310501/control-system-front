@@ -33,7 +33,9 @@
               #f
               style="display: none"
               #fileInput1
-              (change)="onExcelUploadGrades(fileInput1.files)"
+              (change)="
+                onExcelUploadGrades(fileInput1.files); fileInput1.value = null
+              "
             />Upload Grades
           </a>
           <a class="dropdown-item" (click)="fG.click()" style="cursor: pointer"
@@ -42,7 +44,7 @@
               #fG
               style="display: none"
               #fileInput
-              (change)="onFileSelected(fileInput.files)"
+              (change)="onFileSelected(fileInput.files); fileInput.value = null"
             />Add Student Names
           </a>
           <a

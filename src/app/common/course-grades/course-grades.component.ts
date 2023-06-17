@@ -15,8 +15,8 @@ import { SnackbarComponent } from 'src/app/components/snackbar/snackbar.componen
   styleUrls: ['./course-grades.component.css'],
 })
 export class CourseGradesComponent implements OnInit {
-  @ViewChild('f') fileRef: ElementRef;
-  @ViewChild('fG') fileRefgrade: ElementRef;
+  @ViewChild('f') fileRefgrade: ElementRef;
+  @ViewChild('fG') fileRef: ElementRef;
   @ViewChild('snackbar') snackbar: SnackbarComponent;
 
   constructor(
