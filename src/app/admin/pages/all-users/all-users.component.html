@@ -21,25 +21,8 @@
             class="dataTables_wrapper container-fluid dt-bootstrap no-footer"
           >
             <div class="row">
-              <div class="col-sm-6">
-                <div class="dataTables_length" id="datatable_lengSth">
-                  <label
-                    >Show
-                    <select
-                      name="datatable_length"
-                      aria-controls="datatable"
-                      class="form-control input-sm"
-                    >
-                      <option value="10">10</option>
-                      <option value="25">25</option>
-                      <option value="50">50</option>
-                      <option value="100">100</option>
-                    </select>
-                    entries</label
-                  >
-                </div>
-              </div>
-              <div class="col-sm-6">
+              
+              <div class="col-sm-6 search-bar">
                 <div
                   id="datatable_filter"
                   class="d-flex align-items-center float-end"
@@ -273,7 +256,7 @@
                 data-bs-dismiss="modal"
                 (click)="closeModal()"
               >
-                Closel
+                Close
               </button>
               <button
                 type="submit"

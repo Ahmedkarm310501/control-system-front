@@ -59,9 +59,6 @@
                     >
                   </li>
                   <li routerLinkActive="current-page">
-                    <a routerLink="add-courses">Add Courses</a>
-                  </li>
-                  <li routerLinkActive="current-page">
                     <a
                       routerLink="course-dashboard"
                       (click)="clickEvent('home')"
@@ -70,7 +67,7 @@
                   </li>
                 </ul>
               </li>
-              <li
+              <!-- <li
                 (click)="clickEvent('forms')"
                 [ngClass]="toggleDisplay['forms'] ? 'active' : ''"
               >
@@ -95,7 +92,7 @@
                     >
                   </li>
                 </ul>
-              </li>
+              </li> -->
               <li
                 (click)="clickEvent('users')"
                 [ngClass]="toggleDisplay['users'] ? 'active' : ''"
@@ -139,7 +136,7 @@
                 </ul>
               </li>
               <li (click)="clickEvent('semester')" [ngClass]="toggleDisplay['semester'] ? 'active' : ''">
-                <a><i class="fa fa-lock"></i> Semester
+                <a><i class="fa fa-calendar"></i> Semester
                   <span class="fa fa-chevron-down float-end"></span>
                   <!-- <i class="fa fa-caret-down float-end"></i> -->
                 </a>

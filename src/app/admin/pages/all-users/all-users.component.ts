@@ -59,6 +59,9 @@ export class AllUsersComponent implements OnInit {
   }
   onEdit(id: string) {
     this.selectedID = id;
+    // clear input fields
+    this.dept.nativeElement.value = 'Select Department';
+    this.dummyDataCourses = [];
   }
   onSubmit(form: any) {
     console.log('form Submitted');
@@ -122,13 +125,17 @@ export class AllUsersComponent implements OnInit {
 
   sortBy(property: string) {
     this.sortOrder = this.sortOrder * -1;
-    this.filteredData.sort(
-      (
-        a: { [x: string]: { toLowerCase: () => number } },
-        b: { [x: string]: { toLowerCase: () => number } }
-      ) =>
-        (a[property].toLowerCase() > b[property].toLowerCase() ? 1 : -1) *
-        this.sortOrder
-    );
+    this.filteredData.sort((a, b) => {
+      const valueA = (a[property] + '').toLowerCase(); // Convert to string and lowercase
+      const valueB = (b[property] + '').toLowerCase(); // Convert to string and lowercase
+
+      if (valueA > valueB) {
+        return 1 * this.sortOrder;
+      } else if (valueA < valueB) {
+        return -1 * this.sortOrder;
+      } else {
+        return 0;
+      }
+    });
   }
 }
