@@ -41,4 +41,14 @@ export class AddUserComponent implements OnInit {
       );
     console.log(form.is_admin);
   }
+  // function to reset all form fields after submit
+  resetForm(form: any) {
+    form.name = '';
+    form.email = '';
+    form.password = '';
+    form.password_confirmation = '';
+    form.national_id = '';
+    form.is_admin = false;
+
+  }
 }

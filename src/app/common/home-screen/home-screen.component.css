@@ -68,4 +68,9 @@
 .card {
   background-color: var(--background-color-dark);
 }
+app-loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 

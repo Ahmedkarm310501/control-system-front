@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,ViewChild } from '@angular/core';
 import { GradeService } from './grade.service';
 import { ActivatedRoute } from '@angular/router';
+import { SnackbarComponent } from 'src/app/components/snackbar/snackbar.component';
 
 @Component({
   selector: 'app-course-grades',
@@ -8,6 +9,8 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./course-grades.component.css'],
 })
 export class CourseGradesComponent implements OnInit {
+  @ViewChild('snackbar') snackbar: SnackbarComponent;
+
   constructor(
     private gradeService: GradeService,
     private route: ActivatedRoute
@@ -22,6 +25,8 @@ export class CourseGradesComponent implements OnInit {
   students: any;
   filteredStudents: any;
   deleteStudent = false;
+  message: string;
+  type: string;
   ngOnInit(): void {
     console.log(this.courseId);
     this.gradeService.getCourseData(this.courseId).subscribe((res) => {
@@ -279,33 +284,47 @@ export class CourseGradesComponent implements OnInit {
 
     this.gradeService
       .addStudentsToCourse(this.courseId, this.termId, file)
-      .subscribe((res) => {
-        let newStudents = res.body.data.students.map((student) => {
-          return {
-            student_id: student.student_id,
-            student: {
-              name: student.student.name,
-            },
-            termWork: null,
-            examWork: null,
-            editable: false,
-            oldTermWork: null,
-            oldExamWork: null,
-            total: null,
-            grade: null,
-          };
-        });
-        // check if any of the new students already exist in the students array
-        this.students = this.students.concat(
-          newStudents.filter((newStudent) => {
-            return !this.students.some(
-              (student) => +student.student_id === +newStudent.student_id
-            );
-          })
-        );
+      .subscribe(
+        (res) => {
+          let newStudents = res.body.data.students.map((student) => {
+            return {
+              student_id: student.student_id,
+              student: {
+                name: student.student.name,
+              },
+              termWork: null,
+              examWork: null,
+              editable: false,
+              oldTermWork: null,
+              oldExamWork: null,
+              total: null,
+              grade: null,
+            };
+          });
+          // check if any of the new students already exist in the students array
+          this.students = this.students.concat(
+            newStudents.filter((newStudent) => {
+              return !this.students.some(
+                (student) => +student.student_id === +newStudent.student_id
+              );
+            })
+          );
 
-        this.filteredStudents = this.students;
-      });
+          this.filteredStudents = this.students;
+        },
+        (err) => {
+          console.log(err);
+          if (err.status === 400) {
+            // alert('Invalid data in excel file');
+            this.message = 'Invalid data in excel file';
+            this.type = 'failed';
+          } else {
+            // alert('Something went wrong');
+            this.message = err.error.message;
+            this.type = 'failed';
+          }
+        }
+      );
   }
 
   DeleteStudent(studentId: string) {
@@ -313,13 +332,21 @@ export class CourseGradesComponent implements OnInit {
     console.log(studentId);
     this.gradeService
       .deleteStudentFromCourse(this.courseId, this.termId, studentId)
-      .subscribe((res) => {
-        console.log(res);
-        this.students = this.students.filter((student) => {
-          return +student.student_id !== +studentId;
-        });
-        this.filteredStudents = this.students;
-      });
+      .subscribe(
+        (res) => {
+          console.log(res);
+          this.students = this.students.filter((student) => {
+            return +student.student_id !== +studentId;
+          });
+          this.filteredStudents = this.students;
+        },
+        (err) => {
+          console.log(err);
+          // alert('Something went wrong');
+          this.message = err.error.message;
+          this.type = 'failed';
+        }
+      );
   }
 
   exportGrades() {
@@ -333,6 +360,10 @@ export class CourseGradesComponent implements OnInit {
       },
       (err) => {
         console.log(err);
+        // alert('Something went wrong');
+        this.message = err.error.message;
+        this.type = 'failed';
+        this.snackbar.show();
       }
     );
   }

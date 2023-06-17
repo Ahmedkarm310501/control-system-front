@@ -53,20 +53,32 @@ export class AllCoursesComponent implements OnInit {
   // }
 
   filteredData: any = this.courses;
-  getAllCoursesByDepartment(id: any) {
-    this.isLoading = true;
-    this.allCourses.getAllCoursesByDepartment(id).subscribe(
-      (res) => {
-        this.courses = res.data;
-        this.filteredData = this.courses;
-        this.isLoading = false;
-        console.log(res);
-        console.log(this.filteredData);
-      },
-      (err) => {
-        console.log(err);
-      }
+  // getAllCoursesByDepartment(id: any) {
+  //   this.isLoading = true;
+  //   this.allCourses.getAllCoursesByDepartment(id).subscribe(
+  //     (res) => {
+  //       this.courses = res.data;
+  //       this.filteredData = this.courses;
+  //       this.isLoading = false;
+  //       console.log(res);
+  //       console.log(this.filteredData);
+  //     },
+  //     (err) => {
+  //       console.log(err);
+  //     }
+  //   );
+  // }
+  onSelectDepartment(event: any) {
+    if (event.target.value == 'all') {
+      this.filteredData = this.courses;
+      return;
+    }
+    const id = event.target.value;
+    console.log(id);
+    this.filteredData = this.courses.filter(
+      (item: any) => item.department.dept_code == id
     );
+    console.log(this.filteredData);
   }
 
   search(search: string) {
@@ -90,5 +102,9 @@ export class AllCoursesComponent implements OnInit {
         (a[property].toLowerCase() > b[property].toLowerCase() ? 1 : -1) *
         this.sortOrder
     );
+  }
+  onUpload(event: any) {
+    // get uploaded file and paste it as an object in console
+    console.log(event.target.files[0]);
   }
 }

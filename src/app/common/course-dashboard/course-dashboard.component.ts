@@ -11,6 +11,8 @@ export class CourseDashboardComponent implements OnInit {
   selectedDepartment: any = null;
   selectedCourse: any = null;
   show: boolean = false;
+  message: string;
+  type: string;
 
   constructor(
     private courseDashboardService: CourseDashboardService,
@@ -42,6 +44,8 @@ export class CourseDashboardComponent implements OnInit {
       },
       (err) => {
         console.log(err);
+        // this.message = err.error.message;
+        // this.type = 'failed';
       }
     );
   }
@@ -97,7 +101,11 @@ export class CourseDashboardComponent implements OnInit {
         console.log(this.pie);
         console.log(this.bar);
         this.show = true;
-      });
+      },
+        (err) => {
+          console.log(err);
+        }
+      );
   }
   getFlooredAverageGrade() {
     return Math.floor(this.graphOne.average_grade);
