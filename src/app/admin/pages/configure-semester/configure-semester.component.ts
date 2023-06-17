@@ -72,12 +72,12 @@ export class ConfigureSemesterComponent implements OnInit {
   selectedCourses = [];
 
   move() {
-    if (this.selectedCourses.length == 0) {
-      this.message = 'Please select course';
-      this.type = 'error';
-      this.snackbar.show();
-      return;
-    }
+    // if (this.selectedCourses.length == 0) {
+    //   this.message = 'Please select course';
+    //   this.type = 'error';
+    //   this.snackbar.show();
+    //   return;
+    // }
     this.selectedCourses = this.selectedCourses.concat(
       this.courses.filter((item) => item.checked)
     );
