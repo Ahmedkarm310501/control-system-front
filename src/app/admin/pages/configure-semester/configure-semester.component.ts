@@ -150,4 +150,14 @@ export class ConfigureSemesterComponent implements OnInit {
 
     // console.log(this.selectedCourses);
   }
+  selectAll() {
+    this.courses = this.courses.map((item) => {
+      return {
+        ...item,
+        checked: !item.checked,
+      };
+    });
+    this.filteredData = this.courses;
+  }
+  
 }

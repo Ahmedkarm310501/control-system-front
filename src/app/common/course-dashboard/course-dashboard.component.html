@@ -13,7 +13,7 @@
           <div class="select col-6">
             <select name="course" class="w-100" [(ngModel)]="selectedCourse" (change)="getGraphs($event)">
               <option value="0">Select Course</option>
-              <option *ngFor="let course of filteredData" value={{course.id}}>{{course.course_code}}</option>
+              <option *ngFor="let course of filteredData" value={{course.id}}>{{course.name}}</option>
             </select>
           </div>
         </div>
@@ -26,7 +26,7 @@
           <div class="select-course row g-3">
             <app-box class="col-3" [number]="graphOne.number_of_students" [name]="'Number Of Students'"
               [color]="'10px solid var(--main-color)'"></app-box>
-            <app-box class="col-3" [number]="graphOne.average_grade" [name]="'Average Grade'"
+            <app-box class="col-3" [number]="getFlooredAverageGrade()" [name]="'Average Grade'"
               [color]="'10px solid var(--main-color)'"></app-box>
             <app-box class="col-3" [number]="graphOne.passed_students" [name]="'Passed Students'"
               [color]="'10px solid var(--main-color)'"></app-box>
