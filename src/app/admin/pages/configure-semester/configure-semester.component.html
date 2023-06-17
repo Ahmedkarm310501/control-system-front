@@ -25,7 +25,7 @@
             </option>
         </select>
         <div class="select-all">
-            <input type="checkbox" name="select" id="select">
+            <input (click)="selectAll()" type="checkbox" name="select" id="select">
             <label for="select">Select All</label>
         </div>
         <input class="search" type="text" placeholder="Search..." (change)="search($event)">
