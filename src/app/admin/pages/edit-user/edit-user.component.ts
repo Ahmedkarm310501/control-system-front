@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { AuthService } from 'src/app/auth/auth.service';
 import { User } from 'src/app/auth/User';
 import { SnackbarComponent } from 'src/app/components/snackbar/snackbar.component';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-edit-user',
   templateUrl: './edit-user.component.html',
@@ -16,15 +17,35 @@ export class EditUserComponent implements OnInit {
   message: string;
   type: string;
   isAdmin: boolean = false;
-  isActive: boolean = false;
+  isActive: boolean = false;  
+  user: any;
+  name: string;
+  email: string;
+  is_admin: boolean;
+  is_active: boolean;
+  national_id: string;
+
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private http: HttpClient,
-    private authService: AuthService
-  ) {}
-
+    private authService: AuthService,
+    private editUserService: EditUserService
+  ) { }
+  
   ngOnInit(): void {
-    // const id = +this.route.snapshot.paramMap.get('id');
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.editUserService.getUser(id).subscribe((res) => {
+      console.log(res);
+      this.name = res.data.name;
+      this.email = res.data.email;
+      this.is_admin = res.data.is_admin;
+      this.is_active = res.data.is_active;
+      this.national_id = res.data.national_id;
+      
+    }
+    );
+
   }
   id = +this.route.snapshot.paramMap.get('id');
   // edit user with id from snapshot
@@ -64,6 +85,8 @@ export class EditUserComponent implements OnInit {
 
         this.snackbar.show();
         console.log(res);
+        // navigate to users page
+        this.router.navigate(['all-users']);
       },
       (err) => {
         this.message = err.error.message;

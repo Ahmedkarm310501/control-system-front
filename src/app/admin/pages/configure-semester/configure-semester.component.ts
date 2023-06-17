@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AllCoursesService } from '../all-courses/all-courses.service';
 import { ConfigureSemesterService } from './configure-semester.service';
+import { SnackbarComponent } from 'src/app/components/snackbar/snackbar.component';
 
 @Component({
   selector: 'app-configure-semester',
@@ -8,6 +9,8 @@ import { ConfigureSemesterService } from './configure-semester.service';
   styleUrls: ['./configure-semester.component.css'],
 })
 export class ConfigureSemesterComponent implements OnInit {
+  @ViewChild('snackbar') snackbar: SnackbarComponent;
+
   constructor(
     private allCourses: AllCoursesService,
     private configureSemester: ConfigureSemesterService
@@ -16,6 +19,8 @@ export class ConfigureSemesterComponent implements OnInit {
   filteredData: any;
   departments: any = [];
   semester: any = [];
+  message: string;
+  type: string;
 
   ngOnInit(): void {
     // display all courses
@@ -51,7 +56,6 @@ export class ConfigureSemesterComponent implements OnInit {
       }
     );
 
-    
     // this.configureSemester
     //   .getCoursesInSemester(this.semester.id)
     //   .subscribe(
@@ -68,6 +72,12 @@ export class ConfigureSemesterComponent implements OnInit {
   selectedCourses = [];
 
   move() {
+    // if (this.selectedCourses.length == 0) {
+    //   this.message = 'Please select course';
+    //   this.type = 'error';
+    //   this.snackbar.show();
+    //   return;
+    // }
     this.selectedCourses = this.selectedCourses.concat(
       this.courses.filter((item) => item.checked)
     );
@@ -77,10 +87,12 @@ export class ConfigureSemesterComponent implements OnInit {
         checked: false,
       };
     });
-
-    // this.selectedCourses = this.courses.filter(
-    //   (item) => item.checked
-    // );
+    this.courses = this.courses.map((item) => {
+      return {
+        ...item,
+        checked: false,
+      };
+    });
     this.courses = this.courses.filter((item) => !item.checked);
     this.filteredData = this.courses;
   }
@@ -136,15 +148,27 @@ export class ConfigureSemesterComponent implements OnInit {
 
   // save semester
   saveSemester() {
+    // if (this.selectedCourses.length == 0) {
+    //   this.message = 'Please select course';
+    //   this.type = 'failed';
+    //   this.snackbar.show();
+    //   return;
+    // }
     // make array of course ids
     const data = this.selectedCourses.map((item: any) => item.id);
     console.log(data);
     this.configureSemester.SaveSemester(data).subscribe(
       (res) => {
         console.log(res);
+        this.message = 'Semester configured successfully';
+        this.type = 'success';
+        this.snackbar.show();
       },
       (err) => {
         console.log(err);
+        this.message = 'Something went wrong';
+        this.type = 'failed';
+        this.snackbar.show();
       }
     );
 
@@ -159,5 +183,4 @@ export class ConfigureSemesterComponent implements OnInit {
     });
     this.filteredData = this.courses;
   }
-  
 }

@@ -17,6 +17,9 @@
 * {
   box-sizing: border-box;
 }
+button{
+  background-color: var(--main-color);
+}
 
 body {
   color: #73879c;
@@ -99,10 +102,10 @@ div.dataTables_wrapper div.dataTables_paginate ul.pagination {
   content: "";
 }
 
-thead .sorting:after {
+/* thead .sorting:after {
   opacity: 0.2;
   content: "\e150";
-}
+} */
 
 .sorting:after {
   position: absolute;
@@ -179,4 +182,28 @@ td {
 
 .left-45{
   left : 45%;
+}
+
+/*
+upload courses button
+*/
+input[type="file"] {
+  display: none;
+}
+
+.custom-file-upload {
+  border: 1px solid #ccc;
+  color: white;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  background-color: var(--main-color);
+  color: white;
+  border-radius: 5px;
+}
+.custom-file-upload:hover {
+  background-color: #495057;
+}
+.hide-table {
+  display: none;
 }

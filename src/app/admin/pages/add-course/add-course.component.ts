@@ -28,7 +28,7 @@ export class AddCourseComponent implements OnInit {
           console.log(form);
           this.snackbar.show();
           setTimeout(() => {
-            this.router.navigate(['/courses']);
+            this.router.navigate(['/all-courses']);
           }, 2000);
         },
         (err) => {
