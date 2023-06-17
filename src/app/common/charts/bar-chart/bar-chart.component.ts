@@ -1,4 +1,10 @@
-import { Component, OnInit, Input} from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 // import { Chart } from 'chart.js';
 import Chart from 'chart.js/auto';
 
@@ -18,6 +24,12 @@ export class BarChartComponent implements OnInit {
     this.createChart();
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['data1'] && !changes['data1'].firstChange) {
+      this.updateChart();
+    }
+  }
+
   createChart() {
     this.chart = new Chart('bar', {
       type: 'bar', //this denotes tha type of chart
@@ -34,5 +46,9 @@ export class BarChartComponent implements OnInit {
         ],
       },
     });
+  }
+  updateChart() {
+    this.chart.data.datasets[0].data = this.data1;
+    this.chart.update();
   }
 }

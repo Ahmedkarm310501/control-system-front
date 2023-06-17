@@ -1,4 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 import { Chart } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { CourseDashboardComponent } from '../../course-dashboard/course-dashboard.component';
@@ -8,7 +14,7 @@ import { CourseDashboardComponent } from '../../course-dashboard/course-dashboar
   templateUrl: './pie-chart.component.html',
   styleUrls: ['./pie-chart.component.css'],
 })
-export class PieChartComponent implements OnInit {
+export class PieChartComponent implements OnInit, OnChanges {
   @Input('data1') data1: any;
   public chart: any;
   constructor(private courseDashboardComponent: CourseDashboardComponent) {}
@@ -18,6 +24,12 @@ export class PieChartComponent implements OnInit {
 
     this.createChart();
     console.log(this.data1);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['data1'] && !changes['data1'].firstChange) {
+      this.updateChart();
+    }
   }
 
   createChart() {
@@ -69,5 +81,14 @@ export class PieChartComponent implements OnInit {
         },
       },
     });
+  }
+  updateChart() {
+    if (this.chart) {
+      this.chart.data.datasets[0].data = [
+        this.data1[0].toString(),
+        this.data1[1].toString(),
+      ];
+      this.chart.update();
+    }
   }
 }
