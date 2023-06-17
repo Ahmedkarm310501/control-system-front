@@ -1,3 +1,8 @@
+<app-snackbar
+  #snackbar
+  message="{{ message }}"
+  type="{{ type }}"
+></app-snackbar>
 <div class="setup">
   <div class="container h-100">
     <div class="row h-100 justify-content-center">
@@ -8,8 +13,8 @@
           <div class="col-md-6">
             <label for="courseid" class="form-label">Course ID</label>
             <input
-              [(ngModel)]="courseCode"
-              name="courseid"
+              [(ngModel)]="course_code"
+              name="course_code"
               required
               #courseId="ngModel"
               type="text"
@@ -32,8 +37,8 @@
           <div class="col-md-6">
             <label for="courseName" class="form-label">Course Name</label>
             <input
-              [(ngModel)]="courseName"
-              name="courseName"
+              [(ngModel)]="course_name"
+              name="course_name"
               required
               #coursename="ngModel"
               type="text"
@@ -58,18 +63,20 @@
               >Course Department</label
             >
             <select
-              [(ngModel)]="department"
-              name="coursedepartment"
+              [(ngModel)]="dept_code"
+              name="department"
               required
               #courseDepartment="ngModel"
+              class="form-select"
               id="coursedepartment"
             >
-              <option selected>Choose...</option>
-              <option>IS</option>
-              <option>CS</option>
-              <option>AI</option>
-              <option>IT</option>
-              <option>DS</option>
+              <option value="" disabled selected>Select Department</option>
+              <option
+                *ngFor="let Department of departments"
+                [value]="Department.id"
+              >
+                {{ Department.dept_code }}
+              </option>
             </select>
             <div
               *ngIf="
@@ -90,7 +97,7 @@
             >
             <input
               [(ngModel)]="instructor"
-              name="courseinstructor"
+              name="instructor"
               required
               #courseInstructor="ngModel"
               type="text"
@@ -115,9 +122,9 @@
               >Course Term Work</label
             >
             <input
-              [(ngModel)]="termWork"
+              [(ngModel)]="term_work"
               type="number"
-              name="coursetermwork"
+              name="term_work"
               required
               #courseTermWork="ngModel"
               class="form-control"
@@ -141,9 +148,9 @@
               >Course Exam Work</label
             >
             <input
-              [(ngModel)]="examWork"
+              [(ngModel)]="exam_work"
               type="number"
-              name="courseexamwork"
+              name="exam_work"
               required
               #courseExamWork="ngModel"
               class="form-control"
@@ -174,8 +181,8 @@
           <div class="col-md-6">
             <label for="coursecredits" class="form-label">Total Grades</label>
             <input
-              [(ngModel)]="totalGrade"
-              name="coursecredits"
+              [(ngModel)]="total"
+              name="total"
               required
               #courseCredits="ngModel"
               type="text"
