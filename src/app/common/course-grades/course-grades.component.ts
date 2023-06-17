@@ -19,6 +19,7 @@ export class CourseGradesComponent implements OnInit {
   courseCode: string;
   courseName: string;
   deptName: string;
+  instructor: string;
   students: any;
   filteredStudents: any;
   deleteStudent = false;
@@ -26,9 +27,10 @@ export class CourseGradesComponent implements OnInit {
     console.log(this.courseId);
     this.gradeService.getCourseData(this.courseId).subscribe((res) => {
       console.log(res);
-      this.courseCode = res.data.course_code;
-      this.courseName = res.data.name;
+      this.courseCode = res.data.courseID;
+      this.courseName = res.data.courseName;
       this.deptName = res.data.deptName;
+      this.instructor = res.data.instructor;
     });
 
     this.gradeService

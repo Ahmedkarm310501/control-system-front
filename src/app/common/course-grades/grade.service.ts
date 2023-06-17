@@ -4,7 +4,13 @@ import { environment } from 'src/environments/environment';
 
 type ResponseData = {
   message: string;
-  data: { id: string; name: string; deptName: string; course_code: string };
+  data: {
+    courseID: string;
+    courseName: string;
+    deptName: string;
+    course_code: string;
+    instructor: string;
+  };
 };
 
 type ResponseData2 = {
