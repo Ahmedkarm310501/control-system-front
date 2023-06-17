@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Renderer2,
+  ViewChild,
+  ElementRef,
+} from '@angular/core';
 import { GradeService } from './grade.service';
 import { ActivatedRoute } from '@angular/router';
 
@@ -8,9 +14,12 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./course-grades.component.css'],
 })
 export class CourseGradesComponent implements OnInit {
+  @ViewChild('f') fileRef: ElementRef;
+  @ViewChild('fG') fileRefgrade: ElementRef;
   constructor(
     private gradeService: GradeService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private renderer: Renderer2
   ) {}
   gradesFile: File;
   namesFile: File;
@@ -20,7 +29,7 @@ export class CourseGradesComponent implements OnInit {
   courseName: string;
   deptName: string;
   instructor: string;
-  students: any;
+  students: any = [];
   filteredStudents: any;
   deleteStudent = false;
   ngOnInit(): void {
@@ -149,6 +158,7 @@ export class CourseGradesComponent implements OnInit {
       this.errorMsg2 = `${invalidRecords.length} rows were not added. Please make sure each row has both an ID and name.`;
       this.IsInvalidRecords = true;
     }
+    this.renderer.setProperty(this.fileRef.nativeElement, 'value', null);
   }
 
   missingStudents = [];
@@ -195,6 +205,7 @@ export class CourseGradesComponent implements OnInit {
           this.IsInvalid = true;
         }
       });
+    this.renderer.setProperty(this.fileRefgrade.nativeElement, 'value', null);
   }
 
   deleteAllGrades() {
