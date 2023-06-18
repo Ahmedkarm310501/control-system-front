@@ -37,9 +37,10 @@ export class ConfigureSemesterService {
   enviroment = environment;
   dummyDataCourses: any = [];
 
-
-  constructor(private http: HttpClient,
-    private allCourses: AllCoursesService) { }
+  constructor(
+    private http: HttpClient,
+    private allCourses: AllCoursesService
+  ) {}
 
   getAllCourses() {
     return this.http.get(`${environment.baseUrl}/list-courses`);
@@ -54,10 +55,15 @@ export class ConfigureSemesterService {
   //   return this.http.get<Res2>(`${environment.baseUrl}/courses-in-semester/${semester_id}`
   //   );
   // }
-  SaveSemester(data:number []) {
+  SaveSemester(data: number[]) {
     return this.http.post<Res>(`${environment.baseUrl}/edit-course-semester`, {
-      course_ids: data
+      course_ids: data,
     });
   }
-  
+
+  Semester() {
+    return this.http.get<Res2>(
+      `${environment.baseUrl}/courses-in-semester-merge`
+    );
+  }
 }

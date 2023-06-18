@@ -89,15 +89,15 @@ export class CourseDashboardComponent implements OnInit {
           this.graphTwo.perecentage_failed,
         ];
         this.bar = [
-          this.graphTwo.grade_A,
-          this.graphTwo.grade_A_plus,
-          this.graphTwo.grade_B,
-          this.graphTwo.grade_B_plus,
-          this.graphTwo.grade_C,
-          this.graphTwo.grade_C_plus,
+          this.graphTwo.grade_F,
           this.graphTwo.grade_D,
           this.graphTwo.grade_D_plus,
-          this.graphTwo.grade_F,
+          this.graphTwo.grade_C,
+          this.graphTwo.grade_C_plus,
+          this.graphTwo.grade_B,
+          this.graphTwo.grade_B_plus,
+          this.graphTwo.grade_A,
+          this.graphTwo.grade_A_plus,
         ];
         console.log(this.pie);
         console.log(this.bar);
@@ -111,4 +111,5 @@ export class CourseDashboardComponent implements OnInit {
   getFlooredAverageGrade() {
     return Math.floor(this.graphOne.average_grade);
   }
+  
 }
