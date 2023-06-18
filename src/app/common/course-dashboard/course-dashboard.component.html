@@ -5,15 +5,35 @@
       <div class="card-body">
         <div class="select-course row g-3">
           <div class="select col-6">
-            <select name="dept" class="w-100" [(ngModel)]="selectedDepartment" (change)="onSelectDepartment($event)">
+            <select
+              name="dept"
+              class="w-100"
+              [(ngModel)]="selectedDepartment"
+              (change)="onSelectDepartment($event)"
+            >
               <option value="0">Select Department</option>
-              <option *ngFor="let dept of departments" value={{dept.dept_code}}>{{dept.dept_code}}</option>
+              <option
+                *ngFor="let dept of departments"
+                value="{{ dept.dept_code }}"
+              >
+                {{ dept.dept_code }}
+              </option>
             </select>
           </div>
           <div class="select col-6">
-            <select name="course" class="w-100" [(ngModel)]="selectedCourse" (change)="getGraphs($event)">
+            <select
+              name="course"
+              class="w-100"
+              [(ngModel)]="selectedCourse"
+              (change)="getGraphs($event)"
+            >
               <option value="0">Select Course</option>
-              <option *ngFor="let course of filteredData" value={{course.id}}>{{course.name}}</option>
+              <option
+                *ngFor="let course of filteredData"
+                value="{{ course.id }}"
+              >
+                {{ course.name }}
+              </option>
             </select>
           </div>
         </div>
@@ -24,14 +44,30 @@
         <div class="card-header m-0 fw-bold fs-4">Course Grades Analysis</div>
         <div class="card-body">
           <div class="select-course row g-3">
-            <app-box class="col-3" [number]="graphOne.number_of_students" [name]="'Number Of Students'"
-              [color]="'10px solid var(--main-color)'"></app-box>
-            <app-box class="col-3" [number]="getFlooredAverageGrade()" [name]="'Average Grade'"
-              [color]="'10px solid var(--main-color)'"></app-box>
-            <app-box class="col-3" [number]="graphOne.passed_students" [name]="'Passed Students'"
-              [color]="'10px solid var(--main-color)'"></app-box>
-            <app-box class="col-3" [number]="graphOne.failed_students" [name]="'Failed Students'"
-              [color]="'10px solid var(--main-color)'"></app-box>
+            <app-box
+              class="col-3"
+              [number]="graphOne.number_of_students"
+              [name]="'Number Of Students'"
+              [color]="'10px solid var(--main-color)'"
+            ></app-box>
+            <app-box
+              class="col-3"
+              [number]="getFlooredAverageGrade()"
+              [name]="'Average Grade'"
+              [color]="'10px solid var(--main-color)'"
+            ></app-box>
+            <app-box
+              class="col-3"
+              [number]="graphOne.passed_students"
+              [name]="'Passed Students'"
+              [color]="'10px solid var(--main-color)'"
+            ></app-box>
+            <app-box
+              class="col-3"
+              [number]="graphOne.failed_students"
+              [name]="'Failed Students'"
+              [color]="'10px solid var(--main-color)'"
+            ></app-box>
           </div>
         </div>
       </div>
@@ -47,7 +83,7 @@
             </div>
             <div class="select col-4">
               <div class="text-center">
-                <app-pie-chart  [data1]="pie"></app-pie-chart>
+                <app-pie-chart [data1]="pie"></app-pie-chart>
                 <h4>Pass / Fail ratio</h4>
               </div>
             </div>
@@ -55,13 +91,13 @@
         </div>
       </div>
       <div class="card my-4">
-        <div class="card-header m-0 fw-bold fs-4">Ra'fa Grades Analysis</div>
+        <div class="card-header m-0 fw-bold fs-4">Extra Grades Analysis</div>
         <div class="card-body">
           <div class="row align-items-center">
             <div class="select col-8">
               <div class="text-center">
                 <app-line-chart></app-line-chart>
-                <h4>Needed Ra'fa Grades</h4>
+                <h4>Needed Extra Grades</h4>
               </div>
             </div>
             <div class="select col-4">
@@ -69,7 +105,7 @@
                 <table class="table table-bordered">
                   <thead>
                     <tr>
-                      <th scope="col">Ra'fa Grades</th>
+                      <th scope="col">Needed Grades</th>
                       <th scope="col">Number Of Students</th>
                     </tr>
                   </thead>
@@ -96,13 +132,19 @@
                     </tr>
                   </tbody>
                 </table>
+                <a class="btn btn-success mt-3" routerLink="extra-grades">
+                  Add Extra Grades
+                </a>
               </div>
             </div>
           </div>
         </div>
       </div>
     </ng-container>
-    <div class="fallback-text mt-5" *ngIf="!(selectedCourse && selectedDepartment)">
+    <div
+      class="fallback-text mt-5"
+      *ngIf="!(selectedCourse && selectedDepartment)"
+    >
       <h1 class="text-center">Please Select A Course</h1>
     </div>
   </div>

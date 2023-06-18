@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CourseDashboardService } from './course-dashboard.service';
 import { ConfigureSemesterService } from '../../admin/pages/configure-semester/configure-semester.service';
 import { ChangeDetectorRef } from '@angular/core';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-course-dashboard',
   templateUrl: './course-dashboard.component.html',
@@ -17,7 +18,8 @@ export class CourseDashboardComponent implements OnInit {
   constructor(
     private courseDashboardService: CourseDashboardService,
     private configureSemester: ConfigureSemesterService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private router: Router
   ) {}
 
   departments: any = [];

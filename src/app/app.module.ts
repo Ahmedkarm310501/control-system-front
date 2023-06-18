@@ -36,6 +36,7 @@ import { SnackbarComponent } from './components/snackbar/snackbar.component';
 import { AllCoursesComponent } from './admin/pages/all-courses/all-courses.component';
 import { AddSemesterComponent } from './admin/pages/add-semester/add-semester.component';
 import { ConfigureSemesterComponent } from './admin/pages/configure-semester/configure-semester.component';
+import { ExtraGradesComponent } from './common/extra-grades/extra-grades.component';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { ConfigureSemesterComponent } from './admin/pages/configure-semester/con
     AllCoursesComponent,
     AddSemesterComponent,
     ConfigureSemesterComponent,
+    ExtraGradesComponent,
   ],
   imports: [
     BrowserModule,

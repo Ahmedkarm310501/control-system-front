@@ -4,7 +4,13 @@ import { environment } from 'src/environments/environment';
 
 type ResponseData = {
   message: string;
-  data: { id: string; name: string; deptName: string; course_code: string };
+  data: {
+    courseID: string;
+    courseName: string;
+    deptName: string;
+    course_code: string;
+    instructor: string;
+  };
 };
 
 type ResponseData2 = {
@@ -127,6 +133,16 @@ export class GradeService {
   deleteAllStudentGrades(course_id: string, semester_id: string) {
     return this.http.post(
       `${this.baseUrl}/delete-course-grades/`,
+      {
+        course_id: course_id,
+        semester_id: semester_id,
+      },
+      { observe: 'response' }
+    );
+  }
+  deleteAllStudentsFromCourse(course_id: string, semester_id: string) {
+    return this.http.post(
+      `${this.baseUrl}/delete-all-students-from-course/`,
       {
         course_id: course_id,
         semester_id: semester_id,

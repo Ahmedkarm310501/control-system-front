@@ -23,6 +23,7 @@ import { AllCoursesComponent } from './admin/pages/all-courses/all-courses.compo
 import { DissAllowGuard } from './auth/diss-allow.guard';
 import { AddSemesterComponent } from './admin/pages/add-semester/add-semester.component';
 import { ConfigureSemesterComponent } from './admin/pages/configure-semester/configure-semester.component';
+import { ExtraGradesComponent } from './common/extra-grades/extra-grades.component';
 // import { UserDataComponent } from './config/user-data/user-data.component';
 
 const routes: Routes = [
@@ -72,9 +73,17 @@ const routes: Routes = [
   },
   {
     path: 'course-dashboard',
-    component: CourseDashboardComponent,
     canActivate: [AuthGuard],
     data: { breadcrumb: 'Course Dashboard' },
+    children: [
+      { path: '', component: CourseDashboardComponent },
+      {
+        path: 'extra-grades',
+        component: ExtraGradesComponent,
+        canActivate: [AuthGuard],
+        data: { breadcrumb: 'Extra Grades' },
+      },
+    ],
   },
   {
     path: 'user-profile',

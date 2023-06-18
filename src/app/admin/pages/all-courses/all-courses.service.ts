@@ -15,10 +15,6 @@ interface Res {
   data: Course[];
   message: string;
 }
-interface Req {
-  data: Department[];
-  message: string;
-}
 
 @Injectable({
   providedIn: 'root',
