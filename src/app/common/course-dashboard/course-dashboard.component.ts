@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CourseDashboardService } from './course-dashboard.service';
 import { ConfigureSemesterService } from '../../admin/pages/configure-semester/configure-semester.service';
 import { ChangeDetectorRef } from '@angular/core';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-course-dashboard',
   templateUrl: './course-dashboard.component.html',
@@ -17,7 +18,8 @@ export class CourseDashboardComponent implements OnInit {
   constructor(
     private courseDashboardService: CourseDashboardService,
     private configureSemester: ConfigureSemesterService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private router: Router
   ) {}
 
   departments: any = [];
@@ -77,9 +79,8 @@ export class CourseDashboardComponent implements OnInit {
         console.log(err);
       }
     );
-    this.courseDashboardService
-      .graphTwo(course_id, this.semester.id)
-      .subscribe((res) => {
+    this.courseDashboardService.graphTwo(course_id, this.semester.id).subscribe(
+      (res) => {
         this.show = false;
         this.graphTwo = res.data;
         console.log(this.graphTwo);
@@ -102,10 +103,10 @@ export class CourseDashboardComponent implements OnInit {
         console.log(this.bar);
         this.show = true;
       },
-        (err) => {
-          console.log(err);
-        }
-      );
+      (err) => {
+        console.log(err);
+      }
+    );
   }
   getFlooredAverageGrade() {
     return Math.floor(this.graphOne.average_grade);

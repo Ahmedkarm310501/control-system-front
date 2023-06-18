@@ -47,7 +47,7 @@ export class CourseSettingsService {
       semester_id: semester_id,
       course_code: course_code,
       course_name: course_name,
-      department: dept_code,
+      dept_code: dept_code,
       instructor: instructor,
       term_work: term_work,
       exam_work: exam_work,

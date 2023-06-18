@@ -1,0 +1,64 @@
+<div class="dashboard">
+  <div class="container-fluid">
+    <div class="card">
+      <div class="card-header m-0 fw-bold fs-4">Select Course</div>
+      <div class="card-body">
+        <div class="select-course row g-3">
+          <div class="select col-6"></div>
+        </div>
+      </div>
+    </div>
+    <ng-container *ngIf="show">
+      <div class="card mt-4">
+        <div class="card-header m-0 fw-bold fs-4">Course Grades Analysis</div>
+        <div class="card-body">
+          <div class="select-course row g-3">
+            <app-box
+              class="col-3"
+              [number]="graphOne.number_of_students"
+              [name]="'Number Of Students'"
+              [color]="'10px solid var(--main-color)'"
+            ></app-box>
+            <app-box
+              class="col-3"
+              [number]="getFlooredAverageGrade()"
+              [name]="'Average Grade'"
+              [color]="'10px solid var(--main-color)'"
+            ></app-box>
+            <app-box
+              class="col-3"
+              [number]="graphOne.passed_students"
+              [name]="'Passed Students'"
+              [color]="'10px solid var(--main-color)'"
+            ></app-box>
+            <app-box
+              class="col-3"
+              [number]="graphOne.failed_students"
+              [name]="'Failed Students'"
+              [color]="'10px solid var(--main-color)'"
+            ></app-box>
+          </div>
+        </div>
+      </div>
+      <div class="card mt-4">
+        <div class="card-header m-0 fw-bold fs-4">Course Grades Analysis</div>
+        <div class="card-body">
+          <div class="select-course row g-3">
+            <div class="select col-8">
+              <div class="text-center">
+                <app-bar-chart width="327px" [data1]="bar"></app-bar-chart>
+                <h4>Student Grades Distribution</h4>
+              </div>
+            </div>
+            <div class="select col-4">
+              <div class="text-center">
+                <app-pie-chart [data1]="pie"></app-pie-chart>
+                <h4>Pass / Fail ratio</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>
