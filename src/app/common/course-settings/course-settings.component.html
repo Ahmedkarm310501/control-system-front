@@ -7,7 +7,16 @@
   <div class="container h-100">
     <div class="row h-100 justify-content-center">
       <div class="col-sm-10 col-lg-8 text-center">
-        <form class="row g-3" #Form="ngForm" (ngSubmit)="onSubmit(Form.value)">
+        <div class="d-flex justify-content-center mt-5">
+          <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+        </div>
+
+        <form
+          class="row g-3"
+          #Form="ngForm"
+          *ngIf="!isLoading"
+          (ngSubmit)="onSubmit(Form.value)"
+        >
           <h1 class="fs-1 text-center mb-2 form-header">Course Settings</h1>
           <hr />
           <div class="col-md-6">
@@ -63,7 +72,7 @@
               >Course Department</label
             >
             <select
-              [(ngModel)]="dept_code"
+              [(ngModel)]="department"
               name="department"
               required
               #courseDepartment="ngModel"
@@ -73,7 +82,7 @@
               <option value="" disabled selected>Select Department</option>
               <option
                 *ngFor="let Department of departments"
-                [value]="Department.id"
+                [value]="Department.dept_code"
               >
                 {{ Department.dept_code }}
               </option>
