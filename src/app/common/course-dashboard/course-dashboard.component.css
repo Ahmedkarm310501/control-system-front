@@ -19,3 +19,9 @@ select {
 /* .table-bordered {
   border: 3px solid var(--background-color-dark) !important;
 } */
+
+@media (max-width: 768px) {
+  .col-3{
+    width: 100% !important;
+  }
+}
