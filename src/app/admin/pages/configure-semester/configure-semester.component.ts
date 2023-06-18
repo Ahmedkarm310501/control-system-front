@@ -11,90 +11,83 @@ import { SnackbarComponent } from 'src/app/components/snackbar/snackbar.componen
 export class ConfigureSemesterComponent implements OnInit {
   @ViewChild('snackbar') snackbar: SnackbarComponent;
 
-  constructor(
-    private allCourses: AllCoursesService,
-    private configureSemester: ConfigureSemesterService
-  ) {}
+  constructor(private configureSemester: ConfigureSemesterService) {}
   courses: any = [];
+  allData: any = [];
   filteredData: any;
   departments: any = [];
   semester: any = [];
-  message: string;
-  type: string;
-
-  ngOnInit(): void {
-    // display all courses
-    this.allCourses.getAllCourses().subscribe(
-      (res) => {
-        console.log(res);
-
-        this.courses = res.data.map((item: any) => {
-          return {
-            ...item,
-            checked: false,
-          };
-        });
-        this.filteredData = this.courses;
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
-    this.configureSemester.getAllDepartments().subscribe((res) => {
-      this.departments = res.data;
-      console.log(this.departments);
-    });
-
-    this.configureSemester.getCurrentSemester().subscribe(
-      (res) => {
-        this.semester = res.data;
-
-        console.log(this.semester);
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
-
-    // this.configureSemester
-    //   .getCoursesInSemester(this.semester.id)
-    //   .subscribe(
-    //     (res) => {
-    //       console.log(this.semester.id);
-    //       console.log(res);
-    //     },
-    //     (err) => {
-    //       console.log(err);
-    //     }
-    //   );  need to be done
-  }
-
+  coursesInSemester: any = [];
   selectedCourses = [];
 
+  message: string;
+  type: string;
+  ngOnInit(): void {
+    this.configureSemester.Semester().subscribe(
+      (res) => {
+        this.allData = res.data;
+        console.log(this.allData);
+
+        this.courses = this.allData.courses;
+        console.log(this.courses);
+
+        this.departments = this.allData.departments;
+        console.log(this.departments);
+
+        this.semester = this.allData.newestSemester;
+        console.log(this.semester);
+
+        this.coursesInSemester = this.allData.coursesInSemester;
+        console.log(this.coursesInSemester);
+
+        this.filteredData = this.courses;
+        this.selectedCourses = this.coursesInSemester;
+
+        
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+
+    // check if course is in courseInSemester array then it should not appear in courses array
+    // this.courses = this.courses.filter((item: any) => {
+    //   return !this.coursesInSemester.some((item2: any) => {
+    //     return item.id === item2.id;
+    //   });
+    // });
+  }
+
   move() {
-    // if (this.selectedCourses.length == 0) {
-    //   this.message = 'Please select course';
-    //   this.type = 'error';
-    //   this.snackbar.show();
-    //   return;
-    // }
-    this.selectedCourses = this.selectedCourses.concat(
+    this.coursesInSemester = this.coursesInSemester.concat(
       this.courses.filter((item) => item.checked)
     );
-    this.selectedCourses = this.selectedCourses.map((item) => {
+    this.coursesInSemester = this.coursesInSemester.map((item) => {
       return {
         ...item,
         checked: false,
       };
     });
+    
     this.courses = this.courses.map((item) => {
       return {
         ...item,
         checked: false,
       };
     });
+
     this.courses = this.courses.filter((item) => !item.checked);
+    // when moving course from courses to selectedCourses, it should not appear in courses array
+    this.courses = this.courses.filter((item: any) => {
+      return !this.coursesInSemester.some((item2: any) => {
+        return item.id === item2.id;
+      });
+    });
     this.filteredData = this.courses;
+    this.selectedCourses = this.coursesInSemester;
+    console.log('move function');
+    console.log(this.selectedCourses);
+    console.log(this.filteredData);
   }
   moveBack() {
     this.courses = this.courses.concat(
@@ -107,8 +100,18 @@ export class ConfigureSemesterComponent implements OnInit {
       };
     });
     this.selectedCourses = this.selectedCourses.filter((item) => !item.checked);
+    // when moving course from courses to selectedCourses, it should not appear in courses array
+    this.coursesInSemester = this.coursesInSemester.filter((item: any) => {
+      return !this.courses.some((item2: any) => {
+        return item.id === item2.id;
+      });
+    });
     this.filteredData = this.courses;
+    this.selectedCourses = this.coursesInSemester;
     this.courses.checked = false;
+    console.log('moveback function');
+    console.log(this.selectedCourses);
+    console.log(this.filteredData);
   }
   // filter by department
   onSelectDepartment(event: any) {
@@ -155,7 +158,7 @@ export class ConfigureSemesterComponent implements OnInit {
     //   return;
     // }
     // make array of course ids
-    const data = this.selectedCourses.map((item: any) => item.id);
+    const data = this.coursesInSemester.map((item: any) => item.id);
     console.log(data);
     this.configureSemester.SaveSemester(data).subscribe(
       (res) => {
@@ -171,8 +174,6 @@ export class ConfigureSemesterComponent implements OnInit {
         this.snackbar.show();
       }
     );
-
-    // console.log(this.selectedCourses);
   }
   selectAll() {
     this.courses = this.courses.map((item) => {

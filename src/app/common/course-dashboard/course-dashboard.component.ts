@@ -77,9 +77,8 @@ export class CourseDashboardComponent implements OnInit {
         console.log(err);
       }
     );
-    this.courseDashboardService
-      .graphTwo(course_id, this.semester.id)
-      .subscribe((res) => {
+    this.courseDashboardService.graphTwo(course_id, this.semester.id).subscribe(
+      (res) => {
         this.show = false;
         this.graphTwo = res.data;
         console.log(this.graphTwo);
@@ -88,26 +87,27 @@ export class CourseDashboardComponent implements OnInit {
           this.graphTwo.perecentage_failed,
         ];
         this.bar = [
-          this.graphTwo.grade_A,
-          this.graphTwo.grade_A_plus,
-          this.graphTwo.grade_B,
-          this.graphTwo.grade_B_plus,
-          this.graphTwo.grade_C,
-          this.graphTwo.grade_C_plus,
+          this.graphTwo.grade_F,
           this.graphTwo.grade_D,
           this.graphTwo.grade_D_plus,
-          this.graphTwo.grade_F,
+          this.graphTwo.grade_C,
+          this.graphTwo.grade_C_plus,
+          this.graphTwo.grade_B,
+          this.graphTwo.grade_B_plus,
+          this.graphTwo.grade_A,
+          this.graphTwo.grade_A_plus,
         ];
         console.log(this.pie);
         console.log(this.bar);
         this.show = true;
       },
-        (err) => {
-          console.log(err);
-        }
-      );
+      (err) => {
+        console.log(err);
+      }
+    );
   }
   getFlooredAverageGrade() {
     return Math.floor(this.graphOne.average_grade);
   }
+  
 }
