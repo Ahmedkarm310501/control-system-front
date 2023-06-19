@@ -37,7 +37,9 @@
               </div>
                 <div class="col-sm-2 pt-4">
                   <label for="upload" class="custom-file-upload">
-                    <input type="file" name="UploadCourses" id="upload" (change)="onUpload($event)">
+                    <a class="btn btn-primary" (click)="f.click()">
+                      <input #fileInput1 type="file" #f  (change)="onUpload(fileInput1.files) ; fileInput1.value = null">
+                    </a>
                     Upload Courses
 
                   </label>

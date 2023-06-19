@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AdminLogService } from './admin-log.service';
 
 @Component({
   selector: 'app-admin-log',
@@ -6,8 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin-log.component.css'],
 })
 export class AdminLogComponent implements OnInit {
-  constructor() {}
+  constructor(private adminLogService: AdminLogService) {}
   collapseStates: { [key: number]: boolean } = {};
+  date = new Date();
 
   dummyData = [
     {
@@ -56,14 +58,21 @@ export class AdminLogComponent implements OnInit {
       after: 'upload students names',
     },
   ];
-  filteredCourses = this.dummyData;
+  log: any[] = [];
   ngOnInit(): void {
     this.dummyData.forEach((data) => {
       this.collapseStates[data.id] = true;
     });
+    this.adminLogService.getAdminLog().subscribe((res) => {
+      console.log(res);
+      this.log = res['data'];
+      
+    });
   }
+
+  
   searchCourse(searchTerm: string) {
-    this.filteredCourses = this.dummyData.filter((log) => {
+    this.log = this.dummyData.filter((log) => {
       return (
         log.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
         log.change.toLowerCase().includes(searchTerm.toLowerCase())

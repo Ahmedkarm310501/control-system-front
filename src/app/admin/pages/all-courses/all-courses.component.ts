@@ -103,8 +103,17 @@ export class AllCoursesComponent implements OnInit {
         this.sortOrder
     );
   }
-  onUpload(event: any) {
-    // get uploaded file and paste it as an object in console
-    console.log(event.target.files[0]);
+  onUpload(files: FileList) {
+    const file = files[0]
+    console.log(file);
+    this.allCourses.ImportCourses(file).subscribe(
+      (res) => {
+        console.log(res);
+        this.ngOnInit();
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 }

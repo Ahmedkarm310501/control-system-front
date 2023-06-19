@@ -15,6 +15,17 @@ interface Res {
   data: Course[];
   message: string;
 }
+interface ResponseData2 {
+  message: string;
+  data: [
+    {
+      id: number;
+      course_code: string;
+      name: string;
+      
+    }
+  ];
+};
 
 @Injectable({
   providedIn: 'root',
@@ -35,4 +46,13 @@ export class AllCoursesService {
   getAllDepartments() {
     return this.http.get<Res>(`${environment.baseUrl}/departments`);
   }
+
+  ImportCourses(file: File) {
+    const formData = new FormData();
+    formData.append('courses', file);
+    return this.http.post<ResponseData2>(`${environment.baseUrl}/import-courses`, formData, {
+      observe: 'response',
+    });
+  }
+
 }
