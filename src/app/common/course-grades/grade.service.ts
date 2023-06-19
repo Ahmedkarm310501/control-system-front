@@ -12,7 +12,7 @@ type ResponseData = {
     instructor: string;
   };
 };
-
+// course id - coursecode- name- deptId
 type ResponseData2 = {
   message: string;
   data: [
