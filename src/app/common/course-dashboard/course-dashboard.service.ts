@@ -40,7 +40,12 @@ export class CourseDashboardService {
   graphTwo(course_id: number) {
     return this.http.post<Res2>(`${environment.baseUrl}/graph-two`, {
       course_id,
+    });
+  }
 
+  graphThree(course_id: number) {
+    return this.http.post<Res2>(`${environment.baseUrl}/graph-three`, {
+      course_id,
     });
   }
 }
