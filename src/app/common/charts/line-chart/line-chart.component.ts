@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnInit,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 import Chart from 'chart.js/auto';
 
 @Component({
@@ -7,11 +13,18 @@ import Chart from 'chart.js/auto';
   styleUrls: ['./line-chart.component.css'],
 })
 export class LineChartComponent implements OnInit {
+  @Input('data1') data1: any;
   public chart: any;
   constructor() {}
 
   ngOnInit(): void {
+    console.log(this.data1);
     this.createChart();
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['data1'] && !changes['data1'].firstChange) {
+      this.updateChart();
+    }
   }
 
   createChart() {
@@ -23,12 +36,16 @@ export class LineChartComponent implements OnInit {
         datasets: [
           {
             label: 'Grades',
-            data: [5, 7, 3, 6, 8, 10, 1, 2, 4, 5],
+            data: this.data1,
             backgroundColor: '#1d2c28',
             borderColor: '#1d2c28',
           },
         ],
       },
     });
+  }
+  updateChart() {
+    this.chart.data.datasets[0].data = this.data1;
+    this.chart.update();
   }
 }

@@ -8,7 +8,9 @@ select {
   /* background: #fff; */
   background: var(--background-color);
 }
-
+.btn-success {
+  background-color: var(--main-color) !important;
+}
 /* .card-header {
   background-color: #2a3f54;
 } */
@@ -21,7 +23,7 @@ select {
 } */
 
 @media (max-width: 768px) {
-  .col-3{
+  .col-3 {
     width: 100% !important;
   }
 }
