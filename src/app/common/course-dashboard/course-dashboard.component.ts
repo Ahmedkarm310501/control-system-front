@@ -15,6 +15,7 @@ export class CourseDashboardComponent implements OnInit {
   show: boolean = false;
   message: string;
   type: string;
+  isLoading: boolean = false;
   need_one_grade: any;
   need_two_grade: any;
   need_three_grade: any;
@@ -76,6 +77,7 @@ export class CourseDashboardComponent implements OnInit {
   graphThree: any;
   getGraphs(event: any) {
     const course_id = event.target.value;
+    this.isLoading = true;
     this.courseId = course_id.toString();
     this.courseDashboardService.graphOne(course_id, this.semester.id).subscribe(
       (res) => {
@@ -84,6 +86,8 @@ export class CourseDashboardComponent implements OnInit {
         console.log(this.courseId);
         console.log(this.semester.id);
         console.log(res);
+        this.show = true;
+        this.isLoading = false;
       },
       (err) => {
         console.log(err);
@@ -144,6 +148,7 @@ export class CourseDashboardComponent implements OnInit {
         ];
         console.log(this.line);
         this.show = true;
+        this.isLoading = false;
       },
       (err) => {
         console.log(err);

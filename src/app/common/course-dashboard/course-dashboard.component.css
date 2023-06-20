@@ -17,6 +17,11 @@ select {
 .card {
   background-color: var(--background-color-dark);
 }
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 56%;
+}
 
 /* .table-bordered {
   border: 3px solid var(--background-color-dark) !important;
