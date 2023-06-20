@@ -21,6 +21,7 @@ export class ExtraGradesComponent implements OnInit {
   type: string;
   courseId = this.route.snapshot.paramMap.get('courseId');
   semester: any;
+  isLoading: boolean = true;
 
   constructor(
     private courseDashboardService: CourseDashboardService,
@@ -33,7 +34,6 @@ export class ExtraGradesComponent implements OnInit {
 
     this.courseDashboardService.graphTwo(+this.courseId).subscribe(
       (res) => {
-        this.show = false;
         this.graphTwo = res.data;
         console.log(this.graphTwo);
         this.pie = [
@@ -53,7 +53,7 @@ export class ExtraGradesComponent implements OnInit {
         ];
         console.log(this.pie);
         console.log(this.bar);
-        this.show = true;
+        this.isLoading = false;
       },
       (err) => {
         console.log(err);

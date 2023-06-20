@@ -59,7 +59,7 @@
         </div>
       </div>
     </div>
-    <div class="card mt-4">
+    <div *ngIf="!isLoading" class="card mt-4">
       <div class="card-header m-0 fw-bold fs-4">Course Grades Analysis</div>
       <div class="card-body">
         <div class="select-course row g-3">
