@@ -65,6 +65,11 @@
                       >Course Dashboard</a
                     >
                   </li>
+                  <li routerLinkActive="current-page">
+                    <a routerLink="compare-courses" (click)="clickEvent('home')"
+                      >Compare Courses</a
+                    >
+                  </li>
                 </ul>
               </li>
               <!-- <li
@@ -135,22 +140,27 @@
                   </li>
                 </ul>
               </li>
-              <li (click)="clickEvent('semester')" [ngClass]="toggleDisplay['semester'] ? 'active' : ''">
-                <a><i class="fa fa-calendar"></i> Semester
+              <li
+                (click)="clickEvent('semester')"
+                [ngClass]="toggleDisplay['semester'] ? 'active' : ''"
+              >
+                <a
+                  ><i class="fa fa-calendar"></i> Semester
                   <span class="fa fa-chevron-down float-end"></span>
                   <!-- <i class="fa fa-caret-down float-end"></i> -->
                 </a>
-                <ul class="nav child_menu nav-childs" [ngStyle]="{
-                                  display: toggleDisplay['semester'] ? 'block' : 'none'
-                                }">
+                <ul
+                  class="nav child_menu nav-childs"
+                  [ngStyle]="{
+                    display: toggleDisplay['semester'] ? 'block' : 'none'
+                  }"
+                >
                   <li routerLinkActive="current-page">
                     <a routerLink="add-semester">Add Semester</a>
                   </li>
                   <li routerLinkActive="current-page">
                     <a routerLink="configure-semester">Configure Semester</a>
                   </li>
-
-                  
                 </ul>
               </li>
               <!-- additional list items here -->
