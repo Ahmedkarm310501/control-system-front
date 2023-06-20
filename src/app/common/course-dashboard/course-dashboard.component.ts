@@ -15,15 +15,12 @@ export class CourseDashboardComponent implements OnInit {
   show: boolean = false;
   message: string;
   type: string;
-<<<<<<< HEAD
   isLoading: boolean = false;
-=======
   need_one_grade: any;
   need_two_grade: any;
   need_three_grade: any;
   need_four_grade: any;
   need_five_grade: any;
->>>>>>> a07bd014a6d36608cee4b330444d20314f1474ca
 
   constructor(
     private courseDashboardService: CourseDashboardService,
@@ -80,11 +77,8 @@ export class CourseDashboardComponent implements OnInit {
   graphThree: any;
   getGraphs(event: any) {
     const course_id = event.target.value;
-<<<<<<< HEAD
     this.isLoading = true;
-=======
     this.courseId = course_id.toString();
->>>>>>> a07bd014a6d36608cee4b330444d20314f1474ca
     this.courseDashboardService.graphOne(course_id, this.semester.id).subscribe(
       (res) => {
         this.graphOne = res.data;
