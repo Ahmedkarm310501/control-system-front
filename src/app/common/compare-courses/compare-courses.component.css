@@ -42,3 +42,8 @@ select {
   width: 50px;
   /* border-radius: 5px; */
 }
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 56%;
+}

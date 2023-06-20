@@ -14,6 +14,7 @@ export class CourseDashboardComponent implements OnInit {
   show: boolean = false;
   message: string;
   type: string;
+  isLoading: boolean = false;
 
   constructor(
     private courseDashboardService: CourseDashboardService,
@@ -68,12 +69,14 @@ export class CourseDashboardComponent implements OnInit {
   graphTwo: any;
   getGraphs(event: any) {
     const course_id = event.target.value;
-
+    this.isLoading = true;
     this.courseDashboardService.graphOne(course_id, this.semester.id).subscribe(
       (res) => {
         this.graphOne = res.data;
         console.log(this.semester.id);
         console.log(res);
+        this.show = true;
+        this.isLoading = false;
       },
       (err) => {
         console.log(err);
@@ -102,6 +105,7 @@ export class CourseDashboardComponent implements OnInit {
         console.log(this.pie);
         console.log(this.bar);
         this.show = true;
+        this.isLoading = false;
       },
       (err) => {
         console.log(err);
@@ -111,5 +115,4 @@ export class CourseDashboardComponent implements OnInit {
   getFlooredAverageGrade() {
     return Math.floor(this.graphOne.average_grade);
   }
-  
 }
