@@ -9,6 +9,8 @@ export class BoxComponent implements OnInit {
   @Input() name: string;
   @Input() number: number;
   @Input() color: string;
+  // set fallback color
+  @Input() bgColor: string = 'var(--box-color)';
 
   constructor() {}
 

@@ -1,0 +1,44 @@
+select {
+  height: 40px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 0 10px;
+  font-size: 18px;
+  color: var(--text-color);
+  /* background: #fff; */
+  background: var(--background-color);
+}
+
+/* .card-header {
+    background-color: #2a3f54;
+  } */
+.card {
+  background-color: var(--background-color-dark);
+}
+
+/* .table-bordered {
+    border: 3px solid var(--background-color-dark) !important;
+  } */
+
+@media (max-width: 768px) {
+  .col-3 {
+    width: 100% !important;
+  }
+}
+/* style first and second span as boxes with diffrent colors */
+.first {
+  background-color: var(--main-color);
+  color: #fff;
+  display: inline-block;
+  height: 20px;
+  width: 50px;
+  /* border-radius: 5px; */
+}
+.second {
+  background-color: var(--box-color);
+  color: #fff;
+  display: inline-block;
+  height: 20px;
+  width: 50px;
+  /* border-radius: 5px; */
+}

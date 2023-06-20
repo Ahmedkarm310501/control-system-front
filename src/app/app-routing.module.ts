@@ -24,6 +24,7 @@ import { DissAllowGuard } from './auth/diss-allow.guard';
 import { AddSemesterComponent } from './admin/pages/add-semester/add-semester.component';
 import { ConfigureSemesterComponent } from './admin/pages/configure-semester/configure-semester.component';
 import { ExtraGradesComponent } from './common/extra-grades/extra-grades.component';
+import { CompareCoursesComponent } from './common/compare-courses/compare-courses.component';
 // import { UserDataComponent } from './config/user-data/user-data.component';
 
 const routes: Routes = [
@@ -84,6 +85,13 @@ const routes: Routes = [
         data: { breadcrumb: 'Extra Grades' },
       },
     ],
+  },
+
+  {
+    path: 'compare-courses',
+    component: CompareCoursesComponent,
+    canActivate: [AuthGuard],
+    data: { breadcrumb: 'Compare Courses' },
   },
   {
     path: 'user-profile',

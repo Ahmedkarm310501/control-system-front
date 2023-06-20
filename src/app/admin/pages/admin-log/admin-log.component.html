@@ -187,7 +187,7 @@
                   </p>
                 </td>
                 <!--After-->
-                <td *ngIf="data.properties.new !== null && data.event === 'ADD_STUDENTS_TO_COURSE_EXCEL'">
+                <td class="btn1" *ngIf="data.properties.new !== null && data.event === 'ADD_STUDENTS_TO_COURSE_EXCEL'">
                   <span>{{data.description}}</span>
                   <button type="button" class="btn btn-success" (click)="downloadFile()">
                     Download
@@ -211,7 +211,7 @@
                 </td>
                 <!--DELETE_ALL_STUDENTS_FROM_COURSE event-->
                 <!--Before-->
-                <td *ngIf="data.properties.old !== null && data.event === 'DELETE_ALL_STUDENTS_FROM_COURSE'">
+                <td class="btn1" *ngIf="data.properties.old !== null && data.event === 'DELETE_ALL_STUDENTS_FROM_COURSE'">
                   <span>Deleted Students</span>
                   <button type="button" class="btn btn-success" (click)="downloadFile()">
                     Download
@@ -247,12 +247,12 @@
                   </span>
                   <br>
                   <span>
-                    Course Exam : {{ data.properties.new.course_work }}
+                    Course Work : {{ data.properties.new.term_work }}
                   </span>
                 </td>
                 <!--DELETE_COURSE_GRADES event-->
                 <!--Before-->
-                <td *ngIf="data.properties.old !== null && data.event === 'DELETE_COURSE_GRADES'">
+                <td class="btn1" *ngIf="data.properties.old !== null && data.event === 'DELETE_COURSE_GRADES'">
                   <span>Deleted Grades</span>
                   <button type="button" class="btn btn-success" (click)="downloadFile()">
                     Download
@@ -264,12 +264,12 @@
                 </td>
                 <!--ADD_COURSE_GRADES event-->
                 <!--Before-->
-                <td *ngIf="data.properties.old === null && data.event === 'ADD_COURSE_GRADES'">
+               <!----> <td *ngIf="data.properties.old === null && data.event === 'ADD_COURSE_GRADES'">
                   -------- Nothing To Show --------
                 </td>
                 <!--After-->
-                <td *ngIf="data.properties.new !== null && data.event === 'ADD_COURSE_GRADES'">
-                  <span>Added Grades</span>
+                <td class="btn1" *ngIf="data.properties.new !== null && data.event === 'ADD_COURSE_GRADES'">
+                  <span>{{data.description}}</span>
                   <button type="button" class="btn btn-success" (click)="downloadFile()">
                     Download
                   </button>

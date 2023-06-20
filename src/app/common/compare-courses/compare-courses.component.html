@@ -1,0 +1,216 @@
+<div class="dashboard my-5">
+  <div class="container-fluid">
+    <!-- Start card -->
+    <div class="card">
+      <div class="card-header m-0 fw-bold fs-4">Select Course</div>
+      <div class="card-body">
+        <!-- Start Upper row -->
+        <div class="select-course row g-3">
+          <div class="select col-4">
+            <select name="dept" class="w-100">
+              <!-- [(ngModel)]="selectedDepartment"
+              (change)="onSelectDepartment($event)" -->
+              <option value="0">Select First Department</option>
+              <!-- <option
+                *ngFor="let dept of departments"
+                value="{{ dept.dept_code }}"
+              >
+                {{ dept.dept_code }}
+              </option> -->
+            </select>
+          </div>
+          <div class="select col-4">
+            <select name="course" class="w-100">
+              <!-- [(ngModel)]="selectedCourse"
+              (change)="getGraphs($event)" -->
+              <option value="0">Select First Course</option>
+              <!-- <option
+                *ngFor="let course of filteredData"
+                value="{{ course.id }}"
+              >
+                {{ course.name }}
+              </option> -->
+            </select>
+          </div>
+          <div class="select col-4">
+            <select name="semester" class="w-100">
+              <!-- [(ngModel)]="selectedCourse"
+              (change)="getGraphs($event)" -->
+              <option value="0">Select First Semester</option>
+              <!-- <option
+                *ngFor="let course of filteredData"
+                value="{{ course.id }}"
+              >
+                {{ course.name }}
+              </option> -->
+            </select>
+          </div>
+        </div>
+        <!-- End Upper row -->
+        <!-- Start Lower row -->
+        <div class="select-course row g-3 mt-1">
+          <div class="select col-4">
+            <select name="dept" class="w-100">
+              <!-- [(ngModel)]="selectedDepartment"
+              (change)="onSelectDepartment($event)" -->
+              <option value="0">Select Second Department</option>
+              <!-- <option
+                *ngFor="let dept of departments"
+                value="{{ dept.dept_code }}"
+              >
+                {{ dept.dept_code }}
+              </option> -->
+            </select>
+          </div>
+          <div class="select col-4">
+            <select name="course" class="w-100">
+              <!-- [(ngModel)]="selectedCourse"
+              (change)="getGraphs($event)" -->
+              <option value="0">Select Second Course</option>
+              <!-- <option
+                *ngFor="let course of filteredData"
+                value="{{ course.id }}"
+              >
+                {{ course.name }}
+              </option> -->
+            </select>
+          </div>
+          <div class="select col-4">
+            <select name="semester" class="w-100">
+              <!-- [(ngModel)]="selectedCourse"
+              (change)="getGraphs($event)" -->
+              <option value="0">Select Second Semester</option>
+              <!-- <option
+                *ngFor="let course of filteredData"
+                value="{{ course.id }}"
+              >
+                {{ course.name }}
+              </option> -->
+            </select>
+          </div>
+        </div>
+        <!-- End Lower row -->
+      </div>
+    </div>
+    <!-- End card -->
+    <!-- Start numbers card -->
+    <div class="card mt-4">
+      <div class="card-header m-0 fw-bold fs-4">
+        Course Grades Analysis IS221 <span class="first"></span> CS413
+        <span class="second"></span>
+      </div>
+      <div class="card-body">
+        <!-- start first row  -->
+        <div class="select-course row g-3">
+          <!-- add course name -->
+          <app-box
+            class="col-3"
+            [number]="4"
+            [name]="'Number Of Students'"
+            [color]="'10px solid var(--main-color)'"
+            [bgColor]="firstCourseColor"
+          ></app-box>
+          <app-box
+            class="col-3"
+            [number]="343"
+            [name]="'Average Grade'"
+            [color]="'10px solid var(--main-color)'"
+            [bgColor]="firstCourseColor"
+          ></app-box>
+          <app-box
+            class="col-3"
+            [number]="53"
+            [name]="'Passed Students'"
+            [color]="'10px solid var(--main-color)'"
+            [bgColor]="firstCourseColor"
+          ></app-box>
+          <app-box
+            class="col-3"
+            [number]="133"
+            [name]="'Failed Students'"
+            [color]="'10px solid var(--main-color)'"
+            [bgColor]="firstCourseColor"
+          ></app-box>
+        </div>
+        <!-- end first row  -->
+        <!-- start second row  -->
+        <div class="select-course row g-3 mt-1">
+          <app-box
+            class="col-3"
+            [number]="4"
+            [name]="'Number Of Students'"
+            [color]="'10px solid var(--main-color)'"
+          ></app-box>
+          <app-box
+            class="col-3"
+            [number]="343"
+            [name]="'Average Grade'"
+            [color]="'10px solid var(--main-color)'"
+          ></app-box>
+          <app-box
+            class="col-3"
+            [number]="53"
+            [name]="'Passed Students'"
+            [color]="'10px solid var(--main-color)'"
+          ></app-box>
+          <app-box
+            class="col-3"
+            [number]="133"
+            [name]="'Failed Students'"
+            [color]="'10px solid var(--main-color)'"
+          ></app-box>
+        </div>
+        <!-- end second row  -->
+      </div>
+    </div>
+    <!-- End numbers card -->
+    <!-- Start bar card -->
+    <div class="card mt-4">
+      <div class="card-header m-0 fw-bold fs-4">Course Grades Analysis</div>
+      <div class="card-body">
+        <div class="select-course row g-3">
+          <div class="select col-12">
+            <div class="text-center">
+              <app-bar-chart
+                width="327px"
+                [data1]="barChartData1"
+                [data2]="barChartData2"
+                [label1]="'CS123'"
+                [label2]="'CS321'"
+              ></app-bar-chart>
+              <h4>Student Grades Distribution</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End bar card -->
+    <!-- start pie -->
+    <div class="card mt-4">
+      <div class="card-header m-0 fw-bold fs-4">Course Grades Analysis</div>
+      <div class="card-body">
+        <div class="select-course row g-3">
+          <div class="select col-6">
+            <div class="text-center">
+              <app-pie-chart
+                [id]="'pie1'"
+                [data1]="pieChartData1"
+              ></app-pie-chart>
+              <h4>Pass / Fail ratio for IS221</h4>
+            </div>
+          </div>
+          <div class="select col-6">
+            <div class="text-center">
+              <app-pie-chart
+                [id]="'pie2'"
+                [data1]="pieChartData2"
+              ></app-pie-chart>
+              <h4>Pass / Fail ratio for CS413</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end pie -->
+  </div>
+</div>

@@ -4,11 +4,11 @@ import {
   Input,
   OnChanges,
   SimpleChanges,
+  AfterViewInit,
 } from '@angular/core';
 import { Chart } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
-import { CourseDashboardComponent } from '../../course-dashboard/course-dashboard.component';
-// import { ExtraGradesComponent } from '../../extra-grades/extra-grades.component';
+
 
 @Component({
   selector: 'app-pie-chart',
@@ -17,13 +17,17 @@ import { CourseDashboardComponent } from '../../course-dashboard/course-dashboar
 })
 export class PieChartComponent implements OnInit, OnChanges {
   @Input('data1') data1: any;
+  @Input('id') id: any = 'pie';
   public chart: any;
-  constructor() {} // private extraGradesComponent: ExtraGradesComponent
+
+
+
 
   ngOnInit(): void {
+    console.log(this.id);
     console.log(this.data1);
 
-    this.createChart();
+    // this.createChart(this.id);
     console.log(this.data1);
   }
 
@@ -33,8 +37,9 @@ export class PieChartComponent implements OnInit, OnChanges {
     }
   }
 
-  createChart() {
-    this.chart = new Chart('pie', {
+  createChart(id: any) {
+    console.log('from create ', id);
+    this.chart = new Chart(id, {
       type: 'pie', //this denotes tha type of chart
       plugins: [ChartDataLabels],
 
@@ -83,6 +88,13 @@ export class PieChartComponent implements OnInit, OnChanges {
       },
     });
   }
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.createChart(this.id);
+    }, 1);
+  }
+
   updateChart() {
     if (this.chart) {
       this.chart.data.datasets[0].data = [

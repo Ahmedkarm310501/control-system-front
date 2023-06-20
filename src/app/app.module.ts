@@ -37,6 +37,7 @@ import { AllCoursesComponent } from './admin/pages/all-courses/all-courses.compo
 import { AddSemesterComponent } from './admin/pages/add-semester/add-semester.component';
 import { ConfigureSemesterComponent } from './admin/pages/configure-semester/configure-semester.component';
 import { ExtraGradesComponent } from './common/extra-grades/extra-grades.component';
+import { CompareCoursesComponent } from './common/compare-courses/compare-courses.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +74,7 @@ import { ExtraGradesComponent } from './common/extra-grades/extra-grades.compone
     AddSemesterComponent,
     ConfigureSemesterComponent,
     ExtraGradesComponent,
+    CompareCoursesComponent,
   ],
   imports: [
     BrowserModule,
