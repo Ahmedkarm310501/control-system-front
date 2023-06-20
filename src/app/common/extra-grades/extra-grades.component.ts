@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { CourseDashboardService } from '../course-dashboard/course-dashboard.service';
 import { ActivatedRoute } from '@angular/router';
 import { ConfigureSemesterService } from '../../admin/pages/configure-semester/configure-semester.service';
-
+import { ExtraGradesService } from './extra-grades.service';
+import { GradeService } from '../course-grades/grade.service';
 @Component({
   selector: 'app-extra-grades',
   templateUrl: './extra-grades.component.html',
@@ -11,7 +12,6 @@ import { ConfigureSemesterService } from '../../admin/pages/configure-semester/c
 export class ExtraGradesComponent implements OnInit {
   courses: any = [];
   filteredData: any = [];
-
   pie: any = [];
   bar: any = [];
   graphOne: any;
@@ -22,15 +22,26 @@ export class ExtraGradesComponent implements OnInit {
   courseId = this.route.snapshot.paramMap.get('courseId');
   semester: any;
   isLoading: boolean = true;
-
+  courseID: any;
+  courseName: string;
+  deptName: string;
+  instructor: string;
   constructor(
     private courseDashboardService: CourseDashboardService,
     private route: ActivatedRoute,
-    private configureSemester: ConfigureSemesterService
+    private configureSemester: ConfigureSemesterService,
+    private extra: ExtraGradesService,
+    private gradeService: GradeService
   ) {}
 
   ngOnInit(): void {
     console.log(this.courseId);
+    this.gradeService.getCourseData(this.courseId).subscribe((res) => {
+      this.courseID = res.data.courseID;
+      this.courseName = res.data.courseName;
+      this.deptName = res.data.deptName;
+      this.instructor = res.data.instructor;
+    });
 
     this.courseDashboardService.graphTwo(+this.courseId).subscribe(
       (res) => {
@@ -59,6 +70,30 @@ export class ExtraGradesComponent implements OnInit {
         console.log(err);
       }
     );
+  }
+  onInput(event) {
+    let extraGrades = event.target.value;
+    if (extraGrades === '' || extraGrades === null) {
+      return;
+    }
+
+    this.extra.addExtraGrades(this.courseId, extraGrades).subscribe((res) => {
+      this.message = res.message;
+      this.pie = [res.data.perecentage_passed, res.data.perecentage_failed];
+      this.bar = [
+        res.data.grade_F,
+        res.data.grade_D,
+        res.data.grade_D_plus,
+        res.data.grade_C,
+        res.data.grade_C_plus,
+        res.data.grade_B,
+        res.data.grade_B_plus,
+        res.data.grade_A,
+        res.data.grade_A_plus,
+      ];
+      this.type = 'success';
+      // this.ngOnInit();
+    });
   }
   showSaveCancelButtons() {
     this.show = false;
