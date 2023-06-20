@@ -16,9 +16,10 @@
       >
         <app-breadcrumb></app-breadcrumb>
         <li
-          class="nav-item dropdown open"
+          class="nav-item dropdown"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
           style="padding-left: 15px"
-          (click)="toggleClick()"
         >
           <a
             href="javascript:;"
@@ -32,7 +33,6 @@
           </a>
           <div
             class="dropdown-menu dropdown-usermenu pull-right"
-            [ngClass]="{ show: isClicked == true }"
             aria-labelledby="navbarDropdown"
             x-placement="bottom-start"
             style="

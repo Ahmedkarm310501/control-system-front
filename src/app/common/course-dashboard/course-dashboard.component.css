@@ -8,7 +8,9 @@ select {
   /* background: #fff; */
   background: var(--background-color);
 }
-
+.btn-success {
+  background-color: var(--main-color) !important;
+}
 /* .card-header {
   background-color: #2a3f54;
 } */

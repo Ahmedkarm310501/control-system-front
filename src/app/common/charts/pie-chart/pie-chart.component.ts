@@ -9,6 +9,7 @@ import {
 import { Chart } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 
+
 @Component({
   selector: 'app-pie-chart',
   templateUrl: './pie-chart.component.html',
@@ -18,6 +19,9 @@ export class PieChartComponent implements OnInit, OnChanges {
   @Input('data1') data1: any;
   @Input('id') id: any = 'pie';
   public chart: any;
+
+
+
 
   ngOnInit(): void {
     console.log(this.id);

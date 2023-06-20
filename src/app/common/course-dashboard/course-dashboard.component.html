@@ -67,7 +67,7 @@
           <div class="row align-items-center">
             <div class="select col-8">
               <div class="text-center">
-                <app-line-chart></app-line-chart>
+                <app-line-chart [data1]="line"></app-line-chart>
                 <h4>Needed Extra Grades</h4>
               </div>
             </div>
@@ -83,27 +83,30 @@
                   <tbody>
                     <tr>
                       <td>1</td>
-                      <td>5</td>
+                      <td>{{ need_one_grade }}</td>
                     </tr>
                     <tr>
                       <td>2</td>
-                      <td>6</td>
+                      <td>{{ need_two_grade }}</td>
                     </tr>
                     <tr>
                       <td>3</td>
-                      <td>7</td>
+                      <td>{{ need_three_grade }}</td>
                     </tr>
                     <tr>
                       <td>4</td>
-                      <td>9</td>
+                      <td>{{ need_four_grade }}</td>
                     </tr>
                     <tr>
                       <td>5</td>
-                      <td>2</td>
+                      <td>{{ need_five_grade }}</td>
                     </tr>
                   </tbody>
                 </table>
-                <a class="btn btn-success mt-3" routerLink="extra-grades">
+                <a
+                  class="btn btn-success mt-3"
+                  routerLink="extra-grades/{{ courseId }}"
+                >
                   Add Extra Grades
                 </a>
               </div>

@@ -3,6 +3,7 @@ import { CourseDashboardService } from './course-dashboard.service';
 import { ConfigureSemesterService } from '../../admin/pages/configure-semester/configure-semester.service';
 import { ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-course-dashboard',
   templateUrl: './course-dashboard.component.html',
@@ -14,7 +15,15 @@ export class CourseDashboardComponent implements OnInit {
   show: boolean = false;
   message: string;
   type: string;
+<<<<<<< HEAD
   isLoading: boolean = false;
+=======
+  need_one_grade: any;
+  need_two_grade: any;
+  need_three_grade: any;
+  need_four_grade: any;
+  need_five_grade: any;
+>>>>>>> a07bd014a6d36608cee4b330444d20314f1474ca
 
   constructor(
     private courseDashboardService: CourseDashboardService,
@@ -29,7 +38,8 @@ export class CourseDashboardComponent implements OnInit {
   semester: any;
   pie: any = [];
   bar: any = [];
-
+  line: any = [];
+  courseId: any;
   ngOnInit(): void {
     this.courseDashboardService.getDepartments().subscribe((res) => {
       this.departments = res.data;
@@ -67,12 +77,19 @@ export class CourseDashboardComponent implements OnInit {
   }
   graphOne: any;
   graphTwo: any;
+  graphThree: any;
   getGraphs(event: any) {
     const course_id = event.target.value;
+<<<<<<< HEAD
     this.isLoading = true;
+=======
+    this.courseId = course_id.toString();
+>>>>>>> a07bd014a6d36608cee4b330444d20314f1474ca
     this.courseDashboardService.graphOne(course_id, this.semester.id).subscribe(
       (res) => {
         this.graphOne = res.data;
+
+        console.log(this.courseId);
         console.log(this.semester.id);
         console.log(res);
         this.show = true;
@@ -82,9 +99,10 @@ export class CourseDashboardComponent implements OnInit {
         console.log(err);
       }
     );
-    this.courseDashboardService.graphTwo(course_id, this.semester.id).subscribe(
+    ////////////////////////////////////////
+    this.courseDashboardService.graphTwo(course_id).subscribe(
       (res) => {
-        this.show = false;
+        // this.show = false;
         this.graphTwo = res.data;
         console.log(this.graphTwo);
         this.pie = [
@@ -104,6 +122,37 @@ export class CourseDashboardComponent implements OnInit {
         ];
         console.log(this.pie);
         console.log(this.bar);
+        // this.show = true;
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+    //////////////////////////////////////
+    this.courseDashboardService.graphThree(course_id).subscribe(
+      (res) => {
+        this.show = false;
+        this.graphThree = res.data;
+        this.need_one_grade = this.graphThree.need_one_grade;
+        this.need_two_grade = this.graphThree.need_two_grade;
+        this.need_three_grade = this.graphThree.need_three_grade;
+        this.need_four_grade = this.graphThree.need_four_grade;
+        this.need_five_grade = this.graphThree.need_five_grade;
+
+        console.log(this.graphThree);
+        this.line = [
+          this.graphThree.number_of_students_40,
+          this.graphThree.number_of_students_41,
+          this.graphThree.number_of_students_42,
+          this.graphThree.number_of_students_43,
+          this.graphThree.number_of_students_44,
+          this.graphThree.number_of_students_45,
+          this.graphThree.number_of_students_46,
+          this.graphThree.number_of_students_47,
+          this.graphThree.number_of_students_48,
+          this.graphThree.number_of_students_49,
+        ];
+        console.log(this.line);
         this.show = true;
         this.isLoading = false;
       },
