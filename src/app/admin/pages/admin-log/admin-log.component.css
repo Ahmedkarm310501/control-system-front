@@ -79,3 +79,14 @@ td {
 td[colspan] {
   box-shadow: none;
 }
+/*
+style any td with a button in it
+*/
+
+.btn1 {
+  display: flex;
+  flex-direction: column;
+}
+.btn1 button {
+  width: fit-content;
+}
