@@ -8,6 +8,7 @@ import {
 import { Chart } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { CourseDashboardComponent } from '../../course-dashboard/course-dashboard.component';
+// import { ExtraGradesComponent } from '../../extra-grades/extra-grades.component';
 
 @Component({
   selector: 'app-pie-chart',
@@ -17,7 +18,7 @@ import { CourseDashboardComponent } from '../../course-dashboard/course-dashboar
 export class PieChartComponent implements OnInit, OnChanges {
   @Input('data1') data1: any;
   public chart: any;
-  constructor(private courseDashboardComponent: CourseDashboardComponent) {}
+  constructor() {} // private extraGradesComponent: ExtraGradesComponent
 
   ngOnInit(): void {
     console.log(this.data1);

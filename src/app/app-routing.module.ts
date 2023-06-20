@@ -78,7 +78,7 @@ const routes: Routes = [
     children: [
       { path: '', component: CourseDashboardComponent },
       {
-        path: 'extra-grades',
+        path: 'extra-grades/:courseId',
         component: ExtraGradesComponent,
         canActivate: [AuthGuard],
         data: { breadcrumb: 'Extra Grades' },

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {environment} from '../../../environments/environment';
+import { environment } from '../../../environments/environment';
 interface Department {
   id: number;
   dept_code: string;
@@ -20,13 +20,10 @@ interface Res2 {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CourseDashboardService {
-
-  constructor(
-    private http: HttpClient
-  ) { }
+  constructor(private http: HttpClient) {}
 
   getDepartments() {
     return this.http.get<Res>(`${environment.baseUrl}/departments`);
@@ -39,13 +36,11 @@ export class CourseDashboardService {
       course_id,
       semester_id,
     });
-
   }
-  graphTwo(course_id: number, semester_id: number) {
+  graphTwo(course_id: number) {
     return this.http.post<Res2>(`${environment.baseUrl}/graph-two`, {
       course_id,
-      semester_id,
-    });
 
+    });
   }
 }

@@ -3,6 +3,7 @@ import { CourseDashboardService } from './course-dashboard.service';
 import { ConfigureSemesterService } from '../../admin/pages/configure-semester/configure-semester.service';
 import { ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-course-dashboard',
   templateUrl: './course-dashboard.component.html',
@@ -28,7 +29,7 @@ export class CourseDashboardComponent implements OnInit {
   semester: any;
   pie: any = [];
   bar: any = [];
-
+  courseId: any;
   ngOnInit(): void {
     this.courseDashboardService.getDepartments().subscribe((res) => {
       this.departments = res.data;
@@ -68,10 +69,12 @@ export class CourseDashboardComponent implements OnInit {
   graphTwo: any;
   getGraphs(event: any) {
     const course_id = event.target.value;
-
+    this.courseId = course_id.toString();
     this.courseDashboardService.graphOne(course_id, this.semester.id).subscribe(
       (res) => {
         this.graphOne = res.data;
+
+        console.log(this.courseId);
         console.log(this.semester.id);
         console.log(res);
       },
@@ -79,7 +82,7 @@ export class CourseDashboardComponent implements OnInit {
         console.log(err);
       }
     );
-    this.courseDashboardService.graphTwo(course_id, this.semester.id).subscribe(
+    this.courseDashboardService.graphTwo(course_id).subscribe(
       (res) => {
         this.show = false;
         this.graphTwo = res.data;
@@ -111,5 +114,4 @@ export class CourseDashboardComponent implements OnInit {
   getFlooredAverageGrade() {
     return Math.floor(this.graphOne.average_grade);
   }
-  
 }
