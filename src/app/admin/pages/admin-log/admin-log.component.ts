@@ -9,7 +9,6 @@ import { AdminLogService } from './admin-log.service';
 export class AdminLogComponent implements OnInit {
   constructor(private adminLogService: AdminLogService) {}
   collapseStates: { [key: number]: boolean } = {};
-  date = new Date();
 
   dummyData = [
     {
@@ -59,18 +58,32 @@ export class AdminLogComponent implements OnInit {
     },
   ];
   log: any[] = [];
+  date = new Date();
   ngOnInit(): void {
-    this.dummyData.forEach((data) => {
-      this.collapseStates[data.id] = true;
-    });
+    this.dummyData.forEach((data) => {});
     this.adminLogService.getAdminLog().subscribe((res) => {
       console.log(res);
+
       this.log = res['data'];
-      
+      this.log.forEach((log) => {
+        this.collapseStates[log.id] = true;
+      });
+      this.log.forEach((log) => {
+        log.created_at = new Date(log.created_at);
+        // put it in the right format
+        log.created_at = log.created_at.toLocaleString('en-US', {
+          hour12: true,
+
+          year: 'numeric',
+          month: 'numeric',
+          day: 'numeric',
+          hour: 'numeric',
+          minute: 'numeric',
+        });
+      });
     });
   }
 
-  
   searchCourse(searchTerm: string) {
     this.log = this.dummyData.filter((log) => {
       return (
@@ -87,5 +100,16 @@ export class AdminLogComponent implements OnInit {
   isCollapsed(id: number) {
     return this.collapseStates[id];
   }
-  downloadFile() {}
+  fileData: any;
+  downloadFile(file: any, fileName: any) {
+    this.adminLogService.downloadLog(file).subscribe((res) => {
+      console.log(res);
+
+      const downloadLink = document.createElement('a');
+      downloadLink.href = window.URL.createObjectURL(res.body);
+
+      downloadLink.download = `${fileName}.xlsx`;
+      downloadLink.click();
+    });
+  }
 }

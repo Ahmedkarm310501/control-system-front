@@ -46,14 +46,15 @@ export class CompareCoursesComponent implements OnInit {
       console.log(this.courses);
     });
   }
-  semesters: any = [];
+  semesters1: any = [];
+  semesters2: any = [];
 
   onCourseSelect1(event: any) {
     this.course_id_one = event.target.value;
 
     this.compareCoursesService.getCourseSemesters(this.course_id_one).subscribe(
       (res: any) => {
-        this.semesters = res.data;
+        this.semesters1 = res.data;
         console.log(res.data[0]);
       },
       (err: any) => {
@@ -66,7 +67,11 @@ export class CompareCoursesComponent implements OnInit {
 
     this.compareCoursesService.getCourseSemesters(this.course_id_two).subscribe(
       (res: any) => {
-        this.semesters = res.data;
+        if (res.data.length == 0) {
+          this.semesters2 = [];
+          return;
+        }
+        this.semesters2 = res.data;
         console.log(res.data[0]);
       },
       (err: any) => {
