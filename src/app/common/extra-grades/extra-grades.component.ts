@@ -1,15 +1,17 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit, OnChanges, ViewChild } from '@angular/core';
 import { CourseDashboardService } from '../course-dashboard/course-dashboard.service';
 import { ActivatedRoute } from '@angular/router';
 import { ConfigureSemesterService } from '../../admin/pages/configure-semester/configure-semester.service';
 import { ExtraGradesService } from './extra-grades.service';
 import { GradeService } from '../course-grades/grade.service';
+import { SnackbarComponent } from 'src/app/components/snackbar/snackbar.component';
 @Component({
   selector: 'app-extra-grades',
   templateUrl: './extra-grades.component.html',
   styleUrls: ['./extra-grades.component.css'],
 })
 export class ExtraGradesComponent implements OnInit {
+  @ViewChild(SnackbarComponent) snackbar: SnackbarComponent;
   pie: any = [];
   bar: any = [];
   initialPie: any = [];
@@ -28,6 +30,7 @@ export class ExtraGradesComponent implements OnInit {
   deptName: string;
   instructor: string;
   toAll: boolean = false;
+
   constructor(
     private courseDashboardService: CourseDashboardService,
     private route: ActivatedRoute,
@@ -105,11 +108,19 @@ export class ExtraGradesComponent implements OnInit {
   addGrades() {
     this.extra
       .applyExtraGrades(this.courseId, this.extraGrades, this.toAll)
-      .subscribe((res) => {
-        this.message = res.message;
-        this.type = 'success';
-        this.ngOnInit();
-      });
+      .subscribe(
+        (res) => {
+          this.ngOnInit();
+          this.message = 'Extra grades added successfully';
+          this.type = 'success';
+          this.snackbar.show();
+        },
+        (err) => {
+          this.message = err.error.message;
+          this.type = 'danger';
+          this.snackbar.show();
+        }
+      );
   }
   showSaveCancelButtons() {
     this.show = false;
