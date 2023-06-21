@@ -78,7 +78,7 @@
     <div class="spinner">
       <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
     </div>
-    <div *ngIf="isLoaded">
+    <div *ngIf="isLoaded && !isLoading">
       <div class="card mt-4">
         <div class="card-header m-0 fw-bold fs-4">
           Course Grades Analysis : {{coursecodes.course_code_one}} <span class="first"></span>
@@ -160,7 +160,7 @@
   </div>
 
   <div class="fallback-text mt-5"
-    *ngIf="(selectedCourse1 == '0' || selectedCourse2 == '0' || selectedDepartment1 == '0' || selectedDepartment2 == '0' || selectedSemester1 == '0' || selectedSemester2  == '0')">
+    *ngIf="!(selectedCourse1 == '0' && selectedCourse2 == '0' && selectedDepartment1 == '0' && selectedDepartment2 == '0' && selectedSemester1 == '0' && selectedSemester2  == '0')">
     <h1 class="text-center">Please Select A Course</h1>
   </div>
 </div>

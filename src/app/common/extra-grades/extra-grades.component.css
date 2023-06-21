@@ -63,9 +63,14 @@ select {
 }
 
 .checkbox {
-  margin-top: -15px;
+  margin-top: 8px;
   color: var(--main-color);
   background-color: var(--main-color);
+}
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 56%;
 }
 
 @media (max-width: 768px) {

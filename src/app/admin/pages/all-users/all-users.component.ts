@@ -125,6 +125,13 @@ export class AllUsersComponent implements OnInit {
 
   sortBy(property: string) {
     this.sortOrder = this.sortOrder * -1;
+    if (property === 'id') {
+      this.filteredData.sort(
+        (a: { id: number }, b: { id: number }) =>
+          (a.id > b.id ? 1 : -1) * this.sortOrder
+      );
+      return;
+    }
     this.filteredData.sort((a, b) => {
       const valueA = (a[property] + '').toLowerCase(); // Convert to string and lowercase
       const valueB = (b[property] + '').toLowerCase(); // Convert to string and lowercase
@@ -137,5 +144,18 @@ export class AllUsersComponent implements OnInit {
         return 0;
       }
     });
+  }
+  modalIsOpen = false;
+  IsInvalid = false;
+  errorMsg = '';
+  deleteStudent = false;
+  IsInvalidRecords = false;
+
+  closeModal5() {
+    this.errorMsg = 'Are you sure you want to delete this student ?';
+    this.deleteStudent = false;
+  }
+  closeModal4() {
+    this.IsInvalidRecords = false;
   }
 }
