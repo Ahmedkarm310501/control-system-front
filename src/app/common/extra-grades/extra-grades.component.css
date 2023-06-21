@@ -62,6 +62,12 @@ select {
   background-color: var(--background-color);
 }
 
+.checkbox {
+  margin-top: -15px;
+  color: var(--main-color);
+  background-color: var(--main-color);
+}
+
 @media (max-width: 768px) {
   .col-3 {
     width: 100% !important;

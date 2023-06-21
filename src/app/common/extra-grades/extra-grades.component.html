@@ -1,4 +1,4 @@
-<div class="dashboard">
+<div class="dashboard my-5">
   <div class="container-fluid">
     <div class="card">
       <div>
@@ -23,14 +23,14 @@
                   <h5>Course Instructor</h5>
                   <p>Dr {{ instructor }}</p>
                 </div>
-                <div class="d-flex align-items-center">
-                  <div class="p-4">
-                    <h5>Add Extra Grades</h5>
+                <div class="d-flex align-items-start">
+                  <div class="">
                     <div class="x-input p-2 d-flex">
                       <div>
+                        <h5>Add Extra Grades</h5>
                         <input
-                          (input)="onInput($event)"
-                          [ngModel]="extraGrades"
+                          (input)="onInput()"
+                          [(ngModel)]="extraGrades"
                           type="number"
                           id="extraGradesInput"
                           class="rounded-input"
@@ -44,15 +44,16 @@
                         <input
                           type="checkbox"
                           name="toAll"
-                          class="input-style"
+                          class="input-style checkbox"
                           ngModel
+                          (change)="onInput()"
                           [(ngModel)]="toAll"
                         />
                       </div>
                     </div>
 
                     <div
-                      class="d-flex justify-content-between align-items-center mt-4"
+                      class="d-flex justify-content-start align-items-center mt-1"
                       id="saveCancelButtons"
                     >
                       <div class="p-2">
@@ -83,22 +84,22 @@
         </div>
       </div>
     </div>
-  </div>
-</div>
-<div *ngIf="!isLoading" class="card mt-4">
-  <div class="card-header m-0 fw-bold fs-4">Course Grades Analysis</div>
-  <div class="card-body">
-    <div class="select-course row g-3">
-      <div class="select col-8">
-        <div class="text-center">
-          <app-bar-chart width="327px" [data1]="bar"></app-bar-chart>
-          <h4>Student Grades Distribution</h4>
-        </div>
-      </div>
-      <div class="select col-4">
-        <div class="text-center">
-          <app-pie-chart [data1]="pie"></app-pie-chart>
-          <h4>Pass / Fail ratio</h4>
+    <div *ngIf="!isLoading" class="card mt-4">
+      <div class="card-header m-0 fw-bold fs-4">Course Grades Analysis</div>
+      <div class="card-body">
+        <div class="select-course row g-3">
+          <div class="select col-8">
+            <div class="text-center">
+              <app-bar-chart width="327px" [data1]="bar"></app-bar-chart>
+              <h4>Student Grades Distribution</h4>
+            </div>
+          </div>
+          <div class="select col-4">
+            <div class="text-center">
+              <app-pie-chart [data1]="pie"></app-pie-chart>
+              <h4>Pass / Fail ratio</h4>
+            </div>
+          </div>
         </div>
       </div>
     </div>

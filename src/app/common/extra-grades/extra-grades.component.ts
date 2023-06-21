@@ -10,10 +10,10 @@ import { GradeService } from '../course-grades/grade.service';
   styleUrls: ['./extra-grades.component.css'],
 })
 export class ExtraGradesComponent implements OnInit {
-  courses: any = [];
-  filteredData: any = [];
   pie: any = [];
   bar: any = [];
+  initialPie: any = [];
+  initialBar: any = [];
   graphOne: any;
   graphTwo: any;
   show: boolean = true;
@@ -31,7 +31,6 @@ export class ExtraGradesComponent implements OnInit {
   constructor(
     private courseDashboardService: CourseDashboardService,
     private route: ActivatedRoute,
-    private configureSemester: ConfigureSemesterService,
     private extra: ExtraGradesService,
     private gradeService: GradeService
   ) {}
@@ -64,6 +63,8 @@ export class ExtraGradesComponent implements OnInit {
           this.graphTwo.grade_A,
           this.graphTwo.grade_A_plus,
         ];
+        this.initialPie = this.pie.slice();
+        this.initialBar = this.bar.slice();
         console.log(this.pie);
         console.log(this.bar);
         this.isLoading = false;
@@ -73,8 +74,8 @@ export class ExtraGradesComponent implements OnInit {
       }
     );
   }
-  onInput(event) {
-    this.extraGrades = event.target.value;
+  onInput() {
+    // this.extraGrades = event.target.value;
     if (this.extraGrades === 0 || this.extraGrades === null) {
       this.extraGrades = 0;
       return;
@@ -117,6 +118,8 @@ export class ExtraGradesComponent implements OnInit {
   cancel() {
     this.extraGrades = 0;
     this.toAll = false;
+    this.pie = this.initialPie.slice();
+    this.bar = this.initialBar.slice();
     console.log(this.toAll);
     console.log(this.extraGrades);
   }
