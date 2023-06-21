@@ -54,6 +54,13 @@ select {
 .x-input {
   margin-left: -10px;
 }
+.modal-content {
+  background-color: var(--background-color-dark);
+}
+
+.modal select {
+  background-color: var(--background-color);
+}
 
 @media (max-width: 768px) {
   .col-3 {
