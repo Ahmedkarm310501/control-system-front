@@ -1,4 +1,4 @@
-import { Component, OnInit , ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Course, HomeService } from './home.service';
 import { SnackbarComponent } from 'src/app/components/snackbar/snackbar.component';
 @Component({

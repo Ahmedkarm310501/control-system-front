@@ -146,7 +146,7 @@ export class CompareCoursesComponent implements OnInit {
     }
 
     this.isLoading = true;
-
+    this.isLoaded = false;
     this.compareCoursesService
       .compareCourses(
         this.course_id_one,
@@ -222,5 +222,10 @@ export class CompareCoursesComponent implements OnInit {
       return null;
     }
     return Math.floor(this.first_graph_two.average_grade);
+  }
+  setIsLoading() {
+    if(this.selectedCourse1 && this.selectedCourse2 && this.selectedSemester1 && this.selectedSemester2&& this.selectedDepartment1 && this.selectedDepartment2){
+      this.isLoading = true;
+    }
   }
 }

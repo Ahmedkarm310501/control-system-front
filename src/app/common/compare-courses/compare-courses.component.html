@@ -7,30 +7,47 @@
         <!-- Start Upper row -->
         <div class="select-course row g-3">
           <div class="select col-4">
-            <select (change)="onSelectDepartment1($event)" name="dept" class="w-100">
-              <!-- [(ngModel)]="selectedDepartment"
-              (change)="onSelectDepartment($event)" -->
+            <select
+              (change)="onSelectDepartment1($event)"
+              name="dept"
+              class="w-100"
+            >
               <option value="0">Select First Department</option>
 
-              <option *ngFor="let dept of departments" value="{{ dept.dept_code }}">
+              <option
+                *ngFor="let dept of departments"
+                value="{{ dept.dept_code }}"
+              >
                 {{ dept.dept_code }}
               </option>
             </select>
           </div>
           <div class="select col-4">
-            <select (change)="onCourseSelect1($event)" name="course" class="w-100">
-              <option value="0" selected>Select First Course</option>
-              <option *ngFor="let course of filteredData1" value="{{ course.id }}">
+            <select
+              (change)="onCourseSelect1($event)"
+              name="course"
+              class="w-100"
+            >
+              <option value="0">Select First Course</option>
+              <option
+                *ngFor="let course of filteredData1"
+                value="{{ course.id }}"
+              >
                 {{ course.name }}
               </option>
             </select>
           </div>
           <div class="select col-4">
-            <select (change)="onSelectSemester1($event)" name="semester" class="w-100">
-              <!-- [(ngModel)]="selectedCourse"
-              (change)="getGraphs($event)" -->
-              <option value="0" selected>Select First Semester</option>
-              <option *ngFor="let semester of semesters1[0]" value="{{ semester.id }}">
+            <select
+              (change)="onSelectSemester1($event)"
+              name="semester"
+              class="w-100"
+            >
+              <option value="0">Select First Semester</option>
+              <option
+                *ngFor="let semester of semesters1[0]"
+                value="{{ semester.id }}"
+              >
                 {{ semester.year_term }}
               </option>
             </select>
@@ -40,31 +57,46 @@
         <!-- Start Lower row -->
         <div class="select-course row g-3 mt-1">
           <div class="select col-4">
-            <select (change)="onSelectDepartment2($event)" name="dept" class="w-100">
-              <!-- [(ngModel)]="selectedDepartment"
-              (change)="onSelectDepartment($event)" -->
-              <option value="0" selected>Select Second Department</option>
-              <option *ngFor="let dept of departments" value="{{ dept.dept_code }}">
+            <select
+              (change)="onSelectDepartment2($event)"
+              name="dept"
+              class="w-100"
+            >
+              <option value="0">Select Second Department</option>
+              <option
+                *ngFor="let dept of departments"
+                value="{{ dept.dept_code }}"
+              >
                 {{ dept.dept_code }}
               </option>
             </select>
           </div>
           <div class="select col-4">
-            <select (change)="onCourseSelect2($event)" name="course" class="w-100">
-              <!-- [(ngModel)]="selectedCourse"
-              (change)="getGraphs($event)" -->
-              <option value="0" selected>Select Second Course</option>
-              <option *ngFor="let course of filteredData2" value="{{ course.id }}">
+            <select
+              (change)="onCourseSelect2($event)"
+              name="course"
+              class="w-100"
+            >
+              <option value="0">Select Second Course</option>
+              <option
+                *ngFor="let course of filteredData2"
+                value="{{ course.id }}"
+              >
                 {{ course.name }}
               </option>
             </select>
           </div>
           <div class="select col-4">
-            <select (change)="onSelectSemester2($event)" name="semester" class="w-100">
-              <!-- [(ngModel)]="selectedCourse"
-              (change)="getGraphs($event)" -->
-              <option value="0" selected>Select Second Semester</option>
-              <option *ngFor="let semester of semesters2[0]" value="{{ semester.id }}">
+            <select
+              (change)="onSelectSemester2($event)"
+              name="semester"
+              class="w-100"
+            >
+              <option value="0">Select Second Semester</option>
+              <option
+                *ngFor="let semester of semesters2[0]"
+                value="{{ semester.id }}"
+              >
                 {{ semester.year_term }}
               </option>
             </select>
@@ -78,37 +110,74 @@
     <div class="spinner">
       <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
     </div>
-    <div *ngIf="isLoaded">
+    <div *ngIf="isLoaded && !isLoading">
       <div class="card mt-4">
         <div class="card-header m-0 fw-bold fs-4">
-          Course Grades Analysis : {{coursecodes.course_code_one}} <span class="first"></span>
-          {{coursecodes.course_code_two}}
+          Course Grades Analysis : {{ coursecodes.course_code_one }}
+          <span class="first"></span>
+          {{ coursecodes.course_code_two }}
           <span class="second"></span>
         </div>
         <div class="card-body">
           <!-- start first row  -->
           <div class="select-course row g-3">
             <!-- add course name -->
-            <app-box class="col-3" [number]="first_graph_one.number_of_students" [name]="'Number Of Students'"
-              [color]="'10px solid var(--main-color)'" [bgColor]="firstCourseColor"></app-box>
-            <app-box class="col-3" [number]="getFlooredAverageGrade1()" [name]="'Average Grade'"
-              [color]="'10px solid var(--main-color)'" [bgColor]="firstCourseColor"></app-box>
-            <app-box class="col-3" [number]="first_graph_one.passed_students" [name]="'Passed Students'"
-              [color]="'10px solid var(--main-color)'" [bgColor]="firstCourseColor"></app-box>
-            <app-box class="col-3" [number]="first_graph_one.failed_students" [name]="'Failed Students'"
-              [color]="'10px solid var(--main-color)'" [bgColor]="firstCourseColor"></app-box>
+            <app-box
+              class="col-3"
+              [number]="first_graph_one.number_of_students"
+              [name]="'Number Of Students'"
+              [color]="'10px solid var(--main-color)'"
+              [bgColor]="firstCourseColor"
+            ></app-box>
+            <app-box
+              class="col-3"
+              [number]="getFlooredAverageGrade1()"
+              [name]="'Average Grade'"
+              [color]="'10px solid var(--main-color)'"
+              [bgColor]="firstCourseColor"
+            ></app-box>
+            <app-box
+              class="col-3"
+              [number]="first_graph_one.passed_students"
+              [name]="'Passed Students'"
+              [color]="'10px solid var(--main-color)'"
+              [bgColor]="firstCourseColor"
+            ></app-box>
+            <app-box
+              class="col-3"
+              [number]="first_graph_one.failed_students"
+              [name]="'Failed Students'"
+              [color]="'10px solid var(--main-color)'"
+              [bgColor]="firstCourseColor"
+            ></app-box>
           </div>
           <!-- end first row  -->
           <!-- start second row  -->
           <div class="select-course row g-3 mt-1">
-            <app-box class="col-3" [number]="first_graph_two.number_of_students" [name]="'Number Of Students'"
-              [color]="'10px solid var(--main-color)'"></app-box>
-            <app-box class="col-3" [number]="getFlooredAverageGrade2()" [name]="'Average Grade'"
-              [color]="'10px solid var(--main-color)'"></app-box>
-            <app-box class="col-3" [number]="first_graph_two.passed_students" [name]="'Passed Students'"
-              [color]="'10px solid var(--main-color)'"></app-box>
-            <app-box class="col-3" [number]="first_graph_two.failed_students" [name]="'Failed Students'"
-              [color]="'10px solid var(--main-color)'"></app-box>
+            <app-box
+              class="col-3"
+              [number]="first_graph_two.number_of_students"
+              [name]="'Number Of Students'"
+              [color]="'10px solid var(--main-color)'"
+            ></app-box>
+            <app-box
+              class="col-3"
+              [number]="getFlooredAverageGrade2()"
+              [name]="'Average Grade'"
+              [color]="'10px solid var(--main-color)'"
+            ></app-box>
+            <app-box
+              class="col-3"
+              [number]="first_graph_two.passed_students"
+              [name]="'Passed Students'"
+              [color]="'10px solid var(--main-color)'"
+            ></app-box>
+            <app-box
+              class="col-3"
+              [number]="first_graph_two.failed_students"
+              [name]="'Failed Students'"
+              [color]="'10px solid var(--main-color)'"
+            ></app-box>
           </div>
           <!-- end second row  -->
         </div>
@@ -121,8 +190,13 @@
           <div class="select-course row g-3">
             <div class="select col-12">
               <div class="text-center">
-                <app-bar-chart width="250px" [data1]="barChartData1" [data2]="barChartData2"
-                  [label1]="coursecodes.course_code_one" [label2]="coursecodes.course_code_two"></app-bar-chart>
+                <app-bar-chart
+                  width="250px"
+                  [data1]="barChartData1"
+                  [data2]="barChartData2"
+                  [label1]="coursecodes.course_code_one"
+                  [label2]="coursecodes.course_code_two"
+                ></app-bar-chart>
                 <h4>Student Grades Distribution</h4>
               </div>
             </div>
@@ -137,30 +211,31 @@
           <div class="select-course row g-3">
             <div class="select col-6">
               <div class="text-center">
-                <app-pie-chart [id]="'pie1'" [data1]="pieChartData1"></app-pie-chart>
-                <h4>Pass / Fail ratio for {{coursecodes.course_code_one}}</h4>
+                <app-pie-chart
+                  [id]="'pie1'"
+                  [data1]="pieChartData1"
+                ></app-pie-chart>
+                <h4>Pass / Fail ratio for {{ coursecodes.course_code_one }}</h4>
               </div>
             </div>
             <div class="select col-6">
               <div class="text-center">
-                <app-pie-chart [id]="'pie2'" [data1]="pieChartData2"></app-pie-chart>
-                <h4>Pass / Fail ratio for {{coursecodes.course_code_two}}</h4>
+                <app-pie-chart
+                  [id]="'pie2'"
+                  [data1]="pieChartData2"
+                ></app-pie-chart>
+                <h4>Pass / Fail ratio for {{ coursecodes.course_code_two }}</h4>
               </div>
             </div>
           </div>
         </div>
       </div>
-
     </div>
-
-
-
 
     <!-- end pie -->
   </div>
 
-  <div class="fallback-text mt-5"
-    *ngIf="(selectedCourse1 == '0' || selectedCourse2 == '0' || selectedDepartment1 == '0' || selectedDepartment2 == '0' || selectedSemester1 == '0' || selectedSemester2  == '0')">
+  <div class="fallback-text mt-5" *ngIf="!isLoaded && !isLoading">
     <h1 class="text-center">Please Select A Course</h1>
   </div>
 </div>
