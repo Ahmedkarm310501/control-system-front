@@ -1,8 +1,4 @@
-<app-snackbar
-  #snackbar
-  message="{{ message }}"
-  type="{{ type }}"
-></app-snackbar>
+<app-snackbar #snackbar message="{{ message }}" type="{{ type }}"></app-snackbar>
 <div class="x_panel">
   <div class="x_title">
     <h2>All <small>Users</small></h2>
@@ -16,24 +12,13 @@
     <div class="row">
       <div class="col-sm-12">
         <div class="card-box table-responsive">
-          <div
-            id="datatable_wrapper"
-            class="dataTables_wrapper container-fluid dt-bootstrap no-footer"
-          >
+          <div id="datatable_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap no-footer">
             <div class="row">
               <div class="col-sm-6 search-bar">
-                <div
-                  id="datatable_filter"
-                  class="d-flex align-items-center float-end"
-                >
+                <div id="datatable_filter" class="d-flex align-items-center float-end">
                   <label> Search: </label>
-                  <input
-                    type="text"
-                    class="form-control mx-2 my-2"
-                    placeholder="Search for User..."
-                    #searchInput
-                    (input)="search(searchInput.value)"
-                  />
+                  <input type="text" class="form-control mx-2 my-2" placeholder="Search for User..." #searchInput
+                    (input)="search(searchInput.value)" />
                   <span class="input-group-btn">
                     <button class="btn btn-secondary" type="button">
                       <i class="fa fa-search"></i>
@@ -44,109 +29,79 @@
             </div>
             <div class="row">
               <div class="col-sm-12">
-                <table
-                  id="datatable"
-                  class="table table-striped table-bordered dataTable no-footer"
-                  style="width: 100%"
-                  role="grid"
-                  aria-describedby="datatable_info"
-                >
+                <table id="datatable" class="table table-striped table-bordered dataTable no-footer" style="width: 100%"
+                  role="grid" aria-describedby="datatable_info">
                   <thead>
                     <tr role="row">
-                      <th
-                        class="sorting_asc"
-                        tabindex="0"
-                        aria-controls="datatable"
-                        rowspan="1"
-                        colspan="1"
-                        aria-sort="ascending"
-                        aria-label="Name: activate to sort column descending"
-                        style="width: 179px"
-                      >
+                      <th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
+                        aria-sort="ascending" aria-label="Name: activate to sort column descending"
+                        style="width: 179px">
                         ID
-                        <i
-                          class="fa fa-lg fa-sort float-end"
-                          (click)="sortBy('id')"
-                        ></i>
+                        <i class="fa fa-lg fa-sort float-end" (click)="sortBy('id')"></i>
                       </th>
-                      <th
-                        class="sorting"
-                        tabindex="0"
-                        aria-controls="datatable"
-                        rowspan="1"
-                        colspan="1"
-                        aria-label="Position: activate to sort column ascending"
-                        style="width: 289px"
-                      >
+                      <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
+                        aria-label="Position: activate to sort column ascending" style="width: 289px">
                         User Name
-                        <i
-                          class="fa fa-lg fa-sort float-end"
-                          (click)="sortBy('name')"
-                        ></i>
+                        <i class="fa fa-lg fa-sort float-end" (click)="sortBy('name')"></i>
                       </th>
-                      <th
-                        class="sorting"
-                        tabindex="0"
-                        aria-controls="datatable"
-                        rowspan="1"
-                        colspan="1"
-                        aria-label="Office: activate to sort column ascending"
-                        style="width: 136px"
-                      >
+                      <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
+                        aria-label="Office: activate to sort column ascending" style="width: 136px">
                         Email
-                        <i
-                          class="fa fa-lg fa-sort float-end"
-                          (click)="sortBy('email')"
-                        ></i>
+                        <i class="fa fa-lg fa-sort float-end" (click)="sortBy('email')"></i>
                       </th>
-                      <th
-                        class="sorting"
-                        tabindex="0"
-                        aria-controls="datatable"
-                        rowspan="1"
-                        colspan="1"
-                        aria-label="Age: activate to sort column ascending"
-                        style="width: 69px"
-                      >
+                      <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
+                        aria-label="Age: activate to sort column ascending" style="width: 69px">
                         Actions
                       </th>
                     </tr>
                   </thead>
                   <tbody *ngIf="!isShown">
-                    <tr
-                      *ngFor="let data of filteredData"
-                      role="row"
-                      class="odd"
-                    >
+                    <tr *ngFor="let data of filteredData" role="row" class="odd">
                       <td class="sorting_1">{{ data.id }}</td>
                       <td>{{ data.name }}</td>
                       <td>{{ data.email }}</td>
-                      <td
-                        class="d-flex justify-content-evenly align-items-center m-0"
-                      >
-                        <button
-                          type="button"
-                          class="btn btn-primary m-0"
-                          data-bs-toggle="modal"
-                          data-bs-target="#exampleModal"
-                          (click)="onEdit(data.id)"
-                        >
+                      <td class="d-flex justify-content-evenly align-items-center m-0">
+                        <button type="button" class="btn btn-primary m-0" data-bs-toggle="modal"
+                          data-bs-target="#exampleModal" (click)="onEdit(data.id)">
                           Assign
                         </button>
 
-                        <button
-                          class="btn btn-secondary mx-2 my-2 m-0"
-                          routerLink="edit-user/{{ data.id }}"
-                        >
+                        <button class="btn btn-secondary mx-2 my-2 m-0" routerLink="edit-user/{{ data.id }}">
                           Edit
                         </button>
-                        <button
-                          class="btn btn-danger mx-2 my-2 m-0"
-                          (click)="onDelete(data.id)"
-                        >
+                        <button data-bs-toggle="modal" data-bs-target="#example" class="btn btn-danger mx-2 my-2 m-0">
                           Delete
                         </button>
                       </td>
+                      <!-- Modal -->
+                      <div class="modal fade" id="example" tabindex="-1" aria-labelledby="exampleModalLabell"
+                        aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                              <div class="container-fluid">
+                                <div class="mb-3" class="col-md-12">
+                                  <h4>Are you sure you want to delete this student?</h4>
+                                  <button (click)="onDelete(data.id)" class="btn btn-primary me-2" value="yes"
+                                    data-bs-dismiss="modal">
+                                    Yes
+                                  </button>
+                                  <button class="btn btn-secondary" value="no" data-bs-dismiss="modal">
+                                    No
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!--End of Modal -->
+
                     </tr>
                   </tbody>
                   <tbody *ngIf="isShown">
@@ -154,9 +109,7 @@
                       <td class="sorting_1">No Data Found</td>
                       <td>No Data Found</td>
                       <td>No Data Found</td>
-                      <td
-                        class="d-flex justify-content-evenly align-items-center m-0"
-                      >
+                      <td class="d-flex justify-content-evenly align-items-center m-0">
                         No data found
                       </td>
                     </tr>
@@ -171,24 +124,13 @@
   </div>
 </div>
 
-<div
-  class="modal fade"
-  id="exampleModal"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Assign Course</h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-          (click)="closeModal()"
-        ></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+          (click)="closeModal()"></button>
       </div>
 
       <div class="modal-body">
@@ -196,29 +138,14 @@
           <form #Form="ngForm">
             <div class="mb-3" class="col-md-12">
               <label>Department :&nbsp;</label>
-              <select
-                class="custom-select"
-                id="subject"
-                name="Department"
-                ngModel
-                required
-                #department="ngModel"
-                #dept
-                (change)="onSelectDepartment($event)"
-              >
+              <select class="custom-select" id="subject" name="Department" ngModel required #department="ngModel" #dept
+                (change)="onSelectDepartment($event)">
                 <option>Select Department</option>
-                <option
-                  #dept
-                  *ngFor="let Department of departments"
-                  [value]="Department.id"
-                >
+                <option #dept *ngFor="let Department of departments" [value]="Department.id">
                   {{ Department.dept_code }}
                 </option>
               </select>
-              <div
-                *ngIf="department.invalid && department.touched"
-                class="error"
-              >
+              <div *ngIf="department.invalid && department.touched" class="error">
                 Please select an option.
               </div>
               <br />
@@ -227,19 +154,9 @@
 
             <div class="mb-3" class="col-md-12" style="width: 450">
               <label>Add Course :&nbsp;</label>
-              <select
-                class="custom-select"
-                id="subject"
-                name="course"
-                ngModel
-                required
-                #course="ngModel"
-              >
+              <select class="custom-select" id="subject" name="course" ngModel required #course="ngModel">
                 <option>Select Course</option>
-                <option
-                  *ngFor="let Course of dummyDataCourses"
-                  [value]="Course.id"
-                >
+                <option *ngFor="let Course of dummyDataCourses" [value]="Course.id">
                   {{ Course.name }}
                 </option>
               </select>
@@ -249,20 +166,10 @@
               <br />
             </div>
             <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-secondary"
-                data-bs-dismiss="modal"
-                (click)="closeModal()"
-              >
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeModal()">
                 Close
               </button>
-              <button
-                type="submit"
-                class="btn btn-primary"
-                data-bs-dismiss="modal"
-                (click)="onSubmit(Form.value)"
-              >
+              <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" (click)="onSubmit(Form.value)">
                 Save changes
               </button>
             </div>

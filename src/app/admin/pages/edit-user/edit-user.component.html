@@ -1,10 +1,12 @@
-<app-snackbar
-  #snackbar
-  message="{{ message }}"
-  type="{{ type }}"
-></app-snackbar>
+<app-snackbar #snackbar message="{{ message }}" type="{{ type }}"></app-snackbar>
+<!--loading spinner-->
+<div class="spinner">
+  <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
 
-<div class="setup">
+
+</div>
+
+<div class="setup" *ngIf="!isLoading">
   <div class="container h-100">
     <div class="row h-100 justify-content-center">
       <div class="col-sm-10 col-lg-8 text-center">
@@ -12,104 +14,54 @@
           <h1>Edit User</h1>
           <hr />
           <div class="item form-group">
-            <label
-              class="col-form-label col-md-3 col-sm-3 label-align"
-              for="first-name"
-              aria-placeholder="User Name"
-              >User Name
+            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name"
+              aria-placeholder="User Name">User Name
               <span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6">
-              <input
-                [(ngModel)]="name"
-                type="text"
-                id="username"
-                required="required"
-                class="form-control"
-                name="name"
-                placeholder="User Name"
-                
-              />
+              <input [(ngModel)]="name" type="text" id="username" required="required" class="form-control" name="name"
+                placeholder="User Name" />
             </div>
           </div>
           <div class="item form-group">
-            <label
-              class="col-form-label col-md-3 col-sm-3 label-align"
-              for="email"
-              >Email <span class="required">*</span>
+            <label class="col-form-label col-md-3 col-sm-3 label-align" for="email">Email <span
+                class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6">
-              <input
-                [(ngModel)]="email"
-                type="email"
-                id="email"
-                name="email"
-                required="required"
-                class="form-control"
-                placeholder="Email"
-              />
+              <input [(ngModel)]="email" type="email" id="email" name="email" required="required" class="form-control"
+                placeholder="Email" />
             </div>
           </div>
-          
+
           <div class="item form-group">
-            <label class="col-form-label col-md-3 col-sm-3 label-align"
-              >Rules*</label
-            >
+            <label class="col-form-label col-md-3 col-sm-3 label-align">Rules*</label>
             <div class="col-md-6 col-sm-6">
               <div id="Admin" class="btn-group" data-toggle="buttons">
-                <label
-                  class="btn"
-                  data-toggle-class="btn-primary"
-                  data-toggle-passive-class="btn-default"
-                >
-                  <input
-                    type="checkbox"
-                    name="is_admin"
-                    value="admin"
-                    class="join-btn input-style"
-                    ngModel
-                    [(ngModel)]="is_admin"
-                  />
+                <label class="btn" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                  <input type="checkbox" name="is_admin" value="admin" class="join-btn input-style" ngModel
+                    [(ngModel)]="is_admin" />
                   &nbsp; Admin &nbsp;
                 </label>
-                <label
-                  class="btn"
-                  data-toggle-class="btn-primary"
-                  data-toggle-passive-class="btn-default"
-                >
-                  <input
-                    type="checkbox"
-                    name="is_active"
-                    class="input-style"
-                    ngModel
-                    [(ngModel)]="is_active"
-                  />
+                <label class="btn" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                  <input type="checkbox" name="is_active" class="input-style" ngModel [(ngModel)]="is_active" />
                   &nbsp; Activate &nbsp;
                 </label>
               </div>
             </div>
           </div>
           <div class="item form-group">
-            <label class="col-form-label col-md-3 col-sm-3 label-align"
-              >National ID <span class="required">*</span>
+            <label class="col-form-label col-md-3 col-sm-3 label-align">National ID
             </label>
             <div class="col-md-6 col-sm-6">
-              <input
-                id="NationalID"
-                class="date-picker form-control"
-                placeholder="National ID"
-                type="number"
-                required="required"
-                name="national_id"
-                [(ngModel)]="national_id"
-              />
+              <input id="NationalID" class="date-picker form-control" placeholder="National ID" type="number"
+                name="national_id" [(ngModel)]="national_id" />
             </div>
           </div>
           <div class="ln_solid"></div>
           <div class="item form-group">
             <div class="col-md-6 col-sm-6 offset-md-3 but-style">
               <button type="submit" class="btn btn-success">Submit</button>
-              <button class="btn btn-secondary" type="button">Cancel</button>
+              <button (click)="cancel()" class="btn btn-secondary" type="button">Cancel</button>
             </div>
           </div>
         </form>
