@@ -7,7 +7,7 @@
         <!-- Start Upper row -->
         <div class="select-course row g-3">
           <div class="select col-4">
-            <select (change)="onSelectDepartment1($event)" [(ngModel)]="selectedDepartment1" name="dept" class="w-100">
+            <select (change)="onSelectDepartment1($event)" name="dept" class="w-100">
               <!-- [(ngModel)]="selectedDepartment"
               (change)="onSelectDepartment($event)" -->
               <option value="0">Select First Department</option>
@@ -18,7 +18,7 @@
             </select>
           </div>
           <div class="select col-4">
-            <select (change)="onCourseSelect1($event)" [(ngModel)]="selectedCourse1" name="course" class="w-100">
+            <select (change)="onCourseSelect1($event)" name="course" class="w-100">
               <option value="0" selected>Select First Course</option>
               <option *ngFor="let course of filteredData1" value="{{ course.id }}">
                 {{ course.name }}
@@ -26,11 +26,11 @@
             </select>
           </div>
           <div class="select col-4">
-            <select (change)="onSelectSemester1($event)" [(ngModel)]="selectedSemester1" name="semester" class="w-100">
+            <select (change)="onSelectSemester1($event)" name="semester" class="w-100">
               <!-- [(ngModel)]="selectedCourse"
               (change)="getGraphs($event)" -->
               <option value="0" selected>Select First Semester</option>
-              <option *ngFor="let semester of semesters[0]" value="{{ semester.id }}">
+              <option *ngFor="let semester of semesters1[0]" value="{{ semester.id }}">
                 {{ semester.year_term }}
               </option>
             </select>
@@ -40,7 +40,7 @@
         <!-- Start Lower row -->
         <div class="select-course row g-3 mt-1">
           <div class="select col-4">
-            <select (change)="onSelectDepartment2($event)" [(ngModel)]="selectedDepartment2" name="dept" class="w-100">
+            <select (change)="onSelectDepartment2($event)" name="dept" class="w-100">
               <!-- [(ngModel)]="selectedDepartment"
               (change)="onSelectDepartment($event)" -->
               <option value="0" selected>Select Second Department</option>
@@ -50,7 +50,7 @@
             </select>
           </div>
           <div class="select col-4">
-            <select (change)="onCourseSelect2($event)" [(ngModel)]="selectedCourse2" name="course" class="w-100">
+            <select (change)="onCourseSelect2($event)" name="course" class="w-100">
               <!-- [(ngModel)]="selectedCourse"
               (change)="getGraphs($event)" -->
               <option value="0" selected>Select Second Course</option>
@@ -60,11 +60,11 @@
             </select>
           </div>
           <div class="select col-4">
-            <select (change)="onSelectSemester2($event)" [(ngModel)]="selectedSemester2" name="semester" class="w-100">
+            <select (change)="onSelectSemester2($event)" name="semester" class="w-100">
               <!-- [(ngModel)]="selectedCourse"
               (change)="getGraphs($event)" -->
               <option value="0" selected>Select Second Semester</option>
-              <option *ngFor="let semester of semesters[0]" value="{{ semester.id }}">
+              <option *ngFor="let semester of semesters2[0]" value="{{ semester.id }}">
                 {{ semester.year_term }}
               </option>
             </select>
@@ -78,7 +78,7 @@
     <div class="spinner">
       <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
     </div>
-    <div *ngIf="isLoaded">
+    <div *ngIf="isLoaded && !isLoading">
       <div class="card mt-4">
         <div class="card-header m-0 fw-bold fs-4">
           Course Grades Analysis : {{coursecodes.course_code_one}} <span class="first"></span>
@@ -160,7 +160,7 @@
   </div>
 
   <div class="fallback-text mt-5"
-    *ngIf="!(selectedCourse1 && selectedCourse2 && selectedDepartment1 && selectedDepartment2 && selectedSemester1 && selectedSemester2)">
+    *ngIf="!(selectedCourse1 == '0' && selectedCourse2 == '0' && selectedDepartment1 == '0' && selectedDepartment2 == '0' && selectedSemester1 == '0' && selectedSemester2  == '0')">
     <h1 class="text-center">Please Select A Course</h1>
   </div>
 </div>

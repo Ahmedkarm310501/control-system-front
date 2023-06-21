@@ -1,19 +1,21 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit, OnChanges, ViewChild } from '@angular/core';
 import { CourseDashboardService } from '../course-dashboard/course-dashboard.service';
 import { ActivatedRoute } from '@angular/router';
 import { ConfigureSemesterService } from '../../admin/pages/configure-semester/configure-semester.service';
 import { ExtraGradesService } from './extra-grades.service';
 import { GradeService } from '../course-grades/grade.service';
+import { SnackbarComponent } from 'src/app/components/snackbar/snackbar.component';
 @Component({
   selector: 'app-extra-grades',
   templateUrl: './extra-grades.component.html',
   styleUrls: ['./extra-grades.component.css'],
 })
 export class ExtraGradesComponent implements OnInit {
-  courses: any = [];
-  filteredData: any = [];
+  @ViewChild(SnackbarComponent) snackbar: SnackbarComponent;
   pie: any = [];
   bar: any = [];
+  initialPie: any = [];
+  initialBar: any = [];
   graphOne: any;
   graphTwo: any;
   show: boolean = true;
@@ -28,10 +30,10 @@ export class ExtraGradesComponent implements OnInit {
   deptName: string;
   instructor: string;
   toAll: boolean = false;
+
   constructor(
     private courseDashboardService: CourseDashboardService,
     private route: ActivatedRoute,
-    private configureSemester: ConfigureSemesterService,
     private extra: ExtraGradesService,
     private gradeService: GradeService
   ) {}
@@ -64,6 +66,8 @@ export class ExtraGradesComponent implements OnInit {
           this.graphTwo.grade_A,
           this.graphTwo.grade_A_plus,
         ];
+        this.initialPie = this.pie.slice();
+        this.initialBar = this.bar.slice();
         console.log(this.pie);
         console.log(this.bar);
         this.isLoading = false;
@@ -73,8 +77,8 @@ export class ExtraGradesComponent implements OnInit {
       }
     );
   }
-  onInput(event) {
-    this.extraGrades = event.target.value;
+  onInput() {
+    // this.extraGrades = event.target.value;
     if (this.extraGrades === 0 || this.extraGrades === null) {
       this.extraGrades = 0;
       return;
@@ -104,11 +108,19 @@ export class ExtraGradesComponent implements OnInit {
   addGrades() {
     this.extra
       .applyExtraGrades(this.courseId, this.extraGrades, this.toAll)
-      .subscribe((res) => {
-        this.message = res.message;
-        this.type = 'success';
-        this.ngOnInit();
-      });
+      .subscribe(
+        (res) => {
+          this.ngOnInit();
+          this.message = 'Extra grades added successfully';
+          this.type = 'success';
+          this.snackbar.show();
+        },
+        (err) => {
+          this.message = err.error.message;
+          this.type = 'danger';
+          this.snackbar.show();
+        }
+      );
   }
   showSaveCancelButtons() {
     this.show = false;
@@ -117,6 +129,8 @@ export class ExtraGradesComponent implements OnInit {
   cancel() {
     this.extraGrades = 0;
     this.toAll = false;
+    this.pie = this.initialPie.slice();
+    this.bar = this.initialBar.slice();
     console.log(this.toAll);
     console.log(this.extraGrades);
   }

@@ -94,6 +94,13 @@ export class AllCoursesComponent implements OnInit {
 
   sortBy(property: string) {
     this.sortOrder = this.sortOrder * -1;
+    if (property === 'id') {
+      this.filteredData.sort(
+        (a: { id: number }, b: { id: number }) =>
+          (a.id > b.id ? 1 : -1) * this.sortOrder
+      );
+      return;
+    }
     this.filteredData.sort(
       (
         a: { [x: string]: { toLowerCase: () => number } },
@@ -103,8 +110,9 @@ export class AllCoursesComponent implements OnInit {
         this.sortOrder
     );
   }
+
   onUpload(files: FileList) {
-    const file = files[0]
+    const file = files[0];
     console.log(file);
     this.allCourses.ImportCourses(file).subscribe(
       (res) => {

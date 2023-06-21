@@ -86,7 +86,7 @@ export class CourseDashboardComponent implements OnInit {
         console.log(this.courseId);
         console.log(this.semester.id);
         console.log(res);
-        this.show = true;
+        // this.show = true;
         this.isLoading = false;
       },
       (err) => {

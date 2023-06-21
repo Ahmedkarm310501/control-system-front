@@ -1,27 +1,12 @@
-<app-snackbar
-  #snackbar
-  message="{{ message }}"
-  type="{{ type }}"
-></app-snackbar>
+<app-snackbar #snackbar message="{{ message }}" type="{{ type }}"></app-snackbar>
 <div class="container-fluid">
   <div class="row justify-content-center">
     <form #Form="ngForm" (ngSubmit)="onSubmit(Form.value)" class="col-6 mt-5">
       <h1>Add Course</h1>
       <div class="mb-3">
         <label class="form-label">Course Name</label>
-        <input
-          type="text"
-          name="course_name"
-          class="form-control"
-          ngModel
-          required
-          minlength="3"
-          #name="ngModel"
-        />
-        <div
-          *ngIf="name && name.invalid && (name.dirty || name.touched)"
-          class="mt-3"
-        >
+        <input type="text" name="course_name" class="form-control" ngModel required minlength="3" #name="ngModel" />
+        <div *ngIf="name && name.invalid && (name.dirty || name.touched)" class="mt-3">
           <div *ngIf="name.errors && name.errors['required']" class="error">
             courseName is required.
           </div>
@@ -33,17 +18,8 @@
       </div>
       <div class="mb-3">
         <label class="form-label">Course ID </label>
-        <input
-          type="text"
-          name="course_code"
-          class="form-control"
-          ngModel
-          required
-          minlength="5"
-          maxlength="5"
-          #ID="ngModel"
-          pattern="^[A-Z]{2}[0-9]{3}$"
-        />
+        <input type="text" name="course_code" class="form-control" ngModel required minlength="5" maxlength="5"
+          #ID="ngModel" pattern="^[A-Z]{2}[0-9]{3}$" />
         <div *ngIf="ID && ID.invalid && (ID.dirty || ID.touched)" class="mt-3">
           <div *ngIf="ID.errors && ID.errors['required']" class="error">
             courseID is required.
@@ -62,20 +38,13 @@
       </div>
       <div class="mb-3" class="col-md-12">
         <label>Department :&nbsp;</label>
-        <select
-          class="custom-select"
-          id="subject"
-          name="dept_code"
-          ngModel
-          required
-          #department="ngModel"
-        >
-          <option value="CS">CS</option>
-          <option value="IS">IS</option>
-          <option value="IT">IT</option>
-          <option value="AI">AI</option>
-          <option value="DS">DS</option>
-          <option value="General">General</option>
+        <select class="custom-select" id="subject" name="dept_code" ngModel required #department="ngModel">
+          <option value="" disabled selected hidden>
+            Select Department
+          </option>
+          <option *ngFor="let dept of departments" [value]="dept.dept_code">
+            {{ dept.dept_code }}
+          </option>
         </select>
         <div *ngIf="department.invalid && department.touched" class="error">
           Please select an option.
@@ -83,11 +52,7 @@
         <br />
       </div>
       <br />
-      <button
-        type="submit"
-        class="btn btn-primary"
-        [disabled]="!Form.form.valid"
-      >
+      <button type="submit" class="btn btn-primary" [disabled]="!Form.form.valid">
         Add Course
       </button>
     </form>

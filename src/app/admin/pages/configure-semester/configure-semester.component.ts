@@ -20,6 +20,8 @@ export class ConfigureSemesterComponent implements OnInit {
   coursesInSemester: any = [];
   selectedCourses = [];
 
+  initalCoursesInSemester: any = [];
+
   message: string;
   type: string;
   ngOnInit(): void {
@@ -39,11 +41,10 @@ export class ConfigureSemesterComponent implements OnInit {
 
         this.coursesInSemester = this.allData.coursesInSemester;
         console.log(this.coursesInSemester);
+        this.initalCoursesInSemester = this.coursesInSemester.slice();
 
         this.filteredData = this.courses;
         this.selectedCourses = this.coursesInSemester;
-
-        
       },
       (err) => {
         console.log(err);
@@ -68,7 +69,7 @@ export class ConfigureSemesterComponent implements OnInit {
         checked: false,
       };
     });
-    
+
     this.courses = this.courses.map((item) => {
       return {
         ...item,
@@ -158,6 +159,18 @@ export class ConfigureSemesterComponent implements OnInit {
     //   return;
     // }
     // make array of course ids
+    //  check if all course in initealCoursesInSemester are in coursesInSemester
+    if (
+      this.initalCoursesInSemester.some((item: any) => {
+        return !this.coursesInSemester.some((item2: any) => {
+          return item.id === item2.id;
+        });
+      })
+    ) {
+      // if not then show model hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+      return;
+    }
+
     const data = this.coursesInSemester.map((item: any) => item.id);
     console.log(data);
     this.configureSemester.SaveSemester(data).subscribe(

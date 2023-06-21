@@ -1,7 +1,9 @@
 import { AddUserService } from './add-user.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { SnackbarComponent } from 'src/app/components/snackbar/snackbar.component';
 import { Router } from '@angular/router';
+
+import { SnackbarComponent } from 'src/app/components/snackbar/snackbar.component';
+
 @Component({
   selector: 'app-add-user',
   templateUrl: './add-user.component.html',
