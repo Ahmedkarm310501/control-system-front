@@ -26,9 +26,9 @@
     </tr>
   </thead>
   <tbody>
-    <ng-container *ngFor="let data of log">
+    <ng-container *ngFor="let data of log; index as i">
       <tr (click)="toggleCollapse(data.id)" [attr.aria-expanded]="!isCollapsed(data.id)">
-        <th scope="row">{{ data.id }}</th>
+        <th scope="row">{{i+1}}</th>
         <td>{{ data.causer_name}}</td>
         <td>{{ data.created_at}}</td>
         <td>
@@ -64,6 +64,9 @@
           </p>
           <p *ngIf="data.event === 'ADD_COURSE_GRADES'">
             Added Course Grades
+          </p>
+          <p *ngIf="data.event === 'ADD_COURSE'">
+            Course Added
           </p>
 
 
@@ -178,27 +181,37 @@
                 <!--ADD_STUDENTS_TO_COURSE_EXCEL-->
                 <!--Before-->
                 <td *ngIf="data.event === 'ADD_STUDENTS_TO_COURSE_EXCEL'">
+                  <p *ngIf="data.properties.old !== null">
+                    <span>Old Students File</span>
+                    <button type="button" class="btn btn-success"
+                      (click)="downloadFile(data.properties.old.old_file , data.properties.old.course_name)">
+                      Download
+                    </button>
+                  </p>
                   <p *ngIf="data.properties.old === null">
                     -------- Nothing To Show --------
                   </p>
-                  <p *ngIf="data.properties.old !== null">
-                    {{data.description}}
-
-                  </p>
                 </td>
                 <!--After-->
-                <td class="btn1" *ngIf="data.properties.new !== null && data.event === 'ADD_STUDENTS_TO_COURSE_EXCEL'">
-                  <span>{{data.description}}</span>
-                  <button type="button" class="btn btn-success" (click)="downloadFile()">
-                    Download
-                  </button>
+                <td *ngIf=" data.event === 'ADD_STUDENTS_TO_COURSE_EXCEL'">
+                  <p *ngIf="data.properties.new !== null">
+                    <span>New Students File</span>
+                    <button type="button" class="btn btn-success"
+                      (click)="downloadFile(data.properties.new.new_file , data.properties.new.course_name)">
+                      Download
+                    </button>
+                  </p>
+                  <p *ngIf="data.properties.new === null">
+                    -------- Nothing To Show --------
+                  </p>
+
                 </td>
                 <!--DELETE_STUDENT_FROM_COURSE event-->
                 <!--Before-->
                 <td *ngIf="data.properties.old !== null && data.event === 'DELETE_STUDENT_FROM_COURSE'">
 
                   <span>
-                    Name : {{ data.properties.old.name }}
+                    Name : {{ data.properties.old.student.name }}
                   </span>
                   <br>
                   <span>
@@ -211,11 +224,19 @@
                 </td>
                 <!--DELETE_ALL_STUDENTS_FROM_COURSE event-->
                 <!--Before-->
-                <td class="btn1" *ngIf="data.properties.old !== null && data.event === 'DELETE_ALL_STUDENTS_FROM_COURSE'">
-                  <span>Deleted Students</span>
-                  <button type="button" class="btn btn-success" (click)="downloadFile()">
-                    Download
-                  </button>
+                <td *ngIf=" data.event === 'DELETE_ALL_STUDENTS_FROM_COURSE'">
+                  <p *ngIf="data.properties.old !== null">
+                    <span>Deleted Students</span>
+                    <button type="button" class="btn btn-success"
+                      (click)="downloadFile(data.properties.old.old_file, data.properties.old.course_name)">
+                      Download
+                    </button>
+
+                  </p>
+                  <p *ngIf="data.properties.old === null">
+                    -------- Nothing To Show --------
+                  </p>
+
                 </td>
                 <!--After-->
                 <td *ngIf="data.properties.new === null && data.event === 'DELETE_ALL_STUDENTS_FROM_COURSE'">
@@ -225,7 +246,7 @@
                 <!--Before-->
                 <td *ngIf="data.properties.old !== null && data.event === 'UPDATE_STUDENT_GRADE'">
                   <span>
-                    Name : {{ data.properties.old.name }}
+                    Name : {{ data.properties.old.student.name }}
                   </span>
                   <br>
                   <span>
@@ -233,13 +254,13 @@
                   </span>
                   <br>
                   <span>
-                    Course Exam : {{ data.properties.old.course_work }}
+                    Exam Work : {{ data.properties.old.exam_work }}
                   </span>
                 </td>
                 <!--After-->
                 <td *ngIf="data.properties.new !== null && data.event === 'UPDATE_STUDENT_GRADE'">
                   <span>
-                    Name : {{ data.properties.new.name }}
+                    Name : {{ data.properties.new.student.name }}
                   </span>
                   <br>
                   <span>
@@ -247,14 +268,15 @@
                   </span>
                   <br>
                   <span>
-                    Course Work : {{ data.properties.new.term_work }}
+                    Exam Work : {{ data.properties.new.exam_work }}
                   </span>
                 </td>
                 <!--DELETE_COURSE_GRADES event-->
                 <!--Before-->
-                <td class="btn1" *ngIf="data.properties.old !== null && data.event === 'DELETE_COURSE_GRADES'">
+                <td *ngIf="data.properties.old !== null && data.event === 'DELETE_COURSE_GRADES'">
                   <span>Deleted Grades</span>
-                  <button type="button" class="btn btn-success" (click)="downloadFile()">
+                  <button type="button" class="btn btn-success"
+                    (click)="downloadFile(data.properties.old.old_file , data.properties.old.course_name)">
                     Download
                   </button>
                 </td>
@@ -264,15 +286,47 @@
                 </td>
                 <!--ADD_COURSE_GRADES event-->
                 <!--Before-->
-               <!----> <td *ngIf="data.properties.old === null && data.event === 'ADD_COURSE_GRADES'">
+                <!---->
+                <td *ngIf="data.event === 'ADD_COURSE_GRADES'">
+                  <p *ngIf="data.properties.old === null">
+                    -------- Nothing To Show --------
+                  </p>
+                  <p *ngIf="data.properties.old !== null">
+                    <span>
+                      Old Grades for {{data.properties.old.course_name}}
+                    </span>
+                    <button type="button" class="btn btn-success"
+                      (click)="downloadFile(data.properties.old.old_file , data.properties.old.course_name)">
+                      Download
+                    </button>
+                  </p>
+                </td>
+
+                <!--After-->
+                <td *ngIf="data.event === 'ADD_COURSE_GRADES'">
+                  <p *ngIf="data.properties.new === null">
+                    -------- Nothing To Show --------
+                  </p>
+                  <p *ngIf="data.properties.new !== null">
+
+
+                    <span> New Grades for{{data.properties.new.course_name}}</span>
+                    <button type="button" class="btn btn-success"
+                      (click)="downloadFile(data.properties.new.new_file , data.properties.new.course_name)">
+                      Download
+                    </button>
+
+                  </p>
+
+                </td>
+                <!--ADD_COURSE event-->
+                <!--Before-->
+                <td *ngIf="data.properties.old === null && data.event === 'ADD_COURSE'">
                   -------- Nothing To Show --------
                 </td>
                 <!--After-->
-                <td class="btn1" *ngIf="data.properties.new !== null && data.event === 'ADD_COURSE_GRADES'">
+                <td *ngIf="data.properties.new !== null && data.event === 'ADD_COURSE'">
                   <span>{{data.description}}</span>
-                  <button type="button" class="btn btn-success" (click)="downloadFile()">
-                    Download
-                  </button>
                 </td>
                 <!-- <span class="before" *ngIf="data.properties.old !== null">
                   <button
