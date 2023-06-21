@@ -17,6 +17,7 @@ export class ExtraGradesComponent implements OnInit {
   graphOne: any;
   graphTwo: any;
   show: boolean = true;
+  extraGrades: number = 0;
   message: string;
   type: string;
   courseId = this.route.snapshot.paramMap.get('courseId');
@@ -26,6 +27,7 @@ export class ExtraGradesComponent implements OnInit {
   courseName: string;
   deptName: string;
   instructor: string;
+  toAll: boolean = false;
   constructor(
     private courseDashboardService: CourseDashboardService,
     private route: ActivatedRoute,
@@ -72,30 +74,50 @@ export class ExtraGradesComponent implements OnInit {
     );
   }
   onInput(event) {
-    let extraGrades = event.target.value;
-    if (extraGrades === '' || extraGrades === null) {
+    this.extraGrades = event.target.value;
+    if (this.extraGrades === 0 || this.extraGrades === null) {
+      this.extraGrades = 0;
       return;
     }
 
-    this.extra.addExtraGrades(this.courseId, extraGrades).subscribe((res) => {
-      this.message = res.message;
-      this.pie = [res.data.perecentage_passed, res.data.perecentage_failed];
-      this.bar = [
-        res.data.grade_F,
-        res.data.grade_D,
-        res.data.grade_D_plus,
-        res.data.grade_C,
-        res.data.grade_C_plus,
-        res.data.grade_B,
-        res.data.grade_B_plus,
-        res.data.grade_A,
-        res.data.grade_A_plus,
-      ];
-      this.type = 'success';
-      // this.ngOnInit();
-    });
+    this.extra
+      .addExtraGrades(this.courseId, this.extraGrades, this.toAll)
+      .subscribe((res) => {
+        this.message = res.message;
+        this.pie = [res.data.perecentage_passed, res.data.perecentage_failed];
+        this.bar = [
+          res.data.grade_F,
+          res.data.grade_D,
+          res.data.grade_D_plus,
+          res.data.grade_C,
+          res.data.grade_C_plus,
+          res.data.grade_B,
+          res.data.grade_B_plus,
+          res.data.grade_A,
+          res.data.grade_A_plus,
+        ];
+        this.type = 'success';
+        // this.ngOnInit();
+      });
+  }
+
+  addGrades() {
+    this.extra
+      .applyExtraGrades(this.courseId, this.extraGrades, this.toAll)
+      .subscribe((res) => {
+        this.message = res.message;
+        this.type = 'success';
+        this.ngOnInit();
+      });
   }
   showSaveCancelButtons() {
     this.show = false;
+  }
+
+  cancel() {
+    this.extraGrades = 0;
+    this.toAll = false;
+    console.log(this.toAll);
+    console.log(this.extraGrades);
   }
 }

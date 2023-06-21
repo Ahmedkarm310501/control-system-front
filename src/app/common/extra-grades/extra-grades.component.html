@@ -1,55 +1,80 @@
 <div class="dashboard">
   <div class="container-fluid">
     <div class="card">
-      <div class="card-header m-0 fw-bold fs-4">Course Informations</div>
-      <div class="card-body">
-        <div class="select-course row g-3">
-          <div class="select col-12">
-            <div class="d-flex justify-content-between w-100">
-              <div class="p-2">
-                <h5>Course ID</h5>
-                <p>{{ courseID }}</p>
-              </div>
-              <div class="p-2">
-                <h5>Course Name</h5>
-                <p>{{ courseName }}</p>
-              </div>
-              <div class="p-2">
-                <h5>Course Department</h5>
-                <p>{{ deptName }}</p>
-              </div>
-              <div class="p-2">
-                <h5>Course Instructor</h5>
-                <p>Dr {{ instructor }}</p>
-              </div>
-              <div class="d-flex align-items-center">
+      <div>
+        <div class="card-header m-0 fw-bold fs-4">Course Informations</div>
+        <div class="card-body">
+          <div class="select-course row g-3">
+            <div class="select col-12">
+              <div class="d-flex justify-content-between w-100">
                 <div class="p-2">
-                  <h5>Add Extra Grades</h5>
-                  <div class="x-input p-2">
-                    <input
-                      (input)="onInput($event)"
-                      type="number"
-                      id="extraGradesInput"
-                      class="rounded-input"
-                      pattern="[0-9]+"
-                      title="Please enter a valid number"
-                      required
-                    />
-                  </div>
+                  <h5>Course ID</h5>
+                  <p>{{ courseID }}</p>
                 </div>
+                <div class="p-2">
+                  <h5>Course Name</h5>
+                  <p>{{ courseName }}</p>
+                </div>
+                <div class="p-2">
+                  <h5>Course Department</h5>
+                  <p>{{ deptName }}</p>
+                </div>
+                <div class="p-2">
+                  <h5>Course Instructor</h5>
+                  <p>Dr {{ instructor }}</p>
+                </div>
+                <div class="d-flex align-items-center">
+                  <div class="p-4">
+                    <h5>Add Extra Grades</h5>
+                    <div class="x-input p-2 d-flex">
+                      <div>
+                        <input
+                          (input)="onInput($event)"
+                          [ngModel]="extraGrades"
+                          type="number"
+                          id="extraGradesInput"
+                          class="rounded-input"
+                          pattern="[0-9]+"
+                          title="Please enter a valid number"
+                          required
+                        />
+                      </div>
+                      <div class="">
+                        &nbsp; Add To All &nbsp;
+                        <input
+                          type="checkbox"
+                          name="toAll"
+                          class="input-style"
+                          ngModel
+                          [(ngModel)]="toAll"
+                        />
+                      </div>
+                    </div>
 
-                <div
-                  class="d-flex justify-content-between align-items-center mt-4"
-                  *ngIf="show"
-                  id="saveCancelButtons"
-                >
-                  <div class="p-2">
-                    <button type="button" class="btn btn-success">Save</button>
-                  </div>
-                  <div class="p-2">
-                    <button type="button" class="btn btn-secondary">
-                      Cancel
-                    </button>
+                    <div
+                      class="d-flex justify-content-between align-items-center mt-4"
+                      id="saveCancelButtons"
+                    >
+                      <div class="p-2">
+                        <button
+                          type="button"
+                          class="btn btn-success"
+                          data-bs-toggle="modal"
+                          data-bs-target="#exampleModall"
+                        >
+                          Add Grades
+                        </button>
+                      </div>
+                      <div class="p-2">
+                        <button
+                          type="button"
+                          class="btn btn-secondary"
+                          (click)="cancel()"
+                        >
+                          Reset
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -58,21 +83,66 @@
         </div>
       </div>
     </div>
-    <div *ngIf="!isLoading" class="card mt-4">
-      <div class="card-header m-0 fw-bold fs-4">Course Grades Analysis</div>
-      <div class="card-body">
-        <div class="select-course row g-3">
-          <div class="select col-8">
-            <div class="text-center">
-              <app-bar-chart width="327px" [data1]="bar"></app-bar-chart>
-              <h4>Student Grades Distribution</h4>
-            </div>
-          </div>
-          <div class="select col-4">
-            <div class="text-center">
-              <app-pie-chart [data1]="pie"></app-pie-chart>
-              <h4>Pass / Fail ratio</h4>
-            </div>
+  </div>
+</div>
+<div *ngIf="!isLoading" class="card mt-4">
+  <div class="card-header m-0 fw-bold fs-4">Course Grades Analysis</div>
+  <div class="card-body">
+    <div class="select-course row g-3">
+      <div class="select col-8">
+        <div class="text-center">
+          <app-bar-chart width="327px" [data1]="bar"></app-bar-chart>
+          <h4>Student Grades Distribution</h4>
+        </div>
+      </div>
+      <div class="select col-4">
+        <div class="text-center">
+          <app-pie-chart [data1]="pie"></app-pie-chart>
+          <h4>Pass / Fail ratio</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModall"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabell"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="mb-3" class="col-md-12">
+            <h4>Are you sure you want to change grades?</h4>
+            <button
+              (click)="addGrades()"
+              class="btn btn-primary me-2"
+              value="yes"
+              data-bs-dismiss="modal"
+            >
+              Yes
+            </button>
+            <button
+              class="btn btn-secondary"
+              value="no"
+              data-bs-dismiss="modal"
+            >
+              No
+            </button>
           </div>
         </div>
       </div>

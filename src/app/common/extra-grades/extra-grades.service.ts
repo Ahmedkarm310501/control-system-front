@@ -27,10 +27,27 @@ export class ExtraGradesService {
   baseUrl = environment.baseUrl;
   constructor(private http: HttpClient) {}
 
-  addExtraGrades(courseId: string, numberOfGrades: number) {
+  addExtraGrades(
+    courseId: string,
+    numberOfGrades: number,
+    AllOrFailed: boolean
+  ) {
     return this.http.post<RES>(`${this.baseUrl}/raafa-grades`, {
       course_id: courseId,
       number_of_grades: numberOfGrades,
+      AllOrFailed: AllOrFailed,
+    });
+  }
+
+  applyExtraGrades(
+    courseId: string,
+    numberOfGrades: number,
+    AllOrFailed: boolean
+  ) {
+    return this.http.post<RES>(`${this.baseUrl}/apply-raafa-grades`, {
+      course_id: courseId,
+      number_of_gardes: numberOfGrades,
+      AllOrfFailed: AllOrFailed,
     });
   }
 }
