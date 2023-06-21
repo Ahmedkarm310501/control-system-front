@@ -156,41 +156,41 @@ export class CourseGradesComponent implements OnInit {
   /**/
   IsInvalidRecords = false;
   errorMsg2 = '';
-  onExcelUploadNames(data: any) {
-    console.log(data);
-    const newStudents = data
-      .filter((row: any) => row.id && row.name) // Only keep rows with non-empty ID and name
-      .filter((row: any) => {
-        // Only keep rows where student ID doesn't already exist in students array
-        return !this.students.find((s: any) => s.id === row.id);
-      })
-      .map((row: any) => {
-        return {
-          id: row.id,
-          name: row.name,
-          termWork: null,
-          examWork: null,
-          editable: false,
-          oldTermWork: null,
-          oldExamWork: null,
-          total: null,
-          grade: null,
-        };
-      });
+  // onExcelUploadNames(data: any) {
+  //   console.log(data);
+  //   const newStudents = data
+  //     .filter((row: any) => row.id && row.name) // Only keep rows with non-empty ID and name
+  //     .filter((row: any) => {
+  //       // Only keep rows where student ID doesn't already exist in students array
+  //       return !this.students.find((s: any) => s.id === row.id);
+  //     })
+  //     .map((row: any) => {
+  //       return {
+  //         id: row.id,
+  //         name: row.name,
+  //         termWork: null,
+  //         examWork: null,
+  //         editable: false,
+  //         oldTermWork: null,
+  //         oldExamWork: null,
+  //         total: null,
+  //         grade: null,
+  //       };
+  //     });
 
-    if (newStudents.length > 0) {
-      this.students = this.students.concat(newStudents);
-      this.filteredStudents = this.students;
-      console.log(this.filteredStudents);
-    }
+  //   if (newStudents.length > 0) {
+  //     this.students = this.students.concat(newStudents);
+  //     this.filteredStudents = this.students;
+  //     console.log(this.filteredStudents);
+  //   }
 
-    const invalidRecords = data.filter((row: any) => !row.id || !row.name);
-    if (invalidRecords.length > 0) {
-      this.errorMsg2 = `${invalidRecords.length} rows were not added. Please make sure each row has both an ID and name.`;
-      this.IsInvalidRecords = true;
-    }
-    this.renderer.setProperty(this.fileRef.nativeElement, 'value', null);
-  }
+  //   const invalidRecords = data.filter((row: any) => !row.id || !row.name);
+  //   if (invalidRecords.length > 0) {
+  //     this.errorMsg2 = `${invalidRecords.length} rows were not added. Please make sure each row has both an ID and name.`;
+  //     this.IsInvalidRecords = true;
+  //   }
+  //   this.renderer.setProperty(this.fileRef.nativeElement, 'value', null);
+  // }
 
   missingStudents = [];
 
@@ -336,6 +336,8 @@ export class CourseGradesComponent implements OnInit {
         });
         console.log(this.students);
         this.filteredStudents = this.students;
+
+        Form.reset();
       });
   }
 
@@ -395,19 +397,6 @@ export class CourseGradesComponent implements OnInit {
       );
   }
 
-  // DeleteStudent(student_id: string) {
-  //   this.deleteStudent = true;
-  //   console.log(student_id);
-  //   this.gradeService
-  //     .deleteStudentFromCourse(this.courseId, this.termId, student_id)
-  //     .subscribe((res) => {
-  //       console.log(res);
-  //       this.students = this.students.filter((student) => {
-  //         return +student.student_id !== +student_id;
-  //       });
-  //       this.filteredStudents = this.students;
-  //     });
-  // }
   DeleteStudent(student_id: string) {
     this.deleteStudent = true;
     console.log(student_id);
