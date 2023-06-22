@@ -156,15 +156,55 @@
                   }"
                 >
                   <li routerLinkActive="current-page">
-                    <a routerLink="add-semester">Add Semester</a>
+                    <a
+                      routerLink="add-semester"
+                      (click)="clickEvent('semester')"
+                      >Add Semester</a
+                    >
                   </li>
                   <li routerLinkActive="current-page">
-                    <a routerLink="configure-semester">Configure Semester</a>
+                    <a
+                      routerLink="configure-semester"
+                      (click)="clickEvent('semester')"
+                      >Configure Semester</a
+                    >
+                  </li>
+                </ul>
+              </li>
+
+              <li
+                (click)="clickEvent('department')"
+                [ngClass]="toggleDisplay['department'] ? 'active' : ''"
+              >
+                <a
+                  ><i class="fa fa-building"></i> Department
+                  <span class="fa fa-chevron-down float-end"></span>
+                  <!-- <i class="fa fa-caret-down float-end"></i> -->
+                </a>
+                <ul
+                  class="nav child_menu nav-childs"
+                  [ngStyle]="{
+                    display: toggleDisplay['department'] ? 'block' : 'none'
+                  }"
+                >
+                  <li routerLinkActive="current-page">
+                    <a
+                      routerLink="add-department"
+                      (click)="clickEvent('department')"
+                      >Add Department</a
+                    >
+                  </li>
+                  <li routerLinkActive="current-page">
+                    <a
+                      routerLink="all-departments"
+                      (click)="clickEvent('department')"
+                      >List Departments</a
+                    >
                   </li>
                 </ul>
               </li>
               <!-- add-department -->
-              <li
+              <!-- <li
                 (click)="clickEvent('department')"
                 [ngClass]="toggleDisplay['department'] ? 'active' : ''"
               >
@@ -185,7 +225,7 @@
                     <a routerLink="all-departments">List Departments</a>
                   </li>
                 </ul>
-              </li>
+              </li> -->
             </ul>
           </div>
         </div>

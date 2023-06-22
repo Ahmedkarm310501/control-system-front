@@ -79,8 +79,13 @@ export class ExtraGradesComponent implements OnInit {
   }
   onInput() {
     // this.extraGrades = event.target.value;
-    if (this.extraGrades === 0 || this.extraGrades === null) {
-      this.extraGrades = 0;
+    if (
+      this.extraGrades === 0 ||
+      this.extraGrades === null ||
+      this.extraGrades < 0 ||
+      this.extraGrades > 20
+    ) {
+      // this.extraGrades = 0;
       return;
     }
 
