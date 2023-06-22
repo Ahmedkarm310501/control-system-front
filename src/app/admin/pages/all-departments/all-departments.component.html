@@ -125,7 +125,7 @@
                             class="btn Edit m-0"
                             data-bs-toggle="modal"
                             data-bs-target="#exampleModal"
-                            (click)="onEdit(data.id)"
+                            (click)="deptId = data.id"
                           >
                             Edit
                           </button>
@@ -134,6 +134,7 @@
                             class="btn btn-danger mx-2 my-2 m-0"
                             data-bs-toggle="modal"
                             data-bs-target="#exampleModall"
+                            (click)="deptId = data.id"
                           >
                             Delete
                           </button>
@@ -170,7 +171,7 @@
       </div>
       <div class="modal-body">
         <div class="container-fluid">
-          <form #Form="ngForm" (ngSubmit)="onSubmit(Form.value)">
+          <form #Form="ngForm">
             <div class="mb-3" class="col-md-12">
               <label>Department name :&nbsp;</label>
               <input
@@ -195,16 +196,13 @@
               <input
                 type="text"
                 class="form-control"
-                id="course_code"
-                name="course_code"
+                id="dept_code"
+                name="dept_code"
                 ngModel
                 required
-                #course_code="ngModel"
+                #dept_code="ngModel"
               />
-              <div
-                *ngIf="course_code.invalid && course_code.touched"
-                class="error"
-              >
+              <div *ngIf="dept_code.invalid && dept_code.touched" class="error">
                 Please enter a valid code.
               </div>
 
@@ -218,7 +216,13 @@
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
           Close
         </button>
-        <button type="button" class="btn save">Save changes</button>
+        <button
+          type="submit"
+          class="btn save"
+          (ngSubmit)="onSubmit($event, this.deptId)"
+        >
+          Save changes
+        </button>
       </div>
     </div>
   </div>

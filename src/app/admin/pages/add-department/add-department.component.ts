@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { SnackbarComponent } from 'src/app/components/snackbar/snackbar.component';
 import { Router } from '@angular/router';
+import { AddDepartmentService } from './add-department.service';
 
 @Component({
   selector: 'app-add-department',
@@ -11,18 +12,34 @@ export class AddDepartmentComponent implements OnInit {
   @ViewChild('snackbar') snackbar: SnackbarComponent;
   message: string;
   type: string;
-  constructor(private router: Router) {}
+  name = '';
+  dept_code = '';
+  constructor(
+    private router: Router,
+    private addDepartmentService: AddDepartmentService
+  ) {}
 
   ngOnInit(): void {}
 
-  onSubmit(form: any) {
-    console.log('Form Submitted!');
-    // navigate to configure semester page
-    this.message = 'Department Added Successfully';
-    this.type = 'success';
-    this.snackbar.show();
-    setTimeout(() => {
-      this.router.navigate(['/configure-department']);
-    }, 2000);
+  onSubmit(name: string, dept_code: string) {
+    this.addDepartmentService
+      .addDepartment(this.name, this.dept_code)
+      .subscribe(
+        (res) => {
+          console.log(res);
+          this.message = 'Department Added Successfully';
+          this.type = 'success';
+          this.snackbar.show();
+          setTimeout(() => {
+            this.router.navigate(['/all-departments']);
+          }, 2000);
+        },
+        (err) => {
+          console.log(err);
+          this.message = 'Department Added Failed';
+          this.type = 'danger';
+          this.snackbar.show();
+        }
+      );
   }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AllCoursesService } from '../all-courses/all-courses.service';
+import { AllDepartmentsService } from './all-departments.service';
 
 @Component({
   selector: 'app-all-departments',
@@ -14,7 +15,10 @@ export class AllDepartmentsComponent implements OnInit {
   filteredData: any = this.departments;
   modalIsOpen = false;
   selectedID = '';
-  constructor(private allCourses: AllCoursesService) {}
+  constructor(
+    private allCourses: AllCoursesService,
+    private allDepartments: AllDepartmentsService
+  ) {}
 
   ngOnInit(): void {
     this.allCourses.getAllDepartments().subscribe(
@@ -60,14 +64,34 @@ export class AllDepartmentsComponent implements OnInit {
       }
     });
   }
-  onEdit(id: any) {
-    console.log(id);
-    this.modalIsOpen = !this.modalIsOpen;
-    this.selectedID = id;
+  // onEdit(event, id: any) {
+  //   // console.log(id);
+  //   // this.modalIsOpen = !this.modalIsOpen;
+  //   // this.selectedID = id;
+  //   this.allDepartments
+  //     .editDepartment(id, event.name, event.dept_code)
+  //     .subscribe((res) => {
+  //       console.log(res);
+  //       this.ngOnInit();
+  //     });
+  // }
+  onSubmit(event, id: any) {
+    this.allDepartments
+      .editDepartment(id, event.name, event.dept_code)
+      .subscribe((res) => {
+        console.log(res);
+      });
   }
-  onSubmit(form: any) {}
 
   deleteDepartment(id: any) {
-    console.log(id);
+    this.allDepartments.deleteDepartment(id).subscribe(
+      (res) => {
+        console.log(res);
+        this.ngOnInit();
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 }
