@@ -31,7 +31,8 @@ select {
 /* .table-bordered {
   border: 3px solid var(--background-color-dark) !important;
 } */
-.btn-success {
+.btn-success,
+.btn-primary {
   background-color: var(--main-color) !important;
 }
 input,
