@@ -3,7 +3,8 @@
   width: auto;
   justify-content: center;
 }
-.but-style button {
+.but-style button,
+.btn-primary {
   background: var(--main-color);
   color: white;
 }
