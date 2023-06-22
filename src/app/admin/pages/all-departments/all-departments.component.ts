@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AllCoursesService } from '../all-courses/all-courses.service';
 import { AllDepartmentsService } from './all-departments.service';
+import { SnackbarComponent } from 'src/app/components/snackbar/snackbar.component';
 
 @Component({
   selector: 'app-all-departments',
@@ -8,10 +9,12 @@ import { AllDepartmentsService } from './all-departments.service';
   styleUrls: ['./all-departments.component.css'],
 })
 export class AllDepartmentsComponent implements OnInit {
+  @ViewChild('snackbar') snackbar: SnackbarComponent;
   isLoading: boolean = true;
   deptId: any;
   departments: any = [];
-
+  message: any;
+  type: any;
   filteredData: any = this.departments;
   modalIsOpen = false;
   selectedID: any;
@@ -67,38 +70,48 @@ export class AllDepartmentsComponent implements OnInit {
       }
     });
   }
-  // onEdit(event, id: any) {
-  //   // console.log(id);
-  //   // this.modalIsOpen = !this.modalIsOpen;
-  //   // this.selectedID = id;
-  //   this.allDepartments
-  //     .editDepartment(id, event.name, event.dept_code)
-  //     .subscribe((res) => {
-  //       console.log(res);
-  //       this.ngOnInit();
-  //     });
-  // }
+
   onSubmit() {
     this.allDepartments
       .editDepartment(this.deptId, this.name, this.dept_code)
-      .subscribe((res) => {
-        console.log(res);
-        this.ngOnInit();
-      });
+      .subscribe(
+        (res) => {
+          console.log(res);
+          this.message = 'Department Edit Successfully';
+          this.type = 'success';
+          console.log(res);
+          this.snackbar.show();
+          this.ngOnInit();
+          this.modalIsOpen = false;
+        },
+        (err) => {
+          this.message = 'Department Edit Failed';
+          this.type = 'failed';
+          console.log(err);
+          this.snackbar.show();
+        }
+      );
   }
 
   deleteDepartment(id: any) {
     this.allDepartments.deleteDepartment(id).subscribe(
       (res) => {
+        this.message = 'Department Deleted Successfully';
+        this.type = 'success';
+        console.log(res);
+        this.snackbar.show();
         console.log(res);
         this.ngOnInit();
       },
       (err) => {
         console.log(err);
+        this.message = 'Department Deleted Failed';
+        this.type = 'failed';
+        this.snackbar.show();
       }
     );
   }
-  
+
   onClick(id: any, name: any, dept_code: any) {
     this.deptId = id;
     this.name = name;
