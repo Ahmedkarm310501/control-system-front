@@ -10,6 +10,7 @@ import { AuthService } from '../auth/auth.service';
 export class SidebarComponent implements OnInit, OnDestroy {
   sideBarOpen: boolean;
   userName: string;
+  isAdmin: boolean = false;
   constructor(
     private sidebarService: SidebarService,
     private authService: AuthService
@@ -18,6 +19,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
   toggleDisplay: any;
   ngOnInit(): void {
     this.userName = this.authService.user.value.userName;
+    this.isAdmin = this.authService.user.value.isAdmin;
+
     this.sidebarService.sideBarOpen.subscribe((res) => {
       this.sideBarOpen = res;
     });

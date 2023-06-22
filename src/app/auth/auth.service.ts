@@ -27,7 +27,7 @@ export class AuthService {
         tap((res: any) => {
           this.isLoggedIn.next(true);
           console.log(res);
-          let user = new User(res.data.token, res.data.user.name);
+          let user = new User(res.data.token, res.data.user.name, res.data.user.is_admin);
           this.user.next(user);
           localStorage.setItem('user', JSON.stringify(user));
         }),
@@ -57,11 +57,12 @@ export class AuthService {
     let user: {
       _token: string;
       userName: string;
+      isAdmin: boolean;
     } = JSON.parse(localStorage.getItem('user'));
     if (!user) {
       return;
     }
-    let loadedUser = new User(user._token, user.userName);
+    let loadedUser = new User(user._token, user.userName, user.isAdmin);
     this.user.next(loadedUser);
     this.isLoggedIn.next(true);
   }
