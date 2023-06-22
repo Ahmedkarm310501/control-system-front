@@ -123,7 +123,7 @@ export class ConfigureSemesterComponent implements OnInit {
     const id = event.target.value;
     console.log(id);
     this.filteredData = this.courses.filter(
-      (item: any) => item.department.dept_code == id
+      (item: any) => item.department_id == id
     );
     console.log(this.filteredData);
   }
@@ -158,19 +158,20 @@ export class ConfigureSemesterComponent implements OnInit {
     //   this.snackbar.show();
     //   return;
     // }
+
     // make array of course ids
     //  check if all course in initealCoursesInSemester are in coursesInSemester
-    if (
-      this.initalCoursesInSemester.some((item: any) => {
-        return !this.coursesInSemester.some((item2: any) => {
-          return item.id === item2.id;
-        });
-      })
-    ) {
-      // if not then show model hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+    // if (
+    //   this.initalCoursesInSemester.some((item: any) => {
+    //     return !this.coursesInSemester.some((item2: any) => {
+    //       return item.id === item2.id;
+    //     });
+    //   })
+    // ) {
+    //   // if not then show model hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
 
-      return;
-    }
+    //   return;
+    // }
 
     const data = this.coursesInSemester.map((item: any) => item.id);
     console.log(data);
