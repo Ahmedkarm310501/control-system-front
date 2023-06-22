@@ -406,7 +406,7 @@ ul.side-menu li {
 .nav-sm .nav.side-menu li a {
   text-align: center !important;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 12px;
   padding: 10px 5px;
 }
 
@@ -472,26 +472,24 @@ ul.side-menu li {
   display: inline-block;
 }
 
-
-@media (max-width : 600px) {
-  .nav-small{
+@media (max-width: 600px) {
+  .nav-small {
     width: 70px !important;
     margin-left: 0 !important;
-
   }
-  .hider{
+  .hider {
     display: none !important;
   }
-  .smaller{
+  .smaller {
     width: auto !important;
   }
-  .nav-childs{
+  .nav-childs {
     position: absolute !important;
     left: 100% !important;
     background-color: var(--main-color) !important;
     top: 0px !important;
   }
-  .mar{
+  .mar {
     margin-top: 25px !important;
     align-items: center;
   }
