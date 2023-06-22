@@ -5,6 +5,7 @@
         <form class="row g-3">
           <h1>Add New Department</h1>
           <hr />
+
           <div class="col-md-6">
             <label for="fullName" class="form-label"
               >Department Name<span class="required">*</span></label
@@ -17,6 +18,7 @@
               name="departmentName"
               required
               ngModel
+              #departmentName="ngModel"
             />
             <div
               *ngIf="
@@ -24,7 +26,29 @@
                 departmentName.invalid &&
                 (departmentName.dirty || departmentName.touched)
               "
-            ></div>
+            >
+              <div *ngIf="departmentName.errors['required']" class="error">
+                Name is required.
+              </div>
+              <div
+                *ngIf="
+                  departmentName.errors['minlength'] ||
+                  departmentName.errors['maxlength']
+                "
+                class="error"
+              >
+                Name must be between 4 and 60 characters long.
+              </div>
+              <div
+                *ngIf="
+                  departmentName.errors['minWords'] ||
+                  departmentName.errors['maxWords']
+                "
+                class="error"
+              >
+                Name must be between 4 and 60 characters long.
+              </div>
+            </div>
           </div>
 
           <div class="col-md-6">
@@ -39,6 +63,7 @@
               name="departmentCode"
               required
               ngModel
+              #departmentCode="ngModel"
             />
             <div
               *ngIf="
@@ -46,8 +71,31 @@
                 departmentCode.invalid &&
                 (departmentCode.dirty || departmentCode.touched)
               "
-            ></div>
+            >
+              <div *ngIf="departmentCode.errors['required']" class="error">
+                Code is required.
+              </div>
+              <div
+                *ngIf="
+                  departmentCode.errors['minlength'] ||
+                  departmentCode.errors['maxlength']
+                "
+                class="error"
+              >
+                Code must be between 4 and 60 characters long.
+              </div>
+              <div
+                *ngIf="
+                  departmentCode.errors['minWords'] ||
+                  departmentCode.errors['maxWords']
+                "
+                class="error"
+              >
+                Code must be between 4 and 60 characters long.
+              </div>
+            </div>
           </div>
+
           <div class="ln_solid">
             <div class="form-group">
               <div class="col-md-6 but-style">
@@ -56,6 +104,7 @@
                   class="btn btn-lg my-2 mx-2"
                   data-bs-toggle="modal"
                   data-bs-target="#exampleModall"
+                  [disabled]="departmentName.invalid || departmentCode.invalid"
                 >
                   Add Department
                 </button>
