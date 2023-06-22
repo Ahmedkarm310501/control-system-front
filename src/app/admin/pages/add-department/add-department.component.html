@@ -1,3 +1,8 @@
+<app-snackbar
+  #snackbar
+  message="{{ message }}"
+  type="{{ type }}"
+></app-snackbar>
 <div class="setup">
   <div class="container h-100">
     <div class="row h-100 justify-content-center">
@@ -105,6 +110,10 @@
                   data-bs-toggle="modal"
                   data-bs-target="#exampleModall"
                   [disabled]="departmentName.invalid || departmentCode.invalid"
+                  (click)="
+                    this.name = departmentName.value;
+                    this.dept_code = departmentCode.value
+                  "
                 >
                   Add Department
                 </button>
@@ -146,6 +155,7 @@
                 value="yes"
                 data-bs-dismiss="modal"
                 type="submit"
+                (click)="onSubmit(this.name, this.dept_code)"
               >
                 Yes
               </button>
