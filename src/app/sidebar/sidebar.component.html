@@ -163,7 +163,29 @@
                   </li>
                 </ul>
               </li>
-              <!-- additional list items here -->
+              <!-- add-department -->
+              <li
+                (click)="clickEvent('department')"
+                [ngClass]="toggleDisplay['department'] ? 'active' : ''"
+              >
+                <a
+                  ><i class="fa fa-building"></i> Department
+                  <span class="fa fa-chevron-down float-end"></span>
+                </a>
+                <ul
+                  class="nav child_menu nav-childs"
+                  [ngStyle]="{
+                    display: toggleDisplay['department'] ? 'block' : 'none'
+                  }"
+                >
+                  <li routerLinkActive="current-page">
+                    <a routerLink="/add-department">Add Department</a>
+                  </li>
+                  <li routerLinkActive="current-page">
+                    <a routerLink="all-departments">List Departments</a>
+                  </li>
+                </ul>
+              </li>
             </ul>
           </div>
         </div>
