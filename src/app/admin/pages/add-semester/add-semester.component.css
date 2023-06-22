@@ -7,3 +7,10 @@
   background: var(--main-color);
   color: white;
 }
+.modal-content {
+  background-color: var(--background-color-dark);
+}
+
+.modal select {
+  background-color: var(--background-color);
+}

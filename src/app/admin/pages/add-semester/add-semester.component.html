@@ -1,57 +1,135 @@
-<app-snackbar #snackbar message={{message}} type={{type}}></app-snackbar>
+<app-snackbar
+  #snackbar
+  message="{{ message }}"
+  type="{{ type }}"
+></app-snackbar>
 <div class="setup">
-    <div class="container h-100">
-        <div class="row h-100 justify-content-center">
-            <div class="col-sm-10 col-lg-8 text-center">
-                <form class="row g-3" #Form="ngForm" (submit)="onSubmit(Form.value)" >
-                    <h1>Add Semester</h1>
-                    <hr />
-                    <div class="col-md-6">
-                        <label for="fullName" class="form-label">Year<span class="required">*</span></label>
+  <div class="container h-100">
+    <div class="row h-100 justify-content-center">
+      <div class="col-sm-10 col-lg-8 text-center">
+        <form class="row g-3" #Form="ngForm">
+          <h1>Add Semester</h1>
+          <hr />
+          <div class="col-md-6">
+            <label for="fullName" class="form-label"
+              >Year<span class="required">*</span></label
+            >
 
-                        <input class="form-control" data-validate-length-range="60 " data-validate-words="4 "
-                            name="year" required ngModel #year="ngModel" />
-                        <div *ngIf="year && year.invalid && (year.dirty || year.touched)">
-                            <div *ngIf="year.errors && year.errors['required']" class="error">
-                                Year is required.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6 from-group">
-                        <label for="term" class="form-label">Semester<span class="required">*</span></label>
-
-                        <select class="form-control" name="term" value="term" id="exampleFormControlSelect1" ngModel required #enum="ngModel" >
-                            <option value="first">1st Semester</option>
-                            <option value="second">2nd Semester</option>
-                            <option value="third">3rd Semester</option>
-                        </select>
-                        <div *ngIf="enum && enum.invalid && (enum.dirty || enum.touched)">
-                            <div *ngIf="enum.errors && enum.errors['required']" class="error">
-                                Semester is required.
-                            </div>
-
-                            <div *ngIf="enum.errors && enum.errors['pattern']" class="error">
-                                Semester is invalid.
-                            </div>
-                        </div>
-                    </div>
-
-                    
-
-                    <div class="col-md-6" style="padding-bottom: epx; padding-top: 45—; margin-top: 8px">
-                    </div>
-                    <div class="ln_solid">
-                        <div class="form-group">
-                            <div class="col-md-6 but-style">
-                                <button type="submit " class="btn btn-lg my-2 mx-2">
-                                    Add Semester
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
+            <input
+              class="form-control"
+              data-validate-length-range="60 "
+              data-validate-words="4 "
+              name="year"
+              required
+              ngModel
+              #year="ngModel"
+            />
+            <div *ngIf="year && year.invalid && (year.dirty || year.touched)">
+              <div *ngIf="year.errors && year.errors['required']" class="error">
+                Year is required.
+              </div>
             </div>
-        </div>
+          </div>
+
+          <div class="col-md-6 from-group">
+            <label for="term" class="form-label"
+              >Semester<span class="required">*</span></label
+            >
+
+            <select
+              class="form-control"
+              name="term"
+              value="term"
+              id="exampleFormControlSelect1"
+              ngModel
+              required
+              #enum="ngModel"
+            >
+              <option value="first">1st Semester</option>
+              <option value="second">2nd Semester</option>
+              <option value="third">3rd Semester</option>
+            </select>
+            <div *ngIf="enum && enum.invalid && (enum.dirty || enum.touched)">
+              <div *ngIf="enum.errors && enum.errors['required']" class="error">
+                Semester is required.
+              </div>
+
+              <div *ngIf="enum.errors && enum.errors['pattern']" class="error">
+                Semester is invalid.
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="col-md-6"
+            style="padding-bottom: epx; padding-top: 45—; margin-top: 8px"
+          ></div>
+          <div class="ln_solid">
+            <div class="form-group">
+              <div class="col-md-6 but-style">
+                <button
+                  type="submit"
+                  class="btn btn-lg my-2 mx-2"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModall"
+                >
+                  Add Semester
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
+  </div>
+</div>
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModall"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabell"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="mb-3" class="col-md-12">
+            <h4>
+              Are you sure you want to end current semester and create new one?
+            </h4>
+            <hr />
+            <div class="d-flex align-items-center justify-content-end">
+              <button
+                class="btn btn-primary me-2"
+                value="yes"
+                data-bs-dismiss="modal"
+                type="submit"
+                (submit)="onSubmit(Form.value)"
+              >
+                Yes
+              </button>
+              <button
+                class="btn btn-secondary"
+                value="no"
+                data-bs-dismiss="modal"
+              >
+                No
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
