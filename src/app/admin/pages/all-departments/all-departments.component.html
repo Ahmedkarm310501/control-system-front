@@ -181,11 +181,11 @@
                 class="form-control"
                 id="name"
                 name="name"
-                ngModel
+                [(ngModel)]="name"
                 required
-                #name="ngModel"
+                #nameInput="ngModel"
               />
-              <div *ngIf="name.invalid && name.touched" class="error">
+              <div *ngIf="nameInput.invalid && nameInput.touched" class="error">
                 Please enter a valid name.
               </div>
 
@@ -200,11 +200,11 @@
                 class="form-control"
                 id="dept_code"
                 name="dept_code"
-                ngModel
+                [(ngModel)]="dept_code"
                 required
-                #dept_code="ngModel"
+                #deptInput="ngModel"
               />
-              <div *ngIf="dept_code.invalid && dept_code.touched" class="error">
+              <div *ngIf="deptInput.invalid && deptInput.touched" class="error">
                 Please enter a valid code.
               </div>
 
@@ -218,7 +218,12 @@
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
           Close
         </button>
-        <button type="submit" class="btn save" (ngSubmit)="onSubmit()">
+        <button
+          type="submit"
+          class="btn save"
+          data-bs-dismiss="modal"
+          (click)="onSubmit()"
+        >
           Save changes
         </button>
       </div>

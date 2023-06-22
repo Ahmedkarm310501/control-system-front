@@ -14,3 +14,9 @@
   background: var(--main-color);
   color: white;
 }
+
+.btn-primary {
+  background: var(--main-color);
+  color: white;
+  border: none;
+}

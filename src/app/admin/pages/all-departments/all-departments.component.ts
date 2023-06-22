@@ -98,7 +98,7 @@ export class AllDepartmentsComponent implements OnInit {
       }
     );
   }
-
+  
   onClick(id: any, name: any, dept_code: any) {
     this.deptId = id;
     this.name = name;
