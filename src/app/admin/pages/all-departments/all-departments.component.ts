@@ -14,7 +14,10 @@ export class AllDepartmentsComponent implements OnInit {
 
   filteredData: any = this.departments;
   modalIsOpen = false;
-  selectedID = '';
+  selectedID: any;
+  name: any;
+  dept_code: any;
+
   constructor(
     private allCourses: AllCoursesService,
     private allDepartments: AllDepartmentsService
@@ -75,11 +78,12 @@ export class AllDepartmentsComponent implements OnInit {
   //       this.ngOnInit();
   //     });
   // }
-  onSubmit(event, id: any) {
+  onSubmit() {
     this.allDepartments
-      .editDepartment(id, event.name, event.dept_code)
+      .editDepartment(this.deptId, this.name, this.dept_code)
       .subscribe((res) => {
         console.log(res);
+        this.ngOnInit();
       });
   }
 
@@ -93,5 +97,14 @@ export class AllDepartmentsComponent implements OnInit {
         console.log(err);
       }
     );
+  }
+
+  onClick(id: any, name: any, dept_code: any) {
+    this.deptId = id;
+    this.name = name;
+    this.dept_code = dept_code;
+    console.log(this.deptId);
+    console.log(this.name);
+    console.log(this.dept_code);
   }
 }

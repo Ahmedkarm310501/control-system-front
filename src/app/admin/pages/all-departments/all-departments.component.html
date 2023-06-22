@@ -125,7 +125,9 @@
                             class="btn Edit m-0"
                             data-bs-toggle="modal"
                             data-bs-target="#exampleModal"
-                            (click)="deptId = data.id"
+                            (click)="
+                              onClick(data.id, data.name, data.dept_code)
+                            "
                           >
                             Edit
                           </button>
@@ -216,11 +218,7 @@
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
           Close
         </button>
-        <button
-          type="submit"
-          class="btn save"
-          (ngSubmit)="onSubmit($event, this.deptId)"
-        >
+        <button type="submit" class="btn save" (ngSubmit)="onSubmit()">
           Save changes
         </button>
       </div>
