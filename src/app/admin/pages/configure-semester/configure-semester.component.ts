@@ -168,6 +168,7 @@ export class ConfigureSemesterComponent implements OnInit {
       })
     ) {
       // if not then show model hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+
       return;
     }
 

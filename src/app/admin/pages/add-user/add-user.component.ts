@@ -33,7 +33,9 @@ export class AddUserComponent implements OnInit {
           this.type = 'success';
           console.log(res);
           this.snackbar.show();
-          this.router.navigate(['/admin/users']);
+          setTimeout(() => {
+            this.router.navigate(['/all-users']);
+          }, 2000);
         },
         (err) => {
           this.message = err.error.message;

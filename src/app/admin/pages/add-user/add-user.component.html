@@ -94,7 +94,13 @@
             > -->
             <div class="col-md-6 col-sm-6 admin-style">
               <div id="Admin" class="d-flex">
-                <input type="checkbox" name="is_admin" class="input-style" ngModel [(ngModel)]="isAdmin" />
+                <input
+                  type="checkbox"
+                  name="is_admin"
+                  class="input-style larger-checkbox"
+                  ngModel
+                  [(ngModel)]="isAdmin"
+                />
                 <label> &nbsp; Admin &nbsp; </label>
               </div>
             </div>
@@ -105,7 +111,12 @@
                 <button type="submit " class="btn btn-lg btn-success my-2 mx-2">
                   Add User
                 </button>
-                <button (click)="resetForm(Form.value)" type="reset" class="btn btn-lg btn-primary my-2 mx-2">
+
+                <button
+                  (click)="resetForm(Form.value)"
+                  type="reset"
+                  class="btn btn-lg btn-primary my-2 mx-2"
+                >
                   Reset
                 </button>
               </div>

@@ -1,63 +1,135 @@
-<app-snackbar #snackbar message="{{ message }}" type="{{ type }}"></app-snackbar>
-<div style="width: 100%;" class="header d-flex">
-    <header class="col-10">
-        <div class="d-flex">
-            <div class="p-2">
-                <h5>Semester Year</h5>
-                <p>{{semester.year}}</p>
-            </div>
-            <div class="p-2">
-                <h5>Semester Number</h5>
-                <p>{{semester.term}}</p>
-            </div>
-        </div>
-    </header>
-    <div class="col-2 save-but">
-        <button class="btn" (click)="saveSemester()">Save</button>
+<app-snackbar
+  #snackbar
+  message="{{ message }}"
+  type="{{ type }}"
+></app-snackbar>
+<div style="width: 100%" class="header d-flex">
+  <header class="col-10">
+    <div class="d-flex">
+      <div class="p-2">
+        <h5>Semester Year</h5>
+        <p>{{ semester.year }}</p>
+      </div>
+      <div class="p-2">
+        <h5>Semester Number</h5>
+        <p>{{ semester.term }}</p>
+      </div>
     </div>
+  </header>
+  <div class="col-2 save-but">
+    <button class="btn" (click)="saveSemester()">Save</button>
+  </div>
 </div>
 
-
 <div class="container">
-    <div class="filters">
-        <select class="dep" name="departments" id="dep" (change)="onSelectDepartment($event)">
-            <option value="all">All Departments</option>
-            <option *ngFor="let department of departments" [value]="department.dept_code">{{department.dept_code}}
-            </option>
-        </select>
-        <div class="select-all">
-            <input (click)="selectAll()" type="checkbox" name="select" id="select">
-            <label for="select">Select All</label>
-        </div>
-        <input class="search" type="text" placeholder="Search..." (change)="search($event)">
+  <div class="filters">
+    <select
+      class="dep"
+      name="departments"
+      id="dep"
+      (change)="onSelectDepartment($event)"
+    >
+      <option value="all">All Departments</option>
+      <option
+        *ngFor="let department of departments"
+        [value]="department.dept_code"
+      >
+        {{ department.dept_code }}
+      </option>
+    </select>
+    <div class="select-all">
+      <input (click)="selectAll()" type="checkbox" name="select" id="select" />
+      <label for="select">Select All</label>
     </div>
+    <input
+      class="search"
+      type="text"
+      placeholder="Search..."
+      (change)="search($event)"
+    />
+  </div>
 
-    <div style="margin: auto;" class="row conts">
-        <div class="col-md left-cont">
-            <div class="left-courses" *ngFor="let course of filteredData">
-                <input type="checkbox" [(ngModel)]="course.checked">
+  <div style="margin: auto" class="row conts">
+    <div class="col-md left-cont">
+      <div class="left-courses" *ngFor="let course of filteredData">
+        <input type="checkbox" [(ngModel)]="course.checked" />
 
-                <p style="margin-top: 18px; margin-left: 5px; font-size: 20px;">
-                    {{course.name}}
-                </p>
-
-            </div>
-        </div>
-        <div class="col-sm mid-cont">
-            <div class="but-container">
-                <button class="btn btn-primary btn-1" (click)="move()">>></button>
-                <button class="btn btn-primary btn-2" (click)="moveBack()">
-                    << </button>
-
-            </div>
-        </div>
-        <div class="col-md right-cont">
-            <div *ngFor="let course of selectedCourses">
-                <input type="checkbox" [(ngModel)]="course.checked">
-                <p style="margin-top: 18px; margin-left: 5px; font-size: 20px;">
-                    {{course.name}}
-                </p>
-            </div>
-        </div>
+        <p style="margin-top: 18px; margin-left: 5px; font-size: 20px">
+          {{ course.name }}
+        </p>
+      </div>
     </div>
+    <div class="col-sm mid-cont">
+      <div class="but-container">
+        <button class="btn btn-primary btn-1" (click)="move()">>></button>
+        <button
+          class="btn btn-primary btn-2"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModall"
+        >
+          <<
+        </button>
+      </div>
+    </div>
+    <div class="col-md right-cont">
+      <div *ngFor="let course of selectedCourses">
+        <input type="checkbox" [(ngModel)]="course.checked" />
+        <p style="margin-top: 18px; margin-left: 5px; font-size: 20px">
+          {{ course.name }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModall"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabell"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="mb-3" class="col-md-12">
+            <h4>
+              Are you sure you want remove the selected courses from the current
+              semester?
+            </h4>
+            <hr />
+            <div class="d-flex align-items-center justify-content-end">
+              <button
+                class="btn btn-primary me-2"
+                value="yes"
+                data-bs-dismiss="modal"
+                type="submit"
+                (click)="moveBack()"
+              >
+                Yes
+              </button>
+              <button
+                class="btn btn-secondary"
+                value="no"
+                data-bs-dismiss="modal"
+              >
+                No
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

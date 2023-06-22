@@ -41,7 +41,6 @@ select {
   transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
 }
 .input-style {
-  height: 20px !important;
   padding: 0 !important;
   margin: 0 !important;
   width: 15px;
@@ -113,4 +112,8 @@ form {
   align-items: center;
   margin-top: 40px;
   padding: 15px;
+}
+.larger-checkbox {
+  width: 30px;
+  height: 25px;
 }

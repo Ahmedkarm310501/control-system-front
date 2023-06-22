@@ -90,3 +90,7 @@ style any td with a button in it
 .btn1 button {
   width: fit-content;
 }
+.btn-success {
+  background-color: var(--main-color) !important;
+  margin-left: 30px;
+}
