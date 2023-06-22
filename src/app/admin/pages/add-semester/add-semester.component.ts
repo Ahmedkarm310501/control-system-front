@@ -20,7 +20,7 @@ export class AddSemesterComponent implements OnInit {
   ngOnInit(): void {}
   semester: any = [];
   onSubmit(form: any) {
-    this.addSemester.addSemester(form.year, form.term).subscribe(
+    this.addSemester.addSemester(form.term, form.year).subscribe(
       (res) => {
         this.semester = res.data;
         this.message = 'Semester Added Successfully';
@@ -29,8 +29,7 @@ export class AddSemesterComponent implements OnInit {
         this.snackbar.show();
         setTimeout(() => {
           this.router.navigate(['/configure-semester']);
-        }
-        , 2000);  
+        }, 2000);
       },
       (err) => {
         this.message = err.error.message;

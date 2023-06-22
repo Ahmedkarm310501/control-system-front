@@ -21,6 +21,7 @@ export class ConfigureSemesterComponent implements OnInit {
   selectedCourses = [];
 
   initalCoursesInSemester: any = [];
+  checkbox: boolean = false;
 
   message: string;
   type: string;
@@ -50,6 +51,7 @@ export class ConfigureSemesterComponent implements OnInit {
         console.log(err);
       }
     );
+    // reset checkbox input to false if the courses array is empty
 
     // check if course is in courseInSemester array then it should not appear in courses array
     // this.courses = this.courses.filter((item: any) => {
@@ -60,6 +62,8 @@ export class ConfigureSemesterComponent implements OnInit {
   }
 
   move() {
+    // get checkbox input and put it in variable
+
     this.coursesInSemester = this.coursesInSemester.concat(
       this.courses.filter((item) => item.checked)
     );
@@ -89,6 +93,7 @@ export class ConfigureSemesterComponent implements OnInit {
     console.log('move function');
     console.log(this.selectedCourses);
     console.log(this.filteredData);
+    this.checkbox = false;
   }
   moveBack() {
     this.courses = this.courses.concat(
@@ -113,6 +118,7 @@ export class ConfigureSemesterComponent implements OnInit {
     console.log('moveback function');
     console.log(this.selectedCourses);
     console.log(this.filteredData);
+    this.checkbox = false;
   }
   // filter by department
   onSelectDepartment(event: any) {
@@ -191,10 +197,12 @@ export class ConfigureSemesterComponent implements OnInit {
     );
   }
   selectAll() {
+    const allSelected = this.courses.every((item) => item.checked);
+
     this.courses = this.courses.map((item) => {
       return {
         ...item,
-        checked: !item.checked,
+        checked: !allSelected,
       };
     });
     this.filteredData = this.courses;
