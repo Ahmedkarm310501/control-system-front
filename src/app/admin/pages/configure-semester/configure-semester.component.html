@@ -1,8 +1,4 @@
-<app-snackbar
-  #snackbar
-  message="{{ message }}"
-  type="{{ type }}"
-></app-snackbar>
+<app-snackbar #snackbar message="{{ message }}" type="{{ type }}"></app-snackbar>
 <div style="width: 100%" class="header d-flex">
   <header class="col-10">
     <div class="d-flex">
@@ -23,27 +19,17 @@
 
 <div class="container">
   <div class="filters">
-    <select
-      class="dep"
-      name="departments"
-      id="dep"
-      (change)="onSelectDepartment($event)"
-    >
+    <select class="dep" name="departments" id="dep" (change)="onSelectDepartment($event)">
       <option value="all">All Departments</option>
       <option *ngFor="let department of departments" [value]="department.id">
         {{ department.dept_code }}
       </option>
     </select>
     <div class="select-all">
-      <input (click)="selectAll()" type="checkbox" name="select" id="select" />
+      <input (click)="selectAll()" type="checkbox" name="select" id="select" [(ngModel)]="checkbox" />
       <label for="select">Select All</label>
     </div>
-    <input
-      class="search"
-      type="text"
-      placeholder="Search..."
-      (change)="search($event)"
-    />
+    <input class="search" type="text" placeholder="Search..." (change)="search($event)" />
   </div>
 
   <div style="margin: auto" class="row conts">
@@ -59,13 +45,8 @@
     <div class="col-sm mid-cont">
       <div class="but-container">
         <button class="btn btn-primary btn-1" (click)="move()">>></button>
-        <button
-          class="btn btn-primary btn-2"
-          data-bs-toggle="modal"
-          data-bs-target="#exampleModall"
-        >
-          <<
-        </button>
+        <button class="btn btn-primary btn-2" data-bs-toggle="modal" data-bs-target="#exampleModall">
+          << </button>
       </div>
     </div>
     <div class="col-md right-cont">
@@ -80,23 +61,12 @@
 </div>
 
 <!-- Modal -->
-<div
-  class="modal fade"
-  id="exampleModall"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabell"
-  aria-hidden="true"
->
+<div class="modal fade" id="exampleModall" tabindex="-1" aria-labelledby="exampleModalLabell" aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <div class="container-fluid">
@@ -107,20 +77,11 @@
             </h4>
             <hr />
             <div class="d-flex align-items-center justify-content-end">
-              <button
-                class="btn btn-primary me-2"
-                value="yes"
-                data-bs-dismiss="modal"
-                type="submit"
-                (click)="moveBack()"
-              >
+              <button class="btn btn-primary me-2" value="yes" data-bs-dismiss="modal" type="submit"
+                (click)="moveBack()">
                 Yes
               </button>
-              <button
-                class="btn btn-secondary"
-                value="no"
-                data-bs-dismiss="modal"
-              >
+              <button class="btn btn-secondary" value="no" data-bs-dismiss="modal">
                 No
               </button>
             </div>

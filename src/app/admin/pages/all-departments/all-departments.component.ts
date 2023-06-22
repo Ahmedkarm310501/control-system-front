@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AllCoursesService } from '../all-courses/all-courses.service';
+import { AllDepartmentsService } from './all-departments.service';
 
 @Component({
   selector: 'app-all-departments',
@@ -8,40 +10,30 @@ import { Component, OnInit } from '@angular/core';
 export class AllDepartmentsComponent implements OnInit {
   isLoading: boolean = true;
   deptId: any;
-  departments: any = [
-    {
-      id: 1,
-      name: 'Information Systems',
-      course_code: 'IS',
-    },
-    {
-      id: 2,
-      name: 'Computer Science',
-      course_code: 'CS',
-    },
-    {
-      id: 3,
-      name: 'Data Science',
-      course_code: 'DS',
-    },
-    {
-      id: 4,
-      name: 'Artificial Intelligence',
-      course_code: 'AI',
-    },
-    {
-      id: 5,
-      name: 'General',
-      course_code: 'General',
-    },
-  ];
+  departments: any = [];
 
   filteredData: any = this.departments;
   modalIsOpen = false;
   selectedID = '';
-  constructor() {}
+  constructor(
+    private allCourses: AllCoursesService,
+    private allDepartments: AllDepartmentsService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.allCourses.getAllDepartments().subscribe(
+      (res) => {
+        console.log(res);
+        this.departments = res.data;
+        this.filteredData = this.departments;
+        this.isLoading = false;
+      },
+      (err) => {
+        console.log(err);
+        this.isLoading = true;
+      }
+    );
+  }
   search(search: string) {
     this.filteredData = this.departments.filter((dummyData) => {
       return (
@@ -62,23 +54,44 @@ export class AllDepartmentsComponent implements OnInit {
       );
       return;
     }
-    this.filteredData.sort(
-      (
-        a: { [x: string]: { toLowerCase: () => number } },
-        b: { [x: string]: { toLowerCase: () => number } }
-      ) =>
-        (a[property].toLowerCase() > b[property].toLowerCase() ? 1 : -1) *
-        this.sortOrder
-    );
+    this.filteredData.sort((a: any, b: any) => {
+      if (a[property] > b[property]) {
+        return 1 * this.sortOrder;
+      } else if (a[property] < b[property]) {
+        return -1 * this.sortOrder;
+      } else {
+        return 0 * this.sortOrder;
+      }
+    });
   }
-  onEdit(id: any) {
-    console.log(id);
-    this.modalIsOpen = !this.modalIsOpen;
-    this.selectedID = id;
+  // onEdit(event, id: any) {
+  //   // console.log(id);
+  //   // this.modalIsOpen = !this.modalIsOpen;
+  //   // this.selectedID = id;
+  //   this.allDepartments
+  //     .editDepartment(id, event.name, event.dept_code)
+  //     .subscribe((res) => {
+  //       console.log(res);
+  //       this.ngOnInit();
+  //     });
+  // }
+  onSubmit(event, id: any) {
+    this.allDepartments
+      .editDepartment(id, event.name, event.dept_code)
+      .subscribe((res) => {
+        console.log(res);
+      });
   }
-  onSubmit(form: any) {}
 
   deleteDepartment(id: any) {
-    console.log(id);
+    this.allDepartments.deleteDepartment(id).subscribe(
+      (res) => {
+        console.log(res);
+        this.ngOnInit();
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 }
