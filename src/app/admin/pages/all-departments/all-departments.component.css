@@ -5,3 +5,12 @@
 .modal select {
   background-color: var(--background-color);
 }
+.Edit {
+  background: var(--search-color);
+  color: white;
+}
+
+.save {
+  background: var(--main-color);
+  color: white;
+}
