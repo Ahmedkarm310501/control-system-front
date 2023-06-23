@@ -84,7 +84,6 @@ export class BreadcrumbComponent implements OnInit {
       return this.getBreadcrumbs(route.firstChild, nextUrl, newBreadcrumbs);
     }
 
-    // Check if the current route is "course-settings"
     if (route.routeConfig?.path === 'course-settings') {
       const parentRoute = route.parent;
       if (parentRoute) {
@@ -96,23 +95,15 @@ export class BreadcrumbComponent implements OnInit {
         }
       }
     }
-    // make the above to this link http://localhost:4200/course-dashboard/extra-grades/:courseId
-    // Check if the current route is "extra-grades"
-    console.log(route.routeConfig?.path);
+  
     if (route.routeConfig?.path === 'extra-grades/:courseId') {
-      console.log(' in extra-grades');
       const parentRoute = route.parent;
       if (parentRoute) {
-        const courseId = parentRoute.snapshot.paramMap.get('courseId');
-        // const termId = parentRoute.snapshot.paramMap.get('termId');
-
         nextUrl = `/course-dashboard`;
       }
     }
-    //http://localhost:4200/all-users/edit-user/:id
-    // Check if the current route is "edit-user"
+
     if (route.routeConfig?.path === 'edit-user/:id') {
-      console.log(' in edit-user');
       const parentRoute = route.parent;
       if (parentRoute) {
         nextUrl = `/all-users`;
