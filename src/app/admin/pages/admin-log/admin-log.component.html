@@ -59,6 +59,7 @@
           <p *ngIf="data.event === 'ADD_COURSE_GRADES'">Added Course Grades</p>
           <p *ngIf="data.event === 'ADD_COURSE'">Course Added</p>
           <p *ngIf="data.event === 'EDIT_COURSE'">Course Edited</p>
+          <p *ngIf="data.event === 'ADD_SEMESTER'">Semester Added</p>
         </td>
       </tr>
       <tr id="log{{ data.id }}" [ngClass]="{ collapse: true, show: !isCollapsed(data.id) }">
@@ -400,6 +401,20 @@
                     </span>
                   </p>
                 </td>
+                <!--ADD_SEMESTER event-->
+                <!--Before-->
+                <td *ngIf="
+                    data.properties.old === null && data.event === 'ADD_SEMESTER'
+                  ">
+                  -------- Nothing To Show --------
+                </td>
+                <!--After-->
+                <td *ngIf="data.properties.new !== null && data.event === 'ADD_SEMESTER'">
+                  <span>Term : {{ data.properties.new.term }}</span>
+                  <br />
+                  <span>Year : {{ data.properties.new.year }}</span>
+                </td>
+
                 <!-- <span class="before" *ngIf="data.properties.old !== null">
                   <button
                     *ngIf="data.event === 'DELETE_ALL_STUDENTS_FROM_COURSE' || data.event === 'DELETE_COURSE_GRADES' "
