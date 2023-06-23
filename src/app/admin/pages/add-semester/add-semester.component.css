@@ -14,3 +14,8 @@
 .modal select {
   background-color: var(--background-color);
 }
+.btn-primary{
+  background: var(--main-color);
+  color: white;
+  border: none;
+}

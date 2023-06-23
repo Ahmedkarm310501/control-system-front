@@ -32,7 +32,8 @@ export class AddSemesterComponent implements OnInit {
         }, 2000);
       },
       (err) => {
-        this.message = err.error.message;
+        // console.log(err);
+        this.message = err.error.error;
         this.type = 'failed';
         this.snackbar.show();
       }
