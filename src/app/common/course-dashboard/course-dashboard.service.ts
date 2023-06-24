@@ -29,7 +29,9 @@ export class CourseDashboardService {
     return this.http.get<Res>(`${environment.baseUrl}/departments`);
   }
   getCourses() {
-    return this.http.get<Res2>(`${environment.baseUrl}/list-courses`);
+    return this.http.get<Res2>(
+      `${environment.baseUrl}/list-courses-in-semester`
+    );
   }
   graphOne(course_id: number, semester_id: number) {
     return this.http.post<Res2>(`${environment.baseUrl}/graph-one`, {
