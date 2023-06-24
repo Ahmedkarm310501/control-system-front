@@ -55,7 +55,7 @@ export class CompareCoursesComponent implements OnInit {
     this.compareCoursesService.getCourseSemesters(this.course_id_one).subscribe(
       (res: any) => {
         this.semesters1 = res.data;
-        console.log(res.data[0]);
+        console.log(res.data);
       },
       (err: any) => {
         console.log(err);
@@ -72,7 +72,7 @@ export class CompareCoursesComponent implements OnInit {
           return;
         }
         this.semesters2 = res.data;
-        console.log(res.data[0]);
+        console.log(res.data);
       },
       (err: any) => {
         console.log(err);

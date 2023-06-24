@@ -45,7 +45,7 @@
             >
               <option value="0">Select First Semester</option>
               <option
-                *ngFor="let semester of semesters1[0]"
+                *ngFor="let semester of semesters1"
                 value="{{ semester.id }}"
               >
                 {{ semester.year_term }}
@@ -94,7 +94,7 @@
             >
               <option value="0">Select Second Semester</option>
               <option
-                *ngFor="let semester of semesters2[0]"
+                *ngFor="let semester of semesters2"
                 value="{{ semester.id }}"
               >
                 {{ semester.year_term }}
