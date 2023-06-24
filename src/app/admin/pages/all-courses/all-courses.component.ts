@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AllCoursesService } from './all-courses.service';
+import { SnackbarComponent } from 'src/app/components/snackbar/snackbar.component';
 
 @Component({
   selector: 'app-all-courses',
@@ -7,12 +8,15 @@ import { AllCoursesService } from './all-courses.service';
   styleUrls: ['./all-courses.component.css'],
 })
 export class AllCoursesComponent implements OnInit {
+  @ViewChild(SnackbarComponent) snackbar: SnackbarComponent;
   constructor(private allCourses: AllCoursesService) {}
 
   isLoading: boolean = true;
   courses: any = [];
   departments: any = [];
   dep_id: any;
+  type: any;
+  message: any;
   ngOnInit(): void {
     this.allCourses.getAllCourses().subscribe(
       (res) => {
@@ -114,13 +118,24 @@ export class AllCoursesComponent implements OnInit {
   onUpload(files: FileList) {
     const file = files[0];
     console.log(file);
+
+    this.isLoading = true;
     this.allCourses.ImportCourses(file).subscribe(
       (res) => {
+        this.message = 'Courses Added Successfully';
+        this.type = 'success';
         console.log(res);
+        this.snackbar.show();
+        this.isLoading = false;
+
         this.ngOnInit();
       },
       (err) => {
         console.log(err);
+        this.message = err.error.message;
+        this.type = 'failed';
+        this.snackbar.show();
+        this.isLoading = true;
       }
     );
   }
