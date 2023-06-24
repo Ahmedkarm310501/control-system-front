@@ -314,7 +314,7 @@
                     data.event === 'UPDATE_STUDENT_GRADE'
                   "
                 >
-                  <span> Name : {{ data.properties.old.student.name }} </span>
+                  <span> Name : {{ data.properties.old.name }} </span>
                   <br />
                   <span> Term Work : {{ data.properties.old.term_work }} </span>
                   <br />
@@ -327,14 +327,14 @@
                     data.event === 'UPDATE_STUDENT_GRADE'
                   "
                 >
-                  <span> Name : {{ data.properties.new.student.name }} </span>
+                  <span> Name : {{ data.properties.new.name }} </span>
                   <br />
                   <span> Term Work : {{ data.properties.new.term_work }} </span>
                   <br />
                   <span> Exam Work : {{ data.properties.new.exam_work }} </span>
                 </td>
                 <!--DELETE_COURSE_GRADES event-->
-                
+
                 <!--Before-->
                 <td
                   *ngIf="
