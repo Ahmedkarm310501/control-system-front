@@ -248,6 +248,7 @@ export class CourseGradesComponent implements OnInit {
   }
 
   deleteAllGrades() {
+    this.isLoading = true;
     this.gradeService
       .deleteAllStudentGrades(this.courseId, this.termId)
       .subscribe((res) => {
@@ -263,6 +264,7 @@ export class CourseGradesComponent implements OnInit {
           });
           this.filteredStudents = this.students;
         }
+        this.isLoading = false;
       });
   }
 
@@ -398,6 +400,8 @@ export class CourseGradesComponent implements OnInit {
   }
 
   DeleteStudent(student_id: string) {
+    this.isLoading = true;
+
     this.deleteStudent = true;
     console.log(student_id);
     console.log(this.filteredStudents);
@@ -410,6 +414,7 @@ export class CourseGradesComponent implements OnInit {
             return +student.student_id !== +student_id;
           });
           this.filteredStudents = this.students;
+          this.isLoading = false;
         },
         (err) => {
           console.log(err);
@@ -439,6 +444,7 @@ export class CourseGradesComponent implements OnInit {
     );
   }
   deleteAllStudents() {
+    this.isLoading = true;
     this.gradeService
       .deleteAllStudentsFromCourse(this.courseId, this.termId)
       .subscribe(
@@ -446,6 +452,7 @@ export class CourseGradesComponent implements OnInit {
           console.log(res);
           this.students = [];
           this.filteredStudents = this.students;
+          this.isLoading = false;
         },
         (err) => {
           console.log(err);

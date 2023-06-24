@@ -126,6 +126,7 @@ export class ExtraGradesComponent implements OnInit {
           this.snackbar.show();
         }
       );
+    this.extraGrades = 0;
   }
   showSaveCancelButtons() {
     this.show = false;
