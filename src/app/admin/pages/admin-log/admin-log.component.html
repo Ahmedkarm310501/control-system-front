@@ -92,12 +92,8 @@
                     data?.properties?.old !== null && data?.event === 'DELETE_USER'
                   ">
                   <span> Email : {{ data?.properties?.old?.email }} </span>
-                  <br />
-                  <span> Name : {{ data?.properties?.old?.name }} </span>
-                </td>
-                <!--After-->
                 <td *ngIf="
-                    data?.properties?.new === null && data?.event === 'DELETE_USER'
+                    data.properties.new === null && data.event === 'DELETE_USER'
                   ">
                   The following User has been deleted <br />
                   <span>Name : {{ data?.properties?.old?.name }}</span>
@@ -265,7 +261,7 @@
                     data?.properties?.old !== null &&
                     data?.event === 'UPDATE_STUDENT_GRADE'
                   ">
-                  <span> Name : {{ data?.properties?.old?.student.name }} </span>
+                  <span> Name : {{ data?.properties?.old?.name }} </span>
                   <br />
                   <span> Term Work : {{ data?.properties?.old?.term_work }} </span>
                   <br />
@@ -276,13 +272,14 @@
                     data?.properties?.new !== null &&
                     data?.event === 'UPDATE_STUDENT_GRADE'
                   ">
-                  <span> Name : {{ data?.properties?.new?.student?.name }} </span>
+                  <span> Name : {{ data?.properties?.new?.name }} </span>
                   <br />
                   <span> Term Work : {{ data?.properties?.new?.term_work }} </span>
                   <br />
                   <span> Exam Work : {{ data?.properties?.new?.exam_work }} </span>
                 </td>
                 <!--DELETE_COURSE_GRADES event-->
+
                 <!--Before-->
                 <td *ngIf="
                     data?.properties?.old !== null &&
@@ -378,7 +375,6 @@
                     <span>
                       Old Total : {{data?.properties?.old?.course_rule?.total}}
                     </span>
-
                   </p>
                 </td>
                 <!--After-->
@@ -403,9 +399,7 @@
                 </td>
                 <!--ADD_SEMESTER event-->
                 <!--Before-->
-                <td *ngIf="
-                    data?.properties?.old === null && data?.event === 'ADD_SEMESTER'
-                  ">
+                <td *ngIf=" data?.properties?.old === null && data?.event === 'ADD_SEMESTER'">
                   -------- Nothing To Show --------
                 </td>
                 <!--After-->

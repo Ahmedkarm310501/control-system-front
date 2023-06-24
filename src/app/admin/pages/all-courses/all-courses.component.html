@@ -11,13 +11,24 @@
     <div class="row">
       <div class="col-sm-12">
         <div class="card-box table-responsive">
-          <div id="datatable_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap no-footer">
+          <div
+            id="datatable_wrapper"
+            class="dataTables_wrapper container-fluid dt-bootstrap no-footer"
+          >
             <div class="row justify-content-end filters">
               <div class="col-sm-4 pt-3">
-                <div id="datatable_filter" class="d-flex align-items-center float-end">
+                <div
+                  id="datatable_filter"
+                  class="d-flex align-items-center float-end"
+                >
                   <label> Search: </label>
-                  <input type="text" class="form-control mx-2 my-2" placeholder="Search for Course..." #searchInput
-                    (input)="search(searchInput.value)" />
+                  <input
+                    type="text"
+                    class="form-control mx-2 my-2"
+                    placeholder="Search for Course..."
+                    #searchInput
+                    (input)="search(searchInput.value)"
+                  />
                   <span class="input-group-btn">
                     <button class="btn btn-secondary" type="button">
                       <i class="fa fa-search"></i>
@@ -26,54 +37,112 @@
                 </div>
               </div>
               <div class="col-sm-2 pt-4">
-
-                <select class="form-select" aria-label="Default select example" (change)="onSelectDepartment($event)">
+                <select
+                  class="form-select"
+                  aria-label="Default select example"
+                  (change)="onSelectDepartment($event)"
+                >
                   <option value="all">All Departments</option>
-                  <option *ngFor="let department of departments" [value]="department.dept_code">
-                    {{department.dept_code}}
+                  <option
+                    *ngFor="let department of departments"
+                    [value]="department.dept_code"
+                  >
+                    {{ department.dept_code }}
                   </option>
                 </select>
               </div>
               <div class="col-sm-2 pt-4">
-                <label for="upload" class="custom-file-upload">
-                  <a (click)="f.click()">
-                    <input #fileInput1 type="file" #f (change)="onUpload(fileInput1.files) ; fileInput1.value = null">
-                  </a>
-                  Upload Courses
-
-                </label>
+                <a (click)="f.click()">
+                  <label for="upload" class="custom-file-upload">
+                    Upload Courses
+                  </label>
+                  <input
+                    #fileInput1
+                    type="file"
+                    #f
+                    (change)="
+                      onUpload(fileInput1.files); fileInput1.value = null
+                    "
+                  />
+                </a>
               </div>
             </div>
             <div class="row" [class.hide-table]="isLoading">
               <div class="col-sm-12">
-                <table id="datatable" class="table table-striped table-bordered dataTable no-footer" style="width: 100%"
-                  role="grid" aria-describedby="datatable_info">
+                <table
+                  id="datatable"
+                  class="table table-striped table-bordered dataTable no-footer"
+                  style="width: 100%"
+                  role="grid"
+                  aria-describedby="datatable_info"
+                >
                   <thead>
                     <tr role="row">
-                      <th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
-                        aria-sort="ascending" aria-label="Name: activate to sort column descending"
-                        style="width: 179px">
+                      <th
+                        class="sorting_asc"
+                        tabindex="0"
+                        aria-controls="datatable"
+                        rowspan="1"
+                        colspan="1"
+                        aria-sort="ascending"
+                        aria-label="Name: activate to sort column descending"
+                        style="width: 179px"
+                      >
                         ID
-                        <i class="fa fa-lg fa-sort float-end" (click)="sortBy('id')"></i>
+                        <i
+                          class="fa fa-lg fa-sort float-end"
+                          (click)="sortBy('id')"
+                        ></i>
                       </th>
-                      <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
-                        aria-label="Position: activate to sort column ascending" style="width: 289px">
+                      <th
+                        class="sorting"
+                        tabindex="0"
+                        aria-controls="datatable"
+                        rowspan="1"
+                        colspan="1"
+                        aria-label="Position: activate to sort column ascending"
+                        style="width: 289px"
+                      >
                         Course name
-                        <i class="fa fa-lg fa-sort float-end" (click)="sortBy('name')"></i>
+                        <i
+                          class="fa fa-lg fa-sort float-end"
+                          (click)="sortBy('name')"
+                        ></i>
                       </th>
-                      <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
-                        aria-label="Office: activate to sort column ascending" style="width: 136px">
+                      <th
+                        class="sorting"
+                        tabindex="0"
+                        aria-controls="datatable"
+                        rowspan="1"
+                        colspan="1"
+                        aria-label="Office: activate to sort column ascending"
+                        style="width: 136px"
+                      >
                         Course code
-                        <i class="fa fa-lg fa-sort float-end" (click)="sortBy('course_code')"></i>
+                        <i
+                          class="fa fa-lg fa-sort float-end"
+                          (click)="sortBy('course_code')"
+                        ></i>
                       </th>
-                      <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1"
-                        aria-label="Age: activate to sort column ascending" style="width: 69px">
+                      <th
+                        class="sorting"
+                        tabindex="0"
+                        aria-controls="datatable"
+                        rowspan="1"
+                        colspan="1"
+                        aria-label="Age: activate to sort column ascending"
+                        style="width: 69px"
+                      >
                         Department
                       </th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let data of filteredData" role="row" class="odd">
+                    <tr
+                      *ngFor="let data of filteredData"
+                      role="row"
+                      class="odd"
+                    >
                       <td class="sorting_1">{{ data.id }}</td>
                       <td>{{ data.name }}</td>
                       <td>{{ data.course_code }}</td>
