@@ -62,10 +62,8 @@ export class ConfigureSemesterComponent implements OnInit {
   }
 
   move() {
-    // get checkbox input and put it in variable
-
     this.coursesInSemester = this.coursesInSemester.concat(
-      this.courses.filter((item) => item.checked)
+      this.filteredData.filter((item) => item.checked)
     );
     this.coursesInSemester = this.coursesInSemester.map((item) => {
       return {
@@ -88,7 +86,12 @@ export class ConfigureSemesterComponent implements OnInit {
         return item.id === item2.id;
       });
     });
-    this.filteredData = this.courses;
+    // this.filteredData = this.courses;
+    this.filteredData = this.filteredData.filter((item: any) => {
+      return !this.coursesInSemester.some((item2: any) => {
+        return item.id === item2.id;
+      });
+    });
     this.selectedCourses = this.coursesInSemester;
     console.log('move function');
     console.log(this.selectedCourses);
@@ -158,27 +161,6 @@ export class ConfigureSemesterComponent implements OnInit {
 
   // save semester
   saveSemester() {
-    // if (this.selectedCourses.length == 0) {
-    //   this.message = 'Please select course';
-    //   this.type = 'failed';
-    //   this.snackbar.show();
-    //   return;
-    // }
-
-    // make array of course ids
-    //  check if all course in initealCoursesInSemester are in coursesInSemester
-    // if (
-    //   this.initalCoursesInSemester.some((item: any) => {
-    //     return !this.coursesInSemester.some((item2: any) => {
-    //       return item.id === item2.id;
-    //     });
-    //   })
-    // ) {
-    //   // if not then show model hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
-
-    //   return;
-    // }
-
     const data = this.coursesInSemester.map((item: any) => item.id);
     console.log(data);
     this.configureSemester.SaveSemester(data).subscribe(
@@ -197,14 +179,14 @@ export class ConfigureSemesterComponent implements OnInit {
     );
   }
   selectAll() {
-    const allSelected = this.courses.every((item) => item.checked);
+    // const allSelected = this.filteredData.every((item) => item.checked);
 
-    this.courses = this.courses.map((item) => {
+    this.filteredData = this.filteredData.map((item) => {
       return {
         ...item,
-        checked: !allSelected,
+        checked: !this.checkbox,
       };
     });
-    this.filteredData = this.courses;
+    // this.filteredData = this.courses;
   }
 }
