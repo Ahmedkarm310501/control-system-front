@@ -21,12 +21,9 @@ export class AddCourseComponent implements OnInit {
   ngOnInit(): void {
     this.courseDashboardService.getDepartments().subscribe(
       (res) => {
-        console.log(res);
         this.departments = res.data;
       },
-      (err) => {
-        console.log(err);
-      }
+      (err) => {}
     );
   }
   departments: any;
@@ -38,8 +35,6 @@ export class AddCourseComponent implements OnInit {
         (res) => {
           this.message = 'Course Added Successfully';
           this.type = 'success';
-          console.log(res);
-          console.log(form);
           this.snackbar.show();
           setTimeout(() => {
             this.router.navigate(['/all-courses']);

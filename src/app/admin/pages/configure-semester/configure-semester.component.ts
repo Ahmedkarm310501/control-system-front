@@ -32,27 +32,20 @@ export class ConfigureSemesterComponent implements OnInit {
         this.isLoading = false;
 
         this.allData = res.data;
-        console.log(this.allData);
 
         this.courses = this.allData.courses;
-        console.log(this.courses);
 
         this.departments = this.allData.departments;
-        console.log(this.departments);
 
         this.semester = this.allData.newestSemester;
-        console.log(this.semester);
 
         this.coursesInSemester = this.allData.coursesInSemester;
-        console.log(this.coursesInSemester);
         this.initalCoursesInSemester = this.coursesInSemester.slice();
 
         this.filteredData = this.courses;
         this.selectedCourses = this.coursesInSemester;
       },
-      (err) => {
-        console.log(err);
-      }
+      (err) => {}
     );
     // reset checkbox input to false if the courses array is empty
 
@@ -96,9 +89,7 @@ export class ConfigureSemesterComponent implements OnInit {
       });
     });
     this.selectedCourses = this.coursesInSemester;
-    console.log('move function');
-    console.log(this.selectedCourses);
-    console.log(this.filteredData);
+
     this.checkbox = false;
   }
   moveBack() {
@@ -121,9 +112,7 @@ export class ConfigureSemesterComponent implements OnInit {
     this.filteredData = this.courses;
     this.selectedCourses = this.coursesInSemester;
     this.courses.checked = false;
-    console.log('moveback function');
-    console.log(this.selectedCourses);
-    console.log(this.filteredData);
+
     this.checkbox = false;
   }
   // filter by department
@@ -133,11 +122,10 @@ export class ConfigureSemesterComponent implements OnInit {
       return;
     }
     const id = event.target.value;
-    console.log(id);
+
     this.filteredData = this.courses.filter(
       (item: any) => item.department_id == id
     );
-    console.log(this.filteredData);
   }
   // search by course name
   search(event: any) {
@@ -165,16 +153,13 @@ export class ConfigureSemesterComponent implements OnInit {
   // save semester
   saveSemester() {
     const data = this.coursesInSemester.map((item: any) => item.id);
-    console.log(data);
     this.configureSemester.SaveSemester(data).subscribe(
       (res) => {
-        console.log(res);
         this.message = 'Semester configured successfully';
         this.type = 'success';
         this.snackbar.show();
       },
       (err) => {
-        console.log(err);
         this.message = 'Something went wrong';
         this.type = 'failed';
         this.snackbar.show();

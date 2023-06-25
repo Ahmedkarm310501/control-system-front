@@ -59,8 +59,6 @@ export class AdminLogComponent implements OnInit {
   fileData: any;
   downloadFile(file: any, fileName: any) {
     this.adminLogService.downloadLog(file).subscribe((res) => {
-      console.log(res);
-
       const downloadLink = document.createElement('a');
       downloadLink.href = window.URL.createObjectURL(res.body);
 

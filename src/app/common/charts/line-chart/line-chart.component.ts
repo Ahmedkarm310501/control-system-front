@@ -18,7 +18,6 @@ export class LineChartComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    console.log(this.data1);
     this.createChart();
   }
   ngOnChanges(changes: SimpleChanges): void {

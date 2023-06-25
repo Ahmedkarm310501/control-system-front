@@ -26,7 +26,6 @@ export class AddDepartmentComponent implements OnInit {
       .addDepartment(this.name, this.dept_code)
       .subscribe(
         (res) => {
-          console.log(res);
           this.message = 'Department Added Successfully';
           this.type = 'success';
           this.snackbar.show();
@@ -35,7 +34,6 @@ export class AddDepartmentComponent implements OnInit {
           }, 2000);
         },
         (err) => {
-          console.log(err);
           this.message = 'Department Added Failed';
           this.type = 'danger';
           this.snackbar.show();

@@ -38,7 +38,6 @@ export class EditUserComponent implements OnInit {
     const id = +this.route.snapshot.paramMap.get('id');
     this.editUserService.getUser(id).subscribe((res) => {
       this.isLoading = false;
-      console.log(res);
       this.name = res.data.name;
       this.email = res.data.email;
       this.is_admin = res.data.is_admin;
@@ -82,7 +81,7 @@ export class EditUserComponent implements OnInit {
         this.message = 'User Edited Successfully';
         this.type = 'success';
         this.snackbar.show();
-        console.log(res);
+
         // navigate to users page
         setTimeout(() => {
           this.router.navigate(['all-users']);
@@ -91,7 +90,7 @@ export class EditUserComponent implements OnInit {
       (err) => {
         this.message = err.error.message;
         this.type = 'failed';
-        console.log(err);
+
         this.snackbar.show();
       }
     );

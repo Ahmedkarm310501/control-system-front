@@ -28,7 +28,6 @@ export class AllUsersService {
   }
 
   assignUserToCourse(course_id: any, user_id: any) {
-    console.log(course_id, user_id);
     return this.http.post(`${this.enviroment.baseUrl}/assign-user-to-course`, {
       course_id,
       user_id,

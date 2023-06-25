@@ -39,7 +39,6 @@ export class ExtraGradesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.courseId);
     this.gradeService.getCourseData(this.courseId).subscribe((res) => {
       this.courseID = res.data.courseID;
       this.courseName = res.data.courseName;
@@ -50,7 +49,6 @@ export class ExtraGradesComponent implements OnInit {
     this.courseDashboardService.graphTwo(+this.courseId).subscribe(
       (res) => {
         this.graphTwo = res.data;
-        console.log(this.graphTwo);
         this.pie = [
           this.graphTwo.perecentage_passed,
           this.graphTwo.perecentage_failed,
@@ -68,13 +66,10 @@ export class ExtraGradesComponent implements OnInit {
         ];
         this.initialPie = this.pie.slice();
         this.initialBar = this.bar.slice();
-        console.log(this.pie);
-        console.log(this.bar);
+
         this.isLoading = false;
       },
-      (err) => {
-        console.log(err);
-      }
+      (err) => {}
     );
   }
   onInput() {
@@ -137,7 +132,5 @@ export class ExtraGradesComponent implements OnInit {
     this.toAll = false;
     this.pie = this.initialPie.slice();
     this.bar = this.initialBar.slice();
-    console.log(this.toAll);
-    console.log(this.extraGrades);
   }
 }

@@ -11,7 +11,6 @@ export class DissAllowGuard implements CanActivate {
   constructor(private router: Router, private authService: AuthService) {}
 
   canActivate(): boolean {
-    // console.log(this.router.getCurrentNavigation()?.trigger);
     if (
       this.router.getCurrentNavigation()?.extras?.state &&
       'setup' in this.router.getCurrentNavigation()?.extras?.state

@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { UserService } from './user.service';
 import { SnackbarComponent } from 'src/app/components/snackbar/snackbar.component';
@@ -33,7 +33,6 @@ export class UserProfileComponent implements OnInit {
   ngOnInit(): void {
     this.isLoading = true;
     this.userService.getUserProfile().subscribe((res) => {
-      console.log(res);
       this.userName = res.data.name;
       this.userEmail = res.data.email;
       this.userNationalId = res.data.national_id;
@@ -49,10 +48,10 @@ export class UserProfileComponent implements OnInit {
 
   // updatePassword() {
   //   if (this.updatePasswordForm.valid) {
-  //     console.log('Password updated!');
+  //
   //   }
   //   //log the form values
-  //   console.log(this.updatePasswordForm.value);
+  //
   // }
 
   message: string;
@@ -69,14 +68,11 @@ export class UserProfileComponent implements OnInit {
           this.message = 'Password Updated Successfully';
           this.type = 'success';
           this.snackbar.show();
-
-          console.log(res);
         },
         (err) => {
           this.message = err.error.message;
           this.type = 'failed';
           this.snackbar.show();
-          console.log(err);
         }
       );
   }
