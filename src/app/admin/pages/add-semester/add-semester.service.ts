@@ -17,10 +17,11 @@ interface Res {
 export class AddSemesterService {
   constructor(private http: HttpClient) {}
 
-  addSemester(term: number, year: number) {
+  addSemester(term: number, year: number, user_password) {
     return this.http.post<Res>(`${environment.baseUrl}/add-semester`, {
       term,
       year,
+      user_password,
     });
   }
 }

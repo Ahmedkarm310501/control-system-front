@@ -130,22 +130,32 @@ export class GradeService {
     );
   }
 
-  deleteAllStudentGrades(course_id: string, semester_id: string) {
+  deleteAllStudentGrades(
+    course_id: string,
+    semester_id: string,
+    user_password: string
+  ) {
     return this.http.post(
       `${this.baseUrl}/delete-course-grades/`,
       {
         course_id: course_id,
         semester_id: semester_id,
+        user_password: user_password,
       },
       { observe: 'response' }
     );
   }
-  deleteAllStudentsFromCourse(course_id: string, semester_id: string) {
+  deleteAllStudentsFromCourse(
+    course_id: string,
+    semester_id: string,
+    user_password: string
+  ) {
     return this.http.post(
       `${this.baseUrl}/delete-all-students-from-course/`,
       {
         course_id: course_id,
         semester_id: semester_id,
+        user_password: user_password,
       },
       { observe: 'response' }
     );
