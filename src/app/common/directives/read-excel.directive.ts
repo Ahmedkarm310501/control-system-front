@@ -18,7 +18,6 @@ export class ReadExcelDirective implements OnChanges {
   constructor() {}
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log('changes', changes);
     if (changes['file'] && changes['file'].currentValue) {
       this.readExcel();
     }

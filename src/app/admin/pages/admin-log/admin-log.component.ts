@@ -16,8 +16,6 @@ export class AdminLogComponent implements OnInit {
   ngOnInit(): void {
     this.dummyData.forEach((data) => {});
     this.adminLogService.getAdminLog().subscribe((res) => {
-      console.log(res);
-
       this.log = res['data'];
       this.log.forEach((log) => {
         this.collapseStates[log.id] = true;
@@ -57,8 +55,6 @@ export class AdminLogComponent implements OnInit {
   fileData: any;
   downloadFile(file: any, fileName: any) {
     this.adminLogService.downloadLog(file).subscribe((res) => {
-      console.log(res);
-
       const downloadLink = document.createElement('a');
       downloadLink.href = window.URL.createObjectURL(res.body);
 

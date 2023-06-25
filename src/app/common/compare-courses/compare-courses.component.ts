@@ -39,11 +39,9 @@ export class CompareCoursesComponent implements OnInit {
   ngOnInit(): void {
     this.courseDashboardService.getDepartments().subscribe((res: any) => {
       this.departments = res.data;
-      console.log(this.departments);
     });
     this.courseDashboardService.getCourses().subscribe((res: any) => {
       this.courses = res.data;
-      console.log(this.courses);
     });
   }
   semesters1: any = [];
@@ -55,11 +53,8 @@ export class CompareCoursesComponent implements OnInit {
     this.compareCoursesService.getCourseSemesters(this.course_id_one).subscribe(
       (res: any) => {
         this.semesters1 = res.data;
-        console.log(res.data);
       },
-      (err: any) => {
-        console.log(err);
-      }
+      (err: any) => {}
     );
   }
   onCourseSelect2(event: any) {
@@ -72,11 +67,8 @@ export class CompareCoursesComponent implements OnInit {
           return;
         }
         this.semesters2 = res.data;
-        console.log(res.data);
       },
-      (err: any) => {
-        console.log(err);
-      }
+      (err: any) => {}
     );
   }
   filteredData1: any = [];
@@ -87,11 +79,9 @@ export class CompareCoursesComponent implements OnInit {
       return;
     }
     const id = event.target.value;
-    console.log(id);
     this.filteredData1 = this.courses.filter(
       (item: any) => item.department.dept_code == id
     );
-    console.log(this.filteredData1);
   }
   onSelectDepartment2(event: any) {
     if (event.target.value == 'all') {
@@ -99,11 +89,9 @@ export class CompareCoursesComponent implements OnInit {
       return;
     }
     const id = event.target.value;
-    console.log(id);
     this.filteredData2 = this.courses.filter(
       (item: any) => item.department.dept_code == id
     );
-    console.log(this.filteredData2);
   }
 
   onSelectSemester1(event: any) {
@@ -156,17 +144,13 @@ export class CompareCoursesComponent implements OnInit {
       )
       .subscribe(
         (res: any) => {
-          console.log(res);
           this.coursecodes = res.data;
 
           this.first_graph_one = res.data.first_graph_one;
           this.first_graph_two = res.data.first_graph_two;
           this.second_graph_one = res.data.second_graph_one;
           this.second_graph_two = res.data.second_graph_two;
-          console.log(this.first_graph_one);
-          console.log(this.first_graph_two);
-          console.log(this.second_graph_one);
-          console.log(this.second_graph_two);
+
           // take certain values from the array
           this.barChartData1 = [
             this.second_graph_one.grade_F,
@@ -198,17 +182,12 @@ export class CompareCoursesComponent implements OnInit {
             this.first_graph_two.passed_students,
             this.first_graph_two.failed_students,
           ];
-          console.log(this.pieChartData1);
-          console.log(this.pieChartData2);
-          console.log(this.barChartData1);
-          console.log(this.barChartData2);
+
           this.isLoaded = true;
           this.show = true;
           this.isLoading = false;
         },
-        (err: any) => {
-          console.log(err);
-        }
+        (err: any) => {}
       );
   }
   getFlooredAverageGrade1() {
@@ -224,7 +203,14 @@ export class CompareCoursesComponent implements OnInit {
     return Math.floor(this.first_graph_two.average_grade);
   }
   setIsLoading() {
-    if(this.selectedCourse1 && this.selectedCourse2 && this.selectedSemester1 && this.selectedSemester2&& this.selectedDepartment1 && this.selectedDepartment2){
+    if (
+      this.selectedCourse1 &&
+      this.selectedCourse2 &&
+      this.selectedSemester1 &&
+      this.selectedSemester2 &&
+      this.selectedDepartment1 &&
+      this.selectedDepartment2
+    ) {
       this.isLoading = true;
     }
   }

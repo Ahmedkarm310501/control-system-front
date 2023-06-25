@@ -34,19 +34,16 @@ export class AllUsersComponent implements OnInit {
     //display all user
     this.allUsers.getAllUsers().subscribe(
       (res) => {
-        console.log(res);
         this.users = res.data;
         this.filteredData = this.users;
         this.isLoading = false;
       },
       (err) => {
-        console.log(err);
         this.isLoading = true;
       }
     );
     this.allCourses.getAllDepartments().subscribe((res) => {
       this.departments = res.data;
-      console.log(this.departments);
     });
   }
 
@@ -54,7 +51,6 @@ export class AllUsersComponent implements OnInit {
     const id = event.target.value;
     this.allCourses.getAllCoursesByDepartment(id).subscribe((res) => {
       this.dummyDataCourses = res.data;
-      console.log(this.dummyDataCourses);
     });
   }
   onEdit(id: string) {
@@ -64,11 +60,8 @@ export class AllUsersComponent implements OnInit {
     this.dummyDataCourses = [];
   }
   onSubmit(form: any) {
-    console.log('form Submitted');
-    console.log(form);
     this.allUsers.assignUserToCourse(form.course, this.selectedID).subscribe(
       (res) => {
-        console.log(res);
         this.type = 'success';
         this.message = 'User assigned to course successfully';
 
@@ -79,8 +72,6 @@ export class AllUsersComponent implements OnInit {
         this.type = 'error';
 
         this.snackbar.show();
-
-        console.log(err);
       }
     );
   }
@@ -105,7 +96,6 @@ export class AllUsersComponent implements OnInit {
   onDelete(id: number) {
     this.allUsers.onDelete(id).subscribe(
       (res) => {
-        console.log(res);
         this.users = this.users.filter((user: any) => user.id !== id);
         this.filteredData = this.users;
         this.message = 'User Deleted Successfully';
@@ -116,7 +106,6 @@ export class AllUsersComponent implements OnInit {
         this.message = err.error.message;
         this.type = 'error';
         this.snackbar.show();
-        console.log(err);
       }
     );
   }

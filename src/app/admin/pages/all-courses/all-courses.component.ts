@@ -20,22 +20,17 @@ export class AllCoursesComponent implements OnInit {
   ngOnInit(): void {
     this.allCourses.getAllCourses().subscribe(
       (res) => {
-        console.log(res);
         this.courses = res.data;
         this.filteredData = this.courses;
         this.isLoading = false;
       },
-      (err) => {
-        console.log(err);
-      }
+      (err) => {}
     );
     this.allCourses.getAllDepartments().subscribe(
       (res) => {
         this.departments = res.data;
       },
-      (err) => {
-        console.log(err);
-      }
+      (err) => {}
     );
   }
   isShown = false;
@@ -45,13 +40,11 @@ export class AllCoursesComponent implements OnInit {
   // getAllCourses() {
   //   this.allCourses.getAllCourses().subscribe(
   //     (res) => {
-  //       console.log(res);
   //       this.courses = res.data;
   //       this.filteredData = this.courses;
   //       this.isLoading = false;
   //     },
   //     (err) => {
-  //       console.log(err);
   //     }
   //   );
   // }
@@ -64,11 +57,8 @@ export class AllCoursesComponent implements OnInit {
   //       this.courses = res.data;
   //       this.filteredData = this.courses;
   //       this.isLoading = false;
-  //       console.log(res);
-  //       console.log(this.filteredData);
   //     },
   //     (err) => {
-  //       console.log(err);
   //     }
   //   );
   // }
@@ -78,11 +68,9 @@ export class AllCoursesComponent implements OnInit {
       return;
     }
     const id = event.target.value;
-    console.log(id);
     this.filteredData = this.courses.filter(
       (item: any) => item.department.dept_code == id
     );
-    console.log(this.filteredData);
   }
 
   search(search: string) {
@@ -117,21 +105,18 @@ export class AllCoursesComponent implements OnInit {
 
   onUpload(files: FileList) {
     const file = files[0];
-    console.log(file);
 
     this.isLoading = true;
     this.allCourses.ImportCourses(file).subscribe(
       (res) => {
         this.message = 'Courses Added Successfully';
         this.type = 'success';
-        console.log(res);
         this.snackbar.show();
         this.isLoading = false;
 
         this.ngOnInit();
       },
       (err) => {
-        console.log(err);
         this.message = err.error.message;
         this.type = 'failed';
         this.snackbar.show();

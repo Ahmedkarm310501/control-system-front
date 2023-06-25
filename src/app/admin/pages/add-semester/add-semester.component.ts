@@ -32,13 +32,12 @@ export class AddSemesterComponent implements OnInit {
         }, 2000);
       },
       (err) => {
-        // console.log(err);
         this.message = err.error.error;
         this.type = 'failed';
         this.snackbar.show();
       }
     );
-    console.log('Form Submitted!');
+
     // navigate to configure semester page
     // this.router.navigate(['/configure-semester']);
   }

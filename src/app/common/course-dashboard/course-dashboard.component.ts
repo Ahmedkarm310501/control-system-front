@@ -40,20 +40,15 @@ export class CourseDashboardComponent implements OnInit {
   ngOnInit(): void {
     this.courseDashboardService.getDepartments().subscribe((res) => {
       this.departments = res.data;
-      console.log(this.departments);
     });
     this.courseDashboardService.getCourses().subscribe((res) => {
       this.courses = res.data;
-      console.log(this.courses);
     });
     this.configureSemester.getCurrentSemester().subscribe(
       (res) => {
         this.semester = res.data;
-        console.log(this.semester);
-        console.log(this.semester.id);
       },
       (err) => {
-        console.log(err);
         // this.message = err.error.message;
         // this.type = 'failed';
       }
@@ -66,11 +61,9 @@ export class CourseDashboardComponent implements OnInit {
       return;
     }
     const id = event.target.value;
-    console.log(id);
     this.filteredData = this.courses.filter(
       (item: any) => item.department.dept_code == id
     );
-    console.log(this.filteredData);
   }
   graphOne: any;
   graphTwo: any;
@@ -83,22 +76,16 @@ export class CourseDashboardComponent implements OnInit {
       (res) => {
         this.graphOne = res.data;
 
-        console.log(this.courseId);
-        console.log(this.semester.id);
-        console.log(res);
         // this.show = true;
         this.isLoading = false;
       },
-      (err) => {
-        console.log(err);
-      }
+      (err) => {}
     );
     ////////////////////////////////////////
     this.courseDashboardService.graphTwo(course_id).subscribe(
       (res) => {
         // this.show = false;
         this.graphTwo = res.data;
-        console.log(this.graphTwo);
         this.pie = [
           this.graphTwo.perecentage_passed,
           this.graphTwo.perecentage_failed,
@@ -114,13 +101,10 @@ export class CourseDashboardComponent implements OnInit {
           this.graphTwo.grade_A,
           this.graphTwo.grade_A_plus,
         ];
-        console.log(this.pie);
-        console.log(this.bar);
+
         // this.show = true;
       },
-      (err) => {
-        console.log(err);
-      }
+      (err) => {}
     );
     //////////////////////////////////////
     this.courseDashboardService.graphThree(course_id).subscribe(
@@ -133,7 +117,6 @@ export class CourseDashboardComponent implements OnInit {
         this.need_four_grade = this.graphThree.need_four_grade;
         this.need_five_grade = this.graphThree.need_five_grade;
 
-        console.log(this.graphThree);
         this.line = [
           this.graphThree.number_of_students_40,
           this.graphThree.number_of_students_41,
@@ -146,13 +129,10 @@ export class CourseDashboardComponent implements OnInit {
           this.graphThree.number_of_students_48,
           this.graphThree.number_of_students_49,
         ];
-        console.log(this.line);
         this.show = true;
         this.isLoading = false;
       },
-      (err) => {
-        console.log(err);
-      }
+      (err) => {}
     );
   }
   getFlooredAverageGrade() {

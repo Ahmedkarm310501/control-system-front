@@ -41,10 +41,8 @@ export class CourseGradesComponent implements OnInit {
   message: string;
   type: string;
   ngOnInit(): void {
-    console.log(this.courseId);
     this.gradeService.getCourseData(this.courseId).subscribe(
       (res) => {
-        console.log(res);
         this.courseCode = res.data.courseID;
         this.courseName = res.data.courseName;
         this.deptName = res.data.deptName;
@@ -52,7 +50,6 @@ export class CourseGradesComponent implements OnInit {
         this.isLoading = false;
       },
       (err) => {
-        console.log(err);
         this.isLoading = true;
       }
     );
@@ -60,7 +57,6 @@ export class CourseGradesComponent implements OnInit {
     this.gradeService
       .getCourseGrades(this.courseId, this.termId)
       .subscribe((res) => {
-        console.log(res);
         this.isLoading = false;
 
         this.students = res.data.map(
@@ -73,7 +69,6 @@ export class CourseGradesComponent implements OnInit {
             };
           },
           (err) => {
-            console.log(err);
             this.isLoading = true;
           }
         );
@@ -100,7 +95,6 @@ export class CourseGradesComponent implements OnInit {
         examWork
       )
       .subscribe((res) => {
-        console.log(res);
         if (res.status === 200) {
           this.filteredStudents[index].editable =
             !this.filteredStudents[index].editable;
@@ -133,7 +127,6 @@ export class CourseGradesComponent implements OnInit {
   }
 
   searchStudent(searchTerm: string) {
-    console.log(this.students);
     this.filteredStudents = this.students.filter((student) => {
       return (
         student.student.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -147,7 +140,6 @@ export class CourseGradesComponent implements OnInit {
   }
 
   onFileChangeGrades(event: any) {
-    console.log(event);
     this.gradesFile = event.target.files[0];
   }
   onFileChangeNames(event: any) {
@@ -157,7 +149,7 @@ export class CourseGradesComponent implements OnInit {
   IsInvalidRecords = false;
   errorMsg2 = '';
   // onExcelUploadNames(data: any) {
-  //   console.log(data);
+
   //   const newStudents = data
   //     .filter((row: any) => row.id && row.name) // Only keep rows with non-empty ID and name
   //     .filter((row: any) => {
@@ -181,7 +173,7 @@ export class CourseGradesComponent implements OnInit {
   //   if (newStudents.length > 0) {
   //     this.students = this.students.concat(newStudents);
   //     this.filteredStudents = this.students;
-  //     console.log(this.filteredStudents);
+
   //   }
 
   //   const invalidRecords = data.filter((row: any) => !row.id || !row.name);
@@ -204,7 +196,6 @@ export class CourseGradesComponent implements OnInit {
     this.gradeService
       .addStudentGradesExcel(this.courseId, this.termId, file)
       .subscribe((res) => {
-        console.log(res);
         if (res.status === 201) {
           this.students = this.students.map(
             (student) => {
@@ -228,13 +219,11 @@ export class CourseGradesComponent implements OnInit {
               }
             },
             (err) => {
-              console.log(err);
               this.isLoading = true;
             }
           );
           this.filteredStudents = this.students;
           if (this.missingStudents.length > 0) {
-            console.log(this.missingStudents);
             this.modalIsOpen = true;
           }
           this.isLoading = false;
@@ -310,19 +299,15 @@ export class CourseGradesComponent implements OnInit {
   onSubmit(Form) {
     let studentId = Form.value.studentId;
     let studentName = Form.value.studentName;
-    console.log(studentId, studentName);
-    console.log(this.students);
 
     if (this.students.some((student) => +student.student_id === +studentId)) {
       // alert(`A student with ID ${studentId} already exists.`);
-      console.log(studentId);
       this.ISduplicated = true;
       return;
     }
     this.gradeService
       .addStudentToCourse(studentName, this.courseId, this.termId, studentId)
       .subscribe((res) => {
-        console.log(res);
         this.students.push({
           student_id: studentId,
           student: {
@@ -336,7 +321,6 @@ export class CourseGradesComponent implements OnInit {
           total: null,
           grade: null,
         });
-        console.log(this.students);
         this.filteredStudents = this.students;
 
         Form.reset();
@@ -367,9 +351,7 @@ export class CourseGradesComponent implements OnInit {
                 grade: null,
               };
             },
-            (err) => {
-              console.log(err);
-            }
+            (err) => {}
           );
           this.isLoading = false;
 
@@ -385,7 +367,6 @@ export class CourseGradesComponent implements OnInit {
           this.filteredStudents = this.students;
         },
         (err) => {
-          console.log(err);
           if (err.status === 400) {
             // alert('Invalid data in excel file');
             this.message = 'Invalid data in excel file';
@@ -403,13 +384,11 @@ export class CourseGradesComponent implements OnInit {
     this.isLoading = true;
 
     this.deleteStudent = true;
-    console.log(student_id);
-    console.log(this.filteredStudents);
+
     this.gradeService
       .deleteStudentFromCourse(this.courseId, this.termId, student_id)
       .subscribe(
         (res) => {
-          console.log(res);
           this.students = this.students.filter((student) => {
             return +student.student_id !== +student_id;
           });
@@ -417,7 +396,6 @@ export class CourseGradesComponent implements OnInit {
           this.isLoading = false;
         },
         (err) => {
-          console.log(err);
           // alert('Something went wrong');
           this.message = err.error.message;
           this.type = 'failed';
@@ -432,10 +410,8 @@ export class CourseGradesComponent implements OnInit {
         downloadLink.href = window.URL.createObjectURL(res.body);
         downloadLink.download = `${this.courseCode}-${this.termId}.xlsx`;
         downloadLink.click();
-        console.log(res);
       },
       (err) => {
-        console.log(err);
         // alert('Something went wrong');
         this.message = err.error.message;
         this.type = 'failed';
@@ -449,14 +425,11 @@ export class CourseGradesComponent implements OnInit {
       .deleteAllStudentsFromCourse(this.courseId, this.termId)
       .subscribe(
         (res) => {
-          console.log(res);
           this.students = [];
           this.filteredStudents = this.students;
           this.isLoading = false;
         },
-        (err) => {
-          console.log(err);
-        }
+        (err) => {}
       );
   }
 
