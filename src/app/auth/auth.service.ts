@@ -26,13 +26,15 @@ export class AuthService {
       .pipe(
         tap((res: any) => {
           this.isLoggedIn.next(true);
-          console.log(res);
-          let user = new User(res.data.token, res.data.user.name, res.data.user.is_admin);
+          let user = new User(
+            res.data.token,
+            res.data.user.name,
+            res.data.user.is_admin
+          );
           this.user.next(user);
           localStorage.setItem('user', JSON.stringify(user));
         }),
         catchError((err) => {
-          console.log(err);
           if (err.status === 401) {
             err = 'Invalid username or password.';
             alert('Invalid username or password.');

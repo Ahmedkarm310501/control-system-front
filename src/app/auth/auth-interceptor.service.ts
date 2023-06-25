@@ -13,7 +13,6 @@ export class AuthInterceptorService implements HttpInterceptor {
   constructor(private authService: AuthService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
-    console.log('AuthInterceptorService#intercept called');
     let token = this.authService.user.value?.token;
     if (token) {
       let clonedReq = req.clone({

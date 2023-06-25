@@ -31,7 +31,6 @@ export class CourseSettingsComponent implements OnInit {
   ngOnInit(): void {
     this.courseSettingsService.getAllDepartments().subscribe((res) => {
       this.departments = res.data;
-      console.log(this.departments);
     });
     this.courseSettingsService.getCourseData(this.course_id).subscribe(
       (data) => {
@@ -47,13 +46,11 @@ export class CourseSettingsComponent implements OnInit {
       (err) => {
         this.message = err.error.message;
         this.type = 'failed';
-        console.log(err);
         this.snackbar.show();
       }
     );
   }
   onSubmit(form: any) {
-    console.log(form);
     this.courseSettingsService
       .editCourseData(
         this.course_id,
@@ -70,13 +67,12 @@ export class CourseSettingsComponent implements OnInit {
         (res) => {
           this.message = 'Course Updated Successfully';
           this.type = 'success';
-          console.log(res);
+
           this.snackbar.show();
         },
         (err) => {
           this.message = err.error.message;
           this.type = 'failed';
-          console.log(err);
           this.snackbar.show();
         }
       );

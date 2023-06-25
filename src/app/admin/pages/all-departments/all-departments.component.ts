@@ -29,13 +29,11 @@ export class AllDepartmentsComponent implements OnInit {
   ngOnInit(): void {
     this.allCourses.getAllDepartments().subscribe(
       (res) => {
-        console.log(res);
         this.departments = res.data;
         this.filteredData = this.departments;
         this.isLoading = false;
       },
       (err) => {
-        console.log(err);
         this.isLoading = true;
       }
     );
@@ -76,10 +74,9 @@ export class AllDepartmentsComponent implements OnInit {
       .editDepartment(this.deptId, this.name, this.dept_code)
       .subscribe(
         (res) => {
-          console.log(res);
           this.message = 'Department Edit Successfully';
           this.type = 'success';
-          console.log(res);
+
           this.snackbar.show();
           this.ngOnInit();
           this.modalIsOpen = false;
@@ -87,7 +84,7 @@ export class AllDepartmentsComponent implements OnInit {
         (err) => {
           this.message = 'Department Edit Failed';
           this.type = 'failed';
-          console.log(err);
+
           this.snackbar.show();
         }
       );
@@ -98,13 +95,12 @@ export class AllDepartmentsComponent implements OnInit {
       (res) => {
         this.message = 'Department Deleted Successfully';
         this.type = 'success';
-        console.log(res);
+
         this.snackbar.show();
-        console.log(res);
+
         this.ngOnInit();
       },
       (err) => {
-        console.log(err);
         this.message = 'Department Deleted Failed';
         this.type = 'failed';
         this.snackbar.show();
@@ -116,8 +112,5 @@ export class AllDepartmentsComponent implements OnInit {
     this.deptId = id;
     this.name = name;
     this.dept_code = dept_code;
-    console.log(this.deptId);
-    console.log(this.name);
-    console.log(this.dept_code);
   }
 }

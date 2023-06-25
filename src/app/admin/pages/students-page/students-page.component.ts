@@ -79,9 +79,7 @@ export class StudentsPageComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
-  onSubmit(form: any) {
-    console.log('Form Submitted');
-  }
+  onSubmit(form: any) {}
   onEdit(id: string) {
     this.modalIsOpen = !this.modalIsOpen;
     this.selectedID = id;

@@ -31,7 +31,6 @@ export class AddUserComponent implements OnInit {
         (res) => {
           this.message = 'User Added Successfully';
           this.type = 'success';
-          console.log(res);
           this.snackbar.show();
           setTimeout(() => {
             this.router.navigate(['/all-users']);
@@ -40,11 +39,10 @@ export class AddUserComponent implements OnInit {
         (err) => {
           this.message = err.error.message;
           this.type = 'failed';
-          console.log(err);
+
           this.snackbar.show();
         }
       );
-    console.log(form.is_admin);
   }
   // function to reset all form fields after submit
   resetForm(form: any) {

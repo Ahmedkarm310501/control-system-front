@@ -31,8 +31,6 @@ export class AdminDataComponent implements OnInit {
   }
 
   submitForm() {
-    console.log(this.form.value);
-
     const navigationExtras: NavigationExtras = {
       replaceUrl: true,
       state: { setup: true },

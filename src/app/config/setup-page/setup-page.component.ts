@@ -12,7 +12,6 @@ export class SetupPageComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit(form: any) {
-    console.log(form);
     // navigate to admin-data do not allow back button
     const navigationExtras: NavigationExtras = {
       replaceUrl: true,

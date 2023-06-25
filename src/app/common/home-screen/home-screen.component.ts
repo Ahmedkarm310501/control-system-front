@@ -18,19 +18,17 @@ export class HomeScreenComponent implements OnInit {
   type: string;
   ngOnInit(): void {
     this.noCorseFound = false;
-    //console.log(this.Courses.length);
+
     this.home.getHomeData().subscribe(
       (res) => {
         this.filterCourses = res.data;
         this.Courses = res.data;
         if (this.Courses.length == 0) {
           this.noCorseFound = true;
-          console.log('No courses found');
         }
         this.isLoading = false;
       },
       (err) => {
-        console.log(err);
         this.isLoading = true;
         this.message = err.error.message;
         this.type = 'failed';

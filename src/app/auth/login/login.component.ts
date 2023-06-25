@@ -17,13 +17,10 @@ export class LoginComponent implements OnInit {
   onSubmit(form: any) {
     this.authService.login(form.email, form.password).subscribe(
       (res) => {
-        console.log(res);
         this.isAdmin = res.data.is_admin;
         this.router.navigate(['/courses']);
       },
-      (err) => {
-        console.log(err);
-      }
+      (err) => {}
     );
   }
 

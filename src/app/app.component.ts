@@ -22,15 +22,12 @@ export class AppComponent implements OnInit, OnDestroy {
   isAuth: boolean;
 
   ngOnInit() {
-    // console.log(this.router.config);
-
     this.authService.autoLogin();
 
     this.authService.isLoggedIn.subscribe((value) => {
       this.isAuth = value;
     });
 
-    console.log(this.isAuth);
     this.sidebarService.sideBarOpen.subscribe((res) => {
       this.sideBarOpen = res;
     });
