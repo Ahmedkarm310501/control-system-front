@@ -25,9 +25,12 @@ export class ConfigureSemesterComponent implements OnInit {
 
   message: string;
   type: string;
+  isLoading: boolean = true;
   ngOnInit(): void {
     this.configureSemester.Semester().subscribe(
       (res) => {
+        this.isLoading = false;
+
         this.allData = res.data;
         console.log(this.allData);
 

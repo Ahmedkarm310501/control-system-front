@@ -1,64 +1,71 @@
 <app-snackbar #snackbar message="{{ message }}" type="{{ type }}"></app-snackbar>
-<div style="width: 100%" class="header d-flex">
-  <header class="col-10">
-    <div class="d-flex">
-      <div class="p-2">
-        <h5>Semester Year</h5>
-        <p>{{ semester.year }}</p>
+<div class="spinner">
+  <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+</div>
+<div *ngIf="!isLoading">
+  <div style="width: 100%" class="header d-flex">
+    <header class="col-10">
+      <div class="d-flex">
+        <div class="p-2">
+          <h5>Semester Year</h5>
+          <p>{{ semester.year }}</p>
+        </div>
+        <div class="p-2">
+          <h5>Semester Number</h5>
+          <p>{{ semester.term }}</p>
+        </div>
       </div>
-      <div class="p-2">
-        <h5>Semester Number</h5>
-        <p>{{ semester.term }}</p>
+    </header>
+    <div class="col-2 save-but">
+      <button class="btn" (click)="saveSemester()">Save</button>
+    </div>
+  </div>
+  <div class="container">
+    <div class="filters">
+      <select class="dep" name="departments" id="dep" (change)="onSelectDepartment($event)">
+        <option value="all">All Departments</option>
+        <option *ngFor="let department of departments" [value]="department.id">
+          {{ department.dept_code }}
+        </option>
+      </select>
+      <div class="select-all">
+        <input (click)="selectAll()" type="checkbox" name="select" id="select" [(ngModel)]="checkbox" />
+        <label for="select">Select All</label>
+      </div>
+      <input class="search" type="text" placeholder="Search..." (change)="search($event)" />
+    </div>
+
+    <div style="margin: auto" class="row conts">
+      <div class="col-md left-cont">
+        <div class="left-courses" *ngFor="let course of filteredData">
+          <input type="checkbox" [(ngModel)]="course.checked" />
+
+          <p style="margin-top: 18px; margin-left: 5px; font-size: 20px">
+            {{ course.name }}
+          </p>
+        </div>
+      </div>
+      <div class="col-sm mid-cont">
+        <div class="but-container">
+          <button class="btn btn-primary btn-1" (click)="move()">>></button>
+          <button class="btn btn-primary btn-2" data-bs-toggle="modal" data-bs-target="#exampleModall">
+            << </button>
+        </div>
+      </div>
+      <div class="col-md right-cont">
+        <div *ngFor="let course of selectedCourses">
+          <input type="checkbox" [(ngModel)]="course.checked" />
+          <p style="margin-top: 18px; margin-left: 5px; font-size: 20px">
+            {{ course.name }}
+          </p>
+        </div>
       </div>
     </div>
-  </header>
-  <div class="col-2 save-but">
-    <button class="btn" (click)="saveSemester()">Save</button>
   </div>
 </div>
 
-<div class="container">
-  <div class="filters">
-    <select class="dep" name="departments" id="dep" (change)="onSelectDepartment($event)">
-      <option value="all">All Departments</option>
-      <option *ngFor="let department of departments" [value]="department.id">
-        {{ department.dept_code }}
-      </option>
-    </select>
-    <div class="select-all">
-      <input (click)="selectAll()" type="checkbox" name="select" id="select" [(ngModel)]="checkbox" />
-      <label for="select">Select All</label>
-    </div>
-    <input class="search" type="text" placeholder="Search..." (change)="search($event)" />
-  </div>
 
-  <div style="margin: auto" class="row conts">
-    <div class="col-md left-cont">
-      <div class="left-courses" *ngFor="let course of filteredData">
-        <input type="checkbox" [(ngModel)]="course.checked" />
 
-        <p style="margin-top: 18px; margin-left: 5px; font-size: 20px">
-          {{ course.name }}
-        </p>
-      </div>
-    </div>
-    <div class="col-sm mid-cont">
-      <div class="but-container">
-        <button class="btn btn-primary btn-1" (click)="move()">>></button>
-        <button class="btn btn-primary btn-2" data-bs-toggle="modal" data-bs-target="#exampleModall">
-          << </button>
-      </div>
-    </div>
-    <div class="col-md right-cont">
-      <div *ngFor="let course of selectedCourses">
-        <input type="checkbox" [(ngModel)]="course.checked" />
-        <p style="margin-top: 18px; margin-left: 5px; font-size: 20px">
-          {{ course.name }}
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModall" tabindex="-1" aria-labelledby="exampleModalLabell" aria-hidden="true">

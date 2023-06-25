@@ -94,3 +94,8 @@ style any td with a button in it
   background-color: var(--main-color) !important;
   margin-left: 30px;
 }
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 56%;
+}

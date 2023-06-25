@@ -13,9 +13,11 @@ export class AdminLogComponent implements OnInit {
   dummyData = [];
   log: any[] = [];
   date = new Date();
+  isLoading: boolean = true;
   ngOnInit(): void {
     this.dummyData.forEach((data) => {});
     this.adminLogService.getAdminLog().subscribe((res) => {
+      this.isLoading = false;
       console.log(res);
 
       this.log = res['data'];

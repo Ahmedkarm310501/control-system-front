@@ -127,7 +127,11 @@
 .modal select {
   background-color: var(--background-color);
 }
-
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 56%;
+}
 @media screen and (max-width: 768px) {
   .left-cont {
     height: 30vh;
