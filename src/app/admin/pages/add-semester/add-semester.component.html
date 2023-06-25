@@ -68,20 +68,19 @@
                         new one?
                       </h4>
                       <hr />
+                      <label>Enter Your Password :&nbsp;</label>
+                      <br />
+                      <label for="password">
+                        Enter Your Password
+                      </label>
                       <input type="password" ngModel name="user_password" #password="ngModel" class="form-control"
                         placeholder="Enter your password" required [(ngModel)]="user_password">
-                      <div class="invalid-feedback">
-                        Please enter your password to continue.
-                      </div>
-                      <div *ngIf="password.invalid && password.touched" class="error">
-                        Please enter a valid password.
-                      </div>
-                      <div class="d-flex align-items-center justify-content-end">
+                      <div class="d-flex align-items-center justify-content-end mt-1">
                         <button class="btn btn-primary me-2" value="yes" data-bs-dismiss="modal" type="submit">
-                          Yes
+                          Confirm
                         </button>
                         <button class="btn btn-secondary" value="no" data-bs-dismiss="modal">
-                          No
+                          Cancel
                         </button>
                       </div>
                     </div>
