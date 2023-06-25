@@ -51,6 +51,12 @@ export class AdminLogComponent implements OnInit {
 
   toggleCollapse(id: number) {
     this.collapseStates[id] = !this.collapseStates[id];
+    // make all other collapse states false
+    Object.keys(this.collapseStates).forEach((key) => {
+      if (Number(key) !== id) {
+        this.collapseStates[Number(key)] = true;
+      }
+    });
   }
 
   isCollapsed(id: number) {
