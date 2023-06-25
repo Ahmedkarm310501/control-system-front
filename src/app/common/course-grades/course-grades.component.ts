@@ -37,6 +37,7 @@ export class CourseGradesComponent implements OnInit {
   deleteStudent = false;
   isLoading: boolean = true;
   deletedStudentId: string;
+  user_password: string;
 
   message: string;
   type: string;
@@ -239,22 +240,35 @@ export class CourseGradesComponent implements OnInit {
   deleteAllGrades() {
     this.isLoading = true;
     this.gradeService
-      .deleteAllStudentGrades(this.courseId, this.termId)
-      .subscribe((res) => {
-        if (res.status === 200) {
-          this.students = this.students.map((student) => {
-            return {
-              ...student,
-              term_work: null,
-              exam_work: null,
-              total_grade: null,
-              grade: null,
-            };
-          });
-          this.filteredStudents = this.students;
+      .deleteAllStudentGrades(this.courseId, this.termId, this.user_password)
+      .subscribe(
+        (res) => {
+          if (res.status === 200) {
+            this.students = this.students.map((student) => {
+              return {
+                ...student,
+                term_work: null,
+                exam_work: null,
+                total_grade: null,
+                grade: null,
+              };
+            });
+            this.message = 'All grades deleted successfully';
+            this.type = 'success';
+            this.isLoading = false;
+            this.snackbar.show();
+            this.filteredStudents = this.students;
+          }
+          this.isLoading = false;
+        },
+        (err) => {
+          console.log(err);
+          this.message = err.error.error;
+          this.type = 'failed';
+          this.isLoading = false;
+          this.snackbar.show();
         }
-        this.isLoading = false;
-      });
+      );
   }
 
   toggleStudentsWithNoGrades() {
@@ -421,15 +435,29 @@ export class CourseGradesComponent implements OnInit {
   }
   deleteAllStudents() {
     this.isLoading = true;
+    console.log(this.user_password);
     this.gradeService
-      .deleteAllStudentsFromCourse(this.courseId, this.termId)
+      .deleteAllStudentsFromCourse(
+        this.courseId,
+        this.termId,
+        this.user_password
+      )
       .subscribe(
         (res) => {
           this.students = [];
           this.filteredStudents = this.students;
+          this.message = 'All students deleted successfully';
+          this.type = 'success';
           this.isLoading = false;
+          this.snackbar.show();
         },
-        (err) => {}
+        (err) => {
+          this.message = err.error.error;
+          this.type = 'failed';
+          this.snackbar.show();
+          console.log(err);
+          this.isLoading = false;
+        }
       );
   }
 

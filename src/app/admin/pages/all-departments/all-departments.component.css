@@ -20,3 +20,11 @@
   color: white;
   border: none;
 }
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 56%;
+}
+.table-responsive {
+  overflow-x: hidden !important;
+}

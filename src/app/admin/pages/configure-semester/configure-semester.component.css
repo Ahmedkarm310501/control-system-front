@@ -18,6 +18,7 @@
   padding: 0;
   margin: 0;
   overflow: auto;
+  background-color: white;
 }
 .left-cont::-webkit-scrollbar-thumb {
   background-color: grey;
@@ -48,10 +49,6 @@
 .mid-cont {
   max-width: 15%;
 }
-.right-cont div {
-  display: flex;
-  flex-direction: row;
-}
 
 .right-cont {
   border: 1px solid black;
@@ -60,6 +57,7 @@
   padding: 0;
   margin: 0;
   overflow: auto;
+  background-color: white;
 }
 .right-cont::-webkit-scrollbar-thumb {
   background-color: grey;
@@ -83,7 +81,20 @@
 .but-container button {
   background-color: var(--main-color);
   border: none;
-  width: 30%;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  font-size: 20px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+.but-container button:hover {
+  background-color: #7c848b;
+  cursor: pointer;
 }
 .btn-1 {
   margin-right: -38px;
@@ -110,6 +121,7 @@
 .select-all input[type="checkbox"] {
   width: 55px;
   height: 20px;
+  border-radius: 3px;
 }
 
 .search {
@@ -126,6 +138,15 @@
 
 .modal select {
   background-color: var(--background-color);
+}
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 56%;
+}
+.btn-primary {
+  background-color: var(--main-color);
+  border: none;
 }
 
 @media screen and (max-width: 768px) {

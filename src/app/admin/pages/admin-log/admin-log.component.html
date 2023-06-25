@@ -16,7 +16,10 @@
     </div>
   </div>
 </header>
-<table class="table table-hover">
+<div class="spinner">
+  <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+</div>
+<table class="table table-hover" *ngIf="!isLoading">
   <thead>
     <tr>
       <th scope="col">#</th>

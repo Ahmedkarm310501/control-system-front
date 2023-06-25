@@ -1,3 +1,6 @@
+<app-snackbar #snackbar message="{{ message }}" type="{{ type }}"></app-snackbar>
+
+
 <div class="container-fluid row w-100">
   <header class="col-10">
     <div class="d-flex">
@@ -256,6 +259,11 @@
         <div class="container-fluid">
           <div class="mb-3" class="col-md-12">
             <h4>Are you sure you want to delete all grades?</h4>
+            <input type="password" class="form-control" id="password" name="user_password" ngModel required
+              #password="ngModel" placeholder="Enter your password" [(ngModel)]="user_password" />
+            <div *ngIf="password.invalid && password.touched" class="error">
+              Please enter a valid password.
+            </div>
             <button (click)="deleteAllGrades()" class="btn btn-primary me-2" value="yes" data-bs-dismiss="modal">
               Yes
             </button>
@@ -281,6 +289,12 @@
         <div class="container-fluid">
           <div class="mb-3" class="col-md-12">
             <h4>Are you sure you want to delete all students?</h4>
+            <input type="password" class="form-control" id="password1" name="user_password" required #password="ngModel"
+              placeholder="Enter your password" [(ngModel)]="user_password" />
+            <div *ngIf="password.invalid && password.touched" class="error">
+              Please enter a valid password.
+            </div>
+            <br />
             <button [ngClass]="{ 'loading': isLoading }" (click)="deleteAllStudents()" class="btn btn-primary me-2"
               value="yes" data-bs-dismiss="modal">
               Yes
