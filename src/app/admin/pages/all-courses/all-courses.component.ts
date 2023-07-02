@@ -120,7 +120,7 @@ export class AllCoursesComponent implements OnInit {
         this.message = err.error.message;
         this.type = 'failed';
         this.snackbar.show();
-        this.isLoading = true;
+        this.isLoading = false;
       }
     );
   }

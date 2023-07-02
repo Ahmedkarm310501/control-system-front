@@ -218,9 +218,6 @@ export class CourseGradesComponent implements OnInit {
                 this.missingStudents.push(student.student_id);
                 return student;
               }
-            },
-            (err) => {
-              this.isLoading = true;
             }
           );
           this.filteredStudents = this.students;
@@ -233,7 +230,14 @@ export class CourseGradesComponent implements OnInit {
           this.errorMsg = 'Invalid data in excel file';
           this.IsInvalid = true;
         }
-      });
+      } ,
+        (err) => {
+          this.message = err.error.message;
+          this.type = 'failed';
+          this.snackbar.show();
+          this.isLoading = false;
+            }
+      );
     this.renderer.setProperty(this.fileRefgrade.nativeElement, 'value', null);
   }
 
@@ -382,13 +386,15 @@ export class CourseGradesComponent implements OnInit {
         },
         (err) => {
           if (err.status === 400) {
-            // alert('Invalid data in excel file');
             this.message = 'Invalid data in excel file';
             this.type = 'failed';
+            this.snackbar.show();
+            this.isLoading = false;
           } else {
-            // alert('Something went wrong');
             this.message = err.error.message;
             this.type = 'failed';
+            this.snackbar.show();
+            this.isLoading = false;
           }
         }
       );
@@ -426,7 +432,6 @@ export class CourseGradesComponent implements OnInit {
         downloadLink.click();
       },
       (err) => {
-        // alert('Something went wrong');
         this.message = err.error.message;
         this.type = 'failed';
         this.snackbar.show();

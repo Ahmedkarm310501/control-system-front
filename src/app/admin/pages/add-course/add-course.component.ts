@@ -44,6 +44,7 @@ export class AddCourseComponent implements OnInit {
           this.message = err.error.message;
           this.type = 'failed';
           this.snackbar.show();
+          
         }
       );
   }
