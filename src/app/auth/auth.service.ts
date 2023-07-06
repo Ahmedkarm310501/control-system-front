@@ -13,6 +13,7 @@ export class AuthService {
   baseUrl = environment.baseUrl;
   isLoggedIn = new BehaviorSubject<boolean>(false);
   user = new BehaviorSubject<User>(null);
+  
 
   constructor(private http: HttpClient) {}
 
@@ -35,17 +36,17 @@ export class AuthService {
           localStorage.setItem('user', JSON.stringify(user));
         }),
         catchError((err) => {
-          if (err.status === 401) {
-            err = 'Invalid username or password.';
-            alert('Invalid username or password.');
-          } else if (err.status === 403) {
-            alert('You are not activated.');
-          } else {
-            err = 'An error occurred while logging in. Please try again later.';
-            alert(
-              'An error occurred while logging in. Please try again later.'
-            );
-          }
+          // if (err.status === 401) {
+          //   // err = 'Invalid username or password.';
+          //   // alert('Invalid username or password.');
+          // } else if (err.status === 403) {
+          //   // alert('You are not activated.');
+          // } else {
+          //   // err = 'An error occurred while logging in. Please try again later.';
+          //   // alert(
+          //   //   'An error occurred while logging in. Please try again later.'
+          //   // );
+          // }
           return throwError(err);
         })
       );
