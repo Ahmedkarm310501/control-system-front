@@ -38,6 +38,8 @@ export class AuthService {
           if (err.status === 401) {
             err = 'Invalid username or password.';
             alert('Invalid username or password.');
+          } else if (err.status === 403) {
+            alert('You are not activated.');
           } else {
             err = 'An error occurred while logging in. Please try again later.';
             alert(
@@ -71,5 +73,9 @@ export class AuthService {
 
   isUserLoggedIn() {
     return this.isLoggedIn.value;
+  }
+
+  isAdmin() {
+    return this.user.value.isAdmin;
   }
 }
