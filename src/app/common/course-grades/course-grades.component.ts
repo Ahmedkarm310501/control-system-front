@@ -232,10 +232,18 @@ export class CourseGradesComponent implements OnInit {
         }
       } ,
         (err) => {
-          this.message = err.error.message;
-          this.type = 'failed';
-          this.snackbar.show();
-          this.isLoading = false;
+          if (err.status === 500) {
+            this.message = 'Invalid data in excel file';
+            this.type = 'failed';
+            this.snackbar.show();
+            this.isLoading = false;
+          }
+          else {
+            this.message = err.error.message;
+            this.type = 'failed';
+            this.snackbar.show();
+            this.isLoading = false;
+          }
             }
       );
     this.renderer.setProperty(this.fileRefgrade.nativeElement, 'value', null);
@@ -266,6 +274,7 @@ export class CourseGradesComponent implements OnInit {
           this.isLoading = false;
         },
         (err) => {
+          
           console.log(err);
           this.message = err.error.error;
           this.type = 'failed';
@@ -390,7 +399,13 @@ export class CourseGradesComponent implements OnInit {
             this.type = 'failed';
             this.snackbar.show();
             this.isLoading = false;
-          } else {
+          } else if (err.status === 500) {
+            this.message = 'Invalid data in excel file';
+            this.type = 'failed';
+            this.snackbar.show();
+            this.isLoading = false;
+          }
+          else {
             this.message = err.error.message;
             this.type = 'failed';
             this.snackbar.show();
@@ -455,6 +470,7 @@ export class CourseGradesComponent implements OnInit {
           this.type = 'success';
           this.isLoading = false;
           this.snackbar.show();
+          this.user_password = null
         },
         (err) => {
           this.message = err.error.error;
