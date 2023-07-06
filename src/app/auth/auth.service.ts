@@ -72,4 +72,8 @@ export class AuthService {
   isUserLoggedIn() {
     return this.isLoggedIn.value;
   }
+
+  isAdmin() {
+    return this.user.value.isAdmin;
+  }
 }

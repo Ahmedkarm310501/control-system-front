@@ -27,7 +27,7 @@ import { ExtraGradesComponent } from './common/extra-grades/extra-grades.compone
 import { CompareCoursesComponent } from './common/compare-courses/compare-courses.component';
 import { AddDepartmentComponent } from './admin/pages/add-department/add-department.component';
 import { AllDepartmentsComponent } from './admin/pages/all-departments/all-departments.component';
-// import { UserDataComponent } from './config/user-data/user-data.component';
+import { AdminGuard } from './auth/admin.guard';
 
 const routes: Routes = [
   // configration routes
@@ -92,7 +92,7 @@ const routes: Routes = [
   {
     path: 'compare-courses',
     component: CompareCoursesComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, AdminGuard],
     data: { breadcrumb: 'Compare Courses' },
   },
   {
@@ -105,7 +105,7 @@ const routes: Routes = [
   {
     path: 'add-user',
     component: AddUserComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, AdminGuard],
     data: { breadcrumb: 'Add User' },
   },
   {
@@ -117,44 +117,44 @@ const routes: Routes = [
   {
     path: 'add-semester',
     component: AddSemesterComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, AdminGuard],
     data: { breadcrumb: 'Add Semester' },
   },
   {
     path: 'configure-semester',
     component: ConfigureSemesterComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, AdminGuard],
     data: { breadcrumb: 'Configure Semester' },
   },
   {
     path: 'add-department',
     component: AddDepartmentComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, AdminGuard],
     data: { breadcrumb: 'Add Department' },
   },
   {
     path: 'all-departments',
     component: AllDepartmentsComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, AdminGuard],
     data: { breadcrumb: 'All Departments' },
   },
   {
     path: 'add-course',
     component: AddCourseComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, AdminGuard],
     data: { breadcrumb: 'Add Course' },
   },
   {
     path: 'all-users',
     // component: AllUsersComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, AdminGuard],
     data: { breadcrumb: 'All Users' },
     children: [
       { path: '', component: AllUsersComponent },
       {
         path: 'edit-user/:id',
         component: EditUserComponent,
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard, AdminGuard],
         data: { breadcrumb: 'Edit User' },
       },
     ],
@@ -162,20 +162,20 @@ const routes: Routes = [
   {
     path: 'all-courses',
     component: AllCoursesComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, AdminGuard],
     data: { breadcrumb: 'All Courses' },
   },
 
   {
     path: 'students-page',
     component: StudentsPageComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, AdminGuard],
     data: { breadcrumb: 'Students Page' },
   },
   {
     path: 'settings',
     component: SettingsPageComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, AdminGuard],
     data: { breadcrumb: 'Settings' },
   },
 
