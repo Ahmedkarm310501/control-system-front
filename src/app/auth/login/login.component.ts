@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { SnackbarComponent } from 'src/app/components/snackbar/snackbar.component';
 
 @Component({
   selector: 'app-login',
@@ -8,8 +9,13 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  constructor(private authService: AuthService, private router: Router) {}
+  @ViewChild(SnackbarComponent) snackbar: SnackbarComponent;
+  constructor(private authService: AuthService, private router: Router,
+  ) { }
   error = '';
+  message: string = ''
+  type: string = ''
+
 
   ngOnInit(): void {}
   isAdmin: boolean;
@@ -20,7 +26,25 @@ export class LoginComponent implements OnInit {
         this.isAdmin = res.data.is_admin;
         this.router.navigate(['/courses']);
       },
-      (err) => {}
+      (err) => {
+        if (err.status === 403) {
+          this.message = 'User is not activated.'
+          this.type = 'failed'
+          this.snackbar.show();
+        }
+        else if (err.status === 401) {
+          this.message = 'Invalid username or password.'
+          this.type = 'failed'
+          this.snackbar.show();
+        }
+        else {
+          this.message = 'An error occurred while logging in. Please try again later.'
+          this.type = 'failed'
+          this.snackbar.show();
+        }
+
+
+      }
     );
   }
 
