@@ -51,7 +51,8 @@
               style="display: none"
               #fileInput2
               (change)="
-                onUploadTermGradesExcel(fileInput2.files); fileInput2.value = null
+                onUploadTermGradesExcel(fileInput2.files);
+                fileInput2.value = null
               "
             />Upload Term grades
           </a>
@@ -62,7 +63,8 @@
               style="display: none"
               #fileInput3
               (change)="
-                onUploadExamGradesExcel(fileInput3.files); fileInput3.value = null
+                onUploadExamGradesExcel(fileInput3.files);
+                fileInput3.value = null
               "
             />Upload Exam grades
           </a>
@@ -600,7 +602,7 @@
             </div>
             <div class="mt-2">
               <button
-                (click)="deleteAllGrades()"
+                (click)="deleteAllGrades(); password.reset()"
                 class="btn btn-primary me-2"
                 value="yes"
                 data-bs-dismiss="modal"
@@ -611,6 +613,7 @@
                 class="btn btn-secondary"
                 value="no"
                 data-bs-dismiss="modal"
+                (click)="password.reset()"
               >
                 Cancel
               </button>
@@ -665,7 +668,7 @@
             <div class="mt-1">
               <button
                 [ngClass]="{ loading: isLoading }"
-                (click)="deleteAllStudents()"
+                (click)="deleteAllStudents(); password.reset()"
                 class="btn btn-primary me-2"
                 value="yes"
                 data-bs-dismiss="modal"
@@ -676,6 +679,7 @@
                 class="btn btn-secondary"
                 value="no"
                 data-bs-dismiss="modal"
+                (click)="password.reset()"
               >
                 Cancel
               </button>

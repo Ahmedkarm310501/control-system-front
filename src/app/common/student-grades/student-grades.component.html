@@ -10,9 +10,6 @@
     <div class="clearfix"></div>
   </div>
   <div class="x_content">
-    <div class="position-absolute top-100 left-45">
-      <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
-    </div>
     <div class="row">
       <div class="col-sm-12">
         <div class="card-box table-responsive">
@@ -42,8 +39,11 @@
                 </div>
               </div>
             </div>
-            <div class="row" [class.hide-table]="isLoading">
-              <div class="col-sm-12">
+            <div class="row">
+              <div class="position-absolute top-100 left-45">
+                <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+              </div>
+              <div class="col-sm-12" *ngIf="!isLoading">
                 <table
                   id="datatable"
                   class="table table-striped table-bordered dataTable no-footer"
@@ -82,6 +82,28 @@
                         aria-controls="datatable"
                         rowspan="1"
                         colspan="1"
+                        aria-label="Age: activate to sort column ascending"
+                        style="width: 69px"
+                      >
+                        Term
+                      </th>
+                      <th
+                        class="sorting"
+                        tabindex="0"
+                        aria-controls="datatable"
+                        rowspan="1"
+                        colspan="1"
+                        aria-label="Age: activate to sort column ascending"
+                        style="width: 69px"
+                      >
+                        Year
+                      </th>
+                      <th
+                        class="sorting"
+                        tabindex="0"
+                        aria-controls="datatable"
+                        rowspan="1"
+                        colspan="1"
                         aria-label="Office: activate to sort column ascending"
                         style="width: 70px"
                       >
@@ -105,21 +127,11 @@
                         rowspan="1"
                         colspan="1"
                         aria-label="Age: activate to sort column ascending"
-                        style="width: 69px"
+                        style="width: 70px"
                       >
-                        Term
+                        Total
                       </th>
-                      <th
-                        class="sorting"
-                        tabindex="0"
-                        aria-controls="datatable"
-                        rowspan="1"
-                        colspan="1"
-                        aria-label="Age: activate to sort column ascending"
-                        style="width: 69px"
-                      >
-                        Year
-                      </th>
+
                       <th
                         class="sorting"
                         tabindex="0"
@@ -141,10 +153,11 @@
                     >
                       <td>{{ this.student_name }}</td>
                       <td>{{ data.course_name }}</td>
-                      <td>{{ data.term_work }}</td>
-                      <td>{{ data.exam_work }}</td>
                       <td>{{ data.semester_term }}</td>
                       <td>{{ data.semester_year }}</td>
+                      <td>{{ data.term_work }}</td>
+                      <td>{{ data.exam_work }}</td>
+                      <td>{{ data.total_work }}</td>
                       <td>{{ data.grade }}</td>
                     </tr>
                   </tbody>

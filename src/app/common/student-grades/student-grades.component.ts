@@ -16,9 +16,10 @@ export class StudentGradesComponent implements OnInit {
       term_work: string;
       semester_term: string;
       semester_year: string;
+      total_work: string;
     }
   ];
-  isLoading = true;
+  isLoading = false;
   message: any;
   type: any;
 
@@ -31,14 +32,13 @@ export class StudentGradesComponent implements OnInit {
     // add condition to check if student_id is empty
     if (student_id == '') {
       return;
-    }
-    else {
+    } else {
+      this.isLoading = true;
       this.stu.getStudentGrades(student_id).subscribe((res: any) => {
-        console.log(res);
         this.filteredData = res.data.courses;
-        console.log(this.filteredData);
         this.student_name = res.data.student_name;
       });
+      this.isLoading = false;
     }
   }
 }
