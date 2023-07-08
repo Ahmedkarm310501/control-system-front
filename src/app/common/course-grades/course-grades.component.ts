@@ -8,6 +8,7 @@ import {
 import { GradeService } from './grade.service';
 import { ActivatedRoute } from '@angular/router';
 import { SnackbarComponent } from 'src/app/components/snackbar/snackbar.component';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-course-grades',
@@ -126,19 +127,49 @@ export class CourseGradesComponent implements OnInit {
       this.filteredStudents[index].total_grade
     );
   }
-
+searchValue: string = '';
+  searchPlaceholder: string = 'Search by ID,Name';
+  searchResult: string = '';
   searchStudent(searchTerm: string) {
     this.filteredStudents = this.students.filter((student) => {
       return (
         student.student.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         student.student_id.toString().includes(searchTerm) ||
-        student.grade.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        student.total_grade.toString().includes(searchTerm) ||
-        student.term_work.toString().includes(searchTerm) ||
-        student.exam_work.toString().includes(searchTerm)
+        student.grade.toLowerCase().includes(searchTerm.toLowerCase()) 
+        // ||
+        // student.total_grade.toString().includes(searchTerm) ||
+        // student.term_work.toString().includes(searchTerm) ||
+        // student.exam_work.toString().includes(searchTerm)
       );
     });
   }
+  searchBygrade(searchTerm: string) {
+    this.filteredStudents = this.students.filter((student) => {
+      return (
+        student.total_grade.toString().includes(searchTerm)
+      );
+    });
+  }
+  changeSearchType(type: string) {
+    if (type === 'ID,Name') {
+      this.searchPlaceholder = 'Search by ID,Name';
+    } else if (type === 'Grade') {
+      this.searchPlaceholder = 'Search by Grade';
+    }
+    this.searchValue = '';
+    this.searchResult = '';
+  }
+  // search() {
+  //   // Perform the search based on the selected type (searchPlaceholder)
+  //   if (this.searchPlaceholder === 'Search by ID,Name') {
+  //     // Perform search by ID,Name logic here
+  //     this.searchStudent(this.);
+      
+  //   } else if (this.searchPlaceholder === 'Search by Grade') {
+  //     // Perform search by Grade logic here
+  //     this.searchBygrade(this.searchInput);
+  //   }
+  // }
 
   onFileChangeGrades(event: any) {
     this.gradesFile = event.target.files[0];
@@ -196,10 +227,10 @@ export class CourseGradesComponent implements OnInit {
     this.isLoading = true;
     this.gradeService
       .addStudentGradesExcel(this.courseId, this.termId, file)
-      .subscribe((res) => {
-        if (res.status === 201) {
-          this.students = this.students.map(
-            (student) => {
+      .subscribe(
+        (res) => {
+          if (res.status === 201) {
+            this.students = this.students.map((student) => {
               const excelStudent = res.body.data.find(
                 (s) => +s.student_id === +student.student_id
               );
@@ -218,33 +249,31 @@ export class CourseGradesComponent implements OnInit {
                 this.missingStudents.push(student.student_id);
                 return student;
               }
+            });
+            this.filteredStudents = this.students;
+            if (this.missingStudents.length > 0) {
+              this.modalIsOpen = true;
             }
-          );
-          this.filteredStudents = this.students;
-          if (this.missingStudents.length > 0) {
-            this.modalIsOpen = true;
+            this.isLoading = false;
+          } else {
+            // alert('Invalid data in excel file');
+            this.errorMsg = 'Invalid data in excel file';
+            this.IsInvalid = true;
           }
-          this.isLoading = false;
-        } else {
-          // alert('Invalid data in excel file');
-          this.errorMsg = 'Invalid data in excel file';
-          this.IsInvalid = true;
-        }
-      } ,
+        },
         (err) => {
           if (err.status === 500) {
             this.message = 'Invalid data in excel file';
             this.type = 'failed';
             this.snackbar.show();
             this.isLoading = false;
-          }
-          else {
+          } else {
             this.message = err.error.message;
             this.type = 'failed';
             this.snackbar.show();
             this.isLoading = false;
           }
-            }
+        }
       );
     this.renderer.setProperty(this.fileRefgrade.nativeElement, 'value', null);
   }
@@ -274,7 +303,6 @@ export class CourseGradesComponent implements OnInit {
           this.isLoading = false;
         },
         (err) => {
-          
           console.log(err);
           this.message = err.error.error;
           this.type = 'failed';
@@ -404,8 +432,7 @@ export class CourseGradesComponent implements OnInit {
             this.type = 'failed';
             this.snackbar.show();
             this.isLoading = false;
-          }
-          else {
+          } else {
             this.message = err.error.message;
             this.type = 'failed';
             this.snackbar.show();
@@ -470,7 +497,7 @@ export class CourseGradesComponent implements OnInit {
           this.type = 'success';
           this.isLoading = false;
           this.snackbar.show();
-          this.user_password = null
+          this.user_password = null;
         },
         (err) => {
           this.message = err.error.error;
@@ -498,5 +525,67 @@ export class CourseGradesComponent implements OnInit {
   closeModal5() {
     this.errorMsg = 'Are you sure you want to delete this student ?';
     this.deleteStudent = false;
+  }
+  studentIdExist = true;
+  // function to check if student is exist in the course
+  checkStudentExist(studentId: string) {
+    // console.log(studentId);
+    // console.log(this.students);
+    if (this.students.some((student) => +student.student_id === +studentId)) {
+      this.studentIdExist = true;
+      return;
+    }
+    this.studentIdExist = false;
+  }
+
+  onAddStudentGrade(Form: NgForm) {
+    console.log(Form.value);
+    let studentId = Form.value.studentId;
+    let examWork = Form.value.examGrade;
+    this.gradeService
+      .addStudentExamWork(
+        this.courseId,
+        this.termId,
+        Form.value.studentId,
+        Form.value.examGrade
+      )
+      .subscribe(
+        (res) => {
+          if (res.status === 201) {
+            this.students = this.students.map((student) => {
+              if (+student.student_id == +studentId) {
+                student.exam_work = examWork;
+                student.total_grade = student.term_work + student.exam_work;
+                student.grade = this.gradeService.calculateGrade(
+                  student.total_grade
+                );
+              }
+              return student;
+            });
+            this.filteredStudents = this.students;
+            this.message = 'Student grade added successfully';
+            this.type = 'success';
+            this.snackbar.show();
+          } else if (res.status === 422) {
+            // this.message = res.error.message;
+            console.log(res);
+            this.message = 'Invalid data';
+
+            this.type = 'failed';
+            this.snackbar.show();
+          }
+        },
+        (err) => {
+          this.message = err.error.message;
+          this.type = 'failed';
+          this.snackbar.show();
+        }
+      );
+
+    Form.reset();
+  }
+
+  ngOnDestroy() {
+    this.studentIdExist = true;
   }
 }

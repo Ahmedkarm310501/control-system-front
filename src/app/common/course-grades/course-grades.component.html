@@ -1,5 +1,8 @@
-<app-snackbar #snackbar message="{{ message }}" type="{{ type }}"></app-snackbar>
-
+<app-snackbar
+  #snackbar
+  message="{{ message }}"
+  type="{{ type }}"
+></app-snackbar>
 
 <div class="container-fluid row w-100">
   <header class="col-10">
@@ -21,45 +24,125 @@
         <p>Dr {{ instructor }}</p>
       </div>
       <div class="dropdown">
-        <button class="btn btn-prim dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <button
+          class="btn btn-prim dropdown-toggle"
+          type="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
           Course Options
         </button>
         <div class="dropdown-menu">
-          <a class="dropdown-item" (click)="f.click()" style="cursor: pointer"><input type="file" #f
-              style="display: none" #fileInput1 (change)="
+          <a class="dropdown-item" (click)="f.click()" style="cursor: pointer"
+            ><input
+              type="file"
+              #f
+              style="display: none"
+              #fileInput1
+              (change)="
                 onExcelUploadGrades(fileInput1.files); fileInput1.value = null
-              " />Upload Grades
+              "
+            />Upload Grades
           </a>
-          <a class="dropdown-item" (click)="fG.click()" style="cursor: pointer"><input type="file" #fG
-              style="display: none" #fileInput (change)="onFileSelected(fileInput.files); fileInput.value = null" />Add
-            Student Names
+          <a class="dropdown-item" (click)="fG.click()" style="cursor: pointer"
+            ><input
+              type="file"
+              #fG
+              style="display: none"
+              #fileInput
+              (change)="onFileSelected(fileInput.files); fileInput.value = null"
+            />Add Student Names
           </a>
-          <a class="dropdown-item" style="cursor: pointer" data-bs-toggle="modal" data-bs-target="#exampleModal"><input
-              style="display: none" />Add One Student
+          <a
+            class="dropdown-item"
+            style="cursor: pointer"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+            ><input style="display: none" />Add One Student
           </a>
-          <a class="dropdown-item" style="cursor: pointer" (click)="exportGrades()">Export Grades</a>
-          <a class="dropdown-item" style="cursor: pointer" routerLink="course-settings">Course Settings</a>
-          <a class="dropdown-item" style="cursor: pointer" data-bs-toggle="modal" data-bs-target="#exampleModall">Delete
-            All Grades</a>
-          <a class="dropdown-item" style="cursor: pointer" data-bs-toggle="modal"
-            data-bs-target="#exampleModalll">Delete All Students</a>
+          <a
+            class="dropdown-item"
+            style="cursor: pointer"
+            data-bs-toggle="modal"
+            data-bs-target="#addSG"
+            ><input style="display: none" />Add Student grade
+          </a>
+          <a
+            class="dropdown-item"
+            style="cursor: pointer"
+            (click)="exportGrades()"
+            >Export Grades</a
+          >
+          <a
+            class="dropdown-item"
+            style="cursor: pointer"
+            routerLink="course-settings"
+            >Course Settings</a
+          >
+          <a
+            class="dropdown-item"
+            style="cursor: pointer"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModall"
+            >Delete All Grades</a
+          >
+          <a
+            class="dropdown-item"
+            style="cursor: pointer"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModalll"
+            >Delete All Students</a
+          >
         </div>
       </div>
     </div>
   </header>
   <div class="row">
     <div class="col-6 mb-3">
-      <label class="btn join-btn" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-        <input type="checkbox" (change)="toggleStudentsWithNoGrades()" class="join-btn" />
+      <label
+        class="btn join-btn"
+        data-toggle-class="btn-primary"
+        data-toggle-passive-class="btn-default"
+      >
+        <input
+          type="checkbox"
+          (change)="toggleStudentsWithNoGrades()"
+          class="join-btn"
+        />
         &nbsp; show students with no grades &nbsp;
       </label>
     </div>
     <div class="search col-6 mb-3">
       <div class="input-group">
-        <input type="search" class="form-control bg-white" placeholder="Search for..." #searchInput
-          (input)="searchStudent(searchInput.value)" />
+        <input
+          type="search"
+          class="form-control bg-white"
+          placeholder="Search for..."
+          #searchInput
+          (input)="
+            searchPlaceholder == 'Search by ID,Name'
+              ? searchStudent(searchInput.value)
+              : searchBygrade(searchInput.value)
+          "
+          [placeholder]="searchPlaceholder"
+        />
         <span class="input-group-btn">
-          <button class="btn btn-secondary" type="button">Go!</button>
+          <button
+            class="btn btn-prim dropdown-toggle"
+            type="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <i class="fa fa-search"></i>
+          </button>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" (click)="changeSearchType('ID,Name')"
+              >ID,Name</a
+            >
+            <a class="dropdown-item" (click)="changeSearchType('Grade')"
+              >Grade</a
+            >
+          </div>
         </span>
       </div>
     </div>
@@ -69,7 +152,10 @@
   <div class="d-flex justify-content-center mt-5">
     <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
   </div>
-  <table class="tb table table-bordered table-hover table-responsive-md" *ngIf="!isLoading">
+  <table
+    class="tb table table-bordered table-hover table-responsive-md"
+    *ngIf="!isLoading"
+  >
     <thead>
       <tr>
         <th scope="col">#</th>
@@ -118,25 +204,56 @@
         <td>{{ student.student_id }}</td>
         <td>{{ student.student.name }}</td>
         <td>
-          <input type="number" [max]="40" [min]="0" [(ngModel)]="student.term_work" [disabled]="!student.editable"
-            #termWorkInput="ngModel" style="width: 100%" />
+          <input
+            type="number"
+            [max]="40"
+            [min]="0"
+            [(ngModel)]="student.term_work"
+            [disabled]="!student.editable"
+            #termWorkInput="ngModel"
+            style="width: 100%"
+          />
           <div *ngIf="termWorkInput.invalid && termWorkInput.dirty">
-            <div style="margin-left: -5px" *ngIf="termWorkInput.value > 40" class="error">
+            <div
+              style="margin-left: -5px"
+              *ngIf="termWorkInput.value > 40"
+              class="error"
+            >
               Term Work should not exceed 40
             </div>
-            <div style="margin-left: -5px" *ngIf="termWorkInput.value < 0" class="error">
+            <div
+              style="margin-left: -5px"
+              *ngIf="termWorkInput.value < 0"
+              class="error"
+            >
               Term Work should not be less than 0
             </div>
           </div>
         </td>
         <td>
-          <input type="number" [max]="60" [min]="0" [(ngModel)]="student.exam_work" required
-            [disabled]="!student.editable" #examWorkInput="ngModel" style="width: 100%" />
+          <input
+            type="number"
+            [max]="60"
+            [min]="0"
+            [(ngModel)]="student.exam_work"
+            required
+            [disabled]="!student.editable"
+            #examWorkInput="ngModel"
+            style="width: 100%"
+          />
           <div *ngIf="examWorkInput.invalid && examWorkInput.dirty">
-            <div style="margin-left: -5px" *ngIf="examWorkInput.value > 60" class="error">
+            <div
+              style="margin-left: -5px"
+              *ngIf="examWorkInput.value > 60"
+              class="error"
+            >
               Exam Work should not exceed 60
             </div>
-            <div style="margin-left: -5px" *ngIf="examWorkInput.value < 0" class="error">
+            <div
+              style="margin-left: -5px"
+              *ngIf="examWorkInput.value < 0"
+              class="error"
+            >
               Exam Work should not be less than 0
             </div>
           </div>
@@ -146,26 +263,48 @@
         <td>{{ student.grade }}</td>
 
         <td>
-          <button *ngIf="!student.editable" style="margin-right: 5px" class="btn btn-secondary btn-sm" type="button"
-            (click)="edit(i)">
+          <button
+            *ngIf="!student.editable"
+            style="margin-right: 5px"
+            class="btn btn-secondary btn-sm"
+            type="button"
+            (click)="edit(i)"
+          >
             Edit
           </button>
-          <button *ngIf="!student.editable" style="margin-right: 5px" class="btn btn-danger btn-sm"
-            data-bs-toggle="modal" data-bs-target="#exampleModalToDelete" type="button"
-            (click)="deletedStudentId = student.student_id">
+          <button
+            *ngIf="!student.editable"
+            style="margin-right: 5px"
+            class="btn btn-danger btn-sm"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModalToDelete"
+            type="button"
+            (click)="deletedStudentId = student.student_id"
+          >
             Delete
           </button>
 
-          <button *ngIf="student.editable" style="margin-right: 5px" class="btn btn-secondary btn-sm" type="button"
+          <button
+            *ngIf="student.editable"
+            style="margin-right: 5px"
+            class="btn btn-secondary btn-sm"
+            type="button"
             [disabled]="
               termWorkInput.value > 40 ||
               examWorkInput.value > 60 ||
               termWorkInput.value < 0 ||
               examWorkInput.value < 0
-            " (click)="save(i, termWorkInput.value, examWorkInput.value)">
+            "
+            (click)="save(i, termWorkInput.value, examWorkInput.value)"
+          >
             Save
           </button>
-          <button *ngIf="student.editable" class="btn btn-secondary btn-sm" type="button" (click)="cancel(i)">
+          <button
+            *ngIf="student.editable"
+            class="btn btn-secondary btn-sm"
+            type="button"
+            (click)="cancel(i)"
+          >
             Cancel
           </button>
         </td>
@@ -174,21 +313,40 @@
   </table>
 </div>
 
-<div class="modal fade" id="exampleModalToDelete" tabindex="-1" aria-labelledby="exampleModalLabell" aria-hidden="true">
+<div
+  class="modal fade"
+  id="exampleModalToDelete"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabell"
+  aria-hidden="true"
+>
   <div class="modal-dialog modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
       </div>
       <div class="modal-body">
         <div class="container-fluid">
           <div class="mb-3" class="col-md-12">
             <h4>Are you sure you want to delete this student?</h4>
-            <button class="btn btn-primary me-2" data-bs-dismiss="modal" (click)="DeleteStudent(deletedStudentId)">
+            <button
+              class="btn btn-primary me-2"
+              data-bs-dismiss="modal"
+              (click)="DeleteStudent(deletedStudentId)"
+            >
               Yes
             </button>
-            <button class="btn btn-secondary" value="no" data-bs-dismiss="modal">
+            <button
+              class="btn btn-secondary"
+              value="no"
+              data-bs-dismiss="modal"
+            >
               No
             </button>
           </div>
@@ -198,20 +356,125 @@
   </div>
 </div>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div
+  class="modal fade"
+  id="addSG"
+  tabindex="-1"
+  aria-labelledby="addSG"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addSG">Add Student grade</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <form
+            #Form="ngForm"
+            class="w-100"
+            (ngSubmit)="onAddStudentGrade(Form)"
+          >
+            <div class="mb-3" class="col-md-12">
+              <label>Student ID :&nbsp;</label>
+              <input
+                type="text"
+                class="form-control"
+                name="studentId"
+                ngModel
+                required
+                #studentId="ngModel"
+                (change)="checkStudentExist(studentId.value)"
+              />
+              <div *ngIf="studentId.invalid && studentId.touched" class="error">
+                Please enter a valid Student ID.
+              </div>
+              <div *ngIf="!studentIdExist" class="error">
+                Student is not enrolled in this course.
+              </div>
+
+              <br />
+            </div>
+            <hr />
+            <div class="mb-3" class="col-md-12">
+              <label>Exam grade :&nbsp;</label>
+              <input
+                type="number"
+                class="form-control"
+                name="examGrade"
+                ngModel
+                required
+                min="0"
+                max="60"
+                #examGrade="ngModel"
+              />
+              <!-- <div *ngIf="examGrade.invalid && examGrade.touched" class="error">
+                Please enter a valid Exam grade.
+              </div> -->
+              <div *ngIf="examGrade.invalid && examGrade.dirty">
+                <div *ngIf="examGrade.value > 60" class="error">
+                  Exam Work should not exceed 60
+                </div>
+                <div *ngIf="examGrade.value < 0" class="error">
+                  Exam Work should not be less than 0
+                </div>
+              </div>
+
+              <br />
+            </div>
+            <div class="modal-footer">
+              <button
+                type="submit"
+                class="btn btn-primary"
+                [disabled]="Form.invalid"
+              >
+                Add
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Add Student</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
       </div>
       <div class="modal-body">
         <div class="container-fluid">
           <form #Form="ngForm" class="w-100" (ngSubmit)="onSubmit(Form)">
             <div class="mb-3" class="col-md-12">
               <label>Student ID :&nbsp;</label>
-              <input type="text" class="form-control" id="studentId" name="studentId" ngModel required
-                #studentId="ngModel" />
+              <input
+                type="text"
+                class="form-control"
+                id="studentId"
+                name="studentId"
+                ngModel
+                required
+                #studentId="ngModel"
+              />
               <div *ngIf="studentId.invalid && studentId.touched" class="error">
                 Please enter a valid Student ID.
               </div>
@@ -220,15 +483,30 @@
             <hr />
             <div class="mb-3" class="col-md-12">
               <label>Student Name :&nbsp;</label>
-              <input type="text" class="form-control" id="studentName" name="studentName" ngModel required
-                #studentName="ngModel" />
-              <div *ngIf="studentName.invalid && studentName.touched" class="error">
+              <input
+                type="text"
+                class="form-control"
+                id="studentName"
+                name="studentName"
+                ngModel
+                required
+                #studentName="ngModel"
+              />
+              <div
+                *ngIf="studentName.invalid && studentName.touched"
+                class="error"
+              >
                 Please enter a valid Student Name.
               </div>
               <br />
             </div>
             <div class="modal-footer">
-              <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" [disabled]="Form.invalid">
+              <button
+                type="submit"
+                class="btn btn-primary"
+                data-bs-dismiss="modal"
+                [disabled]="Form.invalid"
+              >
                 Add
               </button>
             </div>
@@ -248,12 +526,23 @@
     <button (click)="closeModal()">Close</button>
   </div>
 </app-modal> -->
-<div class="modal fade" id="exampleModall" tabindex="-1" aria-labelledby="exampleModalLabell" aria-hidden="true">
+<div
+  class="modal fade"
+  id="exampleModall"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabell"
+  aria-hidden="true"
+>
   <div class="modal-dialog modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
       </div>
       <div class="modal-body">
         <div class="container-fluid">
@@ -261,16 +550,34 @@
             <h4>Are you sure you want to delete all grades?</h4>
             <label>Enter Your Password :&nbsp;</label>
             <br />
-            <input type="password" class="form-control" id="password" name="user_password" ngModel required
-              #password="ngModel" placeholder="Enter your password" [(ngModel)]="user_password" />
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              name="user_password"
+              ngModel
+              required
+              #password="ngModel"
+              placeholder="Enter your password"
+              [(ngModel)]="user_password"
+            />
             <div *ngIf="password.invalid && password.touched" class="error">
               Please enter a valid password.
             </div>
             <div class="mt-2">
-              <button (click)="deleteAllGrades()" class="btn btn-primary me-2" value="yes" data-bs-dismiss="modal">
+              <button
+                (click)="deleteAllGrades()"
+                class="btn btn-primary me-2"
+                value="yes"
+                data-bs-dismiss="modal"
+              >
                 Confirm
               </button>
-              <button class="btn btn-secondary" value="no" data-bs-dismiss="modal">
+              <button
+                class="btn btn-secondary"
+                value="no"
+                data-bs-dismiss="modal"
+              >
                 Cancel
               </button>
             </div>
@@ -282,12 +589,23 @@
 </div>
 <!-- <app-modal></app-modal> -->
 
-<div class="modal fade" id="exampleModalll" tabindex="-1" aria-labelledby="exampleModalLabell" aria-hidden="true">
+<div
+  class="modal fade"
+  id="exampleModalll"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabell"
+  aria-hidden="true"
+>
   <div class="modal-dialog modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
       </div>
       <div class="modal-body">
         <div class="container-fluid">
@@ -296,22 +614,38 @@
             <label>Enter Your Password :&nbsp;</label>
             <br />
 
-            <input type="password" class="form-control" id="password1" name="user_password" required #password="ngModel"
-              placeholder="Enter your password" [(ngModel)]="user_password" />
+            <input
+              type="password"
+              class="form-control"
+              id="password1"
+              name="user_password"
+              required
+              #password="ngModel"
+              placeholder="Enter your password"
+              [(ngModel)]="user_password"
+            />
             <div *ngIf="password.invalid && password.touched" class="error">
               Please enter a valid password.
             </div>
             <br />
             <div class="mt-1">
-              <button [ngClass]="{ 'loading': isLoading }" (click)="deleteAllStudents()" class="btn btn-primary me-2"
-                value="yes" data-bs-dismiss="modal">
+              <button
+                [ngClass]="{ loading: isLoading }"
+                (click)="deleteAllStudents()"
+                class="btn btn-primary me-2"
+                value="yes"
+                data-bs-dismiss="modal"
+              >
                 Confirm
               </button>
-              <button class="btn btn-secondary" value="no" data-bs-dismiss="modal">
+              <button
+                class="btn btn-secondary"
+                value="no"
+                data-bs-dismiss="modal"
+              >
                 Cancel
               </button>
             </div>
-
           </div>
         </div>
       </div>
