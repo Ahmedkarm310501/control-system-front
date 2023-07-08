@@ -335,60 +335,60 @@ searchValue: string = '';
     this.renderer.setProperty(this.fileRef.nativeElement, 'value', null);
   }
 
-  // onUploadExamGradesExcel(files: FileList) {
-  //   const file = files[0];
-  //   this.isLoading = true;
-  //   this.gradeService
+  onUploadExamGradesExcel(files: FileList) {
+    const file = files[0];
+    this.isLoading = true;
+    this.gradeService
 
-  //     .addStudentExamGradesExcel(this.courseId, this.termId, file)
-  //     .subscribe(
-  //       (res) => {
-  //         if (res.status === 201) {
-  //           this.students = this.students.map((student) => {
-  //             const excelStudent = res.body.data.find(
-  //               (s) => +s.student_id === +student.student_id
-  //             );
-  //             if (excelStudent.exam_work) {
-  //               return {
-  //                 ...student,
-  //                 exam_work: excelStudent.exam_work,
-  //                 total_grade: +excelStudent.exam_work + +student.term_work,
-  //                 grade: this.gradeService.calculateGrade(
-  //                   +excelStudent.exam_work + +student.term_work
-  //                 ),
-  //               };
-  //             } else {
-  //               this.missingStudents.push(student.student_id);
-  //               return student;
-  //             }
-  //           });
-  //           this.filteredStudents = this.students;
-  //           if (this.missingStudents.length > 0) {
-  //             this.modalIsOpen = true;
-  //           }
-  //           this.isLoading = false;
-  //         } else {
-  //           // alert('Invalid data in excel file');
-  //           this.errorMsg = 'Invalid data in excel file';
-  //           this.IsInvalid = true;
-  //         }
-  //       },
-  //       (err) => {
-  //         if (err.status === 500) {
-  //           this.message = 'Invalid data in excel file';
-  //           this.type = 'failed';
-  //           this.snackbar.show();
-  //           this.isLoading = false;
-  //         } else {
-  //           this.message = err.error.message;
-  //           this.type = 'failed';
-  //           this.snackbar.show();
-  //           this.isLoading = false;
-  //         }
-  //       }
-  //   );
-  //   this.renderer.setProperty(this.fileRef.nativeElement, 'value', null);
-  // }
+      .addStudentExamGradesExcel(this.courseId, this.termId, file)
+      .subscribe(
+        (res) => {
+          if (res.status === 201) {
+            this.students = this.students.map((student) => {
+              const excelStudent = res.body.data.find(
+                (s) => +s.student_id === +student.student_id
+              );
+              if (excelStudent.exam_work) {
+                return {
+                  ...student,
+                  exam_work: excelStudent.exam_work,
+                  total_grade: +excelStudent.exam_work + +student.term_work,
+                  grade: this.gradeService.calculateGrade(
+                    +excelStudent.exam_work + +student.term_work
+                  ),
+                };
+              } else {
+                this.missingStudents.push(student.student_id);
+                return student;
+              }
+            });
+            this.filteredStudents = this.students;
+            if (this.missingStudents.length > 0) {
+              this.modalIsOpen = true;
+            }
+            this.isLoading = false;
+          } else {
+            // alert('Invalid data in excel file');
+            this.errorMsg = 'Invalid data in excel file';
+            this.IsInvalid = true;
+          }
+        },
+        (err) => {
+          if (err.status === 500) {
+            this.message = 'Invalid data in excel file';
+            this.type = 'failed';
+            this.snackbar.show();
+            this.isLoading = false;
+          } else {
+            this.message = err.error.message;
+            this.type = 'failed';
+            this.snackbar.show();
+            this.isLoading = false;
+          }
+        }
+    );
+    this.renderer.setProperty(this.fileRef.nativeElement, 'value', null);
+  }
   onUploadExtraGradesExcel(files: FileList) { }
 
     
