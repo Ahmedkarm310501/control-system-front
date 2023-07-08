@@ -28,11 +28,17 @@ export class StudentGradesComponent implements OnInit {
   ngOnInit(): void {}
 
   search(student_id: string) {
-    this.stu.getStudentGrades(student_id).subscribe((res: any) => {
-      console.log(res);
-      this.filteredData = res.data.courses;
-      console.log(this.filteredData);
-      this.student_name = res.data.student_name;
-    });
+    // add condition to check if student_id is empty
+    if (student_id == '') {
+      return;
+    }
+    else {
+      this.stu.getStudentGrades(student_id).subscribe((res: any) => {
+        console.log(res);
+        this.filteredData = res.data.courses;
+        console.log(this.filteredData);
+        this.student_name = res.data.student_name;
+      });
+    }
   }
 }
