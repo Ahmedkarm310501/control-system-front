@@ -40,6 +40,7 @@ import { ExtraGradesComponent } from './common/extra-grades/extra-grades.compone
 import { CompareCoursesComponent } from './common/compare-courses/compare-courses.component';
 import { AllDepartmentsComponent } from './admin/pages/all-departments/all-departments.component';
 import { AddDepartmentComponent } from './admin/pages/add-department/add-department.component';
+import { StudentGradesComponent } from './common/student-grades/student-grades.component';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,8 @@ import { AddDepartmentComponent } from './admin/pages/add-department/add-departm
     ExtraGradesComponent,
     CompareCoursesComponent,
     AllDepartmentsComponent,
-    AddDepartmentComponent
+    AddDepartmentComponent,
+    StudentGradesComponent
   ],
   imports: [
     BrowserModule,
