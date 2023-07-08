@@ -127,19 +127,49 @@ export class CourseGradesComponent implements OnInit {
       this.filteredStudents[index].total_grade
     );
   }
-
+searchValue: string = '';
+  searchPlaceholder: string = 'Search by ID,Name';
+  searchResult: string = '';
   searchStudent(searchTerm: string) {
     this.filteredStudents = this.students.filter((student) => {
       return (
         student.student.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         student.student_id.toString().includes(searchTerm) ||
-        student.grade.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        student.total_grade.toString().includes(searchTerm) ||
-        student.term_work.toString().includes(searchTerm) ||
-        student.exam_work.toString().includes(searchTerm)
+        student.grade.toLowerCase().includes(searchTerm.toLowerCase()) 
+        // ||
+        // student.total_grade.toString().includes(searchTerm) ||
+        // student.term_work.toString().includes(searchTerm) ||
+        // student.exam_work.toString().includes(searchTerm)
       );
     });
   }
+  searchBygrade(searchTerm: string) {
+    this.filteredStudents = this.students.filter((student) => {
+      return (
+        student.total_grade.toString().includes(searchTerm)
+      );
+    });
+  }
+  changeSearchType(type: string) {
+    if (type === 'ID,Name') {
+      this.searchPlaceholder = 'Search by ID,Name';
+    } else if (type === 'Grade') {
+      this.searchPlaceholder = 'Search by Grade';
+    }
+    this.searchValue = '';
+    this.searchResult = '';
+  }
+  // search() {
+  //   // Perform the search based on the selected type (searchPlaceholder)
+  //   if (this.searchPlaceholder === 'Search by ID,Name') {
+  //     // Perform search by ID,Name logic here
+  //     this.searchStudent(this.);
+      
+  //   } else if (this.searchPlaceholder === 'Search by Grade') {
+  //     // Perform search by Grade logic here
+  //     this.searchBygrade(this.searchInput);
+  //   }
+  // }
 
   onFileChangeGrades(event: any) {
     this.gradesFile = event.target.files[0];
