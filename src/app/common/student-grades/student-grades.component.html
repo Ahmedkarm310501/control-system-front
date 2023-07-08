@@ -1,0 +1,159 @@
+<app-snackbar
+  #snackbar
+  message="{{ message }}"
+  type="{{ type }}"
+></app-snackbar>
+<div class="x_panel">
+  <div class="x_title">
+    <h2>Show <small>Student</small></h2>
+
+    <div class="clearfix"></div>
+  </div>
+  <div class="x_content">
+    <div class="position-absolute top-100 left-45">
+      <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card-box table-responsive">
+          <div
+            id="datatable_wrapper"
+            class="dataTables_wrapper container-fluid dt-bootstrap no-footer"
+          >
+            <div class="row justify-content-end filters">
+              <div class="col-sm-4 pt-3">
+                <div
+                  id="datatable_filter"
+                  class="d-flex align-items-center float-end"
+                >
+                  <label> Search: </label>
+                  <input
+                    type="text"
+                    class="form-control mx-2 my-2"
+                    placeholder="Search for Course..."
+                    #searchInput
+                    (input)="search(searchInput.value)"
+                  />
+                  <span class="input-group-btn">
+                    <button class="btn btn-secondary" type="button">
+                      <i class="fa fa-search"></i>
+                    </button>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="row" [class.hide-table]="isLoading">
+              <div class="col-sm-12">
+                <table
+                  id="datatable"
+                  class="table table-striped table-bordered dataTable no-footer"
+                  style="width: 100%"
+                  role="grid"
+                  aria-describedby="datatable_info"
+                >
+                  <thead>
+                    <tr role="row">
+                      <th
+                        class="sorting_asc"
+                        tabindex="0"
+                        aria-controls="datatable"
+                        rowspan="1"
+                        colspan="1"
+                        aria-sort="ascending"
+                        aria-label="Name: activate to sort column descending"
+                        style="width: 200px"
+                      >
+                        Student Name
+                      </th>
+                      <th
+                        class="sorting"
+                        tabindex="0"
+                        aria-controls="datatable"
+                        rowspan="1"
+                        colspan="1"
+                        aria-label="Position: activate to sort column ascending"
+                        style="width: 200px"
+                      >
+                        Course Name
+                      </th>
+                      <th
+                        class="sorting"
+                        tabindex="0"
+                        aria-controls="datatable"
+                        rowspan="1"
+                        colspan="1"
+                        aria-label="Office: activate to sort column ascending"
+                        style="width: 70px"
+                      >
+                        Term Work
+                      </th>
+                      <th
+                        class="sorting"
+                        tabindex="0"
+                        aria-controls="datatable"
+                        rowspan="1"
+                        colspan="1"
+                        aria-label="Age: activate to sort column ascending"
+                        style="width: 70px"
+                      >
+                        Exam Work
+                      </th>
+                      <th
+                        class="sorting"
+                        tabindex="0"
+                        aria-controls="datatable"
+                        rowspan="1"
+                        colspan="1"
+                        aria-label="Age: activate to sort column ascending"
+                        style="width: 69px"
+                      >
+                        Term
+                      </th>
+                      <th
+                        class="sorting"
+                        tabindex="0"
+                        aria-controls="datatable"
+                        rowspan="1"
+                        colspan="1"
+                        aria-label="Age: activate to sort column ascending"
+                        style="width: 69px"
+                      >
+                        Year
+                      </th>
+                      <th
+                        class="sorting"
+                        tabindex="0"
+                        aria-controls="datatable"
+                        rowspan="1"
+                        colspan="1"
+                        aria-label="Age: activate to sort column ascending"
+                        style="width: 69px"
+                      >
+                        Grade
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr
+                      *ngFor="let data of filteredData"
+                      role="row"
+                      class="odd"
+                    >
+                      <td>{{ this.student_name }}</td>
+                      <td>{{ data.course_name }}</td>
+                      <td>{{ data.term_work }}</td>
+                      <td>{{ data.exam_work }}</td>
+                      <td>{{ data.semester_term }}</td>
+                      <td>{{ data.semester_year }}</td>
+                      <td>{{ data.grade }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

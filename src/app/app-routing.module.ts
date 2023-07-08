@@ -28,6 +28,7 @@ import { CompareCoursesComponent } from './common/compare-courses/compare-course
 import { AddDepartmentComponent } from './admin/pages/add-department/add-department.component';
 import { AllDepartmentsComponent } from './admin/pages/all-departments/all-departments.component';
 import { AdminGuard } from './auth/admin.guard';
+import { StudentGradesComponent } from './common/student-grades/student-grades.component';
 
 const routes: Routes = [
   // configration routes
@@ -112,7 +113,13 @@ const routes: Routes = [
     path: 'admin-log',
     component: AdminLogComponent,
     canActivate: [AuthGuard],
-    data: { breadcrumb: 'Admin Log' },
+    data: { breadcrumb: 'Log' },
+  },
+  {
+    path: 'student-grades',
+    component: StudentGradesComponent,
+    canActivate: [AuthGuard],
+    data: { breadcrumb: 'Student Grades' },
   },
   {
     path: 'add-semester',
