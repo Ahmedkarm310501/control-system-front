@@ -4,12 +4,21 @@
       <div class="left_col scroll-view nav-small">
         <div class="navbar nav_title" style="border: 0">
           <a class="site_title d-flex align-items-center hider">
-            <span><a style="color: white" routerLink="courses">Control System</a></span></a>
+            <span
+              ><a style="color: white" routerLink="courses"
+                >Control System</a
+              ></span
+            ></a
+          >
         </div>
         <div class="clearfix"></div>
         <div class="profile clearfix hider">
           <div class="profile_pic">
-            <img src="\assets\download.jfif" alt="..." class="img-circle profile_img rounded-circle" />
+            <img
+              src="\assets\download.jfif"
+              alt="..."
+              class="img-circle profile_img rounded-circle"
+            />
           </div>
           <div class="profile_info">
             <span>Welcome,</span>
@@ -24,96 +33,174 @@
           <div class="menu_section">
             <h3 class="hider">General</h3>
             <ul class="nav side-menu mar">
-              <li (click)="clickEvent('home')" [ngClass]="toggleDisplay['home'] ? 'active' : ''">
-                <a><i class="fa fa-home"></i> Courses
+              <li
+                (click)="clickEvent('home')"
+                [ngClass]="toggleDisplay['home'] ? 'active' : ''"
+              >
+                <a
+                  ><i class="fa fa-home"></i> Courses
                   <span class="fa fa-chevron-down float-end"></span>
                 </a>
-                <ul class="nav child_menu nav-childs" [ngStyle]="{
+                <ul
+                  class="nav child_menu nav-childs"
+                  [ngStyle]="{
                     display: toggleDisplay['home'] ? 'block' : 'none'
-                  }">
+                  }"
+                >
                   <li routerLinkActive="current-page">
-                    <a routerLink="courses" (click)="clickEvent('home')">Courses</a>
+                    <a routerLink="courses" (click)="clickEvent('home')"
+                      >Courses</a
+                    >
                   </li>
                   <li *ngIf="isAdmin == true" routerLinkActive="current-page">
-                    <a routerLink="add-course" (click)="clickEvent('home')">Add Course</a>
+                    <a routerLink="add-course" (click)="clickEvent('home')"
+                      >Add Course</a
+                    >
                   </li>
                   <li routerLinkActive="current-page">
-                    <a routerLink="course-dashboard" (click)="clickEvent('home')">Course Dashboard</a>
+                    <a
+                      routerLink="course-dashboard"
+                      (click)="clickEvent('home')"
+                      >Course Dashboard</a
+                    >
                   </li>
                   <li *ngIf="isAdmin == true" routerLinkActive="current-page">
-                    <a routerLink="compare-courses" (click)="clickEvent('home')">Compare Courses</a>
+                    <a routerLink="compare-courses" (click)="clickEvent('home')"
+                      >Compare Courses</a
+                    >
                   </li>
                 </ul>
               </li>
 
-              <li *ngIf="isAdmin == true" (click)="clickEvent('users')"
-                [ngClass]="toggleDisplay['users'] ? 'active' : ''">
-                <a><i class="fa fa-lock"></i> Admin
+              <li
+                *ngIf="isAdmin == true"
+                (click)="clickEvent('users')"
+                [ngClass]="toggleDisplay['users'] ? 'active' : ''"
+              >
+                <a
+                  ><i class="fa fa-lock"></i> Admin
                   <span class="fa fa-chevron-down float-end"></span>
                 </a>
-                <ul class="nav child_menu nav-childs" [ngStyle]="{
+                <ul
+                  class="nav child_menu nav-childs"
+                  [ngStyle]="{
                     display: toggleDisplay['users'] ? 'block' : 'none'
-                  }">
+                  }"
+                >
                   <li routerLinkActive="current-page">
-                    <a routerLink="all-users" (click)="clickEvent('users')">Users</a>
+                    <a routerLink="all-users" (click)="clickEvent('users')"
+                      >Users</a
+                    >
                   </li>
                   <li routerLinkActive="current-page">
-                    <a routerLink="all-courses" (click)="clickEvent('users')">All Courses</a>
+                    <a routerLink="all-courses" (click)="clickEvent('users')"
+                      >All Courses</a
+                    >
                   </li>
 
                   <li routerLinkActive="current-page">
-                    <a routerLink="add-user" (click)="clickEvent('users')">Add User</a>
+                    <a routerLink="add-user" (click)="clickEvent('users')"
+                      >Add User</a
+                    >
                   </li>
 
                   <li routerLinkActive="current-page">
-                    <a routerLink="settings" (click)="clickEvent('users')">Settings</a>
+                    <a routerLink="settings" (click)="clickEvent('users')"
+                      >Settings</a
+                    >
                   </li>
                 </ul>
               </li>
-              <li *ngIf="isAdmin == true" (click)="clickEvent('semester')"
-                [ngClass]="toggleDisplay['semester'] ? 'active' : ''">
-                <a><i class="fa fa-calendar"></i> Semester
+              <li
+                *ngIf="isAdmin == true"
+                (click)="clickEvent('semester')"
+                [ngClass]="toggleDisplay['semester'] ? 'active' : ''"
+              >
+                <a
+                  ><i class="fa fa-calendar"></i> Semester
                   <span class="fa fa-chevron-down float-end"></span>
                   <!-- <i class="fa fa-caret-down float-end"></i> -->
                 </a>
-                <ul class="nav child_menu nav-childs" [ngStyle]="{
+                <ul
+                  class="nav child_menu nav-childs"
+                  [ngStyle]="{
                     display: toggleDisplay['semester'] ? 'block' : 'none'
-                  }">
+                  }"
+                >
                   <li routerLinkActive="current-page">
-                    <a routerLink="add-semester" (click)="clickEvent('semester')">Add Semester</a>
+                    <a
+                      routerLink="add-semester"
+                      (click)="clickEvent('semester')"
+                      >Add Semester</a
+                    >
                   </li>
                   <li routerLinkActive="current-page">
-                    <a routerLink="configure-semester" (click)="clickEvent('semester')">Configure Semester</a>
+                    <a
+                      routerLink="configure-semester"
+                      (click)="clickEvent('semester')"
+                      >Configure Semester</a
+                    >
                   </li>
                 </ul>
               </li>
 
-              <li *ngIf="isAdmin == true" (click)="clickEvent('department')"
-                [ngClass]="toggleDisplay['department'] ? 'active' : ''">
-                <a><i class="fa fa-building"></i> Department
+              <li
+                *ngIf="isAdmin == true"
+                (click)="clickEvent('department')"
+                [ngClass]="toggleDisplay['department'] ? 'active' : ''"
+              >
+                <a
+                  ><i class="fa fa-building"></i> Department
                   <span class="fa fa-chevron-down float-end"></span>
                   <!-- <i class="fa fa-caret-down float-end"></i> -->
                 </a>
-                <ul class="nav child_menu nav-childs" [ngStyle]="{
+                <ul
+                  class="nav child_menu nav-childs"
+                  [ngStyle]="{
                     display: toggleDisplay['department'] ? 'block' : 'none'
-                  }">
+                  }"
+                >
                   <li routerLinkActive="current-page">
-                    <a routerLink="add-department" (click)="clickEvent('department')">Add Department</a>
+                    <a
+                      routerLink="add-department"
+                      (click)="clickEvent('department')"
+                      >Add Department</a
+                    >
                   </li>
                   <li routerLinkActive="current-page">
-                    <a routerLink="all-departments" (click)="clickEvent('department')">List Departments</a>
+                    <a
+                      routerLink="all-departments"
+                      (click)="clickEvent('department')"
+                      >List Departments</a
+                    >
                   </li>
                 </ul>
               </li>
-              <li (click)="clickEvent('log')" [ngClass]="toggleDisplay['log'] ? 'active' : ''">
-                <a><i class="fa fa-history"></i> Log
+              <li
+                (click)="clickEvent('log')"
+                [ngClass]="toggleDisplay['log'] ? 'active' : ''"
+              >
+                <a
+                  ><i class="fa fa-history"></i> History
                   <span class="fa fa-chevron-down float-end"></span>
                 </a>
-                <ul class="nav child_menu nav-childs" [ngStyle]="{
-                                  display: toggleDisplay['log'] ? 'block' : 'none'
-                                }">
+                <ul
+                  class="nav child_menu nav-childs"
+                  [ngStyle]="{
+                    display: toggleDisplay['log'] ? 'block' : 'none'
+                  }"
+                >
                   <li routerLinkActive="current-page">
-                    <a routerLink="admin-log" (click)="clickEvent('log')">Activity Log</a>
+                    <a routerLink="admin-log" (click)="clickEvent('log')"
+                      >Activity Log</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      routerLink="student-grades"
+                      (click)="clickEvent('student history')"
+                      >Student History</a
+                    >
                   </li>
                 </ul>
               </li>
