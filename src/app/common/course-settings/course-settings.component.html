@@ -138,6 +138,7 @@
               #courseTermWork="ngModel"
               class="form-control"
               id="coursetermwork"
+              [disabled]="!isAdmin"
             />
             <div
               *ngIf="
@@ -164,6 +165,8 @@
               #courseExamWork="ngModel"
               class="form-control"
               id="courseexamwork"
+              [disabled]="!isAdmin"
+              
             />
             <div
               *ngIf="
@@ -197,6 +200,7 @@
               type="text"
               class="form-control"
               id="coursecredits"
+              [disabled]="!isAdmin"
             />
             <div
               *ngIf="

@@ -73,7 +73,9 @@
             </div>
             <div class="select col-4">
               <div class="text-center">
-                <table class="table table-bordered">
+                <table class="table table-bordered" *ngIf="
+                need_one_grade || need_two_grade || need_three_grade || need_four_grade || need_five_grade != 0
+                ">
                   <thead>
                     <tr>
                       <th scope="col">Needed Grades</th>
@@ -81,23 +83,26 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
+                    <!--
+                      if the number of students is 0, then the table row will not be shown
+                    -->
+                    <tr *ngIf="need_one_grade != 0">
                       <td>1</td>
                       <td>{{ need_one_grade }}</td>
                     </tr>
-                    <tr>
+                    <tr *ngIf="need_two_grade != 0">
                       <td>2</td>
                       <td>{{ need_two_grade }}</td>
                     </tr>
-                    <tr>
+                    <tr *ngIf="need_three_grade != 0">
                       <td>3</td>
                       <td>{{ need_three_grade }}</td>
                     </tr>
-                    <tr>
+                    <tr *ngIf="need_four_grade != 0">
                       <td>4</td>
                       <td>{{ need_four_grade }}</td>
                     </tr>
-                    <tr>
+                    <tr *ngIf="need_five_grade != 0">
                       <td>5</td>
                       <td>{{ need_five_grade }}</td>
                     </tr>
