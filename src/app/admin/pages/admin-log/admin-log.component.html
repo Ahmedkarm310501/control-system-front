@@ -6,8 +6,13 @@
     <div class="title_right">
       <div class="pull-right top_search">
         <div class="input-group">
-          <input type="text" class="form-control" placeholder="Search for course..." #searchInput
-            (input)="searchCourse(searchInput.value)" />
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Search for course..."
+            #searchInput
+            (input)="searchCourse(searchInput.value)"
+          />
           <span class="input-group-btn">
             <button class="btn btn-secondary" type="button">Go!</button>
           </span>
@@ -30,7 +35,10 @@
   </thead>
   <tbody>
     <ng-container *ngFor="let data of log; index as i">
-      <tr (click)="toggleCollapse(data.id)" [attr.aria-expanded]="!isCollapsed(data.id)">
+      <tr
+        (click)="toggleCollapse(data.id)"
+        [attr.aria-expanded]="!isCollapsed(data.id)"
+      >
         <th scope="row">{{ i + 1 }}</th>
         <td>{{ data.causer_name }}</td>
         <td>{{ data.created_at }}</td>
@@ -65,7 +73,10 @@
           <p *ngIf="data.event === 'ADD_SEMESTER'">Semester Added</p>
         </td>
       </tr>
-      <tr id="log{{ data.id }}" [ngClass]="{ collapse: true, show: !isCollapsed(data.id) }">
+      <tr
+        id="log{{ data.id }}"
+        [ngClass]="{ collapse: true, show: !isCollapsed(data.id) }"
+      >
         <td colspan="4">
           <table class="table">
             <thead>
@@ -78,9 +89,11 @@
               <tr>
                 <!--Add user event-->
                 <!--Before-->
-                <td *ngIf="
+                <td
+                  *ngIf="
                     data?.properties?.old === null && data?.event === 'ADD_USER'
-                  ">
+                  "
+                >
                   -------- Nothing To Show --------
                 </td>
                 <!--After-->
@@ -91,21 +104,31 @@
                 </td>
                 <!--Delete user event-->
                 <!--Before-->
-                <td *ngIf="
-                    data?.properties?.old !== null && data?.event === 'DELETE_USER'
-                  ">
+                <td
+                  *ngIf="
+                    data?.properties?.old !== null &&
+                    data?.event === 'DELETE_USER'
+                  "
+                >
                   <span> Email : {{ data?.properties?.old?.email }} </span>
-                <td *ngIf="
+                </td>
+
+                <td
+                  *ngIf="
                     data.properties.new === null && data.event === 'DELETE_USER'
-                  ">
+                  "
+                >
                   The following User has been deleted <br />
                   <span>Name : {{ data?.properties?.old?.name }}</span>
                 </td>
                 <!--Edit user event-->
                 <!--Before-->
-                <td *ngIf="
-                    data?.properties?.old !== null && data?.event === 'EDIT_USER'
-                  ">
+                <td
+                  *ngIf="
+                    data?.properties?.old !== null &&
+                    data?.event === 'EDIT_USER'
+                  "
+                >
                   <span> Email : {{ data?.properties?.old?.email }} </span>
                   <br />
                   <span> Name : {{ data?.properties?.old?.name }} </span>
@@ -116,17 +139,20 @@
                   <br />
                   <span style="margin-right: 15px">
                     Admin :
-                    {{ data.properties?.old?.is_admin === 1 ? "Yes" : "No" }}
+                    {{ data.properties?.old?.is_admin == 1 ? "Yes" : "No" }}
                   </span>
                   <span>
                     Active :
-                    {{ data?.properties?.old?.is_active === 1 ? "Yes" : "No" }}
+                    {{ data?.properties?.old?.is_active == 1 ? "Yes" : "No" }}
                   </span>
                 </td>
                 <!--After-->
-                <td *ngIf="
-                    data?.properties?.new !== null && data?.event === 'EDIT_USER'
-                  ">
+                <td
+                  *ngIf="
+                    data?.properties?.new !== null &&
+                    data?.event === 'EDIT_USER'
+                  "
+                >
                   <span> Email : {{ data?.properties?.new?.email }} </span>
                   <br />
                   <span> Name : {{ data?.properties?.new?.name }} </span>
@@ -137,42 +163,50 @@
                   <br />
                   <span style="margin-right: 15px">
                     Admin :
-                    {{ data?.properties?.new?.is_admin === 1 ? "Yes" : "No" }}
+                    {{ data?.properties?.new?.is_admin == 1 ? "Yes" : "No" }}
                   </span>
                   <span>
                     Active :
-                    {{ data?.properties?.new?.is_active === 1 ? "Yes" : "No" }}
+                    {{ data?.properties?.new?.is_active == 1 ? "Yes" : "No" }}
                   </span>
                 </td>
                 <!--ASSIGN_USER_TO_COURSE event-->
                 <!--Before-->
-                <td *ngIf="
+                <td
+                  *ngIf="
                     data?.properties?.old === null &&
                     data?.event === 'ASSIGN_USER_TO_COURSE'
-                  ">
+                  "
+                >
                   -------- Nothing To Show --------
                 </td>
 
                 <!--After-->
-                <td *ngIf="
+                <td
+                  *ngIf="
                     data?.properties?.new !== null &&
                     data?.event === 'ASSIGN_USER_TO_COURSE'
-                  ">
+                  "
+                >
                   <span>{{ data?.description }}</span>
                 </td>
                 <!--ADD_STUDENT_TO_COURSE event-->
                 <!--Before-->
-                <td *ngIf="
+                <td
+                  *ngIf="
                     data?.properties?.old === null &&
                     data?.event === 'ADD_STUDENT_TO_COURSE'
-                  ">
+                  "
+                >
                   -------- Nothing To Show --------
                 </td>
                 <!--After-->
-                <td *ngIf="
+                <td
+                  *ngIf="
                     data?.properties?.new !== null &&
                     data?.event === 'ADD_STUDENT_TO_COURSE'
-                  ">
+                  "
+                >
                   <span>{{ data?.description }}</span>
                 </td>
                 <!--ADD_STUDENTS_TO_COURSE_EXCEL-->
@@ -183,12 +217,16 @@
                   </p>
                   <p *ngIf="data.properties?.old?.old_file !== null">
                     <span>Old Students File</span>
-                    <button type="button" class="btn btn-success" (click)="
+                    <button
+                      type="button"
+                      class="btn btn-success"
+                      (click)="
                         downloadFile(
                           data?.properties?.old?.old_file,
                           'old- ' + data?.properties?.old?.course_name
                         )
-                      ">
+                      "
+                    >
                       Download
                     </button>
                   </p>
@@ -200,12 +238,16 @@
                 <td *ngIf="data?.event === 'ADD_STUDENTS_TO_COURSE_EXCEL'">
                   <p *ngIf="data?.properties?.new?.new_file !== null">
                     <span>New Students File</span>
-                    <button type="button" class="btn btn-success" (click)="
+                    <button
+                      type="button"
+                      class="btn btn-success"
+                      (click)="
                         downloadFile(
                           data.properties?.new?.new_file,
                           'new- ' + data?.properties?.new?.course_name
                         )
-                      ">
+                      "
+                    >
                       Download
                     </button>
                   </p>
@@ -215,19 +257,25 @@
                 </td>
                 <!--DELETE_STUDENT_FROM_COURSE event-->
                 <!--Before-->
-                <td *ngIf="
+                <td
+                  *ngIf="
                     data?.properties?.old !== null &&
                     data?.event === 'DELETE_STUDENT_FROM_COURSE'
-                  ">
-                  <span> Name : {{ data?.properties?.old?.student.name }} </span>
+                  "
+                >
+                  <span>
+                    Name : {{ data?.properties?.old?.student.name }}
+                  </span>
                   <br />
                   <span> Email : {{ data?.properties?.old?.student_id }} </span>
                 </td>
                 <!--After-->
-                <td *ngIf="
+                <td
+                  *ngIf="
                     data.properties?.new === null &&
                     data?.event === 'DELETE_STUDENT_FROM_COURSE'
-                  ">
+                  "
+                >
                   <span>{{ data?.description }}</span>
                 </td>
                 <!--DELETE_ALL_STUDENTS_FROM_COURSE event-->
@@ -238,12 +286,16 @@
                   </p>
                   <p *ngIf="data?.properties?.old !== null">
                     <span>Deleted Students</span>
-                    <button type="button" class="btn btn-success" (click)="
+                    <button
+                      type="button"
+                      class="btn btn-success"
+                      (click)="
                         downloadFile(
                           data?.properties?.old?.old_file,
                           'old- ' + data?.properties?.old?.course_name
                         )
-                      ">
+                      "
+                    >
                       Download
                     </button>
                   </p>
@@ -252,57 +304,79 @@
                   </p>
                 </td>
                 <!--After-->
-                <td *ngIf="
+                <td
+                  *ngIf="
                     data?.properties?.new === null &&
                     data?.event === 'DELETE_ALL_STUDENTS_FROM_COURSE'
-                  ">
+                  "
+                >
                   <span>{{ data?.description }}</span>
                 </td>
                 <!--UPDATE_STUDENT_GRADE event-->
                 <!--Before-->
-                <td *ngIf="
+                <td
+                  *ngIf="
                     data?.properties?.old !== null &&
                     data?.event === 'UPDATE_STUDENT_GRADE'
-                  ">
+                  "
+                >
                   <span> Name : {{ data?.properties?.old?.name }} </span>
                   <br />
-                  <span> Term Work : {{ data?.properties?.old?.term_work }} </span>
+                  <span>
+                    Term Work : {{ data?.properties?.old?.term_work }}
+                  </span>
                   <br />
-                  <span> Exam Work : {{ data?.properties?.old?.exam_work }} </span>
+                  <span>
+                    Exam Work : {{ data?.properties?.old?.exam_work }}
+                  </span>
                 </td>
                 <!--After-->
-                <td *ngIf="
+                <td
+                  *ngIf="
                     data?.properties?.new !== null &&
                     data?.event === 'UPDATE_STUDENT_GRADE'
-                  ">
+                  "
+                >
                   <span> Name : {{ data?.properties?.new?.name }} </span>
                   <br />
-                  <span> Term Work : {{ data?.properties?.new?.term_work }} </span>
+                  <span>
+                    Term Work : {{ data?.properties?.new?.term_work }}
+                  </span>
                   <br />
-                  <span> Exam Work : {{ data?.properties?.new?.exam_work }} </span>
+                  <span>
+                    Exam Work : {{ data?.properties?.new?.exam_work }}
+                  </span>
                 </td>
                 <!--DELETE_COURSE_GRADES event-->
 
                 <!--Before-->
-                <td *ngIf="
+                <td
+                  *ngIf="
                     data?.properties?.old !== null &&
                     data?.event === 'DELETE_COURSE_GRADES'
-                  ">
+                  "
+                >
                   <span>Deleted Grades</span>
-                  <button type="button" class="btn btn-success" (click)="
+                  <button
+                    type="button"
+                    class="btn btn-success"
+                    (click)="
                       downloadFile(
                         data?.properties?.old?.old_file,
                         'old- ' + data?.properties?.old?.course_name
                       )
-                    ">
+                    "
+                  >
                     Download
                   </button>
                 </td>
                 <!--After-->
-                <td *ngIf="
+                <td
+                  *ngIf="
                     data?.properties?.new === null &&
                     data?.event === 'DELETE_COURSE_GRADES'
-                  ">
+                  "
+                >
                   <span>{{ data?.description }}</span>
                 </td>
                 <!--ADD_COURSE_GRADES event-->
@@ -316,12 +390,16 @@
                     <span>
                       Old Grades for {{ data?.properties?.old?.course_name }}
                     </span>
-                    <button type="button" class="btn btn-success" (click)="
+                    <button
+                      type="button"
+                      class="btn btn-success"
+                      (click)="
                         downloadFile(
                           data?.properties?.old?.old_file,
                           'old- ' + data?.properties?.old?.course_name
                         )
-                      ">
+                      "
+                    >
                       Download
                     </button>
                   </p>
@@ -334,79 +412,127 @@
                   </p>
                   <p *ngIf="data?.properties?.new?.new_file !== null">
                     <span>
-                      New Grades for{{ data?.properties?.new?.course_name }}</span>
-                    <button type="button" class="btn btn-success" (click)="
+                      New Grades for{{
+                        data?.properties?.new?.course_name
+                      }}</span
+                    >
+                    <button
+                      type="button"
+                      class="btn btn-success"
+                      (click)="
                         downloadFile(
                           data?.properties?.new?.new_file,
                           'new- ' + data?.properties?.old?.course_name
                         )
-                      ">
+                      "
+                    >
                       Download
                     </button>
                   </p>
                 </td>
                 <!--ADD_COURSE event-->
                 <!--Before-->
-                <td *ngIf="
-                    data?.properties?.old === null && data?.event === 'ADD_COURSE'
-                  ">
+                <td
+                  *ngIf="
+                    data?.properties?.old === null &&
+                    data?.event === 'ADD_COURSE'
+                  "
+                >
                   -------- Nothing To Show --------
                 </td>
                 <!--After-->
-                <td *ngIf="
-                    data?.properties?.new !== null && data?.event === 'ADD_COURSE'
-                  ">
+                <td
+                  *ngIf="
+                    data?.properties?.new !== null &&
+                    data?.event === 'ADD_COURSE'
+                  "
+                >
                   <span>{{ data.description }}</span>
                 </td>
                 <!--EDIT COURSE event-->
                 <!--Before-->
-                <td *ngIf=" data?.properties?.old !== null && data?.event === 'EDIT_COURSE'">
-
+                <td
+                  *ngIf="
+                    data?.properties?.old !== null &&
+                    data?.event === 'EDIT_COURSE'
+                  "
+                >
                   <p>
-                    <span>Old Course Name : {{ data?.properties?.old?.name }} </span>
+                    <span
+                      >Old Course Name : {{ data?.properties?.old?.name }}
+                    </span>
                     <br />
-                    <span>Old Course Code : {{ data?.properties?.old?.course_code }} </span>
-                    <br />
-                    <span>
-                      Old Exam Work : {{ data?.properties?.old?.course_rule?.exam_work }}
+                    <span
+                      >Old Course Code :
+                      {{ data?.properties?.old?.course_code }}
                     </span>
                     <br />
                     <span>
-                      Old Term Work : {{ data?.properties?.old?.course_rule?.term_work }}
+                      Old Exam Work :
+                      {{ data?.properties?.old?.course_rule?.exam_work }}
                     </span>
                     <br />
                     <span>
-                      Old Total : {{data?.properties?.old?.course_rule?.total}}
+                      Old Term Work :
+                      {{ data?.properties?.old?.course_rule?.term_work }}
+                    </span>
+                    <br />
+                    <span>
+                      Old Total :
+                      {{ data?.properties?.old?.course_rule?.total }}
                     </span>
                   </p>
                 </td>
                 <!--After-->
-                <td *ngIf="data?.properties?.new !== null && data?.event === 'EDIT_COURSE'">
+                <td
+                  *ngIf="
+                    data?.properties?.new !== null &&
+                    data?.event === 'EDIT_COURSE'
+                  "
+                >
                   <p>
-                    <span>New Course Name : {{ data?.properties?.new?.name }} </span>
+                    <span
+                      >New Course Name : {{ data?.properties?.new?.name }}
+                    </span>
                     <br />
-                    <span>New Course Code : {{ data?.properties?.new?.course_code }} </span>
-                    <br />
-                    <span>
-                      New Exam Work : {{ data.properties?.new?.course_rule?.exam_work }}
+                    <span
+                      >New Course Code :
+                      {{ data?.properties?.new?.course_code }}
                     </span>
                     <br />
                     <span>
-                      New Term Work : {{ data?.properties?.new?.course_rule?.term_work }}
+                      New Exam Work :
+                      {{ data.properties?.new?.course_rule?.exam_work }}
                     </span>
                     <br />
                     <span>
-                      New Total : {{data?.properties?.old?.course_rule?.total}}
+                      New Term Work :
+                      {{ data?.properties?.new?.course_rule?.term_work }}
+                    </span>
+                    <br />
+                    <span>
+                      New Total :
+                      {{ data?.properties?.old?.course_rule?.total }}
                     </span>
                   </p>
                 </td>
                 <!--ADD_SEMESTER event-->
                 <!--Before-->
-                <td *ngIf=" data?.properties?.old === null && data?.event === 'ADD_SEMESTER'">
+                <td
+                  *ngIf="
+                    data?.properties?.old === null &&
+                    data?.event === 'ADD_SEMESTER'
+                  "
+                >
                   -------- Nothing To Show --------
                 </td>
                 <!--After-->
-                <td *ngIf="data?.properties?.new !== null && data?.event === 'ADD_SEMESTER'">
+                <td
+                  *ngIf="
+                    data?.properties?.new !== null &&
+                    data?.event === 'ADD_SEMESTER'
+                  "
+                >
                   <span>Term : {{ data?.properties?.new?.term }}</span>
                   <br />
                   <span>Year : {{ data?.properties?.new?.year }}</span>
