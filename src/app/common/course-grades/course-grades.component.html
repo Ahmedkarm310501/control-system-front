@@ -44,6 +44,40 @@
               "
             />Upload Grades
           </a>
+          <a class="dropdown-item" (click)="f2.click()" style="cursor: pointer"
+            ><input
+              type="file"
+              #f2
+              style="display: none"
+              #fileInput2
+              (change)="
+                onUploadTermGradesExcel(fileInput2.files); fileInput2.value = null
+              "
+            />Upload Term grades
+          </a>
+          <a class="dropdown-item" (click)="f3.click()" style="cursor: pointer"
+            ><input
+              type="file"
+              #f3
+              style="display: none"
+              #fileInput3
+              (change)="
+                onUploadExamGradesExcel(fileInput3.files); fileInput3.value = null
+              "
+            />Upload Exam grades
+          </a>
+          <a class="dropdown-item" (click)="f4.click()" style="cursor: pointer"
+            ><input
+              type="file"
+              #f4
+              style="display: none"
+              #fileInput4
+              (change)="
+                onUploadExtraGradesExcel(fileInput4.files);
+                fileInput4.value = null
+              "
+            />Upload Extra grades
+          </a>
           <a class="dropdown-item" (click)="fG.click()" style="cursor: pointer"
             ><input
               type="file"
