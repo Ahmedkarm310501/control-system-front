@@ -228,4 +228,19 @@ export class GradeService {
       return 'F';
     }
   }
+  addStudentExamGradesExcel(course_id: string, semester_id: string, file: File) { }
+  addStudentTermGradesExcel(course_id: string, semester_id: string, file: File) { 
+    const formData = new FormData();
+    formData.append('students', file);
+    formData.append('course_id', course_id);
+    formData.append('semester_id', semester_id);
+
+    return this.http.post<ResponseData2>(
+      `${this.baseUrl}/add-students-term-work-excel`,
+      formData,
+      {
+        observe: 'response',
+      }
+    );
+  }
 }
