@@ -256,4 +256,19 @@ export class GradeService {
       }
     );
   }
+  addStudentExtraGradesExcel(course_id: string, semester_id: string, file: File) {
+    const formData = new FormData();
+    formData.append('students', file);
+    formData.append('course_id', course_id);
+    formData.append('semester_id', semester_id);
+
+    return this.http.post<ResponseData2>(
+      `${this.baseUrl}/add-students-extra-grades-excel`,
+      formData,
+      {
+        observe: 'response',
+      }
+    );
+  }
+
 }
