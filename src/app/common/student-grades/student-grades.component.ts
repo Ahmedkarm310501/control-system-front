@@ -32,7 +32,7 @@ export class StudentGradesComponent implements OnInit {
       console.log(res);
       this.filteredData = res.data.courses;
       console.log(this.filteredData);
-      this.student_name = res.student_name;
+      this.student_name = res.data.student_name;
     });
   }
 }
