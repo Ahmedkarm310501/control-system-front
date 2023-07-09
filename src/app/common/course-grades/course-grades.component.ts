@@ -376,13 +376,14 @@ export class CourseGradesComponent implements OnInit {
               const excelStudent = res.body.data.find(
                 (s) => +s.student_id === +student.student_id
               );
-              if (excelStudent.term_work) {
+              console.log(excelStudent);
+              if (excelStudent.exam_work) {
                 return {
                   ...student,
-                  term_work: +excelStudent.term_work,
-                  total_grade: +excelStudent.term_work + +student.exam_work,
+                  exam_work: excelStudent.exam_work,
+                  total_grade: +excelStudent.exam_work + +student.term_work,
                   grade: this.gradeService.calculateGrade(
-                    +excelStudent.term_work + +student.exam_work
+                    +excelStudent.exam_work + +student.term_work
                   ),
                 };
               } else {
@@ -494,6 +495,7 @@ export class CourseGradesComponent implements OnInit {
   ISduplicated = false;
 
   onSubmit(Form) {
+    // console.log(Form.value);
     let studentId = Form.value.studentId;
     let studentName = Form.value.studentName;
 
@@ -682,13 +684,13 @@ export class CourseGradesComponent implements OnInit {
 
   onAddStudentGrade(Form: NgForm) {
     console.log(Form.value);
-    let studentId = Form.value.studentId;
+    let studentId = Form.value.studentId1;
     let examWork = Form.value.examGrade;
     this.gradeService
       .addStudentExamWork(
         this.courseId,
         this.termId,
-        Form.value.studentId,
+        Form.value.studentId1,
         Form.value.examGrade
       )
       .subscribe(

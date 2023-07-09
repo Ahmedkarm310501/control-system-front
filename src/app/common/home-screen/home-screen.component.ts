@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Course, HomeService } from './home.service';
 import { SnackbarComponent } from 'src/app/components/snackbar/snackbar.component';
+import { AllCoursesService } from 'src/app/admin/pages/all-courses/all-courses.service';
 @Component({
   selector: 'app-home-screen',
   templateUrl: './home-screen.component.html',
@@ -9,9 +10,13 @@ import { SnackbarComponent } from 'src/app/components/snackbar/snackbar.componen
 export class HomeScreenComponent implements OnInit {
   @ViewChild('snackbar') snackbar: SnackbarComponent;
 
-  constructor(private home: HomeService) {}
+  constructor(
+    private home: HomeService,
+    private allCourses: AllCoursesService
+  ) {}
   Courses: Course[];
   filterCourses: Course[];
+  departments: any = [];
   noCorseFound = false;
   isLoading: boolean = true;
   message: string;
@@ -35,6 +40,13 @@ export class HomeScreenComponent implements OnInit {
         this.snackbar.show();
       }
     );
+
+    this.allCourses.getAllDepartments().subscribe(
+      (res) => {
+        this.departments = res.data;
+      },
+      (err) => {}
+    );
   }
 
   // filteredCourses: Course[];
@@ -46,5 +58,15 @@ export class HomeScreenComponent implements OnInit {
         course.course_code.toLowerCase().includes(searchTerm.toLowerCase())
       );
     });
+  }
+  onSelectDepartment(event: any) {
+    if (event.target.value == 'all') {
+      this.filterCourses = this.Courses;
+      return;
+    }
+    const id = event.target.value;
+    this.filterCourses = this.Courses.filter(
+      (item: any) => item.dept_code == id
+    );
   }
 }

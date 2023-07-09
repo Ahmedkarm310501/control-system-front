@@ -415,22 +415,25 @@
       <div class="modal-body">
         <div class="container-fluid">
           <form
-            #Form="ngForm"
+            #Form1="ngForm"
             class="w-100"
-            (ngSubmit)="onAddStudentGrade(Form)"
+            (ngSubmit)="onAddStudentGrade(Form1)"
           >
             <div class="mb-3" class="col-md-12">
               <label>Student ID :&nbsp;</label>
               <input
                 type="text"
                 class="form-control"
-                name="studentId"
+                name="studentId1"
                 ngModel
                 required
-                #studentId="ngModel"
-                (change)="checkStudentExist(studentId.value)"
+                #studentId1="ngModel"
+                (change)="checkStudentExist(studentId1.value)"
               />
-              <div *ngIf="studentId.invalid && studentId.touched" class="error">
+              <div
+                *ngIf="studentId1.invalid && studentId1.touched"
+                class="error"
+              >
                 Please enter a valid Student ID.
               </div>
               <div *ngIf="!studentIdExist" class="error">
@@ -470,7 +473,7 @@
               <button
                 type="submit"
                 class="btn btn-primary"
-                [disabled]="Form.invalid"
+                [disabled]="Form1.invalid"
               >
                 Add
               </button>
@@ -543,7 +546,6 @@
                 type="submit"
                 class="btn btn-primary"
                 data-bs-dismiss="modal"
-                [disabled]="Form.invalid"
               >
                 Add
               </button>
