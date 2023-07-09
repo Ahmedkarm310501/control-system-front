@@ -471,6 +471,7 @@ export class CourseGradesComponent implements OnInit {
   ISduplicated = false;
 
   onSubmit(Form) {
+    // console.log(Form.value);
     let studentId = Form.value.studentId;
     let studentName = Form.value.studentName;
 
@@ -659,13 +660,13 @@ export class CourseGradesComponent implements OnInit {
 
   onAddStudentGrade(Form: NgForm) {
     console.log(Form.value);
-    let studentId = Form.value.studentId;
+    let studentId = Form.value.studentId1;
     let examWork = Form.value.examGrade;
     this.gradeService
       .addStudentExamWork(
         this.courseId,
         this.termId,
-        Form.value.studentId,
+        Form.value.studentId1,
         Form.value.examGrade
       )
       .subscribe(
