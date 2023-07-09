@@ -156,9 +156,9 @@
           placeholder="Search for..."
           #searchInput
           (input)="
-            searchPlaceholder == 'Search by ID,Name'
-              ? searchStudent(searchInput.value)
-              : searchBygrade(searchInput.value)
+            searchPlaceholder == 'Search by ID,Name' ? searchStudent(searchInput.value)
+              : searchPlaceholder == 'Search by Grade' ? searchBygrade(searchInput.value) 
+              : searchByGrade(searchInput.value)
           "
           [placeholder]="searchPlaceholder"
         />
@@ -175,6 +175,8 @@
             <a class="dropdown-item" (click)="changeSearchType('ID,Name')"
               >ID,Name</a
             >
+            <a class="dropdown-item" (click)="changeSearchType('Grade Range')"
+              >Grade Range</a>
             <a class="dropdown-item" (click)="changeSearchType('Grade')"
               >Grade</a
             >
