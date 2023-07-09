@@ -195,6 +195,7 @@ export class GradeService {
     student_id: string,
     exam_work: number
   ) {
+    console.log(course_id, exam_work, student_id, semester_id);
     return this.http.post(
       `${this.baseUrl}/insert-grade`,
       {
