@@ -149,14 +149,37 @@ export class CourseGradesComponent implements OnInit {
       return student.total_grade.toString().includes(searchTerm);
     });
   }
+  searchByGrade(minGrade: number, maxGrade: number) {
+  this.filteredStudents = this.students.filter((student) => {
+    const grade = student.total_grade;
+    return grade >= minGrade && grade <= maxGrade;
+  });
+    
+    
+}
+  getMinGrade(inputValue: string): number {
+  const rangeValues = inputValue.split('-');
+  return parseInt(rangeValues[0].trim());
+  }
+
+  getMaxGrade(inputValue: string): number {
+  const rangeValues = inputValue.split('-');
+  return parseInt(rangeValues[1].trim());
+  }
+
   changeSearchType(type: string) {
     if (type === 'ID,Name') {
       this.searchPlaceholder = 'Search by ID,Name';
-    } else if (type === 'Grade') {
+    } else if (type === 'Grade Range') {
+      this.searchPlaceholder = 'Search by Grade Range (min-max)';
+    }
+    else if (type === 'Grade') {
       this.searchPlaceholder = 'Search by Grade';
     }
+
     this.searchValue = '';
     this.searchResult = '';
+
   }
 
   onFileChangeGrades(event: any) {
