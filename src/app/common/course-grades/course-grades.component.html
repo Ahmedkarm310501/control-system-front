@@ -430,6 +430,7 @@
                 ngModel
                 required
                 #studentId1="ngModel"
+                #studentIdInput
                 (change)="checkStudentExist(studentId1.value)"
               />
               <div
@@ -457,6 +458,7 @@
                 max="60"
                 #examGrade="ngModel"
                 #examGradeInput
+                (keydown.enter)="studentIdInput.focus()"
               />
               <div *ngIf="examGrade.invalid && examGrade.dirty">
                 <div *ngIf="examGrade.value > 60" class="error">
@@ -473,8 +475,8 @@
               <button
                 type="submit"
                 class="btn btn-primary"
-                (click)="$event.preventDefault(); setFocusOnStudentIdInput()"
                 [disabled]="Form1.invalid"
+                (click)="studentIdInput.focus()"
               >
                 Add
               </button>
