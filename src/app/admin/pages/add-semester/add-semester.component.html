@@ -11,15 +11,14 @@
           <h1>Add Semester</h1>
           <hr />
           <div class="col-md-6">
-            <label for="fullName" class="form-label"
+            <label for="year" class="form-label"
               >Year<span class="required">*</span></label
             >
 
             <input
               class="form-control"
-              data-validate-length-range="60 "
-              data-validate-words="4 "
               name="year"
+              id="year"
               required
               ngModel
               #year="ngModel"
@@ -39,6 +38,7 @@
 
             <select
               class="form-control"
+              id="term"
               name="term"
               value="term"
               id="exampleFormControlSelect1"
@@ -53,10 +53,6 @@
             <div *ngIf="term && term.invalid && (term.dirty || term.touched)">
               <div *ngIf="term.errors && term.errors['required']" class="error">
                 Semester is required.
-              </div>
-
-              <div *ngIf="term.errors && term.errors['pattern']" class="error">
-                Semester is invalid.
               </div>
             </div>
           </div>
@@ -73,7 +69,7 @@
                   data-bs-toggle="modal"
                   data-bs-target="#exampleModall"
                   type="button"
-                  [disabled]="Form.invalid"
+                  [disabled]="term.invalid || year.invalid"
                 >
                   Add Semester
                 </button>

@@ -207,7 +207,10 @@ export class GradeService {
     );
   }
 
-  calculateGrade(total: number) {
+  calculateGrade(total: number, exam_work: number = null) {
+    if (exam_work != null && exam_work < 18) {
+      return 'F';
+    }
     if (total >= 90) {
       return 'A+';
     } else if (total >= 85) {
@@ -228,7 +231,11 @@ export class GradeService {
       return 'F';
     }
   }
-  addStudentExamGradesExcel(course_id: string, semester_id: string, file: File) { 
+  addStudentExamGradesExcel(
+    course_id: string,
+    semester_id: string,
+    file: File
+  ) {
     const formData = new FormData();
     formData.append('students', file);
     formData.append('course_id', course_id);
@@ -242,7 +249,11 @@ export class GradeService {
       }
     );
   }
-  addStudentTermGradesExcel(course_id: string, semester_id: string, file: File) { 
+  addStudentTermGradesExcel(
+    course_id: string,
+    semester_id: string,
+    file: File
+  ) {
     const formData = new FormData();
     formData.append('students', file);
     formData.append('course_id', course_id);
@@ -256,7 +267,11 @@ export class GradeService {
       }
     );
   }
-  addStudentExtraGradesExcel(course_id: string, semester_id: string, file: File) {
+  addStudentExtraGradesExcel(
+    course_id: string,
+    semester_id: string,
+    file: File
+  ) {
     const formData = new FormData();
     formData.append('students', file);
     formData.append('course_id', course_id);
@@ -270,5 +285,4 @@ export class GradeService {
       }
     );
   }
-
 }

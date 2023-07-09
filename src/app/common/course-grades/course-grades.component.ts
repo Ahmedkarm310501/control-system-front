@@ -124,10 +124,11 @@ export class CourseGradesComponent implements OnInit {
 
   calculateGrade(index: number) {
     this.filteredStudents[index].grade = this.gradeService.calculateGrade(
-      this.filteredStudents[index].total_grade
+      this.filteredStudents[index].total_grade,
+      this.filteredStudents[index].exam_work
     );
   }
-searchValue: string = '';
+  searchValue: string = '';
   searchPlaceholder: string = 'Search by ID,Name';
   searchResult: string = '';
   searchStudent(searchTerm: string) {
@@ -135,7 +136,7 @@ searchValue: string = '';
       return (
         student.student.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         student.student_id.toString().includes(searchTerm) ||
-        student.grade.toLowerCase().includes(searchTerm.toLowerCase()) 
+        student.grade.toLowerCase().includes(searchTerm.toLowerCase())
         // ||
         // student.total_grade.toString().includes(searchTerm) ||
         // student.term_work.toString().includes(searchTerm) ||
@@ -145,9 +146,7 @@ searchValue: string = '';
   }
   searchBygrade(searchTerm: string) {
     this.filteredStudents = this.students.filter((student) => {
-      return (
-        student.total_grade.toString().includes(searchTerm)
-      );
+      return student.total_grade.toString().includes(searchTerm);
     });
   }
   changeSearchType(type: string) {
@@ -159,17 +158,6 @@ searchValue: string = '';
     this.searchValue = '';
     this.searchResult = '';
   }
-  // search() {
-  //   // Perform the search based on the selected type (searchPlaceholder)
-  //   if (this.searchPlaceholder === 'Search by ID,Name') {
-  //     // Perform search by ID,Name logic here
-  //     this.searchStudent(this.);
-      
-  //   } else if (this.searchPlaceholder === 'Search by Grade') {
-  //     // Perform search by Grade logic here
-  //     this.searchBygrade(this.searchInput);
-  //   }
-  // }
 
   onFileChangeGrades(event: any) {
     this.gradesFile = event.target.files[0];
@@ -180,41 +168,6 @@ searchValue: string = '';
   /**/
   IsInvalidRecords = false;
   errorMsg2 = '';
-  // onExcelUploadNames(data: any) {
-
-  //   const newStudents = data
-  //     .filter((row: any) => row.id && row.name) // Only keep rows with non-empty ID and name
-  //     .filter((row: any) => {
-  //       // Only keep rows where student ID doesn't already exist in students array
-  //       return !this.students.find((s: any) => s.id === row.id);
-  //     })
-  //     .map((row: any) => {
-  //       return {
-  //         id: row.id,
-  //         name: row.name,
-  //         termWork: null,
-  //         examWork: null,
-  //         editable: false,
-  //         oldTermWork: null,
-  //         oldExamWork: null,
-  //         total: null,
-  //         grade: null,
-  //       };
-  //     });
-
-  //   if (newStudents.length > 0) {
-  //     this.students = this.students.concat(newStudents);
-  //     this.filteredStudents = this.students;
-
-  //   }
-
-  //   const invalidRecords = data.filter((row: any) => !row.id || !row.name);
-  //   if (invalidRecords.length > 0) {
-  //     this.errorMsg2 = `${invalidRecords.length} rows were not added. Please make sure each row has both an ID and name.`;
-  //     this.IsInvalidRecords = true;
-  //   }
-  //   this.renderer.setProperty(this.fileRef.nativeElement, 'value', null);
-  // }
 
   missingStudents = [];
 
@@ -302,7 +255,6 @@ searchValue: string = '';
               } else {
                 this.missingStudents.push(student.student_id);
                 return student;
-
               }
             });
             this.filteredStudents = this.students;
@@ -330,8 +282,7 @@ searchValue: string = '';
             this.isLoading = false;
           }
         }
-
-    );
+      );
     this.renderer.setProperty(this.fileRef.nativeElement, 'value', null);
   }
 
@@ -386,7 +337,7 @@ searchValue: string = '';
             this.isLoading = false;
           }
         }
-    );
+      );
     this.renderer.setProperty(this.fileRef.nativeElement, 'value', null);
   }
   // function for extra grades upload excel to add extra grades to exam grades
@@ -411,8 +362,7 @@ searchValue: string = '';
                     +excelStudent.term_work + +student.exam_work
                   ),
                 };
-              }
-              else {
+              } else {
                 this.missingStudents.push(student.student_id);
                 return student;
               }
@@ -423,14 +373,11 @@ searchValue: string = '';
               this.modalIsOpen = true;
             }
             this.isLoading = false;
-
           } else {
             // alert('Invalid data in excel file');
             this.errorMsg = 'Invalid data in excel file';
             this.IsInvalid = true;
-  
           }
-          
         },
 
         (err) => {
@@ -446,12 +393,9 @@ searchValue: string = '';
             this.isLoading = false;
           }
         }
-    );
+      );
     this.renderer.setProperty(this.fileRef.nativeElement, 'value', null);
   }
-
-
-    
 
   deleteAllGrades() {
     this.isLoading = true;
