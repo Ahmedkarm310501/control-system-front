@@ -422,6 +422,10 @@
               <input
                 type="text"
                 class="form-control"
+                id="studentIdInput"
+                (keydown.enter)="
+                  $event.preventDefault(); examGradeInput.focus()
+                "
                 name="studentId1"
                 ngModel
                 required
@@ -452,10 +456,8 @@
                 min="0"
                 max="60"
                 #examGrade="ngModel"
+                #examGradeInput
               />
-              <!-- <div *ngIf="examGrade.invalid && examGrade.touched" class="error">
-                Please enter a valid Exam grade.
-              </div> -->
               <div *ngIf="examGrade.invalid && examGrade.dirty">
                 <div *ngIf="examGrade.value > 60" class="error">
                   Exam Work should not exceed 60
@@ -471,6 +473,7 @@
               <button
                 type="submit"
                 class="btn btn-primary"
+                (click)="$event.preventDefault(); setFocusOnStudentIdInput()"
                 [disabled]="Form1.invalid"
               >
                 Add
