@@ -158,7 +158,7 @@
           (input)="
             searchPlaceholder == 'Search by ID,Name' ? searchStudent(searchInput.value)
               : searchPlaceholder == 'Search by Grade' ? searchBygrade(searchInput.value) 
-              : searchByGrade(getMinGrade(searchInput.value), getMaxGrade(searchInput.value))
+              : searchByGrade(searchInput.value)
           "
           [placeholder]="searchPlaceholder"
         />
