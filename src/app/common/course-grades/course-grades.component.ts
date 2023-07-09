@@ -353,13 +353,14 @@ export class CourseGradesComponent implements OnInit {
               const excelStudent = res.body.data.find(
                 (s) => +s.student_id === +student.student_id
               );
-              if (excelStudent.term_work) {
+              console.log(excelStudent);
+              if (excelStudent.exam_work) {
                 return {
                   ...student,
-                  term_work: +excelStudent.term_work,
-                  total_grade: +excelStudent.term_work + +student.exam_work,
+                  exam_work: excelStudent.exam_work,
+                  total_grade: +excelStudent.exam_work + +student.term_work,
                   grade: this.gradeService.calculateGrade(
-                    +excelStudent.term_work + +student.exam_work
+                    +excelStudent.exam_work + +student.term_work
                   ),
                 };
               } else {

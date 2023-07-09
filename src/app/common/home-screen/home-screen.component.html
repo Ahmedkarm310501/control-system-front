@@ -1,7 +1,13 @@
-<app-snackbar #snackbar message="{{ message }}" type="{{ type }}"></app-snackbar>
+<app-snackbar
+  #snackbar
+  message="{{ message }}"
+  type="{{ type }}"
+></app-snackbar>
 <div class="home-page">
   <div *ngIf="noCorseFound">
-    <div class="container-fluid d-flex align-items-center justify-content-center h-100">
+    <div
+      class="container-fluid d-flex align-items-center justify-content-center h-100"
+    >
       <div class="position-absolute top-50">
         <h1 class="text-center">No Courses Found</h1>
       </div>
@@ -14,10 +20,28 @@
           <h3>Assigned Courses</h3>
         </div>
         <div class="title_right">
-          <div class="pull-right top_search">
+          <div class="pull-right top_search d-flex justify-content-between">
+            <select
+              class="form-select"
+              aria-label="Default select example"
+              (change)="onSelectDepartment($event)"
+            >
+              <option value="all">All Departments</option>
+              <option
+                *ngFor="let department of departments"
+                [value]="department.dept_code"
+              >
+                {{ department.dept_code }}
+              </option>
+            </select>
             <div class="input-group">
-              <input type="text " class="form-control" placeholder="Search For Course... " #searchInput
-                (input)="searchCourse(searchInput.value)" />
+              <input
+                type="text "
+                class="form-control"
+                placeholder="Search For Course... "
+                #searchInput
+                (input)="searchCourse(searchInput.value)"
+              />
               <span class="input-group-btn">
                 <button class="btn btn-secondary" type="button ">Go!</button>
               </span>
@@ -29,7 +53,6 @@
     <div class="row courses g-3 mt-2">
       <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
       <div class="col-sm-12 col-md-4" *ngFor="let course of filterCourses">
-
         <div class="card">
           <div class="card-header m-0 fw-bold fs-4">
             {{ course.course_name }}
@@ -47,8 +70,11 @@
               <h5 class="card-subtitle">Term: first</h5>
               <h5 class="card-subtitle ms-5">Year: 2019</h5>
             </div>
-            <a routerLink="course/{{ course.course_id }}/{{course.term_id}}" class="btn mt-3 button">Edit Course
-              Grades</a>
+            <a
+              routerLink="course/{{ course.course_id }}/{{ course.term_id }}"
+              class="btn mt-3 button"
+              >Edit Course Grades</a
+            >
           </div>
         </div>
       </div>
