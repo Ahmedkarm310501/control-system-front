@@ -19,6 +19,7 @@ export class CourseGradesComponent implements OnInit {
   @ViewChild('f') fileRefgrade: ElementRef;
   @ViewChild('fG') fileRef: ElementRef;
   @ViewChild('snackbar') snackbar: SnackbarComponent;
+  studentIdInput!: ElementRef;
 
   constructor(
     private gradeService: GradeService,
@@ -78,7 +79,11 @@ export class CourseGradesComponent implements OnInit {
         this.filteredStudents = this.students;
       });
   }
-
+  setFocusOnStudentIdInput() {
+    if (this.studentIdInput && this.studentIdInput.nativeElement) {
+      this.studentIdInput.nativeElement.focus();
+    }
+  }
   edit(index: number) {
     this.filteredStudents[index].editable =
       !this.filteredStudents[index].editable;
