@@ -29,6 +29,7 @@ export class CourseSettingsComponent implements OnInit {
   term_work: number;
   exam_work: number;
   total: number;
+  passMark: number;
   departments: any = [];
   isLoading: boolean = true;
   isAdmin: boolean = false;
@@ -39,12 +40,14 @@ export class CourseSettingsComponent implements OnInit {
     });
     this.courseSettingsService.getCourseData(this.course_id).subscribe(
       (data) => {
+        console.log(data);
         this.course_code = data.data.courseID;
         this.course_name = data.data.courseName;
         this.department = data.data.department;
         this.instructor = data.data.instructor;
         this.term_work = data.data.termWork;
         this.exam_work = data.data.examWork;
+        this.passMark = data.data.passMark;
         this.total = data.data.totalGrade;
         this.isLoading = false;
       },
@@ -67,6 +70,7 @@ export class CourseSettingsComponent implements OnInit {
         form.instructor,
         form.term_work,
         form.exam_work,
+        form.passMark,
         form.total
       )
       .subscribe(

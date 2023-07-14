@@ -18,7 +18,7 @@ export class AllUsersComponent implements OnInit {
   isShown: boolean = false;
 
   //add dummy data of courses
-  dummyDataCourses: any = [];
+  CoursesInDepartment: any = [];
 
   filteredData: any = this.users;
 
@@ -27,7 +27,7 @@ export class AllUsersComponent implements OnInit {
 
   constructor(
     private allUsers: AllUsersService,
-    private allCourses: AllCoursesService
+    private allCourses: AllCoursesService,
   ) {}
 
   ngOnInit(): void {
@@ -46,37 +46,69 @@ export class AllUsersComponent implements OnInit {
       this.departments = res.data;
     });
   }
-
+  // get courses by department
   onSelectDepartment(event: any) {
     const id = event.target.value;
-    this.allCourses.getAllCoursesByDepartment(id).subscribe((res) => {
-      this.dummyDataCourses = res.data;
+    const user_id = this.selectedID;
+    this.allUsers.getAllCoursesByDepartment(id, user_id).subscribe((res) => {
+      console.log(res.data);
+      this.CoursesInDepartment = res.data;
+      // if course already assigned to user add checked property to that assigned course
+      this.CoursesInDepartment.forEach((course: any) => {
+        if (course.is_enrolled == true) {
+          course.checked = true;
+        }
+        
+      }
+      );
     });
   }
+  // add course to selectedCourses array
   onEdit(id: string) {
     this.selectedID = id;
     // clear input fields
     this.dept.nativeElement.value = 'Select Department';
-    this.dummyDataCourses = [];
+    this.CoursesInDepartment = [];
   }
-  onSubmit(form: any) {
-    this.allUsers.assignUserToCourse(form.course, this.selectedID).subscribe(
-      (res) => {
-        this.type = 'success';
-        this.message = 'User assigned to course successfully';
+  // onSubmit(form: any) {
+  //   this.allUsers.assignUserToCourse(form.course, this.selectedID).subscribe(
+  //     (res) => {
+  //       this.type = 'success';
+  //       this.message = 'User assigned to course successfully';
 
+  //       this.snackbar.show();
+  //     },
+  //     (err) => {
+  //       this.message = err.error.message;
+  //       this.type = 'error';
+
+  //       this.snackbar.show();
+  //     }
+  //   );
+  // }
+  // on submit assign user to checked courses only
+  onSubmit() {
+    const course_ids = this.CoursesInDepartment
+      .filter((course: any) => course.is_enrolled == true)
+      .map((course: any) => course.id);
+    const user_id = this.selectedID;
+    this.allUsers.assignUserToCourse(course_ids, user_id).subscribe(
+      (res) => {
+        
+        this.type = 'success';
+        this.message = 'User assigned to courses successfully';
         this.snackbar.show();
       },
       (err) => {
         this.message = err.error.message;
         this.type = 'error';
-
         this.snackbar.show();
       }
     );
   }
+
   closeModal() {
-    this.dummyDataCourses = [];
+    this.CoursesInDepartment = [];
     this.dept.nativeElement.value = 'Select Department';
   }
 
@@ -147,4 +179,9 @@ export class AllUsersComponent implements OnInit {
   closeModal4() {
     this.IsInvalidRecords = false;
   }
+
+  //   
+
+
+  
 }

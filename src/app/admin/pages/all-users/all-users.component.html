@@ -285,15 +285,20 @@
                 </option>
               </select> -->
               <!-- create list of checkboxes with course names -->
-              <div *ngFor="let Course of dummyDataCourses">
+              <!-- <div *ngFor="let Course of CoursesInDepartment">
                 <input
                   type="checkbox"
                   id="course"
                   name="course"
-                  value="{{ Course.id }}"
+                  [(ngModel)]="Course.checked"
                 />
-                <label for="course">{{ Course.name }}</label
+                <label for="course">{{ Course.name }} : {{Course.checked}}</label
                 ><br />
+              </div> -->
+              <div *ngFor="let Course of CoursesInDepartment">
+                <input type="checkbox" id="course{{Course.id}}" name="course{{Course.id}}" [ngModel]="Course.is_enrolled"
+                  (ngModelChange)="Course.is_enrolled = $event" />
+                <label for="course{{Course.id}}">{{ Course.name }}</label><br />
               </div>
 
               <!-- <div *ngIf="course.invalid && course.touched" class="error">
@@ -314,7 +319,7 @@
                 type="submit"
                 class="btn btn-primary"
                 data-bs-dismiss="modal"
-                (click)="onSubmit(Form.value)"
+                (click)="onSubmit()"
               >
                 Save changes
               </button>
