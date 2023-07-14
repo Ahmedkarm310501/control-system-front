@@ -186,3 +186,38 @@ td {
   justify-content: flex-end;
   width: 100%;
 }
+.user_courses{
+  border: 1px solid black;
+  height: 42vh;
+  border-radius: 10px;
+  padding: 0;
+  margin: 0;
+  overflow: auto;
+  background-color: white;
+}
+
+.user_courses::-webkit-scrollbar-thumb {
+  background-color: grey;
+  border: 4px solid transparent;
+  border-radius: 8px;
+  background-clip: padding-box;
+}
+.user_courses::-webkit-scrollbar {
+  width: 16px;
+}
+.user_courses div {
+  display: flex;
+  flex-direction: row;
+  padding: 9px 0px 5px 17px;
+}
+.user_courses div:nth-child(even) {
+  background-color: #ebeae5;
+}
+
+.conts input[type="checkbox"] {
+  width: 20px;
+  margin-right: 10px;
+}
+.conts label{
+  font-size: 20px;
+}
