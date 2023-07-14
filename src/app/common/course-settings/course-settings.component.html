@@ -220,18 +220,18 @@
           </div>
           <div class="col-md-6">
             <!--Pass Mark -->
-            <label for="coursepassmark" class="form-label">Pass Mark</label>
+            <label for="passMark" class="form-label">Pass Mark</label>
             <input
               [(ngModel)]="passMark"
               name="passMark"
               required
-              #passMark="ngModel"
+              #pass_Mark="ngModel"
               type="text"
               class="form-control"
               id="passMark"
               [disabled]="!isAdmin"
             />
-            <div
+            <!-- <div
               *ngIf="
                 passMark &&
                 passMark.invalid &&
@@ -242,7 +242,7 @@
               class="error"
             >
               Pass Mark is required.
-            </div>
+            </div> -->
 
 
             

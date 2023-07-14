@@ -99,9 +99,7 @@
                 >
                   -------- Nothing To Show --------
 
-                  <button type="button" class="btn btn-success">
-                    Roll Back
-                  </button>
+                  
                 </td>
                 <!--After-->
                 <td *ngIf="data?.event === 'ADD_USER'">
@@ -128,9 +126,7 @@
                   The following User has been deleted <br />
                   <span
                     >Name : {{ data?.properties?.old?.name }}
-                    <button type="button" class="btn btn-success">
-                      Roll Back
-                    </button>
+                    
                   </span>
                 </td>
                 <!--Edit user event-->
@@ -157,9 +153,7 @@
                     Active :
                     {{ data?.properties?.old?.is_active == 1 ? "Yes" : "No" }}
                   </span>
-                  <button type="button" class="btn btn-success">
-                    Roll Back
-                  </button>
+                  
                 </td>
                 <!--After-->
                 <td
@@ -195,9 +189,7 @@
                 >
                   -------- Nothing To Show --------
 
-                  <button type="button" class="btn btn-success">
-                    Roll Back
-                  </button>
+                  
                 </td>
 
                 <!--After-->
@@ -218,9 +210,7 @@
                   "
                 >
                   -------- Nothing To Show --------
-                  <button type="button" class="btn btn-success">
-                    Roll Back
-                  </button>
+                  
                 </td>
                 <!--After-->
                 <td
@@ -299,18 +289,14 @@
                   "
                 >
                   <span>{{ data?.description }}</span>
-                  <button type="button" class="btn btn-success">
-                    Roll Back
-                  </button>
+                  
                 </td>
                 <!--DELETE_ALL_STUDENTS_FROM_COURSE event-->
                 <!--Before-->
                 <td *ngIf="data?.event === 'DELETE_ALL_STUDENTS_FROM_COURSE'">
                   <p *ngIf="data?.properties?.old === null">
                     -------- Nothing To Show --------
-                    <button type="button" class="btn btn-success">
-                      Roll Back
-                    </button>
+                    
                   </p>
                   <p *ngIf="data?.properties?.old !== null">
                     <span>Deleted Students</span>
@@ -358,9 +344,7 @@
                     Exam Work : {{ data?.properties?.old?.exam_work }}
                   </span>
 
-                  <button type="button" class="btn btn-success">
-                    Roll Back
-                  </button>
+                  
                 </td>
                 <!--After-->
                 <td
@@ -410,9 +394,7 @@
                   "
                 >
                   <span>{{ data?.description }}</span>
-                  <button type="button" class="btn btn-success">
-                    Roll Back
-                  </button>
+                  
                 </td>
                 <!--ADD_COURSE_GRADES event-->
                 <!--Before-->
@@ -420,9 +402,7 @@
                 <td *ngIf="data?.event === 'ADD_COURSE_GRADES'">
                   <p *ngIf="data?.properties?.old?.old_file === null">
                     -------- Nothing To Show --------
-                    <button type="button" class="btn btn-success">
-                      Roll Back
-                    </button>
+                    
                   </p>
                   <p *ngIf="data?.properties?.old?.old_file !== null">
                     <span>
@@ -519,14 +499,7 @@
                       Old Total :
                       {{ data?.properties?.old?.course_rule?.total }}
                     </span>
-                    <br />
-                    <span>
-                      Old Total :
-                      {{ data?.properties?.old?.course_rule?.total }}
-                    </span>
-                    <button type="button" class="btn btn-success">
-                      Roll Back
-                    </button>
+                    
                   </p>
                 </td>
                 <!--After-->
@@ -560,6 +533,7 @@
                       New Total :
                       {{ data?.properties?.old?.course_rule?.total }}
                     </span>
+                    
                   </p>
                 </td>
                 <!--ADD_SEMESTER event-->
@@ -572,9 +546,7 @@
                 >
                   -------- Nothing To Show --------
                   
-                  <button type="button" class="btn btn-success">
-                    Roll Back
-                  </button>
+                  
                 </td>
                 <!--After-->
                 <td
