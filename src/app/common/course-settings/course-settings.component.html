@@ -218,15 +218,35 @@
               Total grades is required.
             </div>
           </div>
-          <!-- <div class="col-md-6">
-                        <label for="courseraapha" class="form-label">Course Ra'fa</label>
-                        <input [(ngModel)]="raafaa" type="number" name="courseraapha" required #courseraapha="ngModel"
-                            class="form-control" id="coursecapacity">
-                        <div *ngIf="courseraapha && courseraapha.invalid && (courseraapha.dirty || courseraapha.touched) && courseraapha.errors && courseraapha.errors['required']"
-                            class="error">
-                            Ra'fa is required.
-                        </div>
-                    </div> -->
+          <div class="col-md-6">
+            <!--Pass Mark -->
+            <label for="coursepassmark" class="form-label">Pass Mark</label>
+            <input
+              [(ngModel)]="passMark"
+              name="passMark"
+              required
+              #passMark="ngModel"
+              type="text"
+              class="form-control"
+              id="passMark"
+              [disabled]="!isAdmin"
+            />
+            <div
+              *ngIf="
+                passMark &&
+                passMark.invalid &&
+                (passMark.dirty || passMark.touched) &&
+                passMark.errors &&
+                passMark.errors['required']
+              "
+              class="error"
+            >
+              Pass Mark is required.
+            </div>
+
+
+            
+          </div>
           <div class="col-12">
             <button
               type="submit"

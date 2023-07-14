@@ -12,6 +12,7 @@ type ResponseData = {
     termWork: number;
     examWork: number;
     totalGrade: number;
+    passMark: number;
   };
 };
 
@@ -40,6 +41,7 @@ export class CourseSettingsService {
     instructor: string,
     term_work: number,
     exam_work: number,
+    passMark: number,
     total: number
   ) {
     return this.http.post(`${this.baseUrl}/edit-course`, {
@@ -51,6 +53,7 @@ export class CourseSettingsService {
       instructor: instructor,
       term_work: term_work,
       exam_work: exam_work,
+      passMark: passMark,
       total: total,
     });
   }

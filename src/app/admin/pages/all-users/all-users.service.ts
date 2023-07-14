@@ -27,10 +27,16 @@ export class AllUsersService {
     return this.http.delete(`${this.enviroment.baseUrl}/delete-user?id=${id}`);
   }
 
-  assignUserToCourse(course_id: any, user_id: any) {
+  assignUserToCourse(course_ids:number [], user_id: any) {
     return this.http.post(`${this.enviroment.baseUrl}/assign-user-to-course`, {
-      course_id,
+      course_ids,
       user_id,
     });
   }
+  getAllCoursesByDepartment(id: any , user_id: any) {
+    return this.http.get<Res>(
+      `${environment.baseUrl}/courses-in-department-for-user/${id}/${user_id}`
+    );
+
+  } 
 }
