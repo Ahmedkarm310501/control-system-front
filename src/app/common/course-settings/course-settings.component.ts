@@ -19,7 +19,6 @@ export class CourseSettingsComponent implements OnInit {
     private route: ActivatedRoute,
     private courseSettingsService: CourseSettingsService,
     private authService: AuthService
-
   ) {}
   course_id = this.route.snapshot.paramMap.get('courseId');
   semester_id = this.route.snapshot.paramMap.get('termId');
@@ -32,7 +31,7 @@ export class CourseSettingsComponent implements OnInit {
   total: number;
   departments: any = [];
   isLoading: boolean = true;
-    isAdmin: boolean = false;
+  isAdmin: boolean = false;
 
   ngOnInit(): void {
     this.courseSettingsService.getAllDepartments().subscribe((res) => {
@@ -54,10 +53,8 @@ export class CourseSettingsComponent implements OnInit {
         this.type = 'failed';
         this.snackbar.show();
       }
-
     );
     this.isAdmin = this.authService.user.value.isAdmin;
-
   }
   onSubmit(form: any) {
     this.courseSettingsService
@@ -80,7 +77,7 @@ export class CourseSettingsComponent implements OnInit {
           this.snackbar.show();
         },
         (err) => {
-          this.message = err.error.message;
+          this.message = err.error.error;
           this.type = 'failed';
           this.snackbar.show();
         }

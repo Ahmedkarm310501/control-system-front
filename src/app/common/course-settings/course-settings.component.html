@@ -166,7 +166,6 @@
               class="form-control"
               id="courseexamwork"
               [disabled]="!isAdmin"
-              
             />
             <div
               *ngIf="
@@ -183,10 +182,14 @@
           </div>
           <div class="error">
             <div
-              *ngIf="courseExamWork.value + courseTermWork.value > 100"
+              *ngIf="
+                courseExamWork.value + courseTermWork.value !=
+                courseCredits.value
+              "
               class="error"
             >
-              Course Term Work + Course Exam Work must be equal to 100.
+              Course Term Work + Course Exam Work must be equal to
+              {{ courseCredits.value }}.
             </div>
           </div>
 
@@ -230,7 +233,8 @@
               class="btn btn-primary"
               [disabled]="
                 Form.invalid ||
-                courseExamWork.value + courseTermWork.value > 100
+                courseExamWork.value + courseTermWork.value !=
+                  courseCredits.value
               "
             >
               Submit
