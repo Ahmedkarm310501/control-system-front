@@ -97,3 +97,8 @@ form {
 .file{
   height: auto !important;
 }
+@media (max-width: 768px) {
+  form {
+    width: 100%;
+  }
+}

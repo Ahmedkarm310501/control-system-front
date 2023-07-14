@@ -61,3 +61,8 @@ form h1{
   color: var(--text-color);
   margin-bottom: 20px;
 }
+@media (max-width: 768px) {
+  form {
+    width: 100%;
+  }
+}
